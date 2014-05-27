@@ -14,5 +14,5 @@ altscreen
 termcapinfo xterm*|Eterm|mlterm "hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007"
 hardstatus off
 hardstatus string "screen %n (%t)%? [%h]%?"
-caption always "%{-b .b}%-w%{+b .b}%n%f*%t%{-}%+w"
+caption always "%{-u wb}%-w%{+u Wb}%n%f*%t%{-}%+w"
 
