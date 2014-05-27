@@ -1,0 +1,102 @@
+#! /bin/sh
+
+# Simple autostart file for i3-wm, you can execute it from i3 config with
+# exec $HOME/bin/auto-start-for-i3
+#
+# xdotool and xmessage must be installed. On BSD use jot instead of
+# seq or install seq from ports.
+
+
+# Max seconds to wait until the process is up
+MAXWAIT=10
+
+# Start the given command and wait until it's visible
+StartProg()
+{
+    "$@" &                  # Handle arguments with whitspaces
+    mypid=$!                # Pid of last background process
+    echo "Waiting on ${mypid}: $@"
+    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+    do
+    	if xdotool search --onlyvisible --pid $mypid; then
+    	    return 0
+    	fi
+	sleep 1
+    done
+    xmessage "Error on executing: $@" &
+}
+
+StartProgName()
+{
+    "$@" &                  # Handle arguments with whitspaces
+    mypid=$!                # Pid of last background process
+    echo "Waiting on $1: $@"
+    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+    do
+    	if xdotool search --onlyvisible --name $1; then
+    	    return 0
+    	fi
+	sleep 1
+    done
+    xmessage "Error on executing: $@" &
+}
+
+# ### --- emacs --- ###
+# StartProg emacs
+#
+# ### --- ding ---- ###
+# StartProg ding
+# i3-msg border none
+#
+# # make right half bigger
+# i3-msg resize grow left 16 px or 16 ppt
+#
+# # build container
+# i3-msg split v
+# sleep 1
+#
+# ### --- terminal --- ###
+# StartProg rxvt
+#
+# # Make Terminal bigger and Ding smaller
+# i3-msg resize grow up 32 px or 32 ppt
+#
+# ### --------------------------------- tab START--- ###
+# ### ---------------------------------------------- ###
+# i3-msg split v
+# i3-msg layout tabbed
+#
+# ### --- gnome-commander --- ###
+# StartProg gnome-commander
+#
+# ### --- chromium --- ###
+# StartProg chromium
+#
+# ### --- pdf --- ###
+# StartProg evince "~/Dokumente/Haskell/Haskell.pdf"
+# ### ---------------------------------------------- ###
+# ### ---------------------------------- tab END --- ###
+#
+# ### --- new terminal left under emacs --- ###
+# i3-msg focus left
+# i3-msg split v
+# StartProg rxvt
+#
+# # terminal without border and make it smaller
+# i3-msg border none
+# i3-msg resize shrink up 32 px or 32 ppt
+#
+
+StartProg xfce4-terminal
+
+i3-msg 'split h'
+
+StartProgName gvim
+
+i3-msg 'focus left; split v'
+
+StartProg xfce4-terminal
+
+i3-msg 'resize shrink height 20 px or 20 ppt'
+
+exit 0
