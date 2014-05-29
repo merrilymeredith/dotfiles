@@ -1,0 +1,20 @@
+[ui]
+username = Meredith Howard <mhoward@roomag.org>
+
+[extensions]
+hgext.graphlog = 
+rebase = 
+color = 
+record = 
+pager =
+progress = 
+fetch = 
+flow = $HOME/.hgext/hgflow.py
+
+[pager]
+pager = LESS='FSRX' less
+
+[alias]
+fetch = pull --rebase
+
+%include ~/.hgrc.local
