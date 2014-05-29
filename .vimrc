@@ -150,12 +150,6 @@ if has('persistent_undo')
   set undodir=$MYVIM/var/undo//,.
 end
 
-if has('gui_running')
-  set number
-  set background=dark
-  set columns=120 lines=40
-  colorscheme solarized
-end
 
 autocmd FileType text setlocal textwidth=78
 
@@ -232,4 +226,18 @@ try
   endif
 catch
 endtry
+
+if has('gui_running')
+  set nu
+  set bg=dark
+
+  set columns=120 lines=40
+
+  colorscheme solarized
+else
+  if &t_Co == 256
+    colorscheme jellybeans
+  end
+end
+
 
