@@ -143,7 +143,7 @@ set sbr=»\
 
 " Superseded by vim-airline
 "set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
-"set laststatus=2
+set laststatus=2
 
 if on_windows == 1
   let $MYVIM=$HOME.'/vimfiles'
