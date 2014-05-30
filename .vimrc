@@ -39,10 +39,10 @@ end
 
   if on_windows == 0
     set rtp+=~/.vim/bundle/vundle/
-    call vundle#begin()
+    call vundle#rc()
   else
     set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#begin('~/vimfiles/bundle')
+    call vundle#rc('~/vimfiles/bundle')
   endif
 
   Plugin 'gmarik/vundle'
