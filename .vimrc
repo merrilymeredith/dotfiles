@@ -39,11 +39,12 @@ end
 
   if on_windows == 0
     set rtp+=~/.vim/bundle/vundle/
+    call vundle#begin()
   else
     set rtp+=~/vimfiles/bundle/vundle/
+    call vundle#begin('~/vimfiles/bundle')
   endif
 
-  call vundle#rc()
   Plugin 'gmarik/vundle'
 
   Plugin 'altercation/vim-colors-solarized'
