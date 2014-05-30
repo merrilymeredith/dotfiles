@@ -6,10 +6,8 @@ if has('win32') || has('win64')
   let on_windows=1
 end
 
-" call pathogen#infect()
-" call pathogen#helptags()
 
-" Setting up Vundle - the vim plugin bundler
+" >> Setting up Vundle - the vim plugin bundler
   let installed_vundle=0
 
   if on_windows == 0
@@ -25,13 +23,17 @@ end
     endif
 
     let installed_vundle=1
-    echo "Installing Vundle.."
-    echo ""
     if on_windows == 0
+      echo "Installing Vundle..."
+      echo ""
       silent !mkdir -p ~/.vim/bundle
       silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     else
-      "windows is weird about args and quoting
+      echo "Installing Vundle and Plugins..."
+      " This happens in a series of minimized cmd windows rather than the cool
+      " progress display we normally get.
+
+      " Also windows is weird about args and quoting:
       silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
       silent execute '!git clone https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
     endif
@@ -66,10 +68,44 @@ end
     echo "Installing Plugins, please ignore key map error messages"
     echo ""
     :PluginInstall
+    if on_windows == 1
+      " Windows build just isn't there with exec $0, so we already
+      " have some odd errors and get a weird UI at the end.
+      echo "Please restart vim to continue with plugins installed."
+      quit
+    endif
   endif
 " Setting up Vundle - the vim plugin bundler end
 
 
+" >> F-key maps, mostly plugin stuff
+nmap <silent> <F1> :Unite buffer<CR>
+nmap <silent> <F2> :Unite file<CR>
+nmap <silent> <F3> :VimShell<CR>
+map  <silent> <F4> :noh<CR>
+nmap <silent> <F5> :GundoToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
+
+" This is supposed to get a CtrlP workalike with fuzzy match
+" but i need to fix ignores and always chdir to a good place
+if on_windows == 1
+  nmap <silent> <S-F2> :Unite -start-insert file_rec:!<CR>
+else
+  nmap <silent> <S-F2> :Unite -start-insert file_rec/async:!<CR>
+endif
+
+" F-n keys call out to normal mode from insert mode
+imap <F1> <C-O><F1>
+imap <F2> <C-O><F2>
+"imap <F3> <C-O><F3>
+imap <F4> <C-O><F4>
+imap <F5> <C-O><F5>
+"imap <F6> <C-O><F6>
+"imap <F7> <C-O><F7>
+imap <F8> <C-O><F8>
+
+
+" >> General settings
 syntax on
 filetype plugin indent on
 
@@ -90,36 +126,11 @@ set softtabstop=2
 
 set backspace=indent,eol,start
 
-" set nu
+"set nu
 set scrolloff=2
 set ruler
 set showcmd
 set wildmenu
-
-nmap <silent> <F1> :Unite buffer<CR>
-nmap <silent> <F2> :Unite file<CR>
-nmap <silent> <F3> :VimShell<CR>
-map  <silent> <F4> :noh<CR>
-nmap <silent> <F5> :GundoToggle<CR>
-nmap <silent> <F8> :TagbarToggle<CR>
-
-" This is supposed to get a CtrlP workalike with fuzzy match
-" but i need to fix ignores and always chdir to a good place
-if has("win32") || has("win16")
-  nmap <silent> <S-F2> :Unite -start-insert file_rec:!<CR>
-else
-  nmap <silent> <S-F2> :Unite -start-insert file_rec/async:!<CR>
-endif
-
-" F-n keys call out to normal mode from insert mode
-imap <F1> <C-O><F1>
-imap <F2> <C-O><F2>
-" imap <F3> <C-O><F3>
-imap <F4> <C-O><F4>
-" imap <F5> <C-O><F5>
-" imap <F6> <C-O><F6>
-" imap <F7> <C-O><F7>
-imap <F8> <C-O><F8>
 
 " Don't assume to scan includes when autocompleting
 set cpt-=i
@@ -130,8 +141,9 @@ set nofoldenable
 set lbr
 set sbr=»\ 
 
-set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
-set laststatus=2
+" Superseded by vim-airline
+"set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
+"set laststatus=2
 
 if on_windows == 1
   let $MYVIM=$HOME.'/vimfiles'
@@ -172,7 +184,6 @@ set directory=$MYVIM/var/tmp//,.
 
 set backup
 set autowrite
-" set hidden  -- autowrite vs hidden, haven't decided.
 
 if has('persistent_undo')
   set undofile
@@ -180,10 +191,9 @@ if has('persistent_undo')
 end
 
 
+" >> File type-specific settings
 autocmd FileType text setlocal textwidth=78
 
-
-" -- Perl stuff
 function! PerlSettings ()
   setlocal keywordprg=perldoc\ -f
   setlocal makeprg=perl\ -c\ %\ $*
@@ -193,21 +203,24 @@ endfunction
 autocmd FileType perl call PerlSettings()
 
 " preload templates into new buffers by file extension
-" autocmd BuffNewFile * silent! 0r $MYVIM/templates/%:e.template
+"autocmd BuffNewFile * silent! 0r $MYVIM/templates/%:e.template
 
 " strip trailing whitespace on save
-" autocmd BufWritePre * :%s/\s+$//e
+"autocmd BufWritePre * :%s/\s+$//e
 
-"let perl_fold = 1           "perl fold scanning is slow
+" perl fold scanning is slow
+"let perl_fold = 1           
 let perl_include_pod = 1
 
-" -- Gundo
+
+" >> Plugin settings
+" > Gundo
 " I prefer python3 on windows if I have to use it.
 if on_windows == 1
   let g:gundo_prefer_python3=1
 endif
 
-" -- Tagbar
+" > Tagbar
 if on_windows == 1
   let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
 endif
@@ -231,7 +244,7 @@ let g:tagbar_type_perl = {
 \ }
 
 
-" -- Unite
+" > Unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 let g:unite_source_history_yank_enable = 1
@@ -242,11 +255,11 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
-" -- Airline
+" > Airline
 let g:airline#extensions#whitespace#enabled = 0
 
 
-" Local stuff
+" >> Local stuff, finish up
 try
   if on_windows == 1
     source ~/_vimrc.local
