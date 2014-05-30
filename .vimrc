@@ -1,20 +1,48 @@
 set nocompatible
 
+let on_windows=0
+if has('win32') || has('win64') 
+  " vim in cygwin has win32 = 0 and win32unix = 1
+  let on_windows=1
+end
+
 " call pathogen#infect()
 " call pathogen#helptags()
 
 " Setting up Vundle - the vim plugin bundler
-  let has_vundle=1
-  let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-  if !filereadable(vundle_readme)
-    let has_vundle=0
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+  let installed_vundle=0
+
+  if on_windows == 0
+    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+  else
+    let vundle_readme=expand('~/vimfiles/bundle/vundle/README.md')
   endif
 
-  set rtp+=~/.vim/bundle/vundle/
+  if !filereadable(vundle_readme)
+    if !executable('git')
+      echo "You probably want git installed and in PATH"
+      quit
+    endif
+
+    let installed_vundle=1
+    echo "Installing Vundle.."
+    echo ""
+    if on_windows == 0
+      silent !mkdir -p ~/.vim/bundle
+      silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    else
+      "windows is weird about args and quoting
+      silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
+      silent execute '!git clone https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
+    endif
+  endif
+
+  if on_windows == 0
+    set rtp+=~/.vim/bundle/vundle/
+  else
+    set rtp+=~/vimfiles/bundle/vundle/
+  endif
+
   call vundle#rc()
   Plugin 'gmarik/vundle'
 
@@ -33,7 +61,7 @@ set nocompatible
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
 
-  if has_vundle == 0
+  if installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages"
     echo ""
     :PluginInstall
@@ -104,7 +132,7 @@ set sbr=»\
 set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
 set laststatus=2
 
-if has("win32") || has("win16")
+if on_windows == 1
   let $MYVIM=$HOME.'/vimfiles'
 
   if !filewritable( $MYVIM . '/var' )
@@ -174,12 +202,12 @@ let perl_include_pod = 1
 
 " -- Gundo
 " I prefer python3 on windows if I have to use it.
-if has('win32')
+if on_windows == 1
   let g:gundo_prefer_python3=1
 endif
 
 " -- Tagbar
-if has("win32") || has("win16")
+if on_windows == 1
   let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
 endif
 
@@ -219,7 +247,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " Local stuff
 try
-  if has("win32") || has("win16")
+  if on_windows == 1
     source ~/_vimrc.local
   else
     source ~/.vimrc.local
