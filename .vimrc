@@ -178,7 +178,7 @@ if on_windows == 1
   endif
 
   set guifont=Consolas:h11
-  set guioptions-=t
+  set guioptions-=t    "just disable tearoffs
 else
   let $MYVIM=$HOME.'/.vim'
 
@@ -193,6 +193,8 @@ else
   endif
 
   set guifont=Droid\ Sans\ Mono\ Slashed\ 10
+  set guioptions-=T     " disable toolbar and menu
+  set guioptions-=m
 endif
 
 set backupdir=$MYVIM/var/backup//,.
