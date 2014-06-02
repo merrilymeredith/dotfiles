@@ -1,3 +1,6 @@
+" vim: et sts=2 sw=2
+" vim: fdm=marker
+
 set nocompatible
 
 let on_windows=0
@@ -7,7 +10,7 @@ if has('win32') || has('win64')
 end
 
 
-" >> Setting up Vundle - the vim plugin bundler
+" {{{ Set up Vundle and plugins
   let installed_vundle=0
 
   if on_windows == 0
@@ -75,10 +78,10 @@ end
       quit
     endif
   endif
-" Setting up Vundle - the vim plugin bundler end
+" }}}
 
 
-" >> F-key maps, mostly plugin stuff
+" {{{  Key maps, mostly plugin stuff on F-keys
 nmap <silent> <F1> :Unite buffer<CR>
 nmap <silent> <F2> :Unite file<CR>
 nmap <silent> <F3> :VimShell<CR>
@@ -104,8 +107,14 @@ imap <F5> <C-O><F5>
 "imap <F7> <C-O><F7>
 imap <F8> <C-O><F8>
 
+" chdir to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" >> General settings
+map <leader>pp :setlocal paste!<cr>
+"}}}
+
+
+" {{{ General settings
 syntax on
 filetype plugin indent on
 
@@ -122,7 +131,6 @@ set autoindent
 set expandtab
 set shiftwidth=2
 set softtabstop=2
-" vim: enc=utf-8 et sts=2 sw=2
 
 set backspace=indent,eol,start
 
@@ -131,6 +139,14 @@ set scrolloff=2
 set ruler
 set showcmd
 set wildmenu
+
+" Ignore compiled files and repositories
+set wildignore=*.o,*~,*.pyc
+if on_windows == 1
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+else
+    set wildignore+=.git\*,.hg\*,.svn\*
+endif
 
 " Don't assume to scan includes when autocompleting
 set cpt-=i
@@ -189,9 +205,10 @@ if has('persistent_undo')
   set undofile
   set undodir=$MYVIM/var/undo//,.
 end
+" }}}
 
 
-" >> File type-specific settings
+" {{{ File type-specific settings
 autocmd FileType text setlocal textwidth=78
 
 function! PerlSettings ()
@@ -211,9 +228,10 @@ autocmd FileType perl call PerlSettings()
 " perl fold scanning is slow
 "let perl_fold = 1           
 let perl_include_pod = 1
+" }}}
 
 
-" >> Plugin settings
+" {{{ Plugin settings
 " > Gundo
 " I prefer python3 on windows if I have to use it.
 if on_windows == 1
@@ -257,9 +275,10 @@ endif
 
 " > Airline
 let g:airline#extensions#whitespace#enabled = 0
+" }}}
 
 
-" >> Local stuff, finish up
+" Local stuff, finish up
 try
   if on_windows == 1
     source ~/_vimrc.local
