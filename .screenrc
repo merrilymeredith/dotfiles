@@ -1,8 +1,14 @@
 startup_message off
 
+# I need to get more comfortable with zsh
+# shell -/bin/zsh
+
 # babun on windows doesn't have utmp, i don't really work in situations
 # where not being listed is a concern
 deflogin off
+
+# use xterm scrollbacks
+termcapinfo xterm* ti@:te@
 
 # pass-through 256-color mode
 attrcolor b ".I"
@@ -16,3 +22,8 @@ hardstatus off
 hardstatus string "screen %n (%t)%? [%h]%?"
 caption always "%{-u wb}%-w%{+u Wb}%n%f*%t%{-}%+w"
 
+# skip window 0
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+screen 1
