@@ -10,7 +10,7 @@ if has('win32') || has('win64')
 end
 
 
-" {{{ Set up Vundle and plugins
+" Set up Vundle and plugins  {{{
   let installed_vundle=0
 
   if on_windows == 0
@@ -81,7 +81,7 @@ end
 " }}}
 
 
-" {{{  Key maps, mostly plugin stuff on F-keys
+" Key maps, mostly plugin stuff on F-keys  {{{
 nmap <silent> <F1> :Unite buffer<CR>
 nmap <silent> <F2> :Unite file<CR>
 nmap <silent> <F3> :VimShell<CR>
@@ -114,7 +114,7 @@ map <leader>pp :setlocal paste!<cr>
 "}}}
 
 
-" {{{ General settings
+" General settings  {{{
 syntax on
 filetype plugin indent on
 
@@ -208,7 +208,7 @@ end
 " }}}
 
 
-" {{{ File type-specific settings
+" File type-specific settings  {{{
 autocmd FileType text setlocal textwidth=78
 
 function! PerlSettings ()
@@ -231,7 +231,7 @@ let perl_include_pod = 1
 " }}}
 
 
-" {{{ Plugin settings
+" Plugin settings  {{{
 " > Gundo
 " I prefer python3 on windows if I have to use it.
 if on_windows == 1
