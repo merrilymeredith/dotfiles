@@ -7,15 +7,44 @@
 
 use strict;
 use warnings qw(FATAL utf8);
+use v5.10;
+
+my $dmenu_cmd;
+my @entry_types;
+
+BEGIN {
+    $dmenu_cmd = 'dmenu -b -i -p ] -nf \#CCC -nb \#555';
+
+    use Getopt::Long;
+    my $result = GetOptions(
+        'dmenu=s' => \$dmenu_cmd,
+        'entry-type=s' => \@entry_types,
+        'version' => sub {
+            say "dmenu-desktop 1.5~custom~mhoward";
+            exit 0;
+        },
+        'help' => sub {
+            pod2usage(-exitval => 0);
+        });
+
+    die "Could not parse command line options" unless $result;
+
+    # if j4-dmenu-desktop is available, let it take over asap
+    #    https://github.com/enkore/j4-dmenu-desktop
+    if ( -x $ENV{HOME} . '/.i3/j4-dmenu-desktop' ){
+        exec $ENV{HOME} . "/.i3/j4-dmenu-desktop --dmenu='${dmenu_cmd}'";
+    }
+    
+    #otherwise we do the same thing as stock i3-dmenu-desktop, but cache the result
+}
+
 use Data::Dumper;
 use IPC::Open2;
 use POSIX qw(locale_h);
 use File::Find;
 use File::Basename qw(basename);
 use File::Temp qw(tempfile);
-use Getopt::Long;
 use Pod::Usage;
-use v5.10;
 use utf8;
 use open ':encoding(UTF-8)';
 
@@ -40,21 +69,6 @@ sub slurp {
         return $result;
     }
 }
-
-my @entry_types;
-my $dmenu_cmd = 'dmenu -b -i -p ] -nf \#CCC -nb \#555';
-my $result = GetOptions(
-    'dmenu=s' => \$dmenu_cmd,
-    'entry-type=s' => \@entry_types,
-    'version' => sub {
-        say "dmenu-desktop 1.5 © 2012-2013 Michael Stapelberg";
-        exit 0;
-    },
-    'help' => sub {
-        pod2usage(-exitval => 0);
-    });
-
-die "Could not parse command line options" unless $result;
 
 my ( %apps, %choices );
 my $cachefile = $ENV{HOME} . '/.cache/i3-dmenu-desktop.bin';
