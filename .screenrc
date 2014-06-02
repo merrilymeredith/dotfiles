@@ -1,7 +1,6 @@
-startup_message off
+# vim: fdm=marker
 
-# I need to get more comfortable with zsh
-# shell -/bin/zsh
+startup_message off
 
 # babun on windows doesn't have utmp, i don't really work in situations
 # where not being listed is a concern
@@ -22,8 +21,41 @@ hardstatus off
 hardstatus string "screen %n (%t)%? [%h]%?"
 caption always "%{-u wb}%-w%{+u Wb}%n%f*%t%{-}%+w"
 
+# split movements with C-a arrow
+bind -k kl focus left
+bind -k kd focus down
+bind -k ku focus up
+bind -k kr focus right
+
+bind -k -a kl focus left
+bind -k -a kd focus down
+bind -k -a ku focus up
+bind -k -a kr focus right
+
+# F2 puts Screen into resize mode. Resize regions using hjkl keys.
+bind R eval "command -c rsz" # enter resize mode
+
+# resize mode keys {{{
+# use hjkl keys to resize regions
+bind -c rsz h eval "resize -h -5" "command -c rsz"
+bind -c rsz j eval "resize -v -5" "command -c rsz"
+bind -c rsz k eval "resize -v +5" "command -c rsz"
+bind -c rsz l eval "resize -h +5" "command -c rsz"
+
+# quickly switch between regions using tab and arrows
+bind -c rsz \t    eval "focus"       "command -c rsz" # Tab
+bind -c rsz -k kl eval "focus left"  "command -c rsz" # Left
+bind -c rsz -k kr eval "focus right" "command -c rsz" # Right
+bind -c rsz -k ku eval "focus up"    "command -c rsz" # Up
+bind -c rsz -k kd eval "focus down"  "command -c rsz" # Down
+# }}}
+
+# and local settings
+source $HOME/.screenrc.local
+
 # skip window 0
 bind c screen 1
 bind ^c screen 1
 bind 0 select 10
 screen 1
+
