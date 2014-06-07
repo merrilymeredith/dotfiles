@@ -38,7 +38,7 @@ StartProgName()
     	fi
 	sleep 1
     done
-    xmessage "Error on executing: $@" &
+    notify-send "Error on executing: $@"
 }
 
 # ### --- emacs --- ###
@@ -87,7 +87,7 @@ StartProgName()
 # i3-msg resize shrink up 32 px or 32 ppt
 #
 
-StartProg xfce4-terminal
+StartProg urxvt
 
 i3-msg 'split h'
 
@@ -95,7 +95,7 @@ StartProgName gvim
 
 i3-msg 'focus left; split v'
 
-StartProg xfce4-terminal
+StartProg urxvt
 
 i3-msg 'resize shrink height 20 px or 20 ppt'
 
