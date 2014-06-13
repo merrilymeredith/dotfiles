@@ -3,7 +3,7 @@
 # Simple autostart file for i3-wm, you can execute it from i3 config with
 # exec $HOME/bin/auto-start-for-i3
 #
-# xdotool and xmessage must be installed. On BSD use jot instead of
+# xdotool and notify-send must be installed. On BSD use jot instead of
 # seq or install seq from ports.
 
 
@@ -23,7 +23,7 @@ StartProg()
     	fi
 	sleep 1
     done
-    xmessage "Error on executing: $@" &
+    notify-send "Error on executing: $@" &
 }
 
 StartProgName()
@@ -89,14 +89,10 @@ StartProgName()
 
 StartProg urxvt
 
-i3-msg 'split h'
-
-StartProgName gvim
-
-i3-msg 'focus left; split v'
-
-StartProg urxvt
-
-i3-msg 'resize shrink height 20 px or 20 ppt'
+# i3-msg 'split h'
+# StartProgName gvim
+# i3-msg 'focus left; split v'
+# StartProg urxvt
+# i3-msg 'resize shrink height 20 px or 20 ppt'
 
 exit 0
