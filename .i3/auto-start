@@ -23,7 +23,7 @@ StartProg()
     	fi
 	sleep 1
     done
-    notify-send "Error on executing: $@" &
+    notify-send "Error on executing: $@"
 }
 
 StartProgName()
