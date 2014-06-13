@@ -157,6 +157,5 @@ bar {
 
 exec xsetroot -solid "SteelBlue4"
 
-exec xset -dpms s off
 exec ~/.i3/auto-start
 
