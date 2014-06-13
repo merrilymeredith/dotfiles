@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -d ~/bin ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
 if [ -d ~/.plenv ]; then
   export PATH="$HOME/.plenv/bin:$PATH"
   eval "$( plenv init - )"
@@ -10,8 +14,17 @@ if [ -d ~/.rbenv ]; then
   eval "$( rbenv init - )"
 fi
 
+
+if [ -x /usr/bin/urxvtd ]; then
+  /usr/bin/urxvtd -q -o -f
+fi
+
+if [ -x /usr/bin/xcompmgr ]; then
+  /usr/bin/xcompmgr -n &>/dev/null </dev/null &
+fi
+
+
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
 fi
-
 
