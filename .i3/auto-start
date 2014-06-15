@@ -41,6 +41,33 @@ StartProgName()
     notify-send "Error on executing: $@"
 }
 
+WaitProgName()
+{
+    echo "Waiting on $1"
+    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+    do
+    	if xdotool search --onlyvisible --name $1; then
+    	    return 0
+    	fi
+	sleep 1
+    done
+    notify-send "Error waiting on $1: $@"
+}
+
+WaitClassName()
+{
+    echo "Waiting on window class $1"
+    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+    do
+    	if xdotool search --onlyvisible --class $1; then
+    	    return 0
+    	fi
+	sleep 1
+    done
+    notify-send "Error waiting on $1: $@"
+}
+
+
 # ### --- emacs --- ###
 # StartProg emacs
 #
@@ -87,12 +114,15 @@ StartProgName()
 # i3-msg resize shrink up 32 px or 32 ppt
 #
 
-StartProg urxvt
-
+# StartProg urxvt
 # i3-msg 'split h'
 # StartProgName gvim
 # i3-msg 'focus left; split v'
 # StartProg urxvt
 # i3-msg 'resize shrink height 20 px or 20 ppt'
+
+if [ -r ~/.i3/auto-start.local ]; then
+  . .i3/auto-start.local
+fi
 
 exit 0
