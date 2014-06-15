@@ -25,7 +25,7 @@ fi
 
 
 if [ -r ~/.Xdefaults.local ]; then
-  /usr/bin/xrdb -quiet -merge -cpp /usr/bin/cpp ~/.Xdefaults.local
+  /usr/bin/xrdb -quiet -merge -cpp /usr/bin/cpp -DUSE_LOCAL ~/.Xdefaults
 fi
 
 if [ -r ~/.xsessionrc.local ]; then
