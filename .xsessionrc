@@ -24,6 +24,10 @@ if [ -x /usr/bin/xcompmgr ]; then
 fi
 
 
+if [ -r ~/.Xdefaults.local ]; then
+  /usr/bin/xrdb -quiet -merge -cpp /usr/bin/cpp ~/.Xdefaults.local
+fi
+
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
 fi

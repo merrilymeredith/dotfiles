@@ -15,3 +15,4 @@ URxvt.saveLines: 1000
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 
+#include ".Xdefaults.local"
