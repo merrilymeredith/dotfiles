@@ -193,6 +193,7 @@ else
 endif
 
 set guifont=Droid\ Sans\ Mono\ Slashed\ 10
+set lsp=0            "line spacing 0 px
 set guioptions-=T    "disable toolbar and menu
 set guioptions-=m
 set guioptions-=t    "disable tearoffs
