@@ -22,7 +22,7 @@ fi
 /usr/bin/xmodmap ~/.xmodmaprc
 
 if [ -r ~/.Xdefaults.local ]; then
-  /usr/bin/xrdb -quiet -merge -cpp /usr/bin/cpp -DUSE_LOCAL ~/.Xdefaults
+  /usr/bin/xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
 fi
 
 if [ -x /usr/bin/urxvtd ]; then
