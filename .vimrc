@@ -177,8 +177,6 @@ if on_windows == 1
     silent execute '!mkdir "'.$HOME.'\vimfiles\var\undo"'
   endif
 
-  set guifont=Consolas:h11
-  set guioptions-=t    "just disable tearoffs
 else
   let $MYVIM=$HOME.'/.vim'
 
@@ -192,10 +190,12 @@ else
     silent execute '!mkdir "'.$MYVIM.'/var/undo"'
   endif
 
-  set guifont=Droid\ Sans\ Mono\ Slashed\ 10
-  set guioptions-=T     " disable toolbar and menu
-  set guioptions-=m
 endif
+
+set guifont=Droid\ Sans\ Mono\ Slashed\ 10
+set guioptions-=T    "disable toolbar and menu
+set guioptions-=m
+set guioptions-=t    "disable tearoffs
 
 set backupdir=$MYVIM/var/backup//,.
 set directory=$MYVIM/var/tmp//,.
