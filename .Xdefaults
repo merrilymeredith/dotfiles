@@ -12,7 +12,9 @@ URxvt.urgentOnBell: true
 
 URxvt.saveLines: 1000
 
-URxvt.iso14755: false
+! keep LCtrl+LShift+[0-9a-f] unicode insertion
+URxvt.iso14755: true
+! disable LCtrl+LShift+keycap symbolic unicode (use Compose key instead)
 URxvt.iso14755_52: false
 
 #ifdef USE_LOCAL
