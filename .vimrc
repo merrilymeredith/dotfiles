@@ -192,8 +192,13 @@ else
 
 endif
 
-set guifont=Droid\ Sans\ Mono\ Slashed\ 10
-set lsp=0            "line spacing 0 px
+if on_windows == 1
+  set guifont=Droid_Sans_Mono_Slashed:h10:cANSI
+  set lsp=0
+else
+  set guifont=Droid\ Sans\ Mono\ Slashed\ 10
+endif
+
 set guioptions-=T    "disable toolbar and menu
 set guioptions-=m
 set guioptions-=t    "disable tearoffs
