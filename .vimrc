@@ -193,10 +193,10 @@ else
 endif
 
 if on_windows == 1
-  set guifont=Droid_Sans_Mono_Slashed:h10:cANSI
+  set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
   set lsp=0
 else
-  set guifont=Droid\ Sans\ Mono\ Slashed\ 10
+  set guifont=DejaVu\ Sans\ Mono\ 10
 endif
 
 set guioptions-=T    "disable toolbar and menu
