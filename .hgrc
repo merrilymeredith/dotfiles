@@ -1,5 +1,6 @@
 [ui]
 username = Meredith Howard <mhoward@roomag.org>
+merge = vimdiff
 
 [extensions]
 hgext.graphlog = 
@@ -16,5 +17,11 @@ pager = LESS='FSRX' less
 
 [alias]
 fetch = pull --rebase
+
+[merge-tools]
+vimdiff.executable = vim
+vimdiff.args = -d $base $local $output $other +close +close
+vimdiff.check = changed, conflicts
+
 
 %include ~/.hgrc.local
