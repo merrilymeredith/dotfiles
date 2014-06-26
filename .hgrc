@@ -4,6 +4,7 @@ merge = vimdiff
 
 [extensions]
 hgext.graphlog = 
+mq = 
 rebase = 
 color = 
 record = 
