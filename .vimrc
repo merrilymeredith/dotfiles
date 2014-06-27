@@ -62,6 +62,7 @@ end
   Plugin 'majutsushi/tagbar'
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
+  Plugin 'tpope/vim-unimpaired'
 
   Plugin 'danchoi/ri.vim'
   Plugin 'tpope/vim-fugitive'
