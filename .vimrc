@@ -63,6 +63,7 @@ end
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
+  Plugin 'tpope/vim-endwise'
 
   Plugin 'danchoi/ri.vim'
   Plugin 'tpope/vim-fugitive'
@@ -132,6 +133,9 @@ set autoindent
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+
+" apparently you have to go out of your way to make this stick
+autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
 set backspace=indent,eol,start
 
