@@ -68,6 +68,7 @@ end
   Plugin 'danchoi/ri.vim'
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
+  Plugin 'mhinz/vim-signify'
 
   if installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages"
@@ -288,6 +289,15 @@ endif
 
 " > Airline
 let g:airline#extensions#whitespace#enabled = 0
+
+" > Signify
+let g:signify_disable_by_default = 1
+let g:signify_vcs_list = [ 'git', 'hg' ]
+
+let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_prev_hunk = '<leader>gk'
+let g:signify_mapping_toggle = '<leader>gt'
+
 " }}}
 
 
