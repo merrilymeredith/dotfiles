@@ -65,10 +65,13 @@ end
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
 
-  Plugin 'danchoi/ri.vim'
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
   Plugin 'mhinz/vim-signify'
+
+  Plugin 'danchoi/ri.vim'
+  Plugin 'vim-ruby/vim-ruby'
+  Plugin 'vim-perl/vim-perl'
 
   if installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages"
@@ -315,7 +318,10 @@ if has('gui_running')
   set nu
   set bg=dark
 
-  set columns=120 lines=40
+  if on_windows == 1
+    " generally have a tiling wm on linux
+    set columns=120 lines=40
+  end
 
   colorscheme solarized
 else
