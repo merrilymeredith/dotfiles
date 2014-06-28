@@ -58,6 +58,7 @@ end
   Plugin 'Shougo/vimproc.vim'
   Plugin 'Shougo/unite.vim'
   Plugin 'Shougo/vimshell.vim'
+  Plugin 'Shougo/vimfiler.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'godlygeek/tabular'
@@ -89,7 +90,7 @@ end
 
 " Key maps, mostly plugin stuff on F-keys  {{{
 nmap <silent> <F1> :Unite buffer<CR>
-nmap <silent> <F2> :Unite file<CR>
+nmap <silent> <F2> :VimFilerExplorer<CR>
 nmap <silent> <F3> :VimShell<CR>
 map  <silent> <F4> :noh<CR>
 nmap <silent> <F5> :GundoToggle<CR>
@@ -289,6 +290,10 @@ if executable('ag')
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
 endif
+
+" > vimfiler
+let g:vimfiler_as_default_explorer = 1
+autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
 " > Airline
 let g:airline#extensions#whitespace#enabled = 0
