@@ -1,0 +1,18 @@
+[user]
+	email = mhoward@roomag.org
+	name  = Meredith Howard
+
+[ui]
+	color = true
+
+[core]
+	pager = LESS='FSRX' less
+
+[alias]
+	ci        = commit
+	record    = !sh -c '(git add -p -- $@ && git commit -v ) || git reset' --
+	update    = !git fetch --all --tags --prune && git pull --rebase
+	incoming  = "!git remote update -p; git log ..@{u}"
+	outgoing  = log @{u}..
+	glog      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
