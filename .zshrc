@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="mhoward"
 ZSH_CUSTOM=~/.oh-my-zsh.cust
 
-plugins=( common-aliases mercurial gitfast )
+plugins=( common-aliases gitfast )
 
 if [ -f ~/.zshrc.local-pre ]; then
   source ~/.zshrc.local-pre
