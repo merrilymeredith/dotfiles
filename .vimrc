@@ -139,9 +139,6 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-" apparently you have to go out of your way to make this stick
-autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-
 set backspace=indent,eol,start
 
 "set nu
@@ -226,26 +223,40 @@ end
 " }}}
 
 
-" File type-specific settings  {{{
-autocmd FileType text setlocal textwidth=78
+" Autocmds  {{{
+augroup vimrc
+  autocmd!
+
+  " you have to go out of your way to make this stick
+  autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
+
+  autocmd FileType text setlocal textwidth=78
+  autocmd FileType perl call PerlSettings()
+
+  " preload templates into new buffers by file extension
+  "autocmd BufNewFile * silent! 0r $MYVIM/templates/%:e.template
+
+  " simple strip trailing whitespace on save
+  "autocmd BufWritePre *.pl,*.rb,*.js,*.css,*.md :%s/\s+$//e
+
+augroup END
+"}}}
+
+
+" Perl type-specific settings  {{{
 
 function! PerlSettings ()
-  setlocal keywordprg=perldoc\ -f
+  compiler perl
+  " even with g:perl_compiler_force_warnings = 0, perl -w is used and
+  " that's just noisy with intentional no-warnings blocks out there
+
   setlocal makeprg=perl\ -c\ %\ $*
-  setlocal errorformat=%m\ at\ %f\ line\ %l
 endfunction
-
-autocmd FileType perl call PerlSettings()
-
-" preload templates into new buffers by file extension
-"autocmd BuffNewFile * silent! 0r $MYVIM/templates/%:e.template
-
-" strip trailing whitespace on save
-"autocmd BufWritePre * :%s/\s+$//e
 
 " perl fold scanning is slow
 "let perl_fold = 1           
 let perl_include_pod = 1
+
 " }}}
 
 
