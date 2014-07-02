@@ -5,6 +5,8 @@ if [ -f ~/.bashrc.dist ]; then
   source ~/.bashrc.dist
 fi
 
+export EDITOR=vim
+export PERL_CPANM_OPT='-n --prompt --reinstall'
 
 if [ -d ~/bin ]; then
   export PATH="$HOME/bin:$PATH"

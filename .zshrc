@@ -33,6 +33,7 @@ export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 # export LANG=en_US.UTF-8
 
 export EDITOR='vim'
+export PERL_CPANM_OPT='-n --prompt --reinstall'
 
 typeset -U path
 
