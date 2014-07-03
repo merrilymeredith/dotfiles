@@ -59,13 +59,15 @@ end
   Plugin 'Shougo/unite.vim'
   Plugin 'Shougo/vimshell.vim'
   Plugin 'Shougo/vimfiler.vim'
-  Plugin 'Shougo/neocomplcache.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
+
+  Plugin 'Shougo/neocomplcache.vim'
+  Plugin 'c9s/perlomni.vim'
 
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
@@ -262,13 +264,13 @@ let perl_include_pod = 1
 
 
 " Plugin settings  {{{
-" > Gundo
+">> Gundo
 " I prefer python3 on windows if I have to use it.
 if on_windows == 1
   let g:gundo_prefer_python3=1
 endif
 
-" > Tagbar
+">> Tagbar
 if on_windows == 1
   let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
 endif
@@ -292,7 +294,7 @@ let g:tagbar_type_perl = {
 \ }
 
 
-" > Unite
+">> Unite
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 " let g:unite_source_history_yank_enable = 1
@@ -303,14 +305,14 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
-" > vimfiler
+">> vimfiler
 let g:vimfiler_as_default_explorer = 1
 autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
-" > Airline
+">> Airline
 let g:airline#extensions#whitespace#enabled = 0
 
-" > Signify
+">> Signify
 let g:signify_disable_by_default = 1
 let g:signify_vcs_list = [ 'git', 'hg' ]
 
@@ -318,7 +320,7 @@ let g:signify_mapping_next_hunk = '<leader>gj'
 let g:signify_mapping_prev_hunk = '<leader>gk'
 let g:signify_mapping_toggle = '<leader>gt'
 
-" > neocomplcache
+">> neocomplcache
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 
@@ -326,6 +328,15 @@ let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
+
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+
+"Required to get ruby omni
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"Enabling the below allows module completion from CPAN, jeez
+" let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " }}}
 
