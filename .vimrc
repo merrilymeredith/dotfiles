@@ -59,6 +59,7 @@ end
   Plugin 'Shougo/unite.vim'
   Plugin 'Shougo/vimshell.vim'
   Plugin 'Shougo/vimfiler.vim'
+  Plugin 'Shougo/neocomplcache.vim'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'godlygeek/tabular'
@@ -316,6 +317,15 @@ let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_mapping_next_hunk = '<leader>gj'
 let g:signify_mapping_prev_hunk = '<leader>gk'
 let g:signify_mapping_toggle = '<leader>gt'
+
+" > neocomplcache
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
 
 " }}}
 
