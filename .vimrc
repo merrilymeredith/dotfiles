@@ -108,19 +108,26 @@ else
 endif
 
 " F-n keys call out to normal mode from insert mode
-imap <F1> <C-O><F1>
-imap <F2> <C-O><F2>
+" only :noh seems smart to do.
+"imap <F1> <C-O><F1>
+"imap <F2> <C-O><F2>
 "imap <F3> <C-O><F3>
 imap <F4> <C-O><F4>
-imap <F5> <C-O><F5>
+"imap <F5> <C-O><F5>
 "imap <F6> <C-O><F6>
 "imap <F7> <C-O><F7>
-imap <F8> <C-O><F8>
+"imap <F8> <C-O><F8>
 
 " chdir to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 map <leader>pp :setlocal paste!<cr>
+
+" faster window nav
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 "}}}
 
 
