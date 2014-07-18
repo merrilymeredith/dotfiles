@@ -21,7 +21,8 @@ end
 
   if !filereadable(vundle_readme)
     if !executable('git')
-      echo "You probably want git installed and in PATH"
+      echo "You probably want git installed and in PATH."
+      echo " http://chocolatey.org "
       quit
     endif
 
@@ -279,7 +280,10 @@ endif
 
 ">> Tagbar
 if on_windows == 1
-  let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
+  if executable('ctags') == 0
+    " if i haven't installed from chocolatey...
+    let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
+  endif
 endif
 
 let g:tagbar_autoclose = 1
