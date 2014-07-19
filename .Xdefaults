@@ -1,5 +1,5 @@
 
-URxvt.foreground: white
+URxvt.foreground: #DFDFDF
 URxvt.background: #070707
 URxvt.font: xft:monospace-10
 
