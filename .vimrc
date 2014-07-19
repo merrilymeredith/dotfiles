@@ -69,6 +69,7 @@ end
 
   Plugin 'Shougo/neocomplcache.vim'
   Plugin 'c9s/perlomni.vim'
+  Plugin 'rking/ag.vim'
 
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
@@ -77,6 +78,7 @@ end
   Plugin 'danchoi/ri.vim'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'vim-perl/vim-perl'
+
 
   if installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages"
@@ -165,6 +167,9 @@ if on_windows == 1
 else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
+
+" Enable enhanced % matching in ruby
+runtime macros/matchit.vim
 
 " Don't assume to scan includes when autocompleting
 set cpt-=i
