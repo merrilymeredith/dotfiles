@@ -381,6 +381,11 @@ else
   if &t_Co == 256
     colorscheme jellybeans
   end
+
+  if $TERM =~ 'rxvt-unicode'
+    set ttymouse=urxvt
+    set mouse=a
+  endif
 end
 
 
