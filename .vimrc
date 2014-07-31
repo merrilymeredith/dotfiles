@@ -143,7 +143,11 @@ set enc=utf-8
 set hlsearch
 set ic smartcase
 
-set lcs=tab:→·,trail:·
+if has('gui_running') || $LANG =~ 'UTF-8'
+  set lcs=tab:⇥·,trail:·
+  " eol:↩   not as useful as trail i think
+  set fillchars=fold:∷,vert:│
+endif
 
 set ve=block
 
