@@ -382,14 +382,25 @@ if has('gui_running')
 
   colorscheme solarized
 else
-  if &t_Co == 256
-    colorscheme jellybeans
-  end
+
+  if $TERM =~ 'screen'
+    if $TERM == 'screen-bce'
+      "if i'm not screen-bce, i'm not sure i have a good .screenrc in place
+      set t_Co=256
+    endif
+
+    set mouse=a
+  endif
 
   if $TERM =~ 'rxvt-unicode'
     set ttymouse=urxvt
     set mouse=a
   endif
+
+  if &t_Co == 256
+    colorscheme jellybeans
+  end
+
 end
 
 
