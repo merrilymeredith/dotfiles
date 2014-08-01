@@ -138,18 +138,19 @@ nmap <C-l> <C-w>l
 syntax on
 filetype plugin indent on
 
-set enc=utf-8
+set encoding=utf-8
 
 set hlsearch
-set ic smartcase
+set ignorecase
+set smartcase
 
 if has('gui_running') || $LANG =~ 'UTF-8'
-  set lcs=tab:⇥·,trail:·
+  set listchars=tab:⇥·,trail:·
   " eol:↩   not as useful as trail i think
   set fillchars=fold:∷,vert:│
 endif
 
-set ve=block
+set virtualedit=block
 
 set autoindent
 set expandtab
@@ -158,7 +159,7 @@ set softtabstop=2
 
 set backspace=indent,eol,start
 
-"set nu
+" set number
 set scrolloff=2
 set ruler
 set showcmd
@@ -176,13 +177,13 @@ endif
 runtime macros/matchit.vim
 
 " Don't assume to scan includes when autocompleting
-set cpt-=i
+set complete-=i
 
 " Never open with folds collapsed
 set nofoldenable
 
-set lbr
-set sbr=»\ 
+set linebreak
+set showbreak=»\ 
 
 " Superseded by vim-airline
 "set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
@@ -221,7 +222,7 @@ endif
 
 if on_windows == 1
   set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
-  set lsp=0
+  set linespace=0
 else
   set guifont=DejaVu\ Sans\ Mono\ 10
 endif
@@ -372,8 +373,8 @@ catch
 endtry
 
 if has('gui_running')
-  set nu
-  set bg=dark
+  set number
+  set background=dark
 
   if on_windows == 1
     " generally have a tiling wm on linux
