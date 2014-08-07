@@ -55,6 +55,7 @@ end
 
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'bling/vim-airline'
+  Plugin 'bling/vim-bufferline'
 
   Plugin 'Shougo/vimproc.vim'
   Plugin 'Shougo/unite.vim'
@@ -334,6 +335,9 @@ autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
 ">> Airline
 let g:airline#extensions#whitespace#enabled = 0
+
+"keep bufferline from writing into the command line
+let g:bufferline_echo = 0
 
 ">> Signify
 let g:signify_disable_by_default = 1
