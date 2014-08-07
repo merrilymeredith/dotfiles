@@ -278,6 +278,7 @@ endfunction
 " perl fold scanning is slow
 "let perl_fold = 1           
 let perl_include_pod = 1
+let perl_no_subprototype_error = 1
 
 " }}}
 
