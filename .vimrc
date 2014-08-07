@@ -78,6 +78,7 @@ end
   Plugin 'danchoi/ri.vim'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'vim-perl/vim-perl'
+  Plugin 'yko/mojo.vim'
 
 
   if installed_vundle == 1
