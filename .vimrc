@@ -162,7 +162,7 @@ set softtabstop=2
 set backspace=indent,eol,start
 
 " set number
-set scrolloff=2
+set scrolloff=4
 set ruler
 set showcmd
 set wildmenu
