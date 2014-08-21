@@ -22,7 +22,9 @@ end
   if !filereadable(vundle_readme)
     if !executable('git')
       echo "You probably want git installed and in PATH."
-      echo " http://chocolatey.org "
+      if on_windows == 1
+        echo " http://chocolatey.org "
+      endif
       quit
     endif
 
@@ -279,17 +281,20 @@ endfunction
 " perl fold scanning is slow
 "let perl_fold = 1           
 let perl_include_pod = 1
+" workaround for experimental signatures
 let perl_no_subprototype_error = 1
 
 " }}}
 
 
 " Plugin settings  {{{
+
 ">> Gundo
-" I prefer python3 on windows if I have to use it.
+" I prefer python3 on windows if I have to use it. Needs a dll in path.
 if on_windows == 1
   let g:gundo_prefer_python3=1
 endif
+
 
 ">> Tagbar
 if on_windows == 1
@@ -329,15 +334,19 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
+
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
+" double-click to edit
 autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+
 
 ">> Airline
 let g:airline#extensions#whitespace#enabled = 0
 
 "keep bufferline from writing into the command line
 let g:bufferline_echo = 0
+
 
 ">> Signify
 let g:signify_disable_by_default = 1
@@ -346,6 +355,7 @@ let g:signify_vcs_list = [ 'git', 'hg' ]
 let g:signify_mapping_next_hunk = '<leader>gj'
 let g:signify_mapping_prev_hunk = '<leader>gk'
 let g:signify_mapping_toggle = '<leader>gt'
+
 
 ">> neocomplcache
 " Disable AutoComplPop.
