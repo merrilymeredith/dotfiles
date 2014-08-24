@@ -1,7 +1,7 @@
--i=2
--l=72
--ci=2
--nsbl
--vt=2
--sot -sct
--nolq
+-i=2          # Indent 2
+-l=78         # Lines to 78
+-ci=2         # indent continuing lines
+-nolq         # don't outdent long quotes
+-csc -csci=30 # closing-side comments
+-sbl          # open brackets after named subs
+#-sot -sct     # stack opening/closing tokens
