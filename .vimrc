@@ -99,7 +99,8 @@ end
 
 
 " Key maps, mostly plugin stuff on F-keys  {{{
-nmap <silent> <F1> :Unite buffer<CR>
+nmap <silent> <F1> :Unite -auto-resize -here buffer<CR>
+nmap <silent> <S-F1> :Unite -winheight=5 -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
 nmap <silent> <F3> :VimShell<CR>
 map  <silent> <F4> :noh<CR>
@@ -307,6 +308,7 @@ endif
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
+let g:tagbar_width = 30
 
 let g:tagbar_type_perl = {
     \ 'kinds' : [
