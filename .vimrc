@@ -84,6 +84,15 @@ end
   Plugin 'yko/mojo.vim'
 
 
+  try
+    if on_windows == 1
+      source ~/_vimrc.local-pre
+    else
+      source ~/.vimrc.local-pre
+    endif
+  catch
+  endtry
+
   if installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages"
     echo ""
