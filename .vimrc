@@ -403,6 +403,8 @@ if has('gui_running')
   set number
   set background=dark
 
+  set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
+
   if on_windows == 1
     " generally have a tiling wm on linux
     set columns=120 lines=40
