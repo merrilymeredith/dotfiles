@@ -157,5 +157,7 @@ bar {
 
 exec xsetroot -solid "SteelBlue4"
 
+for_window [class="xfreerdp"] floating disable
+
 exec ~/.i3/auto-start
 
