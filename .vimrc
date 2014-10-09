@@ -410,7 +410,7 @@ if has('gui_running')
     set columns=120 lines=40
   end
 
-  colorscheme solarized
+  colorscheme jellybeans
 else
 
   if $TERM =~ 'screen'
