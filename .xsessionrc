@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -d ~/bin ]; then
   export PATH="$HOME/bin:$PATH"
@@ -15,19 +15,20 @@ if [ -d ~/.rbenv ]; then
 fi
 
 
-if [ -x /usr/bin/xcompmgr ]; then
-  /usr/bin/xcompmgr -n &>/dev/null </dev/null &
+if [ "$(uname -s)" = "OpenBSD" ]; then
+  PATH="/usr/X11R6/bin:$PATH"
 fi
 
-/usr/bin/xmodmap ~/.xmodmaprc
+
+xcompmgr -n &>/dev/null </dev/null &
+
+xmodmap ~/.xmodmaprc
 
 if [ -r ~/.Xdefaults.local ]; then
-  /usr/bin/xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
+  xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
 fi
 
-if [ -x /usr/bin/urxvtd ]; then
-  /usr/bin/urxvtd -q -o -f
-fi
+urxvtd -q -o -f
 
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
