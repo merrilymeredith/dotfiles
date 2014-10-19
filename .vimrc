@@ -166,6 +166,7 @@ endif
 
 if exists('&breakindent')
   set bri
+  set briopt+=sbr
 endif
 
 set virtualedit=block
