@@ -164,6 +164,10 @@ if has('gui_running') || $LANG =~ 'UTF-8'
   set fillchars=fold:∷,vert:│
 endif
 
+if exists('&breakindent')
+  set bri
+endif
+
 set virtualedit=block
 
 set autoindent
