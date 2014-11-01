@@ -10,6 +10,12 @@ hi TabNumber	color: #fff; margin: 0; padding-right: .3ex; text-shadow: #000 -1px
 
 set guioptions=bCrsn
 
+
+" navigation on tmbo
 set passkeys+=thismight.be:<Left>,<Right>
+
+" catch all post controls on tumblr
+set hinttags+=div.post_control
+
 
 " vim: set ft=vim
