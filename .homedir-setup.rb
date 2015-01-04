@@ -11,6 +11,10 @@ if `which git` == ''
 end
 
 def main
+  if ARGV.length == 0
+    ARGV << '--help'
+  end
+
   opts = GetoptLong.new(
     [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
     [ '--update', '-u', GetoptLong::NO_ARGUMENT ],
