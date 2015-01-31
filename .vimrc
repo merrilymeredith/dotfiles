@@ -430,6 +430,8 @@ else
   if $TERM =~ 'rxvt-unicode'
     set ttymouse=urxvt
     set mouse=a
+    map <Esc>[7~ <Home>
+    map <Esc>[8~ <End>
   endif
 
   if &t_Co == 256
