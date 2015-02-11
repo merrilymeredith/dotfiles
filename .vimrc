@@ -59,6 +59,8 @@ end
   Plugin 'bling/vim-airline'
   Plugin 'bling/vim-bufferline'
 
+  Plugin 'editorconfig/editorconfig-vim'
+
   Plugin 'Shougo/vimproc.vim'
   Plugin 'Shougo/unite.vim'
   Plugin 'Shougo/vimshell.vim'
