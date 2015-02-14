@@ -9,7 +9,7 @@ group user
 hi TabClose	display: none;
 hi TabNumber	color: #fff; margin: 0; padding-right: .3ex; text-shadow: #000 -1px 0 0, #000 0 1px 0, #000 1px 0 0, #000 0 -1px 0;
 
-set guioptions=bCrsn
+set guioptions=bCrsnT
 
 
 " navigation on tmbo
