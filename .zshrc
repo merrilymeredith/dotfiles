@@ -50,6 +50,7 @@ if [ -d ~/.rbenv ]; then
   eval "$(rbenv init - zsh)"
 fi
 
+alias hgcd='cd $(hg root)'
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
