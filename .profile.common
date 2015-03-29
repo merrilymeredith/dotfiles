@@ -1,0 +1,12 @@
+# simple profile stuff that is common to both zsh and bash
+
+export EDITOR=vim
+export PERL_CPANM_OPT='-n --prompt --reinstall'
+export DEVEL_REPL_PROFILE='Standard'
+
+alias hgcd='cd $(hg root)'
+
+if [ -f ~/.profile.common.local ]; then
+  source ~/.profile.common.local
+fi
+

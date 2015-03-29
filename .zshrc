@@ -35,8 +35,7 @@ export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
 
 # export LANG=en_US.UTF-8
 
-export EDITOR='vim'
-export PERL_CPANM_OPT='-n --prompt --reinstall'
+source ~/.profile.common
 
 typeset -U path
 
@@ -49,8 +48,6 @@ if [ -d ~/.rbenv ]; then
   path=( ~/.rbenv/bin "$path[@]" )
   eval "$(rbenv init - zsh)"
 fi
-
-alias hgcd='cd $(hg root)'
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
