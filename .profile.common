@@ -5,6 +5,7 @@ export PERL_CPANM_OPT='-n --prompt --reinstall'
 export DEVEL_REPL_PROFILE='Standard'
 
 alias hgcd='cd $(hg root)'
+alias gcd='cd "$(git rev-parse --show-toplevel)"'
 
 if [ -f ~/.profile.common.local ]; then
   source ~/.profile.common.local
