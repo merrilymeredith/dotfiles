@@ -1,0 +1,5 @@
+#!/bin/sh
+export PATH=/opt/local/bin:${PATH}
+export CTAGS_HOOK=1
+
+~/.git_helpers/ctags >/dev/null 2>&1 </dev/null &

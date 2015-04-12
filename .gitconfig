@@ -16,6 +16,7 @@
 	outgoing  = log @{u}..
 	glog      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	cleanup   = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
+	ctags     = !~/.git_helpers/ctags
 
 [branch]
 	autosetuprebase = always

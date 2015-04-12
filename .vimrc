@@ -186,6 +186,8 @@ set ruler
 set showcmd
 set wildmenu
 
+set tags+=.tags
+
 " Ignore compiled files and repositories
 set wildignore=*.o,*~,*.pyc
 if on_windows == 1
@@ -293,6 +295,7 @@ function! PerlSettings ()
   " that's just noisy with intentional no-warnings blocks out there
 
   setlocal makeprg=perl\ -c\ %\ $*
+  setlocal iskeyword+=:
 endfunction
 
 " perl fold scanning is slow
