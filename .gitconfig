@@ -31,3 +31,8 @@
 [include]
 	path = ~/.gitconfig.local
 
+# https://github.com/aanand/git-up
+# $ gem install git-up
+[git-up "rebase"]
+	log-hook = "echo \"changes on $1:\"; git log --oneline --decorate $1..$2"
+
