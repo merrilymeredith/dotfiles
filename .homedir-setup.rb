@@ -21,19 +21,25 @@ def main
     [ '--setup', '-s', GetoptLong::NO_ARGUMENT ],
   );
 
-  case opts.get.shift
-  when '--help'
-    puts <<-ENDHELP.sub(/^\s+/,'')
-      #{$0} usage:
-       -h --help    This help message
-       -s --setup   Perform home directory setup (git clone)
-       -u --update  Update git stuff (git pull)
-    ENDHELP
-    exit 1
-  when '--setup'
-    setup
-  when '--update'
-    update
+  Dir.chdir(
+    File.dirname File.expand_path $0
+  )
+
+  opts.each do |opt, arg|
+    case opt
+    when '--help'
+      puts <<-ENDHELP.sub(/^\s+/,'')
+        #{$0} usage:
+         -h --help    This help message
+         -s --setup   Perform home directory setup (git clone)
+         -u --update  Update git stuff (git pull)
+      ENDHELP
+      exit 1
+    when '--setup'
+      setup
+    when '--update'
+      update
+    end
   end
 end
 
