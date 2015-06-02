@@ -110,7 +110,7 @@ end
 
 
 " Key maps, mostly plugin stuff on F-keys  {{{
-nmap <silent> <F1> :Unite -auto-resize -here buffer<CR>
+nmap <silent> <F1> :Unite -auto-resize -direction=dynamicbottom buffer<CR>
 nmap <silent> <S-F1> :Unite -winheight=5 -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
 nmap <silent> <F3> :VimShell<CR>
