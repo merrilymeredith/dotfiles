@@ -111,7 +111,7 @@ def update
     '.rbenv/plugins/ruby-build',
   ].each do |dir|
     do_cmds \
-      "chdir ~/#{dir} && git pull origin master"
+      "cd ~/#{dir} && git pull origin master"
   end
 
 
