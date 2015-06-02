@@ -20,7 +20,7 @@ tmp    = "#{dir}/#{$$}.tags"
 
 opts   = File.exists?(conf) ? "--options=#{conf}" : ''
 
-sleep 10 if ENV['CTAGS_HOOK']
+sleep 5 if ENV['CTAGS_HOOK']
 
 open( target, File::RDONLY|File::CREAT, 0644 ) do |f|
   if ENV['CTAGS_HOOK']
