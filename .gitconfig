@@ -28,11 +28,12 @@
 [rebase]
 	stat = true
 
+# include.path is available in git 1.7.10 and later
 [include]
 	path = ~/.gitconfig.local
 
 # https://github.com/aanand/git-up
 # $ gem install git-up
 [git-up "rebase"]
-	log-hook = "echo \"changes on $1:\"; git log --oneline --decorate $1..$2"
+	log-hook = "echo \"changes on $1 -> $2:\"; git log --oneline --decorate $1..$2"
 
