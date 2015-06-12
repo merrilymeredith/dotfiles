@@ -19,3 +19,8 @@ fi
 
 cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 
+# rebuilding vimproc dll on babun for w32 gvim:
+# $ pact install mingw-gcc-core
+# $ make -f make_mingw32.mak CC=i686-pc-mingw32-gcc
+
+
