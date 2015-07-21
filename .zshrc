@@ -8,6 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_UPDATE_PROMPT="true"
 
 plugins=( common-aliases gitfast )
+envthings=( plenv rbenv ndenv )
 
 if [ -f ~/.zshrc.local-pre ]; then
   source ~/.zshrc.local-pre
@@ -39,15 +40,12 @@ source ~/.profile.common
 
 typeset -U path
 
-if [ -d ~/.plenv ]; then
-  path=( ~/.plenv/bin "$path[@]" )
-  eval "$(plenv init - zsh)"
-fi
-
-if [ -d ~/.rbenv ]; then
-  path=( ~/.rbenv/bin "$path[@]" )
-  eval "$(rbenv init - zsh)"
-fi
+for ENVTHING in $envthings; do
+  if [ -d ~/.$ENVTHING ]; then
+    path=( ~/.$ENVTHING/bin "$path[@]" )
+    eval "$($ENVTHING init - zsh)"
+  fi
+done
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
