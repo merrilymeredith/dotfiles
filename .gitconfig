@@ -9,21 +9,23 @@
 	pager = LESS='FSRX' less
 
 [alias]
-	ci        = commit
-	record    = !sh -c '(git add -p -- $@ && git commit -v ) || git reset' --
-	update    = !git fetch --all --tags --prune && git pull --rebase
-	incoming  = "!git remote update -p; git log ..@{u}"
-	outgoing  = log @{u}..
-	glog      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	cleanup   = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
-	ctags     = !~/.git_helpers/ctags
+	ci      = commit
+	rec     = !sh -c '(git add -p -- $@ && git commit -v ) || git reset' --
+	unrec   = checkout --patch
+	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
+	in      = "!git remote update -p; git log ..@{u}"
+	out     = log @{u}..
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
+	ctags   = "!~/.git_helpers/ctags"
+	glog    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	recent  = for-each-ref --count=20 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
 
 [branch]
 	autosetuprebase = always
-	autosetupmerge = always
+	autosetupmerge  = always
 
 [push]
-	default = simple
+	default = current
 
 [rebase]
 	stat = true
