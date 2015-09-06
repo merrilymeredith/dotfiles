@@ -12,6 +12,7 @@
 	ci      = commit
 	rec     = !sh -c '(git add -p -- $@ && git commit -v ) || git reset' --
 	unrec   = checkout --patch
+	sb      = status -sb
 	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in      = "!git remote update -p; git log ..@{u}"
 	out     = log @{u}..
