@@ -18,6 +18,7 @@ pager = LESS='FSRX' less
 
 [alias]
 fetch = pull --rebase
+ctags = !~/.hg_helpers/ctags
 
 [merge-tools]
 vimdiff.executable = vim
