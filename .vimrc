@@ -148,6 +148,8 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 "}}}
 
 
@@ -379,6 +381,11 @@ let g:signify_mapping_next_hunk = '<leader>gj'
 let g:signify_mapping_prev_hunk = '<leader>gk'
 let g:signify_mapping_toggle = '<leader>gt'
 
+
+">> interestingwords
+" These are jellybeans colors and some complements
+let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
+let g:interestingWordsRandomiseColors = 1
 
 ">> neocomplcache
 " Disable AutoComplPop.
