@@ -58,6 +58,7 @@ end
   Plugin 'altercation/vim-colors-solarized'
   Plugin 'bling/vim-airline'
   Plugin 'bling/vim-bufferline'
+  Plugin 'vasconcelloslf/vim-interestingwords'
 
   Plugin 'editorconfig/editorconfig-vim'
 
