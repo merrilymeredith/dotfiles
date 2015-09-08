@@ -129,7 +129,7 @@ endif
 
 " F-n keys call out to normal mode from insert mode
 " only :noh seems smart to do.
-"imap <F1> <C-O><F1>
+imap <F1> <ESC>
 "imap <F2> <C-O><F2>
 "imap <F3> <C-O><F3>
 imap <F4> <C-O><F4>
@@ -367,6 +367,8 @@ let g:airline#extensions#whitespace#enabled = 0
 
 "keep bufferline from writing into the command line
 let g:bufferline_echo = 0
+let g:bufferline_rotate = 1
+let g:bufferline_fixed_index = -2
 
 
 ">> Signify
