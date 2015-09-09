@@ -402,8 +402,16 @@ endif
 
 "Required to get ruby omni
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-"Enabling the below allows module completion from CPAN, jeez
-" let g:neocomplcache_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" allow module completion from CPAN when combined with perlomni
+"let g:neocomplcache_omni_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" seems like overkill
+
+if !exists('g:neocomplcache_filename_include_exprs')
+  let g:neocomplcache_filename_include_exprs = {}
+endif
+
+"help scan into "use" statements
+let g:neocomplcache_filename_include_exprs.perl = 'fnamemodify(substitute(v:fname, "/", "::", "g"), ":r")'
 
 " }}}
 
