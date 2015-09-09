@@ -149,6 +149,8 @@ nmap <C-l> <C-w>l
 
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
+
+nnoremap <silent> <leader>gt :SignifyToggle<CR>
 "}}}
 
 
@@ -377,10 +379,6 @@ let g:bufferline_fixed_index = -2
 ">> Signify
 let g:signify_disable_by_default = 1
 let g:signify_vcs_list = [ 'git', 'hg' ]
-
-let g:signify_mapping_next_hunk = '<leader>gj'
-let g:signify_mapping_prev_hunk = '<leader>gk'
-let g:signify_mapping_toggle = '<leader>gt'
 
 
 ">> interestingwords
