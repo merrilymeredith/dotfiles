@@ -111,7 +111,10 @@ end
 
 
 " Key maps, mostly plugin stuff on F-keys  {{{
+
+" F1 - Unite to switch buffers
 nmap <silent> <F1> :Unite -auto-resize -direction=dynamicbottom buffer<CR>
+" S-F1 - Unite to switch windows or tabs
 nmap <silent> <S-F1> :Unite -winheight=5 -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
 nmap <silent> <F3> :VimShell<CR>
@@ -127,16 +130,11 @@ else
   nmap <silent> <S-F2> :Unite -start-insert file_rec/async:!<CR>
 endif
 
-" F-n keys call out to normal mode from insert mode
-" only :noh seems smart to do.
+" stop opening help by mistake
 imap <F1> <ESC>
-"imap <F2> <C-O><F2>
-"imap <F3> <C-O><F3>
+
+" let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
-"imap <F5> <C-O><F5>
-"imap <F6> <C-O><F6>
-"imap <F7> <C-O><F7>
-"imap <F8> <C-O><F8>
 
 " chdir to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -149,6 +147,7 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 "}}}
 
@@ -369,6 +368,8 @@ let g:airline#extensions#whitespace#enabled = 0
 
 "keep bufferline from writing into the command line
 let g:bufferline_echo = 0
+
+"cycle the bufferline with current buf in 2nd-to-last spot
 let g:bufferline_rotate = 1
 let g:bufferline_fixed_index = -2
 
@@ -386,6 +387,7 @@ let g:signify_mapping_toggle = '<leader>gt'
 " These are jellybeans colors and some complements
 let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
 let g:interestingWordsRandomiseColors = 1
+
 
 ">> neocomplcache
 " Disable AutoComplPop.
