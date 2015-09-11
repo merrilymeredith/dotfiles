@@ -10,16 +10,22 @@
 
 [alias]
 	ci      = commit
-	rec     = !sh -c '(git add -p -- $@ && git commit -v ) || git reset' --
+	rec     = commit -p
 	unrec   = checkout --patch
-	sb      = status -sb
+	st      = status -sb
+	co      = checkout
+	br      = branch
+	staged  = diff --cached
+	unstage = reset HEAD --
 	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in      = "!git remote update -p; git log ..@{u}"
 	out     = log @{u}..
+	new     = !sh -c 'git log $1@{1}..$1@{0}' "$@"
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
 	ctags   = "!~/.git_helpers/ctags"
 	glog    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	recent  = for-each-ref --count=20 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
+	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\"' "$@"
+	last    = !sh -c 'git log -${1:-1} --stat' "$@"
 
 [branch]
 	autosetuprebase = always
