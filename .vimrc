@@ -212,6 +212,9 @@ set nofoldenable
 set linebreak
 set showbreak=»\ 
 
+" keep the junk out (imo)
+set sessionoptions=buffers,curdir,localoptions
+
 " Superseded by vim-airline
 "set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
 set laststatus=2
