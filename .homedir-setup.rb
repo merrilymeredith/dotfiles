@@ -99,6 +99,21 @@ def setup
     end
   # }}}
 
+
+  # ndenv {{{
+    if Dir.exists?('.ndenv')
+      puts "ndenv already installed"
+    else
+      puts "Installing ndenv..."
+
+      do_cmds \
+        'git clone https://github.com/riywo/ndenv.git .ndenv',
+        'git clone https://github.com/riywo/node-build.git .ndenv/plugins/node-build'
+
+    end
+  # }}}
+
+
 end
 
 def update
@@ -109,6 +124,8 @@ def update
     '.plenv/plugins/perl-build',
     '.rbenv',
     '.rbenv/plugins/ruby-build',
+    '.ndenv',
+    '.ndenv/plugins/node-build',
   ].each do |dir|
     do_cmds \
       "cd ~/#{dir} && git pull origin master"
