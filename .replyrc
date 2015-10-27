@@ -1,6 +1,6 @@
 script_line1 = use strict
 script_line2 = use warnings
-script_line3 = eval "use $^V"
+script_line3 = use v5.14
 
 [Interrupt]
 [FancyPrompt]
