@@ -1,0 +1,19 @@
+\set QUIET 1
+
+-- complete keywords in upper case
+\set COMP_KEYWORD_CASE upper
+
+-- automatically use expanded display
+\x auto
+
+-- display nulls as...
+\pset null ¤
+
+-- Verbose error reports.
+\set VERBOSITY verbose
+
+-- Use a separate history file per-database, no dupes
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+
+\unset QUIET
