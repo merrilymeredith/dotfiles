@@ -27,5 +27,14 @@ vimdiff.executable = vim
 vimdiff.args = -d $base $local $output $other +close +close
 vimdiff.check = changed, conflicts
 
+[committemplate]
+changeset = {desc}\n\n
+    HG: {extramsg}
+    HG: user: {author}\n{ifeq(p2rev, "-1", "",
+   "HG: branch merge\n")
+   }HG: branch '{branch}'\n{if(currentbookmark,
+   "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
+   "HG: subrepo {subrepo}\n"              }
+   {splitlines(diff()) % 'HG: {line}\n'}
 
 %include ~/.hgrc.local
