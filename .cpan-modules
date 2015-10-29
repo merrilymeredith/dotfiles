@@ -7,5 +7,6 @@ Reply
 Data::Printer
 Carp::Always
 Proc::InvokeEditor
+B::Keywords
 Term::ReadLine::Gnu
 
