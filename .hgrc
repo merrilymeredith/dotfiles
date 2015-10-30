@@ -27,6 +27,10 @@ vimdiff.executable = vim
 vimdiff.args = -d $base $local $output $other +close +close
 vimdiff.check = changed, conflicts
 
+[diff]
+git = true
+showfunc = true
+
 [committemplate]
 changeset = {desc}\n\n
     HG: {extramsg}
