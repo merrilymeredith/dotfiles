@@ -1,0 +1,12 @@
+"3.10.1 (created: 2015/08/25 00:41:59)
+
+source! ~/_vimperatorrc.local
+
+style browser .tab-close-button{ display: none; }
+
+nmap s tgoogle 
+nmap S :winopen -private google 
+
+command! -nargs=* private winop -private <args>
+
+" vim: set ft=vimperator:
