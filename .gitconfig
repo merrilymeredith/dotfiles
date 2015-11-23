@@ -18,14 +18,16 @@
 	staged  = diff --cached
 	unstage = reset HEAD --
 	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
-	in      = "!git remote update -p; git log ..@{u}"
-	out     = "!git glog @{u}.."
-	new     = !sh -c 'git log $1@{1}..$1@{0}' "$@"
+	in      = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
+	out     = "!git log --pretty=onelinecustom @{u}.."
+	new     = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
 	ctags   = "!~/.git_helpers/ctags"
-	glog    = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	glog    = log --graph --pretty=onelinecustom
 	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\"' "$@"
-	last    = !sh -c 'git log -${1:-1} --stat' "$@"
+
+[pretty]
+	onelinecustom = format:%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
 
 [branch]
 	autosetuprebase = always
@@ -44,5 +46,6 @@
 # https://github.com/aanand/git-up
 # $ gem install git-up
 [git-up "rebase"]
-	log-hook = "echo \"changes on $1 -> $2:\"; git --no-pager log --oneline --decorate $1..$2"
+	log-hook = "echo \"changes on $1 -> $2:\"; git --no-pager log --pretty=onelinecustom $1..$2"
 
+# vim: noet:sw=8
