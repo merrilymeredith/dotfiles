@@ -27,7 +27,7 @@
 	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\"' "$@"
 
 [pretty]
-	onelinecustom = format:%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
+	onelinecustom = tformat:%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
 
 [branch]
 	autosetuprebase = always
