@@ -343,6 +343,7 @@ let g:tagbar_type_perl = {
         \ 'c:constants:0:0',
         \ 'f:formats:0:0',
         \ 'a:attributes',
+        \ 'm:methods',
         \ 's:subroutines',
         \ 'l:labels',
     \ ],
