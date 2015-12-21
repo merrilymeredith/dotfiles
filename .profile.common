@@ -1,7 +1,7 @@
 # simple profile stuff that is common to both zsh and bash
 
 export EDITOR=vim
-export PERL_CPANM_OPT='-n --prompt --reinstall'
+export PERL_CPANM_OPT='-nq --prompt'
 export DEVEL_REPL_PROFILE='Standard'
 
 alias hgcd='cd $(hg root)'
