@@ -66,6 +66,7 @@ end
   Plugin 'Shougo/unite.vim'
   Plugin 'Shougo/vimshell.vim'
   Plugin 'Shougo/vimfiler.vim'
+  Plugin 'Shougo/unite-session'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
   Plugin 'godlygeek/tabular'
@@ -101,8 +102,8 @@ end
     echo ""
     :PluginInstall
     if on_windows == 1
-      " Windows build just isn't there with exec $0, so we already
-      " have some odd errors and get a weird UI at the end.
+      " Windows build just isn't there with exec $0, so we already have some
+      " odd errors and get a weird UI at the end.
       echo "Please restart vim to continue with plugins installed."
       quit
     endif
@@ -115,15 +116,16 @@ end
 " F1 - Unite to switch buffers
 nmap <silent> <F1> :Unite -auto-resize -direction=dynamicbottom buffer<CR>
 " S-F1 - Unite to switch windows or tabs
-nmap <silent> <S-F1> :Unite -winheight=5 -quick-match -short-source-names window tab:no-current<CR>
+nmap <silent> <S-F1> :Unite -winheight=10 -quick-match -short-source-names window tab:no-current<CR>
+nmap <silent> <A-F1> :Unite -winheight=10 session<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
 nmap <silent> <F3> :VimShell<CR>
 map  <silent> <F4> :noh<CR>
 nmap <silent> <F5> :GundoToggle<CR>
 nmap <silent> <F8> :TagbarToggle<CR>
 
-" This is supposed to get a CtrlP workalike with fuzzy match
-" but i need to fix ignores and always chdir to a good place
+" This is supposed to get a CtrlP workalike with fuzzy match but i need to fix
+" ignores and always chdir to a good place
 if on_windows == 1
   nmap <silent> <S-F2> :Unite -start-insert file_rec:!<CR>
 else
@@ -361,7 +363,6 @@ if executable('ag')
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
 endif
-
 
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
