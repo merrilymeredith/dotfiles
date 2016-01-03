@@ -25,6 +25,12 @@ PROMPT_SUCCESS_COLOR=$FG[071]
 PROMPT_FAILURE_COLOR=$FG[124]
 PROMPT_VCS_INFO_COLOR=$FG[242]
 
+if ! [[ $LC_CTYPE =~ 'UTF-8$' ]]
+then
+  PROMPT_DEFAULT_END=\$
+  PROMPT_ROOT_END=\#
+fi
+
 # Set required options.
 setopt promptsubst
 
