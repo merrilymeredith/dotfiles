@@ -74,6 +74,8 @@ end
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
 
+  Plugin 'vimoutliner/vimoutliner'
+
   Plugin 'Shougo/neocomplcache.vim'
   Plugin 'c9s/perlomni.vim'
   Plugin 'rking/ag.vim'

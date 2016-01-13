@@ -1,0 +1,3 @@
+
+setlocal sts=4
+
