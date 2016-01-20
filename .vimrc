@@ -69,10 +69,12 @@ end
   Plugin 'Shougo/unite-session'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
+
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
+  Plugin 'jiangmiao/auto-pairs'
 
   Plugin 'vimoutliner/vimoutliner'
 
