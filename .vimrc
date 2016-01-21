@@ -64,7 +64,6 @@ end
 
   Plugin 'Shougo/vimproc.vim'
   Plugin 'Shougo/unite.vim'
-  Plugin 'Shougo/vimshell.vim'
   Plugin 'Shougo/vimfiler.vim'
   Plugin 'Shougo/unite-session'
   Plugin 'sjl/gundo.vim'
@@ -123,7 +122,6 @@ nmap <silent> <F1> :Unite -auto-resize -direction=dynamicbottom buffer<CR>
 nmap <silent> <S-F1> :Unite -winheight=10 -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <A-F1> :Unite -winheight=10 session<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
-nmap <silent> <F3> :VimShell<CR>
 map  <silent> <F4> :noh<CR>
 nmap <silent> <F5> :GundoToggle<CR>
 nmap <silent> <F8> :TagbarToggle<CR>
