@@ -293,9 +293,11 @@ augroup vimrc
   " preload templates into new buffers by file extension
   "autocmd BufNewFile * silent! 0r $MYVIM/templates/%:e.template
 
-  " simple strip trailing whitespace on save
-  "autocmd BufWritePre *.pl,*.rb,*.js,*.css,*.md :%s/\s+$//e
-
+  " Set file marks by "category" on switch-away
+  autocmd BufLeave *.css,*,less,*.scss normal! mC
+  autocmd BufLeave *.html,*.ep,*.tt    normal! mH
+  autocmd BufLeave *.js                normal! mJ
+  autocmd BufLeave *.pl,*.pm           normal! mP
 augroup END
 "}}}
 
