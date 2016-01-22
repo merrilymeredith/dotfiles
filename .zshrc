@@ -1,6 +1,7 @@
 # Version/environment management tools to load
 envthings=(plenv rbenv ndenv)
 
+DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -18,8 +19,9 @@ if [ -f ~/.zgen/zgen.zsh ]; then
     zgen oh-my-zsh
     zgen oh-my-zsh plugins/common-aliases
     zgen oh-my-zsh plugins/gitfast
+    zgen oh-my-zsh plugins/colored-man-pages
 
-    zgen load zsh-users/zsh-syntax-highlighing
+    zgen load zsh-users/zsh-syntax-highlighting
     zgen load ~/.oh-my-zsh.cust/themes/mhoward
 
     zgen save
