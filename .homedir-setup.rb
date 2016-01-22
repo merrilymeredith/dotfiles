@@ -53,15 +53,14 @@ end
 
 
 def setup
-  # oh-my-zsh {{{
-    # some custom zsh files are already in .oh-my-zsh.cust
-    if Dir.exists?('.oh-my-zsh/.git')
-      puts "oh-my-zsh already installed"
+  # zgen {{{
+    if Dir.exists?('.zgen')
+      puts "zgen already installed"
     else
-      puts "Installing oh-my-zsh..."
+      puts "Installing zgen..."
 
       do_cmds \
-        'git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh'
+        'git clone https://github.com/tarjoilija/zgen.git .zgen'
     end
   # }}}
 
@@ -72,8 +71,8 @@ def setup
       puts "Installing plenv..."
 
       do_cmds \
-        'git clone git://github.com/tokuhirom/plenv.git .plenv',
-        'git clone git://github.com/tokuhirom/Perl-Build.git .plenv/plugins/perl-build/'
+        'git clone https://github.com/tokuhirom/plenv.git .plenv',
+        'git clone https://github.com/tokuhirom/Perl-Build.git .plenv/plugins/perl-build/'
     end
   # }}}
 
@@ -103,8 +102,7 @@ def setup
 end
 
 def update
-  [
-    '.oh-my-zsh',
+  [ '.zgen',
     '.plenv',
     '.plenv/plugins/perl-build',
     '.rbenv',

@@ -1,32 +1,30 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Version/environment management tools to load
+envthings=(plenv rbenv ndenv)
 
-ZSH_THEME="mhoward"
-ZSH_CUSTOM=~/.oh-my-zsh.cust
+# DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-DISABLE_AUTO_UPDATE="true"
-# DISABLE_UPDATE_PROMPT="true"
-
-plugins=( common-aliases gitfast )
-envthings=( plenv rbenv ndenv )
+typeset -U path
 
 if [ -f ~/.zshrc.local-pre ]; then
   source ~/.zshrc.local-pre
 fi
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+if [ -f ~/.zgen/zgen.zsh ]; then
+  source ~/.zgen/zgen.zsh
 
-COMPLETION_WAITING_DOTS="true"
+  if ! zgen saved; then
+    zgen oh-my-zsh
+    zgen oh-my-zsh plugins/common-aliases
+    zgen oh-my-zsh plugins/gitfast
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+    zgen load zsh-users/zsh-syntax-highlighing
+    zgen load ~/.oh-my-zsh.cust/themes/mhoward
 
-typeset -U path
-
-source $ZSH/oh-my-zsh.sh
+    zgen save
+  fi
+fi
 
 # User configuration
 path=( "$HOME/bin" "$path[@]" )
