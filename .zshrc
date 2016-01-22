@@ -6,7 +6,18 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-typeset -U path
+typeset -U path omz_plugins zsh_plugins
+
+omz_plugins=(
+  plugins/common-aliases
+  plugins/gitfast
+  plugins/colored-man-pages
+)
+
+zsh_plugins=(
+  zsh-users/zsh-syntax-highlighting
+  ~/.oh-my-zsh.cust/themes/mhoward
+)
 
 if [ -f ~/.zshrc.local-pre ]; then
   source ~/.zshrc.local-pre
@@ -17,19 +28,15 @@ if [ -f ~/.zgen/zgen.zsh ]; then
 
   if ! zgen saved; then
     zgen oh-my-zsh
-    zgen oh-my-zsh plugins/common-aliases
-    zgen oh-my-zsh plugins/gitfast
-    zgen oh-my-zsh plugins/colored-man-pages
+    for plugin in $omz_plugins[@]; do zgen oh-my-zsh $plugin; done
 
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load ~/.oh-my-zsh.cust/themes/mhoward
-
+    for plugin in $zsh_plugins[@]; do zgen load $plugin; done
     zgen save
   fi
 fi
 
 # User configuration
-path=( "$HOME/bin" "$path[@]" )
+path=("$HOME/bin" "$path[@]")
 
 source ~/.profile.common
 
