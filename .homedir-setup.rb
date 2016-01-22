@@ -53,10 +53,8 @@ end
 
 
 def setup
-
   # oh-my-zsh {{{
     # some custom zsh files are already in .oh-my-zsh.cust
-
     if Dir.exists?('.oh-my-zsh/.git')
       puts "oh-my-zsh already installed"
     else
@@ -64,14 +62,10 @@ def setup
 
       do_cmds \
         'git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh'
-
     end
-
   # }}}
 
-
   # plenv {{{
-
     if Dir.exists?('.plenv')
       puts "plenv already installed"
     else
@@ -80,11 +74,8 @@ def setup
       do_cmds \
         'git clone git://github.com/tokuhirom/plenv.git .plenv',
         'git clone git://github.com/tokuhirom/Perl-Build.git .plenv/plugins/perl-build/'
-
     end
-
   # }}}
-
 
   # rbenv {{{
     if Dir.exists?('.rbenv')
@@ -95,10 +86,8 @@ def setup
       do_cmds \
         'git clone https://github.com/sstephenson/rbenv.git .rbenv',
         'git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build/'
-
     end
   # }}}
-
 
   # ndenv {{{
     if Dir.exists?('.ndenv')
@@ -109,15 +98,11 @@ def setup
       do_cmds \
         'git clone https://github.com/riywo/ndenv.git .ndenv',
         'git clone https://github.com/riywo/node-build.git .ndenv/plugins/node-build'
-
     end
   # }}}
-
-
 end
 
 def update
-
   [
     '.oh-my-zsh',
     '.plenv',
@@ -130,8 +115,6 @@ def update
     do_cmds \
       "cd ~/#{dir} && git pull origin master"
   end
-
-
 end
 
 main
