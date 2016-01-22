@@ -38,6 +38,15 @@ fi
 # User configuration
 path=("$HOME/bin" "$path[@]")
 
+REPORTTIME=5
+
+setopt list_packed
+setopt correct
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
 source ~/.profile.common
 
 for ENVTHING in $envthings; do
