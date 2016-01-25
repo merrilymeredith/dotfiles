@@ -309,6 +309,9 @@ function! PerlSettings ()
 
   setlocal makeprg=perl\ -c\ %\ $*
   setlocal iskeyword+=:
+
+  " this keeps indents from jumping more than one level
+  let b:indent_use_syntax = 0
 endfunction
 
 " perl fold scanning is slow
