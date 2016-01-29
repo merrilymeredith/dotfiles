@@ -1,3 +1,7 @@
+#!/bin/sh
+set -eu
+
+exec cpanm -q <<END
 
 Carton
 
@@ -10,3 +14,5 @@ Proc::InvokeEditor
 B::Keywords
 Term::ReadLine::Gnu
 
+Devel::Confess
+END
