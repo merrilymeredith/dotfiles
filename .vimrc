@@ -380,6 +380,7 @@ autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
 ">> Airline
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline_powerline_fonts = 0
 
 "keep bufferline from writing into the command line
 let g:bufferline_echo = 0
@@ -438,6 +439,11 @@ try
   endif
 catch
 endtry
+
+if g:airline_powerline_fonts == 0 && $LANG =~ 'UTF-8'
+  let g:airline_left_sep  = '▒'
+  let g:airline_right_sep = g:airline_left_sep
+endif
 
 if has('gui_running')
   set number
