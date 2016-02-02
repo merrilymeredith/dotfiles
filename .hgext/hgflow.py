@@ -3,7 +3,7 @@
 # License GPL 2.0
 #
 # hgflow.py - Mercurial extension to support generalized Driessen's branching model
-# Copyright (C) 2011-2012, Yujie Wu
+# Copyright (C) 2011-2014, Yujie Wu and others
 #
 # This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2 of the License or any later version.
@@ -112,7 +112,7 @@ from mercurial.i18n import _
 
 
 
-VERSION                   = "0.9.7"
+VERSION                   = "0.9.8"
 CONFIG_BASENAME           = ".hgflow"
 OLD_CONFIG_BASENAME       = ".flow"
 CONFIG_SECTION_BRANCHNAME = "branchname"
@@ -315,6 +315,10 @@ class Commands( object ) :
         self._common_opts = {}
         self._opt_mutator = {}
 
+        self.reg_option_mutator( "strip", lambda opts : dict( {"rev" : [],},                                 **opts ) )
+        self.reg_option_mutator( "graft", lambda opts : dict( {"rev" : [], "continue" : False,},             **opts ) )
+        self.reg_option_mutator( "log",   lambda opts : dict( {"date" : None, "user" : None, "rev" : None,}, **opts ) )
+
         
     
     def __getattr__( self, name ) :
@@ -331,6 +335,7 @@ class Commands( object ) :
     def __call__( self, ui, repo, *arg, **kwarg ) :
         """
         Invoke the mercurial command and save it as a string into the history.
+        
         @raise AbortFlow: Throw exception if the return code of hg command (except C{commit} and C{rebase}) is nonzero.
         """
         self.ui = ui
@@ -348,8 +353,8 @@ class Commands( object ) :
 
         kwarg = self._mutate_options( where, self._cmd, kwarg )
 
-        for key, value in kwarg.items() :
-            if (value in [None, ""]) :
+        for key, value in sorted( kwarg.items(), reverse = True ) :
+            if (value in [None, "", False]) :
                 continue
             
             # If the command is `hg commit --message <commit-hint> --force-editor [other-options...]`, we will drop the
@@ -401,8 +406,8 @@ class Commands( object ) :
 
     def _add_quotes( self, value ) :
         """
-        If value is a string that contains space, slash, double quote, and parenthesis (viz: '(' or ')'), then wrap the value
-        with double quotes and properly escape double-quotes and slashes in the string, returning the treated value.
+        If C{value} is a string that contains space, slash, double quote, and parenthesis (viz: '(' or ')'), wrap it with
+        double quotes and properly escape the double-quotes and slashes within, and finally return the modified string.
         Otherwise, return the value as is.        
         """
         if (isinstance( value, str ) and (1 in [c in value for c in " ()\\\""])) :
@@ -444,7 +449,7 @@ class Commands( object ) :
         @type  where: module
         @param where: Should be `mercurial.commands', or a Mercurial's plugin object.
         @type  cmd  : C{str}
-        @param cmd  : command name
+        @param cmd  : Mercurial command name
         """
         ret = {}
         if (self._common_opts != {}) :
@@ -461,7 +466,16 @@ class Commands( object ) :
 
     def _mutate_options( self, where, cmd, opts ) :
         """
-
+        Call the registered command option mutator for the command and return the modified command options.
+        
+        @type  where: module
+        @param where: Should be `mercurial.commands', or a Mercurial's plugin object.
+        @type  cmd  : C{str}
+        @param cmd  : Mercurial command name
+        @type  opts : C{dict}
+        @param opts : Original command options
+        
+        @rtype: C{dict}
         """
         common_opts = self._filter_common_options( where, cmd )
         common_opts.update( opts )
@@ -478,6 +492,10 @@ class Commands( object ) :
         """
         Print the history to the I{quiet} channel, where text will be displayed even when user does not specify the
         C{--verbose} option.
+
+        @type  via_quiet: C{bool}
+        @param via_quiet: To turn off using the "quiet" channel for history printing, you can call this function like:
+                          C{use_quiet_channel( False )}.
         """
         self._via_quiet = via_quiet
 
@@ -486,6 +504,10 @@ class Commands( object ) :
     def use_verbose_channel( self, via_verbose = True ) :
         """
         Print the history to the I{verbose} channel, where text will be display only when user specify the C{--verbose} option.
+
+        @type  via_verbose: C{bool}
+        @param via_verbose: To turn off using the "verbose" channel for history printing (you will be using the "quiet"
+                            channel instead), you can call this function like: C{use_verbose_channel( False )}.
         """
         self._via_quiet = not via_verbose
 
@@ -506,8 +528,12 @@ class Commands( object ) :
         """
         Register common options.
 
-        @type  opts: C{dict}
-        @param opts: Common options. Key = option's flag, value = option's value. 
+        @type  cmd    : C{str}
+        @param cmd    : Mercurial command name
+        @type  mutator: Callable object
+        @param mutator: It will take a C{dict} object as its argument and return another C{dict} object that is supposed to be
+                        a mutant of the former. The input object is supposed to be the original hg-command options in form of
+                        key-value pairs.
         """
         self._opt_mutator[cmd] = mutator
 
@@ -549,7 +575,7 @@ class Stream( object ) :
         get the object.
         
         @type  name : C{str}
-        @param name : Name of the stream
+        @param name : Name of the stream. It can be a complex stream name, e.g., "develop/spring:release".
         @type  check: C{boolean}
         @param check: If true and the stream is not a standard one, the function will check if the trunk of the stream exists
                       or not and (if exists) open or not.
@@ -557,29 +583,57 @@ class Stream( object ) :
         @raise AbortFlow     : When C{check} is true and the trunk of the stream doesn't exist or is closed
         @raise AbnormalStream: When the stream is not in any of the standard streams
         """
+        source = None
+        tokens = name.split( ':' )
+        n      = len( tokens )
+        if (n == 2) :
+            source, name = tokens[0], tokens[1]
+        if (n > 2 or not name) :
+            raise AbortFlow( "Invalid stream syntax: '%s'" % stream )
+
         for e in STREAM.values() :
             if (name == e.name()) :
-                return e
-        
-        rootstream_name = name.split( '/', 1 )[0]
-        is_normalstream = True
-        if (rootstream_name in STREAM) :
-            trunk  = name.replace( rootstream_name + '/', STREAM[rootstream_name].prefix(), 1 )
-            stream = Stream( ui, repo, name, trunk = trunk )
+                if (source) :
+                    stream = copy.copy( e )
+                    break
+                else :
+                    return e
         else :
-            stream = Stream( ui, repo, name, trunk = name )
-            is_normalstream = False
-        if (check) :
-            try :
-                trunk = stream.trunk()
-            except error.RepoLookupError :
-                misspelling = difflib.get_close_matches( stream.name(), STREAM.keys(), 3, 0.7 )
-                note        = "Did you mean: %s?" % " or ".join( misspelling ) if (misspelling) else None
-                raise AbortFlow( "Stream not found: %s" % stream, note = note )
-            if (trunk.is_closed()) :
-                raise AbortFlow( "%s has been closed." % stream )
-        if (not is_normalstream) :
-            raise AbnormalStream( stream = Stream( ui, repo, name ) )
+            rootstream_name = name.split( '/', 1 )[0]
+            is_normalstream = True
+
+            if (rootstream_name in STREAM) :
+                trunk  = name.replace( rootstream_name + '/', STREAM[rootstream_name].prefix(), 1 )
+                stream = Stream( ui, repo, name, trunk = trunk )
+            else :
+                stream = Stream( ui, repo, name, trunk = name )
+                is_normalstream = False
+                
+            if (check) :
+                try :
+                    trunk = stream.trunk()
+                except error.RepoLookupError , e :
+                    misspelling = difflib.get_close_matches( stream.name(), STREAM.keys(), 3, 0.7 )
+                    note        = "Did you mean: %s?" % " or ".join( misspelling ) if (misspelling) else None
+                    raise AbortFlow( "Stream not found: %s" % stream, note = note )
+                if (trunk.is_closed()) :
+                    raise AbortFlow( "%s has been closed." % stream )
+
+        # It seems we never really mind abnormal streams. So comment this out.
+        #if (not is_normalstream) :
+        #    raise AbnormalStream( stream = Stream( ui, repo, name ) )
+
+        if (source) :
+            source = Stream.gen( ui, repo, source, check = True )
+            stream = copy.copy( stream )
+            stream._source = source
+            for i, e in enumerate( stream.destin() ) :
+                if (source in e) :
+                    stream._destin[i] = source
+                    break
+            else :
+                stream._destin = [source]
+
         return stream
 
         
@@ -668,13 +722,13 @@ class Stream( object ) :
 
         @type  trace: C{boolean}
         @param trace: If true and this stream has no trunk, return the trunk of the source stream, and do this recursively
-                      until a trunk is found. If false, this function will return C{None}.
+                      until a trunk is found. If false and this stream has no trunk, this function will return C{None}.
                       
         @return: A C{Branch} object or C{None}
         """
         if (self._tcache) :
             return self._tcache
-        
+
         trunk = Branch( self.ui, self.repo, self._trunk ) if (self._trunk) else None
         if (not trunk and trace) :
             return self.source().trunk( True )
@@ -751,14 +805,18 @@ class Stream( object ) :
         if (openclosed not in ["open", "closed", "all",]) :
             raise ValueError( "Invalid value for `openclosed` parameter: %s" % openclosed )
 
+        all_branches = []
         if (openclosed == "open") :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()
-                            if (not self.repo[head[0]].extra().get( "close", False ) )]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads
+                                 if (not self.repo[head].extra().get( "close", False ))]
         elif (openclosed == "closed") :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()
-                            if (self.repo[head[0]].extra().get( "close", False ) )]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads
+                                 if (self.repo[head].extra().get( "close", False ))]
         else :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads]
 
         return sorted( [e for e in all_branches if (e in self)] )
         
@@ -811,8 +869,10 @@ class Branch( object ) :
         not contain any '/'s).
         Return the string "trunk" if this branch is the trunk of the C{stream}.
 
-        @type  stream: C{Stream} or C{None}
-        @param stream: Stream to which the basename is relative
+        @type        stream: C{Stream} or C{None}
+        @param       stream: Stream to which the basename is relative
+        @type  should_quote: C{bool}
+        @param should_quote: The returned string will be wrapped with single quotes ' if this parameter's value is true.
         """
         if (stream) :
             if (self._fullname == stream._trunk) :
@@ -823,7 +883,16 @@ class Branch( object ) :
         if (should_quote) :
             ret = "'%s'" % ret
         return ret
+
+
     
+    def rev_node( self ) :
+        """
+        Return a string showing this branch's head's revision number and short node ID in the format of "<rev>:<node-ID>",
+        e.g., "9:db14bf692069".
+        """
+        return "%s:%s" % (self.ctx.rev(), short( self.ctx.node() ),)
+
 
 
     def is_closed( self ) :
@@ -891,6 +960,9 @@ STREAM   = {}           # key = stream name, value = `Stream` object. Will be se
 
 
 class Flow( object ) :
+
+    ACTION_NAME = ["start", "finish", "push", "publish", "pull", "list", "log", "abort", "promote", "rebase", "rename",]
+
     def __init__( self, ui, repo, init = False ) :
         """
         Construct a C{Flow} instance that will execute the workflow.
@@ -946,7 +1018,8 @@ class Flow( object ) :
                 except Exception, e :
                     self._error( str( e ) )
                     self._error( "Flow has not been initialized properly for this repository." )
-                    self._note ( "You can use command `hg flow init -f` to reinitialize for this repository.", via_quiet = True )
+                    self._note ( "You can use command `hg flow init -f` to reinitialize for this repository.",
+                                 via_quiet = True )
                     sys.exit( 1 )
             else :
                 self._error( "Flow has not been initialized for this repository: %s file is missing." % CONFIG_BASENAME )
@@ -1142,7 +1215,7 @@ class Flow( object ) :
         where <patchname> follows the pattern: flow/<branch_fullname>.pch, which was previously created by flow's shelving.
 
         @type  basename: C{str}
-        @param basename: Base name of the shelved patch file. Default is the name of current workspace branch.
+        @param basename: Basename of the path of the shelved patch file. Default is the name of current workspace branch.
         """
         if (self.autoshelve or kwarg.get( "force" )) :
             basename    = basename if (basename) else self.curr_workspace.fullname()
@@ -1175,30 +1248,37 @@ class Flow( object ) :
         """
         if (openclosed not in ["open", "closed", "all",]) :
             raise ValueError( "Invalid value for openclosed parameter: %s" % openclosed )
+
+        all_branches = []
         if (openclosed == "open") :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()
-                            if (not self.repo[head[0]].extra().get( "close", False ) )]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads
+                                 if (not self.repo[head].extra().get( "close", False ))]
         elif (openclosed == "closed") :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()
-                            if (self.repo[head[0]].extra().get( "close", False ))]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads
+                                 if (self.repo[head].extra().get( "close", False ))]
         else :
-            all_branches = [Branch( self.ui, self.repo, head[0] ) for branch_fullname, head in self.repo.branchmap().items()]
+            for branch_fullname, heads in self.repo.branchmap().items() :
+                all_branches += [Branch( self.ui, self.repo, head ) for head in heads]
+
         return all_branches
 
 
 
     def _find_branch( self, fullname ) :
         """
-        Return true if a branch C{fullname} is open.
+        Try to find a branch of name: C{fullname}. If it exists, return a C{Branch} object of this branch and a boolean value
+        indicating if it's open (C{True}) or closed (C{False}). If it does not exists, return C{(None, None)}.
 
         @type  fullname: C{str}
-        @param fullname: Fullname of branch that you want to know whether it is open
+        @param fullname: Fullname of the branch to find
         """
         try :
-            Branch( self.ui, self.repo, fullname )
-            return True
+            branch = Branch( self.ui, self.repo, fullname )
+            return branch, branch.is_open()
         except error.RepoLookupError :
-            return False
+            return None, None
 
     
     
@@ -1263,12 +1343,15 @@ class Flow( object ) :
         except IndexError :
             raise AbortFlow( "You must specify a name for the new branch to start." )
             
-        rev      = kwarg.pop( "rev",     None )
-        msg      = kwarg.pop( "message", ""   )
-        dirty    = kwarg.pop( "dirty",   None )
-        fullname = stream.get_fullname( basename )
-        if (self._find_branch( fullname )) :
-            self._warn( "An open branch named '%s' already exists in %s." % (basename, stream,) )
+        rev         = kwarg.pop( "rev",     None )
+        msg         = kwarg.pop( "message", ""   )
+        dirty       = kwarg.pop( "dirty",   None )
+        fullname    = stream.get_fullname( basename )
+        br, is_open = self._find_branch( fullname )
+        if (br) :
+            self._error( "A branch named '%s' already exists in %s: '%s'." % (basename, stream, fullname,) )
+            if (not is_open) :
+                self._note( "Branch '%s' is currently closed." % fullname, via_quiet = True )
         else :
             shelvedpatch_basename = self.curr_workspace.fullname()
             if (rev is None) :
@@ -1343,8 +1426,9 @@ class Flow( object ) :
         if (open_branches) :
             self._print( "Open %s branches:" % stream )
             for e in open_branches :
-                marker  = "#" if (self._is_shelved( e )  ) else ""
+                marker  = "#" if (self._is_shelved( e )   ) else ""
                 marker += "*" if (e == self.curr_workspace) else ""
+                marker += "  %s" % e.rev_node()
                 self._print( str( e ) + marker, prefix = "  " )
         else :
             self._print( "No open %s branches" % stream )
@@ -1354,8 +1438,8 @@ class Flow( object ) :
                 self._print( "Closed %s branches:" % stream )
                 closed_branches.sort( lambda x, y : y.ctx.rev() - x.ctx.rev() )
                 for e in closed_branches :
-                    self.ui.write( "%-31s"   % e.basename( stream ),                  label = "branches.closed" )
-                    self.ui.write( " %5s:%s" % (e.ctx.rev(), short( e.ctx.node() ),), label = "log.changeset"   )
+                    self.ui.write( "%-31s" % e.basename( stream ), label = "branches.closed" )
+                    self.ui.write( " %18s" % e.rev_node(),         label = "log.changeset"   )
                     self.ui.write( "  %s\n"  % util.datestr( e.ctx.date(), format = "%Y-%m-%d %a %H:%M %1" ),
                                    label = "log.date" )
                     bn = str( e )
@@ -1450,8 +1534,7 @@ class Flow( object ) :
             # At this point, `branch` must be existent.
             branches = [branch,]
 
-        # OK. We have to explicitly specify the date, rev, and user arguments to prevent mercurial python APIs from crashing.
-        opts = {"date" : None, "rev" : None, "user" : None, "branch" : branches,}
+        opts = {"branch" : branches,}
         opts.update( kwarg )
         self._log( *filenames, **opts )
 
@@ -1464,6 +1547,7 @@ class Flow( object ) :
         @type  stream: C{Stream}
         @param stream: Stream where the branch which you want to abort is
         """
+        arg            = arg[1:]
         msg            = kwarg.pop( "message",  ""    )
         should_erase   = kwarg.pop( "erase",    False )
         onstream       = kwarg.pop( "onstream", False )
@@ -1472,6 +1556,9 @@ class Flow( object ) :
             msg = "%s\n" % msg
         if (curr_workspace.is_develop_trunk()) :
             raise AbortFlow( "You cannot abort the <develop> trunk." )
+        if (arg) :
+            if (len( arg ) > 1 or curr_workspace.basename() != arg[0]) :
+                raise AbortFlow( "hgflow intentionally forbids aborting a non-workspace branch." )
         if (onstream) :
             branches = stream.branches()
             if (stream == STREAM["develop"]) :
@@ -1480,7 +1567,7 @@ class Flow( object ) :
                 branches.append( stream.trunk() )
             for branch in branches :
                 if (should_erase) :
-                    self._strip( rev = ["branch('%s')" % branch,] )
+                    self._strip( branch, self.repo.revs( "min(branch('%s'))" % branch )[0] )
                 else :
                     self._update( branch )
                     self._commit( close_branch = True, message = "%s%sAborted %s %s." %
@@ -1497,7 +1584,7 @@ class Flow( object ) :
                 raise AbortFlow( "Your workspace is '%s' branch, which is not in %s." % (curr_workspace, stream,),
                                  "To abort a %s branch, you must first update to it." % stream )
             if (should_erase) :
-                self._strip( rev = ["branch('%s')" % curr_workspace,] )
+                self._strip( curr_workspace, self.repo.revs( "min(branch('%s'))" % curr_workspace )[0] )
             else :
                 self._commit( close_branch = True, message = "%s%sAborted %s '%s'." %
                               (msg, self.msg_prefix, stream, curr_workspace.basename( stream ),) )
@@ -1513,8 +1600,8 @@ class Flow( object ) :
 
         @type  stream: C{Stream}
         @param stream: Stream where the branch which you want to rebase is
-        @type     rev: C{str}
-        @param    rev: If provided, promote this revision instead of the head. The specified revision must be in the workspace
+        @type  rev   : C{str}
+        @param rev   : If provided, promote this revision instead of the head. The specified revision must be in the workspace
                        branch.
         """
         rev            = kwarg.pop( "rev",     None )
@@ -1590,8 +1677,8 @@ class Flow( object ) :
 
         @type  stream: C{Stream}
         @param stream: Stream where the branch which you want to rebase is
-        @type  dest:   C{str}
-        @param dest:   If provided, use its value as the destination of rebasing. The value must be a changeset of the parent
+        @type  dest  : C{str}
+        @param dest  : If provided, use its value as the destination of rebasing. The value must be a changeset of the parent
                        branch, otherwise it will trigger an error. If not provided, use the tip of the parent branch as the
                        destination of rebasing.
         """
@@ -1627,6 +1714,46 @@ class Flow( object ) :
                 self._shelve()
                 self._rebase( base = curr_workspace, dest = dest, keepbranches = True )
                 self._unshelve()
+
+
+
+    def _action_rename( self, stream, *arg, **kwarg ) :
+        """
+        Rename the workspace branch to a new basename. If there are uncommitted changes in the current branch, they will be
+        automatically shelved before renaming and unshelved afterwards.
+        Under the hood this action will create a new branch and copy (or graft) all commits in the workspace branch to the new
+        branch and then erase the workspace branch.
+
+        @type  stream: C{Stream}
+        @param stream: Stream where the branch which you want to rename is
+        @type  to    : C{str}
+        @param to    : Its value should be the new basename of the workspace branch.
+        """
+        new_branch_name = kwarg.pop( "to", None )
+        curr_workspace  = self.curr_workspace
+        if (not new_branch_name) :
+            raise AbortFlow( "Please specify the new base name of this branch via the `-t` option." )
+        if (curr_workspace not in stream) :
+            raise AbortFlow( "Your workspace is '%s' branch, which is not in %s." % (curr_workspace, stream,),
+                             "To rename a %s branch, you must first update to it." % stream )
+        if (curr_workspace.is_trunk( stream )) :
+            raise AbortFlow( "You cannot rename the trunk of %s." % stream )
+        if (new_branch_name == curr_workspace.basename( stream )) :
+            self._warn( "No effects because the supposed new basename turns out to be the same as the current one." )
+        else :
+            cfn = curr_workspace.fullname()
+            brn = "branch(%s)" % cfn
+            rev = "min(%s)" % brn
+            ctx = self.repo[self.repo.revs( rev )[0]]
+            nfn = stream.get_fullname( new_branch_name )
+            msg = ctx.description()
+            msg = msg.replace( cfn, nfn )
+            self._shelve()
+            self._update( self.repo.revs( "%s^" % rev )[0] )
+            self._create_branch( nfn, msg, user = ctx.user(), date = util.datestr( ctx.date() ) )
+            self._graft( curr_workspace, **kwarg )
+            self._unshelve( cfn )
+            self._strip( curr_workspace, int( ctx ) )
     
     
     
@@ -1650,6 +1777,7 @@ class Flow( object ) :
             self._shelve()
             self._update( branch )
             self._unshelve()
+        self._print( "Parent of working directory: %s" % branch.rev_node() )
 
 
     
@@ -1668,12 +1796,12 @@ class Flow( object ) :
                 self._warn( "%s '%s' has been closed." % (stream, name,) )
             self._update_workspace( stream, branch )
         except error.RepoLookupError :
-            misspelling = difflib.get_close_matches( name, ["start", "finish", "push", "publish", "pull",
-                                                            "list", "log", "abort", "promote", "rebase",], 3, 0.7 )
+            misspelling = difflib.get_close_matches( name, Flow.ACTION_NAME, 3, 0.7 )
             note = ("Did you mean: %s?" % " or ".join( misspelling )) if (misspelling    ) else None
             note = ("Did you mean: finish or abort?")                 if ("close" == name) else note
-            note = ("If you meant to create a new branch called '%s' in %s" % (name, stream,),
-                    "try command:", "  hg flow %s start %s" % (stream.name(), name,),) if (not note) else note
+            if (stream != STREAM["master"]) :
+                note = ("If you meant to create a new branch called '%s' in %s" % (name, stream,),
+                        "try command:", "  hg flow %s start %s" % (stream.name(), name,),) if (not note) else note
             raise AbortFlow( "Invalid action or unknown branch in %s: '%s'" % (stream, name,), note = note )
 
             
@@ -1740,6 +1868,7 @@ class Flow( object ) :
         curr_workspace = self.curr_workspace
         curr_stream    = curr_workspace.stream()
         name           = curr_workspace.basename( stream, should_quote = True )
+        tag_name_orig  = tag_name
         tag_name       = tag_name if (tag_name) else (self.version_prefix + name[1:-1])
         develop_stream = STREAM["develop"]
 
@@ -1797,14 +1926,14 @@ class Flow( object ) :
             raise AbortFlow( "Cannot finish '%s' branch because it has uncommitted changes." % curr_workspace )
         
         # For destin streams without trunks, we need to create a branch in each of these destin streams.
-        # Each newly created branch will be named after the pattern: <stream-prefix>/<current-branch-basename> and will be from
-        # the current branch. The current branch will be closed. Note that there is no need to merge the current branch because
-        # a new branch has been created from it.
+        # Each newly created branch will be from the current branch and named after the pattern:
+        # <stream-prefix>/<current-branch-basename>. Afterwards, the current branch will be closed.
+        # Note that there is no need to merge the current branch because the new branch is created from it.
         for s in destin_without_trunk :
             trunk    = s.trunk()
             so_name  = "" if ("trunk" == curr_workspace.basename( stream )) else ("/" + curr_workspace.basename( stream ))
-            so       = Stream( self.ui, self.repo, stream.name() + so_name, trunk = curr_workspace.fullname() )
-            so       = "%s:%s" % (so.name(), s.name(),)
+            so       = Stream    ( self.ui, self.repo, stream.name() + so_name, trunk = curr_workspace.fullname() )
+            so       = Stream.gen( self.ui, self.repo, "%s:%s" % (so.name(), s.name(),), check = True )
             basename = curr_workspace.basename()
             self.action( so, "start", basename )
             final_branch = s.get_fullname( basename )
@@ -1821,13 +1950,17 @@ class Flow( object ) :
                 final_branch = STREAM["master"].trunk()
             else :
                 self._print( "All open branches in %s are finished and merged to its trunk." % stream )
+
+        if (tag_name_orig and (STREAM["master"] not in destin_with_trunk)) :
+            self._warn( "You specified a tag name, but it has effect only when the workspace branch is merged to <master>." )
+                
         for s in destin_with_trunk :
             trunk = s.trunk()
             self._update( trunk          )
             self._merge ( curr_workspace )
             self._commit( message = "%sMerged %s %s to %s ('%s')." % (self.msg_prefix, stream, name, s, trunk,), **kwarg )
             if (s == STREAM["master"]) :
-                self._tag( tag_name )
+                self._tag( tag_name, force = True )
             elif (s in develop_stream and s is not develop_stream) :
                 tr_stream = trunk.stream()
                 for ss in tr_stream.destin() :
@@ -1846,7 +1979,7 @@ class Flow( object ) :
             self._update( "tip" )
             self._update( rev   )
             self._revert( rev = "-1", all = True )
-            self._strip ( rev = ["branch('%s')" % curr_workspace,] )
+            self._strip ( curr_workspace, self.repo.revs( "min(branch('%s'))" % curr_workspace )[0] )
             self._commit( message = message, **kwarg )
         self._unshelve()
             
@@ -1880,6 +2013,7 @@ class Flow( object ) :
             "abort"   : self._action_abort,
             "promote" : self._action_promote,
             "rebase"  : self._action_rebase,
+            "rename"  : self._action_rename,
             "other"   : self._action_other,
         }
 
@@ -1893,6 +2027,9 @@ class Flow( object ) :
     def action( self, stream, *arg, **kwarg ) :
         """
         Execute action on the stream.
+
+        @type  stream: C{Stream}
+        @param stream: Stream where we will execute the action
         """
         if (len( arg ) > 0) :
             action = arg[0]
@@ -1900,7 +2037,8 @@ class Flow( object ) :
                 if (action in ["start", "finish", "abort", "rebase",]) :
                     raise AbortFlow( "Invalid action for <master>" )
         else :
-            self._update_workspace( stream, stream.trunk(), verbose = False )
+            trunk = stream.trunk()
+            self._update_workspace( stream, trunk, verbose = False )
         self._execute_action( stream, *arg, **kwarg )
         
     
@@ -1933,17 +2071,18 @@ class Flow( object ) :
         curr_workspace = self.curr_workspace
         stream_names   = ["master", "develop", "feature", "release", "hotfix", "support",]
         all_branches   = self._branches()
+        name_branches  = {}
+        for branch in all_branches :
+            name_branches.setdefault( branch.fullname(), [] ).append( branch )
+        name_branches = sorted( name_branches.items() )
         for sn in stream_names :
             stream = STREAM[sn]
             trunk  = stream.trunk()
             open_branches_in_stream = []
-            remaining_branches      = []
-            for e in all_branches :
+            for name, heads in name_branches :
+                e = heads[0]
                 if (e in stream) :
                     open_branches_in_stream.append( e )
-                else :
-                    remaining_branches.append( e )
-            all_branches = remaining_branches
             if (trunk is None and not open_branches_in_stream) :
                 continue
             self._print( "%-9s: " % stream, newline = False )
@@ -1960,7 +2099,15 @@ class Flow( object ) :
                     marker += "*" if (e == curr_workspace  ) else ""
                     self.ui.write( "%s%s " % (e, marker,) )
             self.ui.write( "\n" )
-
+        if (sum( [len( heads ) - 1 for name, heads in name_branches] )) :
+            self._print( "\n", newline = False )
+            self._print( "Multihead branches:" )
+            for name, heads in name_branches :
+                if (len( heads ) > 1) :
+                    self._print( "  %s" % name )
+                    for head in heads :
+                        self._print( "    %s" % head.rev_node() )
+            
     
      
     def init( self, *arg, **kwarg ) :
@@ -2037,7 +2184,7 @@ class Flow( object ) :
                 else :
                     self._warn( "  %s" % branch.fullname() )
             print
-            
+
         # 'status' method returns a 7-member tuple:
         # 0 modified, 1 added, 2 removed, 3 deleted, 4 unknown(?), 5 ignored, and 6 clean
         orig_repo_status = self.repo.status()[:4]
@@ -2100,8 +2247,9 @@ Here is what you need to do:
                         "support = %s" % support_stream,]
         def write_config() :
             # Writes the configuration in the current branch.
-            with open( config_fname, "w" ) as fh :
-                print >> fh, "\n".join( cfg_contents )
+            if (not commands.dryrun()) :
+                with open( config_fname, "w" ) as fh :
+                    print >> fh, "\n".join( cfg_contents )
             repo_status = self.repo.status( unknown = True )
             if (CONFIG_BASENAME in repo_status[0]) :
                 self._commit( config_fname, message = "flow initialization: Modified configuration file." )
@@ -2110,7 +2258,19 @@ Here is what you need to do:
                 self._commit( config_fname, message = "flow initialization: Added configuration file." )
 
         write_config()
-        
+
+        master_trunk, is_open = self._find_branch( master_stream )
+        if (master_trunk and not is_open) :
+            self._warn( "Branch \"%s\" is currently closed." % master_stream )
+            self._warn( "Will reopen and use it as <master> trunk."          )
+            branches.append( master_trunk )
+            
+        develop_trunk, is_open = self._find_branch( develop_stream )
+        if (develop_trunk and not is_open) :
+            self._warn( "Branch \"%s\" is currently closed." % develop_stream )
+            self._warn( "Will reopen and use it as <develop> trunk."          )
+            branches.append( develop_trunk )
+            
         # Writes the configuration in all the other branches.
         self.autoshelve = True
         self._shelve()
@@ -2123,14 +2283,15 @@ Here is what you need to do:
             self._update( workspace )
     
         # Creates 'master' and 'develop' streams if they don't yet exist.
-        if (not self._find_branch( master_stream )) :
+        if (master_trunk is None) :
             self._create_branch( master_stream, "flow initialization: Created <master> trunk: %s." % master_stream )
-        if (not self._find_branch( develop_stream )) :
+        if (develop_trunk is None) :
             self._create_branch( develop_stream, "flow initialization: Created <develop> trunk: %s." % develop_stream )
+            
         self._update( workspace )
         self._unshelve()
 
-    
+
 
     def upgrade( self, *arg, **kwarg ) :
         """
@@ -2167,6 +2328,7 @@ actions:
 - log      Show revision history of branch.
 - promote  Merge workspace to other branches. (not closing any branches.)
 - rebase   Rebase workspace branch to its parent branch.
+- rename   Rename workspace branch to a new basename.
 - abort    Abort branch. Close branch without merging.
 
 If no action is specified by user, the action will default to `list`. If a
@@ -2220,31 +2382,8 @@ commands:
         # Constructs a `Stream' objects.
         # This will also check the validity of the part of user's input that is supposed to specify a stream.
         if (isinstance( stream, str )) :
-            source = None
-            tokens = stream.split( ':' )
-            n      = len( tokens )
-            if (n == 2) :
-                source, stream = tokens[0], tokens[1]
-            if (n > 2 or not stream) :
-                raise AbortFlow( "Invalid stream syntax: '%s'" % stream )
-            try :
-                stream = Stream.gen( ui, repo, stream, check = True )
-            except AbnormalStream, e :
-                stream = e.stream()
-            if (source) :
-                try :
-                    source = Stream.gen( ui, repo, source, check = True )
-                except AbnormalStream, e :
-                    source = e.stream()
-                stream = copy.copy( stream )
-                stream._source = source
-                for i, e in enumerate( stream.destin() ) :
-                    if (source in e ) :
-                        stream._destin[i] = source
-                        break
-                else :
-                    stream._destin = [source]
-    
+            stream = Stream.gen( ui, repo, stream, check = True )
+            
         # Checks the options for all commands and actions.
         kwarg = _getopt( ui, cmd, kwarg )
         stamp = kwarg.pop( "stamp", None )
@@ -2264,6 +2403,14 @@ commands:
         _error( ui, *errmsg )
         if (getattr( e, "note", None )) :
             _note( ui, *((e.note,) if (isinstance( e.note, str )) else e.note), via_quiet = True )
+        elif (errmsg[0].startswith( "Stream not found" )) :
+            misspelling = difflib.get_close_matches( stream, ["init", "upgrade", "unshelve", "help", "version",], 3, 0.7 )
+            note = ("Did you mean the command: %s?" % " or ".join( misspelling )) if (misspelling        ) else None
+            note = ("Did you mean the command: init?")                            if ("install" == stream) else note
+            note = ("Did you mean the command: upgrade?")                         if ("update"  == stream) else note
+            if (note) :
+                _note( ui, note, via_quiet = True )
+            
         if (ui.tracebackflag) :
             if (hasattr( e, "traceback" )) :
                 ei = e.traceback
@@ -2310,6 +2457,10 @@ The following item has been deprecated in this release and will be removed in
 the future:
   * [hgflow]   The '[hgflow]' section name in hg's configuration file has been
                renamed to '[flow]'.
+  * Syntax: hg flow <stream> finish {{{<tag-name>}}}
+               Replacement syntax: hg flow <stream> finish {{{-t <tag-name>}}}
+               Any positional arguments for `finish` will be considered as
+               error.
 """,
 
 "@examples" : """
@@ -2620,6 +2771,34 @@ Show version of the flow extension.
 syntax:
 {{{hg flow version}}}
 """,
+        
+"@rename" : """
+Rename the workspace branch to a new basename. Under the hood, this action
+will create a new branch with the new basename and copy/graft the commits in
+the workspace branch to the new branch, and then erase the workspace branch.
+All the user, date, and commit-message information will be copied to the
+new branch.
+
+N.B.: The workspace branch should be a simple linear branch. This means:
+(1) It has not merged to other branches;
+(2) It has no subbranches;
+(3) No other branches has merged to this branch.
+
+syntax:
+{{{hg flow <stream> rename [-t <basename>]}}}
+
+option:
+ -t --to NAME  Rename the basename of the workspace branch to NAME.
+
+The workspace branch must be in <stream>.
+""",
+        
+"@version" : """
+Show version of the flow extension.
+
+syntax:
+{{{hg flow version}}}
+""",
 
 "@init" : """
 Initialize the flow extension for the repository. The configuration file:
@@ -2803,7 +2982,7 @@ available for the following topics:
   @<stream>   - Show help about a particular stream, e.g., @feature, @master.
   @<action>   - Show help about an action, e.g., @finish, @log.
   @<command>  - Show help about a command, e.g., @help, @unshelve.
-  @<option>   - Show help about an option, e.g., @-F, @--history.
+  @terms      - Show explanations of terminologies used in hgflow.
   @examples   - Show a few command examples.
   @deprecated - Show a list of deprecated features.
 """ )
@@ -2820,6 +2999,7 @@ OPT_FILTER = {
 "abort"   : ("erase", "message", "stamp", "onstream",),
 "promote" : ("rev", "message", "stamp", "tag", "date", "user", "onstream",),
 "rebase"  : ("dest", "onstream", "stamp",),
+"rename"  : ("to",),
 }
 
 OPT_CONFLICT = {
@@ -2830,6 +3010,8 @@ OPT_CONFLICT = {
 "commit"  : ("-c", False,),
 "stamp"   : ("-p", ''    ),
 "patch"   : ("-p", False ),
+"tag"     : ("-t", ''    ),
+"to"      : ("-t", ''    ),
 }
 
 def _getopt( ui, key, opt ) :
@@ -2884,10 +3066,13 @@ def _getopt( ui, key, opt ) :
             raise AbortFlow( "Unrecognized option%s for `hg flow`: %s." %
                              ("" if (len( bad_opt ) == 1) else "s", "--" + (", --".join( bad_opt )),),
                              note = "`hg flow` should take no options." )
-        else :
+        elif (key in Flow.ACTION_NAME) :
             raise AbortFlow( "Unrecognized option%s for `%s`: %s." %
                              ("" if (len( bad_opt ) == 1) else "s", key, "--" + (", --".join( bad_opt )),),
                              note = "Execute `hg flow help @%s` to see available options for `%s`." % (key, key,) )
+        else :
+            raise AbortFlow( "Unrecognized option%s: %s." %
+                             ("" if (len( bad_opt ) == 1) else "s", "--" + (", --".join( bad_opt )),) )
             
     return ret
 
@@ -2921,6 +3106,7 @@ cmdtable = {
       ("s", "onstream",  False, _("Act on stream. [finish, rebase, log, abort]"),                                  ),
       ("t", "tag",       '',    _("Tag the merging changeset with NAME. [promote]"),                     _('NAME'),),
       ("t", "tag",       '',    _("Tag the <master> trunk with NAME after merging. [finish]"),           _('NAME'),),
+      ("t", "to",        '',    _("Rename the branch to NAME. [rename]"),                                _('NAME'),),
       ("u", "user",      '',    _("Use specified user as committer. [init, upgrade, start, finish,"
                                   " promote]"),                                                          _('USER'),),
       ("u", "user",      '',    _("Show revisions committed by specified user. [log]"),                  _('USER'),),
