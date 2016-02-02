@@ -13,6 +13,7 @@ record =
 shelve =
 histedit =
 mq =
+schemes =
 flow = $HOME/.hgext/hgflow.py
 
 [pager]
