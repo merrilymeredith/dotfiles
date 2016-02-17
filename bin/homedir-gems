@@ -1,4 +1,6 @@
 #!/bin/sh
 set -eu
 
+bundle --version || gem install bundler
+
 exec bundle install --system --jobs=2 --gemfile=~/.Gemfile
