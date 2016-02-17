@@ -1,11 +1,4 @@
 #!/bin/sh
 set -eu
 
-GEMS="pry git-up"
-
-if which pry >/dev/null; then
-  gem update $GEMS
-else
-  gem install $GEMS
-fi
-
+exec bundle install --system --jobs=2 --gemfile=~/.Gemfile
