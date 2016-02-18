@@ -270,7 +270,7 @@ set backupdir=$MYVIM/var/backup//,.
 set directory=$MYVIM/var/tmp//,.
 
 set backup
-set autowrite
+set autowriteall
 
 if has('persistent_undo')
   set undofile
@@ -282,6 +282,8 @@ end
 " Autocmds  {{{
 augroup vimrc
   autocmd!
+
+  autocmd FocusLost * silent! wa
 
   " you have to go out of your way to make this stick
   autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
