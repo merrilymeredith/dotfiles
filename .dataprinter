@@ -1,0 +1,8 @@
+{
+  filters => {
+    'JSON::PP::Boolean' => sub { ${$_[0]} ? 'true': 'false'  },
+    'Mojo::JSON::_Bool' => sub { ${$_[0]} ? 'true': 'false'  },
+    'URI::http'         => sub { "URI<$_[0]>"  },
+    'URI::https'        => sub { "URI<$_[0]>"  },
+  }
+};
