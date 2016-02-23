@@ -3,4 +3,4 @@ set -eu
 
 TARGET=$1
 
-hg archive -t tgz -p . - | ssh $TARGET tar xzv
+hg archive -t tgz -p . - | ssh $TARGET tar xz --keep-newer-files
