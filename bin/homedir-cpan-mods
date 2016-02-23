@@ -11,6 +11,8 @@ experimentals
 
 Reply
 Data::Printer
+Data::Printer::Filter::JSON
+Data::Printer::Filter::URI
 Carp::Always
 Proc::InvokeEditor
 B::Keywords
