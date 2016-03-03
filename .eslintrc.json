@@ -1,0 +1,20 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "semi":                        [2, "never"],
+    "space-before-function-paren": [2, "never"],
+    "space-in-parens":             [2],
+    "brace-style":                 [2, "stroustrup", { "allowSingleLine": true }],
+    "quotes":                      [2, "single", "avoid-escape"],
+    "curly":                       [2, "multi-or-nest", "consistent"],
+    "object-curly-spacing":        [2],
+    "array-bracket-spacing":       [2],
+    "keyword-spacing":             [2],
+    "comma-spacing":               [2],
+    "no-else-return":              [2],
+    "comma-dangle":                [1, "always-multiline"],
+    "eqeqeq":                      [1, "smart"],
+    "no-extra-bind":               [1],
+    "no-console":                  [0]
+  }
+}
