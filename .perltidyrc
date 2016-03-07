@@ -1,7 +1,12 @@
+-xs           # extended syntax
+-mbl=2        # max blank lines 2
+-l=100        # Lines to 100
 -i=2          # Indent 2
--l=78         # Lines to 78
 -ci=2         # indent continuing lines
 -nolq         # don't outdent long quotes
+-isbc         # indent block comments when not at left edge
 -csc -csci=30 # closing-side comments
--sbl          # open brackets after named subs
-#-sot -sct     # stack opening/closing tokens
+-otr          # leave opening tokens on right
+-sot -sct     # stack opening/closing tokens
+-act=2        # all containers tight
+
