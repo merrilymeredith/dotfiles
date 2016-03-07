@@ -1,5 +1,5 @@
 # Version/environment management tools to load
-envthings=(plenv rbenv ndenv)
+envthings=(plenv rbenv ndenv rakudobrew)
 
 DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
