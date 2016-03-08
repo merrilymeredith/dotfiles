@@ -1,12 +1,14 @@
--xs           # extended syntax
--mbl=2        # max blank lines 2
--l=100        # Lines to 100
--i=2          # Indent 2
--ci=2         # indent continuing lines
--nolq         # don't outdent long quotes
--isbc         # indent block comments when not at left edge
--csc -csci=30 # closing-side comments
--otr          # leave opening tokens on right
--sot -sct     # stack opening/closing tokens
--act=2        # all containers tight
-
+--iterations=2
+--extended-syntax
+--indent-columns=2
+--continuation-indentation=2
+--maximum-line-length=100
+--nooutdent-long-quotes
+--noblanks-before-comments
+--maximum-consecutive-blank-lines=2
+--opening-token-right
+--stack-opening-tokens
+--all-containers-tightness=2
+--indent-spaced-block-comments
+--closing-side-comments
+--closing-side-comment-interval=30
