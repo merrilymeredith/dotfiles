@@ -3,8 +3,8 @@
 --indent-columns=2
 --continuation-indentation=2
 --maximum-line-length=100
---nooutdent-long-quotes
---noblanks-before-comments
+--no-outdent-long-quotes
+--no-blanks-before-comments
 --maximum-consecutive-blank-lines=2
 --opening-token-right
 --stack-opening-tokens
