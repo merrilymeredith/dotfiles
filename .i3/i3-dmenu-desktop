@@ -8,12 +8,13 @@
 use strict;
 use warnings qw(FATAL utf8);
 use v5.10;
+use utf8;
 
 my $dmenu_cmd;
 my @entry_types;
 
 BEGIN {
-    $dmenu_cmd = 'dmenu -b -i -p ] -nf \#CCC -nb \#555';
+    $dmenu_cmd = 'dmenu.xft -b -i -fn "Droid Sans-10" -p ] -nf \#CCC -nb \#555';
 
     use Getopt::Long;
     my $result = GetOptions(
