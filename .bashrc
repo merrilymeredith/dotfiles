@@ -5,19 +5,15 @@ if [ -f ~/.bashrc.dist ]; then
   source ~/.bashrc.dist
 fi
 
-source ~/.profile.common
+source .bashrc.lib
 
-if [ -d ~/bin ]; then
-  export PATH="$HOME/bin:$PATH"
-fi
+path-prepend "$HOME/bin"
 
-if [ -d ~/.plenv ]; then
-  export PATH="$HOME/.plenv/bin:$PATH"
+if path-prepend "$HOME/.plenv/bin"; then
   eval "$(plenv init -)"
 fi
 
-if [ -d ~/.rbenv ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
+if path-prepend "$HOME/.rbenv/bin"; then
   eval "$(rbenv init -)"
 fi
 
@@ -25,4 +21,6 @@ fi
 if [ -f ~/.bashrc.local ]; then
   source ~/.bashrc.local
 fi
+
+source ~/.profile.common
 
