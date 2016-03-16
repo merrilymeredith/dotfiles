@@ -1,3 +1,5 @@
+typeset -U path omz_plugins zsh_plugins envthings
+
 # Version/environment management tools to load
 envthings=(plenv rbenv ndenv rakudobrew)
 
@@ -6,7 +8,6 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-typeset -U path omz_plugins zsh_plugins
 
 omz_plugins=(
   plugins/common-aliases
@@ -28,15 +29,15 @@ if [ -f ~/.zgen/zgen.zsh ]; then
 
   if ! zgen saved; then
     zgen oh-my-zsh
-    for plugin in $omz_plugins[@]; do zgen oh-my-zsh $plugin; done
+    for plugin in $omz_plugins; do zgen oh-my-zsh $plugin; done
 
-    for plugin in $zsh_plugins[@]; do zgen load $plugin; done
+    for plugin in $zsh_plugins; do zgen load $plugin; done
     zgen save
   fi
 fi
 
-# User configuration
-path=("$HOME/bin" "$path[@]")
+
+path[1,0]="$HOME/bin"
 
 REPORTTIME=5
 
@@ -49,13 +50,14 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 source ~/.profile.common
 
-for ENVTHING in $envthings; do
-  if [ -d ~/.$ENVTHING ]; then
-    path=( ~/.$ENVTHING/bin "$path[@]" )
-    eval "$($ENVTHING init - zsh)"
+for envthing in $envthings; do
+  if [ -d ~/.$envthing ]; then
+    path[1,0]="$HOME/.$envthing/bin"
+    eval "$($envthing init - zsh)"
   fi
 done
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
+
