@@ -1,6 +1,9 @@
 #!/bin/sh
 set -eu
 
-bundle --version || gem install bundler
+if ! bundle --version >/dev/null 2>&1; then
+  gem install bundler
+fi
 
+rm -f ~/.Gemfile.lock
 exec bundle install --system --jobs=2 --gemfile=~/.Gemfile
