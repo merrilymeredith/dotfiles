@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source .bashrc
-
 if [ "$(uname -s)" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
 fi
@@ -17,6 +15,6 @@ fi
 urxvtd -q -o -f
 
 if [ -r ~/.xsessionrc.local ]; then
-  source ~/.xsessionrc.local
+  . ~/.xsessionrc.local
 fi
 
