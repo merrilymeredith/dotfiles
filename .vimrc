@@ -86,7 +86,7 @@ end
   Plugin 'ludovicchabant/vim-lawrencium'
   Plugin 'mhinz/vim-signify'
 
-  Plugin 'danchoi/ri.vim'
+  Plugin 'asciidoc/vim-asciidoc'
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'vim-perl/vim-perl'
   Plugin 'yko/mojo.vim'
