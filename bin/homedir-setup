@@ -1,8 +1,13 @@
 #!/bin/sh
 set -eu
 
+if [ ! -f .zshrc ]; then
+  echo "Refusing to run without a .zshrc nearby" >&2
+  exit 1
+fi
+
 if ! git --version >/dev/null; then
-  echo "Please install git!"
+  echo "Please install git!" >&2
   exit 1
 fi
 
