@@ -1,0 +1,116 @@
+# Folder management / IMAP
+set folder=imaps://mhoward@ramdas.roomag.org/
+set spoolfile=+INBOX
+
+unset imap_passive
+set imap_idle             = yes
+set imap_check_subscribed = yes
+set imap_keepalive        = 300
+set imap_peek             = no
+set mark_old              = no
+
+set ssl_usesystemcerts = yes
+
+# Behavior
+set beep            = no
+set beep_new        = no
+set mail_check      = 120
+set move            = no
+set pager_stop      = yes
+set pager_context   = 2
+set menu_scroll     = yes
+set mailcap_path    = ~/.mailcap
+set assumed_charset = "utf-8:iso8859-1"
+set autoedit        = yes
+set edit_headers    = yes
+set editor          = "vim +'set tw=72 noawa'"
+
+auto_view text/html
+alternative_order text/plain text/html
+
+bind index <F1> help
+bind index / search
+bind index ? search-reverse
+bind index n search-next
+bind index N search-opposite
+
+bind index gg first-entry
+bind index G   last-entry
+bind index \Cu half-up
+bind index \Cd half-down
+
+bind pager J next-unread
+bind pager K previous-unread
+
+bind pager <up>   previous-line
+bind pager <down> next-line
+bind pager gg top
+bind pager G  bottom
+bind pager \Cu half-up
+bind pager \Cd half-down
+
+bind pager r reply
+bind pager R group-reply
+bind pager l list-reply
+
+bind pager <F1> help
+bind pager / search
+bind pager ? search-reverse
+bind pager n search-next
+bind pager N search-opposite
+
+push <first-entry>
+
+# Appearance
+set sort              = reverse-date-sent
+set status_on_top     = yes
+set pager_index_lines = 10
+set wrap              = -15
+set markers           = no
+
+set date_format  = "%m-%d %H:%M"
+set index_format = "%2C %Z %D  %-30.30F  %s"
+
+ignore *
+unignore from date subject to cc
+unignore organization organisation x-mailing-list: posted-to:
+
+hdr_order subject from to cc date
+
+# jellybeans-ish
+color attachment color162 color233
+color bold color183 color233
+color hdrdefault color215 color233
+color indicator brightwhite color234
+color markers color215 color233
+color message color188 color233
+color normal color188 color233
+color search brightgreen color233
+color signature color222 color233
+color status color30 color235
+color tilde color244 color233
+color tree color104 color233
+# color underline brightmagenta color233
+color error color167 color233
+
+# Colours for items in the index
+color index color188 color233 ~A
+color index default color233 ~R
+color index color110 color233 ~U
+color index color213 color233 ~F
+color index color217 color233 ~T
+color index color126 color233 ~D
+
+# Highlights inside message body
+
+# URLs
+color body color103 color233 "https?://[^ \"\t\r\n>]+"
+color body color103 color233 "mailto:[^ \"\t\r\n>]+"
+
+# Email addresses.
+color body color103 color233 "[-a-z_0-9.%$+]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+
+color quoted color107 color233
+color quoted1 color58 color233
+color quoted2 color244 color233
+color quoted3 color233 color233
