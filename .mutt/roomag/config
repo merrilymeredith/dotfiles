@@ -1,0 +1,8 @@
+# vim: ft=muttrc
+
+set folder=imaps://mhoward@ramdas.roomag.org/
+set spoolfile=+INBOX
+
+set realname="Meredith Howard"
+set from="mhoward@roomag.org"
+set signature=~/.mutt/roomag/signature

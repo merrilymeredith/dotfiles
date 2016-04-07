@@ -1,6 +1,5 @@
-# Folder management / IMAP
-set folder=imaps://mhoward@ramdas.roomag.org/
-set spoolfile=+INBOX
+# IMAP
+source ~/.mutt/roomag/config
 
 unset imap_passive
 set imap_idle             = yes
@@ -8,8 +7,7 @@ set imap_check_subscribed = yes
 set imap_keepalive        = 300
 set imap_peek             = no
 set mark_old              = no
-
-set ssl_usesystemcerts = yes
+set ssl_usesystemcerts    = yes
 
 # Behavior
 set beep            = no
@@ -19,14 +17,13 @@ set move            = no
 set pager_stop      = yes
 set pager_context   = 2
 set menu_scroll     = yes
-set mailcap_path    = ~/.mailcap
+set mailcap_path    = ~/.mutt/mailcap
 set assumed_charset = "utf-8:iso8859-1"
 set autoedit        = yes
 set edit_headers    = yes
 set editor          = "vim +'set tw=72 noawa'"
 
 auto_view text/html
-alternative_order text/plain text/html
 
 bind index <F1> help
 bind index / search
