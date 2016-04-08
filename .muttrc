@@ -24,6 +24,7 @@ set edit_headers    = yes
 set editor          = "vim +'set tw=72 noawa'"
 
 auto_view text/html
+alternative_order text/plain text/html
 
 bind index <F1> help
 bind index / search
