@@ -7,8 +7,7 @@
 --no-blanks-before-comments
 --maximum-consecutive-blank-lines=2
 --opening-token-right
---stack-opening-tokens
 --all-containers-tightness=2
 --indent-spaced-block-comments
 --closing-side-comments
---closing-side-comment-interval=30
+--closing-side-comment-interval=40
