@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+cd
+mkdir -p sandbox
+
+if [ ! -d sandbox/neomutt ]; then
+  git clone https://github.com/neomutt/neomutt.git sandbox/neomutt
+else
+  git -C sandbox/neomutt pull
+fi
+
+cd sandbox/neomutt
+
+./prepare \
+ --with-ssl \
+ --enable-imap --enable-smtp \
+ --enable-sidebar --enable-hcache >/dev/null
+make mutt -j2 >/dev/null
+
+cd ~/bin
+ln -sf ../sandbox/neomutt/mutt mutt
+

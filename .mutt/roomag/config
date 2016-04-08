@@ -4,6 +4,7 @@ set folder    = imaps://mhoward@ramdas.roomag.org/
 set spoolfile = "+INBOX"
 set record    = "+Sent"
 set postponed = "+Drafts"
+set trash     = "+Trash"
 
 set smtp_url  = smtps://mhoward@ramdas.roomag.org/
 set realname  = "Meredith Howard"
