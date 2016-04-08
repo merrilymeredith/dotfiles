@@ -1,8 +1,11 @@
 # vim: ft=muttrc
 
-set folder=imaps://mhoward@ramdas.roomag.org/
-set spoolfile=+INBOX
+set folder    = imaps://mhoward@ramdas.roomag.org/
+set spoolfile = "+INBOX"
+set record    = "+Sent"
+set postponed = "+Drafts"
 
-set realname="Meredith Howard"
-set from="mhoward@roomag.org"
-set signature=~/.mutt/roomag/signature
+set smtp_url  = smtps://mhoward@ramdas.roomag.org/
+set realname  = "Meredith Howard"
+set from      = "mhoward@roomag.org"
+set signature = ~/.mutt/roomag/signature
