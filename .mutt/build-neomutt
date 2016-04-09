@@ -15,8 +15,9 @@ cd sandbox/neomutt
 ./prepare \
  --with-ssl \
  --enable-imap --enable-smtp \
- --enable-sidebar --enable-hcache >/dev/null
-make -j2 mutt >/dev/null
+ --enable-sidebar >/dev/null
+
+make -j3 >/dev/null
 
 cd ~/bin
 ln -sf ../sandbox/neomutt/mutt mutt
