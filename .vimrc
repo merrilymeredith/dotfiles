@@ -74,7 +74,7 @@ end
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
-  Plugin 'jiangmiao/auto-pairs'
+  " Plugin 'jiangmiao/auto-pairs'
 
   Plugin 'vimoutliner/vimoutliner'
 
