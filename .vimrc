@@ -9,7 +9,6 @@ if has('win32') || has('win64')
   let on_windows=1
 end
 
-
 " Set up Vundle and plugins  {{{
   let installed_vundle=0
 
@@ -74,7 +73,6 @@ end
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
-  " Plugin 'jiangmiao/auto-pairs'
 
   Plugin 'vimoutliner/vimoutliner'
 
@@ -90,7 +88,6 @@ end
   Plugin 'vim-ruby/vim-ruby'
   Plugin 'vim-perl/vim-perl'
   Plugin 'yko/mojo.vim'
-
 
   try
     if on_windows == 1
@@ -115,13 +112,13 @@ end
 " }}}
 
 
-" Key maps, mostly plugin stuff on F-keys  {{{
+" Key maps {{{
 
 " F1 - Unite to switch buffers
-nmap <silent> <F1> :Unite -auto-resize -direction=dynamicbottom buffer<CR>
+nmap <silent> <F1> :Unite -auto-resize buffer<CR>
 " S-F1 - Unite to switch windows or tabs
-nmap <silent> <S-F1> :Unite -winheight=10 -quick-match -short-source-names window tab:no-current<CR>
-nmap <silent> <A-F1> :Unite -winheight=10 session<CR>
+nmap <silent> <S-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
+nmap <silent> <A-F1> :Unite session<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
 map  <silent> <F4> :noh<CR>
 nmap <silent> <F5> :GundoToggle<CR>
@@ -151,6 +148,16 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+
+" Prefer using regexes like in code.
+map / /\v
+map ? ?\v
+
+" navigate by on-screen lines
+map j gj
+map k gk
+imap <down> <C-O>j
+imap <up> <C-O>k
 
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
@@ -190,7 +197,7 @@ set softtabstop=2
 set backspace=indent,eol,start
 
 " set number
-set scrolloff=4
+set scrolloff=10
 set ruler
 set showcmd
 set wildmenu
@@ -368,6 +375,8 @@ let g:tagbar_type_perl = {
 call unite#filters#sorter_default#use(['sorter_rank'])
 " let g:unite_source_history_yank_enable = 1
 
+call unite#custom#profile('default', 'context', {'winheight': 10})
+
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
@@ -482,5 +491,4 @@ else
   end
 
 end
-
 
