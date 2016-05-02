@@ -115,7 +115,7 @@ end
 " Key maps {{{
 
 " F1 - Unite to switch buffers
-nmap <silent> <F1> :Unite -auto-resize buffer<CR>
+nmap <silent> <F1> :Unite buffer<CR>
 " S-F1 - Unite to switch windows or tabs
 nmap <silent> <S-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <A-F1> :Unite session<CR>
