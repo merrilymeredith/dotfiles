@@ -156,8 +156,6 @@ map ? ?\v
 " navigate by on-screen lines
 map j gj
 map k gk
-imap <down> <C-O>j
-imap <up> <C-O>k
 
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
