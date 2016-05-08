@@ -27,6 +27,9 @@ set autoedit        = yes
 set edit_headers    = yes
 set editor          = "vim +'set tw=72 noawa'"
 
+set header_cache     = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt
+
 auto_view text/html
 alternative_order text/plain text/html
 
