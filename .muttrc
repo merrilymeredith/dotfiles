@@ -1,6 +1,10 @@
 # IMAP
 source ~/.mutt/roomag/config
 
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/roomag/config<enter><change-folder>!<enter>'
+
+source `F=$HOME/.mutt/local; if [ ! -s "$F" ]; then F=/dev/null;fi;echo "$F"`
+
 unset imap_passive
 set imap_idle             = yes
 set imap_check_subscribed = yes

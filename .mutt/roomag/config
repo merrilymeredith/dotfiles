@@ -1,5 +1,7 @@
 # vim: ft=muttrc
 
+source "gpg -d ~/.mutt/roomag/passwords.gpg |"
+
 set folder    = imaps://mhoward@ramdas.roomag.org/
 set spoolfile = "+INBOX"
 set record    = "+Sent"
