@@ -31,6 +31,7 @@ auto_view text/html
 alternative_order text/plain text/html
 
 bind index <F1> help
+bind index <F5> sync-mailbox
 bind index / search
 bind index ? search-reverse
 bind index n search-next
