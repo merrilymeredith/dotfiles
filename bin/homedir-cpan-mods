@@ -8,6 +8,8 @@ Carton
 App::prowess
 Test::Pretty
 
+Perl::Tidy
+
 experimentals
 
 Reply
