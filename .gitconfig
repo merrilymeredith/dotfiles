@@ -20,7 +20,7 @@
 	br      = branch
 	staged  = diff --cached
 	unstage = reset HEAD --
-	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
+	fetch   = "!git remote update -p && git rebase --stat @{u}"
 	in      = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
 	out     = "!git log --pretty=onelinecustom @{u}.."
 	new     = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
