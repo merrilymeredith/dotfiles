@@ -149,13 +149,20 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Prefer using regexes like in code.
+" Prefer using regexes like in perl code.
 map / /\v
 map ? ?\v
 
 " navigate by on-screen lines
 map j gj
 map k gk
+
+" Select last paste
+map gV `[v`]
+
+" Stay in visual when indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
