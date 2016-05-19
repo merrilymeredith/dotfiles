@@ -160,10 +160,6 @@ map k gk
 " Select last paste
 map gV `[v`]
 
-" Stay in visual when indenting
-vnoremap < <gv
-vnoremap > >gv
-
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
