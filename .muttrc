@@ -60,7 +60,7 @@ bind pager R group-reply
 bind pager l list-reply
 
 bind pager <F1> help
-bind index <F5> sync-mailbox
+bind pager <F5> sync-mailbox
 bind pager / search
 bind pager ? search-reverse
 bind pager n search-next
