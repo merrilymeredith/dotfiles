@@ -33,38 +33,30 @@ set message_cachedir = ~/.cache/mutt
 auto_view text/html
 alternative_order text/plain text/html
 
-bind index <F1> help
-bind index <F5> sync-mailbox
-bind index / search
-bind index ? search-reverse
-bind index n search-next
-bind index N search-opposite
+bind generic \`  help
+bind generic /   search
+bind generic ?   search-reverse
+bind generic n   search-next
+bind generic N   search-opposite
+bind generic \Cu half-up
+bind generic \Cd half-down
 
-bind index gg first-entry
-bind index G   last-entry
-bind index \Cu half-up
-bind index \Cd half-down
+bind index <F5> sync-mailbox
+bind index gg   first-entry
+bind index G    last-entry
 
 bind pager J next-unread
 bind pager K previous-unread
 
+bind pager <F5>   sync-mailbox
 bind pager <up>   previous-line
 bind pager <down> next-line
-bind pager gg top
-bind pager G  bottom
-bind pager \Cu half-up
-bind pager \Cd half-down
+bind pager gg     top
+bind pager G      bottom
 
 bind pager r reply
 bind pager R group-reply
 bind pager l list-reply
-
-bind pager <F1> help
-bind pager <F5> sync-mailbox
-bind pager / search
-bind pager ? search-reverse
-bind pager n search-next
-bind pager N search-opposite
 
 push <first-entry>
 
