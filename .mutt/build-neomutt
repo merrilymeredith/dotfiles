@@ -1,6 +1,10 @@
 #!/bin/sh
 set -eu
 
+echo "Requirements (on debian):"
+echo "autoconf libncurses5-dev libssl-dev libtokyocabinet-dev libsasl2-dev"
+echo "links"
+
 cd
 mkdir -p sandbox
 
