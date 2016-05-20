@@ -13,7 +13,7 @@ fi
 cd sandbox/neomutt
 
 ./prepare \
- --with-ssl \
+ --with-ssl --with-sasl \
  --enable-hcache \
  --enable-imap --enable-smtp \
  --enable-sidebar >/dev/null
