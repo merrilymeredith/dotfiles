@@ -3,6 +3,7 @@ source ~/.mutt/roomag/config
 
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/roomag/config<enter><change-folder>!<enter>'
 
+source ~/.mutt/gpg2.rc
 source `F=$HOME/.mutt/local; if [ ! -s "$F" ]; then F=/dev/null;fi;echo "$F"`
 
 unset imap_passive
