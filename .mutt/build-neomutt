@@ -25,5 +25,6 @@ cd sandbox/neomutt
 make -j3 >/dev/null
 
 cd ~/bin
-ln -sf ../sandbox/neomutt/mutt mutt
+ln -sf ../sandbox/neomutt/mutt
+ln -sf ../sandbox/neomutt/pgpewrap
 
