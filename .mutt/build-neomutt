@@ -2,7 +2,7 @@
 set -eu
 
 echo "Requirements (on debian):"
-echo "autoconf libncurses5-dev libssl-dev libtokyocabinet-dev libsasl2-dev"
+echo "autoconf libncursesw5-dev libssl-dev libtokyocabinet-dev libsasl2-dev"
 echo "links"
 
 cd
@@ -22,7 +22,7 @@ cd sandbox/neomutt
  --enable-imap --enable-smtp \
  --enable-sidebar >/dev/null
 
-make -j3 >/dev/null
+make -s -j3
 
 cd ~/bin
 ln -sf ../sandbox/neomutt/mutt
