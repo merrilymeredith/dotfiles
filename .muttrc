@@ -27,6 +27,7 @@ set assumed_charset = "utf-8:iso8859-1"
 set autoedit        = yes
 set edit_headers    = yes
 set editor          = "vim +'set tw=72 noawa'"
+set strict_threads  = yes
 
 set header_cache     = ~/.cache/mutt
 set message_cachedir = ~/.cache/mutt
@@ -62,14 +63,17 @@ bind pager l list-reply
 push <first-entry>
 
 # Appearance
-set sort              = reverse-date-sent
+set sort              = reverse-threads
+set sort_aux          = last-date
+set sort_browser      = reverse-date
 set status_on_top     = yes
-set pager_index_lines = 10
+set pager_index_lines = 7
 set wrap              = -15
 set markers           = no
 
-set date_format  = "%m-%d %H:%M"
-set index_format = "%2C %Z %D  %-30.30F  %s"
+set date_format   = "%m-%d %H:%M"
+set index_format  = "%2C %Z %D  %-30.30F  %s"
+set status_format = " %r Mutt: %f [N:%n%?d? D:%d?%?t? *:%t?] %>- (%s/%S) %P"
 
 ignore *
 unignore from date subject to cc
