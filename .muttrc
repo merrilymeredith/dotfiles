@@ -114,7 +114,11 @@ color body color103 color233 "mailto:[^ \"\t\r\n>]+"
 # Email addresses.
 color body color103 color233 "[-a-z_0-9.%$+]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
+# Nested quotes
 color quoted color107 color233
-color quoted1 color58 color233
-color quoted2 color244 color233
-color quoted3 color233 color233
+# color quoted1 color58 color233
+# color quoted2 color244 color233
+
+# diffs, maybe
+color body color107 default "^[\+]+.*"
+color body color167 default "^[\-]+.*"
