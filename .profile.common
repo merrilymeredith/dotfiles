@@ -7,6 +7,10 @@ export DEVEL_REPL_PROFILE='Standard'
 alias hgcd='cd $(hg root)'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 
+if [ -d ~/.asdf ]; then
+  source ~/.asdf/asdf.sh
+fi
+
 if [ -f ~/.profile.common.local ]; then
   source ~/.profile.common.local
 fi

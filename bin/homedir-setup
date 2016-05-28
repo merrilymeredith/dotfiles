@@ -46,3 +46,13 @@ else
   pull .ndenv/plugins/node-build
 fi
 
+if ! [ -d .asdf ]; then
+  git clone https://github.com/asdf-vm/asdf .asdf
+  git clone https://github.com/asdf-vm/asdf-erlang .asdf/plugins/erlang
+  git clone https://github.com/asdf-vm/asdf-elixir .asdf/plugins/elixir
+else
+  pull .asdf
+  pull .asdf/plugins/erlang
+  pull .asdf/plugins/elixir
+fi
+
