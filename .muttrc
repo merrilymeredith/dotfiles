@@ -65,6 +65,9 @@ bind pager r reply
 bind pager R group-reply
 bind pager l list-reply
 
+macro index,pager    \Cb "<pipe-message> urlscan<enter>" 'urlscan'
+macro attach,compose \Cb "<pipe-entry> urlscan<enter>" 'urlscan'
+
 push <first-entry>
 
 # Appearance
