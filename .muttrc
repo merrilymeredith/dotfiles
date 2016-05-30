@@ -48,14 +48,13 @@ bind generic N   search-opposite
 bind generic \Cu half-up
 bind generic \Cd half-down
 
-bind index <F5> sync-mailbox
+bind index,pager <F5> sync-mailbox
 bind index gg   first-entry
 bind index G    last-entry
 
 bind pager J next-unread
 bind pager K previous-unread
 
-bind pager <F5>   sync-mailbox
 bind pager <up>   previous-line
 bind pager <down> next-line
 bind pager gg     top
@@ -80,7 +79,7 @@ set wrap              = -15
 set markers           = no
 
 set date_format   = "%m-%d %H:%M"
-set index_format  = "%2C %Z %D  %-30.30F  %s"
+set index_format  = "%2C %Z %D  %-25.25F  %s"
 set status_format = " %r Mutt: %f [N:%n%?d? D:%d?%?t? *:%t?] %>- (%s/%S) %P"
 
 ignore *
