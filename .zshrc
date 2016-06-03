@@ -45,6 +45,7 @@ setopt list_packed
 setopt correct
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
+setopt interactive_comments
 
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
