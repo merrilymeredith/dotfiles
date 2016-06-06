@@ -14,6 +14,8 @@ set imap_peek             = no
 set mark_old              = no
 set ssl_usesystemcerts    = yes
 
+set smtp_authenticators = "gssapi:login:plain"
+
 # Behavior
 set beep            = no
 set beep_new        = no
