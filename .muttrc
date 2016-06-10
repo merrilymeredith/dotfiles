@@ -28,7 +28,7 @@ set mailcap_path    = ~/.mutt/mailcap
 set assumed_charset = "utf-8:iso8859-1"
 set autoedit        = yes
 set edit_headers    = yes
-set editor          = "vim +'set tw=72 spell' +/^$ +noh ++1"
+set editor          = "exec vim +'set tw=72 spell' +/^$ +noh ++1"
 set strict_threads  = yes
 
 set reverse_name    = yes
@@ -129,5 +129,5 @@ color quoted color107 color233
 # color quoted2 color244 color233
 
 # diffs, maybe
-color body color107 default "^[\+]+.*"
-color body color167 default "^[\-]+.*"
+color body color107 color233 "^[\+]+.*"
+color body color167 color233 "^[\-]+.*"
