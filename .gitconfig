@@ -11,6 +11,9 @@
 [core]
 	pager = LESS='FSRX' less
 
+[diff]
+	compactionheuristic = true
+
 [alias]
 	ci      = commit
 	rec     = commit -p
