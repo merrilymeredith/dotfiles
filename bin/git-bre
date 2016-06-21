@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+# git-bre:  "branch edit", run $EDITOR with a list of all files touched in this
+# branch compared to upstream.  Any args are passed to the editor, before the
+# file list.
+
+CHANGED=$(
+  git diff --name-only @{u}.. | while read file
+  do
+    echo \'$file\'
+  done
+)
+
+eval "exec $EDITOR $@ ${CHANGED:?[No files to edit]}"

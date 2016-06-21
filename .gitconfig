@@ -31,7 +31,6 @@
 	ctags   = "!~/.git_helpers/ctags"
 	glog    = log --graph --pretty=onelinecustom
 	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\"' "$@"
-	bre     = !$EDITOR $@ $(git diff --name-only @{u}..)
 
 [pretty]
 	onelinecustom = tformat:%C(magenta)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
