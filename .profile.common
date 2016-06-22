@@ -7,6 +7,9 @@ export DEVEL_REPL_PROFILE='Standard'
 alias hgcd='cd $(hg root)'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 
+alias :e=vim
+alias :q=exit
+
 if [ -d ~/.asdf ]; then
   source ~/.asdf/asdf.sh
 fi
