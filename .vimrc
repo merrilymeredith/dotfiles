@@ -345,8 +345,8 @@ let perl_sub_signatures = 1
 " Plugin settings  {{{
 
 ">> Viewdoc
+let g:viewdoc_open = 'new'
 let g:viewdoc_perldoc_format = 'ansi'
-let g:viewdoc_open = 'split'
 
 ">> Gundo
 " I prefer python3 on windows if I have to use it. Needs a dll in path.
