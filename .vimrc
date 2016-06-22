@@ -89,6 +89,10 @@ end
   Plugin 'vim-perl/vim-perl'
   Plugin 'yko/mojo.vim'
 
+  let g:no_viewdoc_maps = 1
+  Plugin 'powerman/vim-plugin-viewdoc'
+  Plugin 'powerman/vim-plugin-AnsiEsc'
+
   try
     if on_windows == 1
       source ~/_vimrc.local-pre
@@ -164,6 +168,11 @@ map gV `[v`]
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
 nnoremap <silent> <leader>gt :SignifyToggle<CR>
+
+" K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
+nmap K   :call ViewDoc('doc', '<cword>')<CR>
+nmap gK  :call ViewDoc('doc', expand('<cword>'))<CR>
+nmap gKK :call ViewDoc('doc', expand('%'))<CR>
 "}}}
 
 
@@ -334,6 +343,10 @@ let perl_sub_signatures = 1
 
 
 " Plugin settings  {{{
+
+">> Viewdoc
+let g:viewdoc_perldoc_format = 'ansi'
+let g:viewdoc_open = 'split'
 
 ">> Gundo
 " I prefer python3 on windows if I have to use it. Needs a dll in path.
