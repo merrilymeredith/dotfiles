@@ -8,7 +8,7 @@ set -eu
 CHANGED=$(
   git diff --name-only @{u}.. | while read file
   do
-    echo \'$file\'
+    printf "\'$file\' "
   done
 )
 
