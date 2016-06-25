@@ -85,8 +85,7 @@ end
   Plugin 'mhinz/vim-signify'
 
   Plugin 'asciidoc/vim-asciidoc'
-  Plugin 'vim-ruby/vim-ruby'
-  Plugin 'vim-perl/vim-perl'
+  Plugin 'sheerun/vim-polyglot'
   Plugin 'yko/mojo.vim'
 
   let g:no_viewdoc_maps = 1
