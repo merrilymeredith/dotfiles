@@ -85,6 +85,7 @@ end
   Plugin 'mhinz/vim-signify'
 
   Plugin 'asciidoc/vim-asciidoc'
+  Plugin 'vim-perl/vim-perl'
   Plugin 'sheerun/vim-polyglot'
   Plugin 'yko/mojo.vim'
 
