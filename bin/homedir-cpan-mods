@@ -6,7 +6,6 @@ exec cpanm -q <<END
 Carton
 
 App::prowess
-Test::Pretty
 
 Perl::Tidy
 
