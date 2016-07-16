@@ -79,6 +79,7 @@ set sort_browser      = reverse-date
 set status_on_top     = yes
 set pager_index_lines = 7
 set wrap              = -15
+set reflow_wrap       = -15
 set markers           = no
 
 set date_format   = "%m-%d %H:%M"

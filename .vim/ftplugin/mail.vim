@@ -1,3 +1,4 @@
+
 function IsReply()
   if line('$') > 1
     :/^$/
