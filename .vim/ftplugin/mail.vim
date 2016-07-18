@@ -14,5 +14,5 @@ augroup mail_filetype
 augroup END
 
 setl textwidth=72
-setl formatoptions=awn
+setl formatoptions=aw
 setl spell
