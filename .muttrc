@@ -1,7 +1,7 @@
 # IMAP
 source ~/.mutt/roomag/config
 
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/roomag/config<enter><change-folder>!<enter>' 'switch roomag'
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.mutt/roomag/config<enter><change-folder>!<enter>' 'switch roomag'
 
 source ~/.mutt/gpg2.rc
 source `F=$HOME/.mutt/local; if [ ! -s "$F" ]; then F=/dev/null;fi;echo "$F"`
@@ -51,12 +51,15 @@ bind generic N   search-opposite
 bind generic \Cu half-up
 bind generic \Cd half-down
 
-bind index,pager <F5> sync-mailbox
+bind index,pager <F5>      sync-mailbox
+bind index,pager <Tab>     previous-new-then-unread
+bind index,pager <BackTab> next-new-then-unread
+
 bind index gg   first-entry
 bind index G    last-entry
 
-bind pager J next-unread
-bind pager K previous-unread
+# bind pager J next-unread
+# bind pager K previous-unread
 
 bind pager <up>   previous-line
 bind pager <down> next-line
