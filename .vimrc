@@ -306,7 +306,6 @@ augroup vimrc
   autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
 
   autocmd FileType text setlocal textwidth=78
-  autocmd FileType perl call PerlSettings()
 
   " preload templates into new buffers by file extension
   "autocmd BufNewFile * silent! 0r $MYVIM/templates/%:e.template
@@ -322,22 +321,10 @@ augroup END
 
 " Perl type-specific settings  {{{
 
-function! PerlSettings ()
-  compiler perl
-  " even with g:perl_compiler_force_warnings = 0, perl -w is used and
-  " that's just noisy with intentional no-warnings blocks out there
-
-  setlocal makeprg=perl\ -c\ %\ $*
-  setlocal iskeyword+=:
-
-  " this keeps indents from jumping more than one level
-  let b:indent_use_syntax = 0
-endfunction
-
-" perl fold scanning is slow
-"let perl_fold = 1           
+" let perl_fold = 1    " perl fold scanning is slow
 let perl_include_pod = 1
 let perl_sub_signatures = 1
+let perl_sync_dist = 200
 
 " }}}
 
