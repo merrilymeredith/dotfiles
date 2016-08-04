@@ -1,9 +1,9 @@
 #!/bin/sh
 set -eu
 
-echo "Requirements (on debian):"
-echo "autoconf libncursesw5-dev libssl-dev libtokyocabinet-dev libsasl2-dev"
-echo "links"
+case ${1:-} in *help|-h)
+  exec perldoc $0;;
+esac
 
 cd
 mkdir -p sandbox
@@ -17,7 +17,8 @@ fi
 cd sandbox/neomutt
 
 ./prepare \
-  --enable-quick-build \
+ --with-homespool=/var/spool/mail \
+ --enable-quick-build \
  --with-ssl --with-sasl \
  --enable-hcache \
  --enable-imap --enable-smtp \
@@ -31,3 +32,28 @@ for BIN in mutt mutt_dotlock pgpewrap; do
   ln -sf ../sandbox/neomutt/$BIN
 done
 
+
+:<<=cut
+=head1 NAME
+
+setup-neomutt - clone/update, build, and link neomutt
+
+=head1 DESCRIPTION
+
+Run to do the above.
+
+=head1 REQUIREMENTS
+
+=head2 Debian
+
+autoconf libncursesw5-dev libssl-dev libsasl2-dev libtokyocabinet-dev links
+gnupg2 urlscan
+
+=head2 Cygwin
+
+autoconf libncursesw-devel openssl-devel libsasl2-devel libgdbm4-devel links
+
+gpg2 isn't available in cygwin, but there is a windows build.  using it with
+cygwin paths requires a wrapper though.
+
+=cut
