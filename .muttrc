@@ -30,6 +30,7 @@ set autoedit        = yes
 set edit_headers    = yes
 set editor          = "exec vim"
 set strict_threads  = yes
+set wait_key        = no
 
 set text_flowed     = yes
 set reverse_name    = yes
@@ -72,6 +73,9 @@ bind pager l list-reply
 
 macro index,pager    \Cb "<pipe-message> urlscan<enter>" 'urlscan'
 macro attach,compose \Cb "<pipe-entry> urlscan<enter>" 'urlscan'
+
+# Turn a text/plain markdown part into text/html
+macro compose \eh "F pandoc -s -f markdown -t html \ny^T^Utext/html; charset=us-ascii\n" 'htmlify'
 
 push <first-entry>
 
