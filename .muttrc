@@ -17,9 +17,11 @@ set ssl_usesystemcerts    = yes
 set smtp_authenticators = "gssapi:login:plain"
 
 # Behavior
+set connect_timeout = 10
+set timeout         = 10
+set mail_check      = 47
 set beep            = no
 set beep_new        = no
-set mail_check      = 120
 set move            = no
 set pager_stop      = yes
 set pager_context   = 2
