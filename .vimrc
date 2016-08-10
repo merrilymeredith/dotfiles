@@ -173,6 +173,19 @@ nnoremap <silent> <leader>gt :SignifyToggle<CR>
 nmap K   :call ViewDoc('doc', '<cword>')<CR>
 nmap gK  :call ViewDoc('doc', expand('<cword>'))<CR>
 nmap gKK :call ViewDoc('doc', expand('%'))<CR>
+
+
+function! AutoFmtToggle()
+  if &formatoptions =~ 'a'
+    setl fo-=a
+    echo '-a'
+  else
+    setl fo+=a
+    echo '+a'
+  endif
+endfunction
+
+map <silent> <leader>a :call AutoFmtToggle()<CR>
 "}}}
 
 
@@ -204,6 +217,7 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
+set formatoptions=cqljn1
 set backspace=indent,eol,start
 
 " set number
@@ -302,13 +316,11 @@ augroup vimrc
 
   autocmd FocusLost * silent! wa
 
-  " you have to go out of your way to make this stick
-  autocmd BufNewFile,BufRead * setlocal formatoptions-=ro
-
-  autocmd FileType text setlocal textwidth=78
-
   " preload templates into new buffers by file extension
   "autocmd BufNewFile * silent! 0r $MYVIM/templates/%:e.template
+
+  " double-click to edit
+  autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
   " Set file marks by "category" on switch-away
   autocmd BufLeave *.css,*,less,*.scss normal! mC
@@ -386,8 +398,6 @@ endif
 
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
-" double-click to edit
-autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
 
 ">> Airline
