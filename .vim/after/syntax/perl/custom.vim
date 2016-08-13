@@ -8,8 +8,11 @@ setlocal iskeyword+=:
 " this keeps indents from jumping more than one level
 let b:indent_use_syntax = 0
 
-" Add match for =method from Pod::Weaver
+" Add match for =method and =func from Pod::Weaver
 syn match podCommand "^=method" contained nextgroup=podCmdText contains=@NoSpell
+syn match podCommand "^=func" contained nextgroup=podCmdText contains=@NoSpell
+
+syn sync minlines=15
 
 " Tweak some colors
 hi! def link perlPOD      Comment
