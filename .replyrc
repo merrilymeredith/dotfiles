@@ -18,6 +18,8 @@ script_line1 = use strict; use warnings; use v5.14; use experimentals;
 [Autocomplete::Methods]
 [Autocomplete::Commands]
 [Autocomplete::Keywords]
+[Pager]
+pager = less -SRX
 
 [Timer]
 mintime = 1.0

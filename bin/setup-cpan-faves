@@ -12,6 +12,7 @@ Perl::Tidy
 experimentals
 
 Reply
+IO::Pager
 Data::Printer
 Data::Printer::Filter::JSON
 Data::Printer::Filter::URI
