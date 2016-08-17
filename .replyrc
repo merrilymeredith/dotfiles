@@ -1,16 +1,19 @@
 script_line1 = use strict; use warnings; use v5.14; use experimentals;
 
-[Interrupt]
-[FancyPrompt]
-[DataPrinter]
 [Colors]
-[ReadLine]
+[DataPrinter]
+[FancyPrompt]
+[Interrupt]
+
 [Hints]
 [Packages]
 [LexicalPersistence]
 [ResultCache]
 [LoadClass]
+
+[ReadLine]
 [Editor]
+
 [Autocomplete::Packages]
 [Autocomplete::Lexicals]
 [Autocomplete::Functions]
@@ -18,6 +21,7 @@ script_line1 = use strict; use warnings; use v5.14; use experimentals;
 [Autocomplete::Methods]
 [Autocomplete::Commands]
 [Autocomplete::Keywords]
+
 [Pager]
 pager = less -SRX
 
