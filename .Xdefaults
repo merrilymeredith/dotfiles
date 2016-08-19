@@ -17,6 +17,16 @@ URxvt.iso14755: true
 ! disable LCtrl+LShift+keycap symbolic unicode (use Compose key instead)
 URxvt.iso14755_52: false
 
+XTerm*termName: xterm-256color
+XTerm*locale: true
+XTerm*metaSendsEscape: true
+
+XTerm*foreground: #DFDFDF
+XTerm*background: #070707
+XTerm*faceName: monospace:size=12
+XTerm*saveLines: 1000
+XTerm*VT100.geometry: 120x40
+
 #ifdef USE_LOCAL
 #include ".Xdefaults.local"
 #endif
