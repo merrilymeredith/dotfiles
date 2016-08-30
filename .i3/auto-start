@@ -1,11 +1,9 @@
-#! /bin/sh
-
+#!/bin/sh
 # Simple autostart file for i3-wm, you can execute it from i3 config with
-# exec $HOME/bin/auto-start-for-i3
+# exec $HOME/.i3/auto-start
 #
 # xdotool and notify-send must be installed. On BSD use jot instead of
 # seq or install seq from ports.
-
 
 # Max seconds to wait until the process is up
 MAXWAIT=10
@@ -13,58 +11,58 @@ MAXWAIT=10
 # Start the given command and wait until it's visible
 StartProg()
 {
-    "$@" &                  # Handle arguments with whitspaces
-    mypid=$!                # Pid of last background process
-    echo "Waiting on ${mypid}: $@"
-    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
-    do
-    	if xdotool search --onlyvisible --pid $mypid; then
-    	    return 0
-    	fi
-	sleep 1
-    done
-    notify-send "Error on executing: $@"
+  "$@" &                  # Handle arguments with whitspaces
+  mypid=$!                # Pid of last background process
+  echo "Waiting on ${mypid}: $@"
+  for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+  do
+    if xdotool search --onlyvisible --pid $mypid; then
+      return 0
+    fi
+    sleep 1
+  done
+  notify-send "Error on executing: $@"
 }
 
 StartProgName()
 {
-    "$@" &                  # Handle arguments with whitspaces
-    mypid=$!                # Pid of last background process
-    echo "Waiting on $1: $@"
-    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
-    do
-    	if xdotool search --onlyvisible --name $1; then
-    	    return 0
-    	fi
-	sleep 1
-    done
-    notify-send "Error on executing: $@"
+  "$@" &                  # Handle arguments with whitspaces
+  mypid=$!                # Pid of last background process
+  echo "Waiting on $1: $@"
+  for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+  do
+    if xdotool search --onlyvisible --name $1; then
+      return 0
+    fi
+    sleep 1
+  done
+  notify-send "Error on executing: $@"
 }
 
 WaitProgName()
 {
-    echo "Waiting on $1"
-    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
-    do
-    	if xdotool search --onlyvisible --name $1; then
-    	    return 0
-    	fi
-	sleep 1
-    done
-    notify-send "Error waiting on $1: $@"
+  echo "Waiting on $1"
+  for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+  do
+    if xdotool search --onlyvisible --name $1; then
+      return 0
+    fi
+    sleep 1
+  done
+  notify-send "Error waiting on $1: $@"
 }
 
 WaitClassName()
 {
-    echo "Waiting on window class $1"
-    for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
-    do
-    	if xdotool search --onlyvisible --class $1; then
-    	    return 0
-    	fi
-	sleep 1
-    done
-    notify-send "Error waiting on $1: $@"
+  echo "Waiting on window class $1"
+  for i in `seq $MAXWAIT` # count from 1 to MAXWAIT
+  do
+    if xdotool search --onlyvisible --class $1; then
+      return 0
+    fi
+    sleep 1
+  done
+  notify-send "Error waiting on $1: $@"
 }
 
 
