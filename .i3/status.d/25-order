@@ -1,0 +1,4 @@
+order += "ethernet eth0"
+order += "load"
+order += "tztime local"
+

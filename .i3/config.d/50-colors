@@ -1,0 +1,7 @@
+# Colors -- make them like vim's jellybeans
+#
+client.focused            #457ee0   #345fa8   #deebfe   #8fbfdc
+client.focused_inactive   #444444   #333333   #c7c7c7   #333333
+client.unfocused          #444444   #333333   #777777   #333333
+client.urgent             #c02a2a   #902020   #ffffff   #902020
+

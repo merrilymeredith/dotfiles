@@ -1,0 +1,16 @@
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  status_command "exec i3status -c $HOME/.i3/status"
+  colors {
+    background           #000000
+    statusline           #c7c7c7
+    separator            #777777
+
+    focused_workspace    #457ee0   #345fa8   #deebfe
+    active_workspace     #444444   #333333   #c7c7c7
+    inactive_workspace   #444444   #333333   #777777
+    urgent_workspace     #c02a2a   #902020   #ffffff
+  }
+}
+
