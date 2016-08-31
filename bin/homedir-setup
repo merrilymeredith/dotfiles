@@ -30,29 +30,57 @@ else
   pull .plenv/plugins/perl-build
 fi
 
-if ! [ -d .rbenv ]; then
-  git clone https://github.com/sstephenson/rbenv.git .rbenv
-  git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build/
-else
-  pull .rbenv
-  pull .rbenv/plugins/ruby-build
-fi
-
-if ! [ -d .ndenv ]; then
-  git clone https://github.com/riywo/ndenv.git .ndenv
-  git clone https://github.com/riywo/node-build.git .ndenv/plugins/node-build
-else
-  pull .ndenv
-  pull .ndenv/plugins/node-build
-fi
-
 if ! [ -d .asdf ]; then
   git clone https://github.com/asdf-vm/asdf .asdf
-  git clone https://github.com/asdf-vm/asdf-erlang .asdf/plugins/erlang
-  git clone https://github.com/asdf-vm/asdf-elixir .asdf/plugins/elixir
 else
   pull .asdf
-  pull .asdf/plugins/erlang
-  pull .asdf/plugins/elixir
 fi
 
+for LANG in ruby nodejs erlang elixir; do
+  if ! [ -d .asdf/plugins/$LANG ]; then
+    git clone https://github.com/asdf-vm/asdf-$LANG .asdf/plugins/$LANG
+  else
+    pull .asdf/plugins/$LANG
+  fi
+done
+
+set +eu
+. .asdf/asdf.sh
+set -eu
+
+# Transition older stuff to asdf
+if [ -d .rbenv ]; then
+  echo 'Removing rbenv and moving ruby installs'
+
+  mkdir -p .asdf/installs
+  mv .rbenv/versions .asdf/installs/ruby
+  pushd $!
+  for ver in *; do
+    asdf reshim ruby $ver
+  done
+  popd
+
+  if [ -f .rbenv/version ]; then
+    echo "ruby $(cat .rbenv/version)" >> .tool-versions
+  fi
+
+  rm -rf .rbenv
+fi
+
+if [ -d .ndenv ]; then
+  echo 'Removing ndenv and moving node installs'
+
+  mkdir -p .asdf/installs
+  mv .ndenv/versions .asdf/installs/nodejs
+  pushd $!
+  for ver in *; do
+    asdf reshim nodejs $ver
+  done
+  popd
+
+  if [ -f .ndenv/version ]; then
+    echo "nodejs $(cat .ndenv/version)" >> .tool-versions
+  fi
+
+  rm -rf .ndenv
+fi
