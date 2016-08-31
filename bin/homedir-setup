@@ -47,6 +47,7 @@ done
 # Transition older stuff to asdf
 if [ -d .rbenv ]; then
   echo 'Removing rbenv and moving ruby installs'
+  echo 'bin/* in each version dir needs all shebang lines fixed'
 
   if [ -d .rbenv/versions ]; then
     mkdir -p .asdf/installs
