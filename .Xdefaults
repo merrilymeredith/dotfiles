@@ -23,7 +23,7 @@ XTerm*metaSendsEscape: true
 
 XTerm*foreground: #DFDFDF
 XTerm*background: #070707
-XTerm*faceName: monospace:size=12
+XTerm*faceName: monospace:size=10
 XTerm*saveLines: 1000
 XTerm*VT100.geometry: 120x40
 
