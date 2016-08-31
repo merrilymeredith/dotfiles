@@ -44,21 +44,17 @@ for LANG in ruby nodejs erlang elixir; do
   fi
 done
 
-set +eu
-. .asdf/asdf.sh
-set -eu
-
 # Transition older stuff to asdf
 if [ -d .rbenv ]; then
   echo 'Removing rbenv and moving ruby installs'
 
-  mkdir -p .asdf/installs
-  mv .rbenv/versions .asdf/installs/ruby
-  pushd $!
-  for ver in *; do
-    asdf reshim ruby $ver
-  done
-  popd
+  if [ -d .rbenv/versions ]; then
+    mkdir -p .asdf/installs
+    mv .rbenv/versions .asdf/installs/ruby
+    for ver in .asdf/installs/ruby/*; do
+      bash -c "asdf reshim ruby $(basename $ver)"
+    done
+  fi
 
   if [ -f .rbenv/version ]; then
     echo "ruby $(cat .rbenv/version)" >> .tool-versions
@@ -70,13 +66,13 @@ fi
 if [ -d .ndenv ]; then
   echo 'Removing ndenv and moving node installs'
 
-  mkdir -p .asdf/installs
-  mv .ndenv/versions .asdf/installs/nodejs
-  pushd $!
-  for ver in *; do
-    asdf reshim nodejs $ver
-  done
-  popd
+  if [ -d .ndenv/versions ]; then
+    mkdir -p .asdf/installs
+    mv .ndenv/versions .asdf/installs/nodejs
+    for ver in .asdf/installs/nodejs/*; do
+      bash -c "asdf reshim nodejs $(basename $ver)"
+    done
+  fi
 
   if [ -f .ndenv/version ]; then
     echo "nodejs $(cat .ndenv/version)" >> .tool-versions
