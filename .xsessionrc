@@ -4,6 +4,9 @@ if [ "$(uname -s)" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
 fi
 
+hsetroot -solid "#002244" &>/dev/null || \
+  xsetroot -def -solid "#002244"
+
 xcompmgr -n &>/dev/null </dev/null &
 
 xmodmap ~/.xmodmaprc
