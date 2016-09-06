@@ -38,6 +38,7 @@ set wait_key        = no
 
 set send_charset    = "utf-8"
 set text_flowed     = yes
+set mime_forward    = yes
 
 set reverse_name    = yes
 set envelope_from   = yes
