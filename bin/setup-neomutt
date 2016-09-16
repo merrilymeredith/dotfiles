@@ -16,14 +16,20 @@ fi
 
 cd sandbox/neomutt
 
-./prepare \
+case "$OSTYPE" in
+  darwin*)
+    # Use macports' headers
+    OPENSSL_PREFIX=/opt/local
+    ;;
+esac
+
+./prepare -q \
  --with-homespool=/var/spool/mail \
- --enable-quick-build \
- --with-ssl --with-sasl \
+ --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
+ --with-sasl \
  --enable-hcache \
  --enable-imap --enable-smtp \
- --with-regex \
-  >/dev/null
+ --with-regex
 
 make -s -j3
 
