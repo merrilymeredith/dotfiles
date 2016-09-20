@@ -16,7 +16,7 @@ fi
 
 cd sandbox/neomutt
 
-case "$OSTYPE" in
+case "${OSTYPE:-}" in
   darwin*)
     # Use macports' headers
     OPENSSL_PREFIX=/opt/local
