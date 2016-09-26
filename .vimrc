@@ -7,7 +7,7 @@ let on_windows=0
 if has('win32') || has('win64') 
   " vim in cygwin has win32 = 0 and win32unix = 1
   let on_windows=1
-end
+endif
 
 " Set up Vundle and plugins  {{{
   let installed_vundle=0
@@ -307,13 +307,24 @@ set autowriteall
 if has('persistent_undo')
   set undofile
   set undodir=$MYVIM/var/undo//,.
-end
+endif
 " }}}
 
 
 " Autocmds  {{{
+function! AutoSessionConfig()
+  if strlen(v:servername) > 0
+    let g:unite_source_session_default_session_name = tolower(v:servername)
+    let g:unite_source_session_enable_auto_save = 1
+
+    UniteSessionLoad
+  endif
+endfunction
+
 augroup vimrc
   autocmd!
+
+  autocmd VimEnter * call AutoSessionConfig()
 
   autocmd FocusLost * silent! wa
 
@@ -477,14 +488,13 @@ if has('gui_running')
   if on_windows == 1
     " generally have a tiling wm on linux
     set columns=120 lines=40
-  end
+  endif
 
   colorscheme jellybeans
 else
-
   if $TERM =~ 'screen'
     if $TERM == 'screen-bce'
-      "if i'm not screen-bce, i'm not sure i have a good .screenrc in place
+      " if i'm not screen-bce, i'm not sure i have a good .screenrc in place
       set t_Co=256
     endif
 
@@ -500,7 +510,7 @@ else
 
   if &t_Co == 256
     colorscheme jellybeans
-  end
+  endif
+endif
 
-end
 
