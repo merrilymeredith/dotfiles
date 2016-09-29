@@ -3,7 +3,7 @@
 if (document.querySelector('div.story_content')) {
   var sheet = document.createElement('style')
   sheet.innerHTML = "\
-    li.story { height: 7.5em; } \
+    ol.list li.story { height: 7.5em; } \
     li.story div.byline { color: #777; } \
     li.story div.byline a { color: #777; } \
     li.story div.story_content { color: #999; font-size: 95%; }"
