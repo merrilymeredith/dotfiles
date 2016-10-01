@@ -218,8 +218,13 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-set formatoptions=cqljn1
+set formatoptions=cqln1
 set backspace=indent,eol,start
+
+if has('patch-7.3-541')
+  " Can unwrap this once I don't have to deal with ubuntu 12.04
+  set formatoptions+=j
+endif
 
 " set number
 set scrolloff=10
