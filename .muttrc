@@ -101,10 +101,10 @@ set index_format  = "%2C %Z %D  %-25.25F  %s"
 set status_format = " %r Mutt: %f [N:%n%?d? D:%d?%?t? *:%t?] %>- (%s/%S) %P"
 
 ignore *
-unignore from date subject to cc
-unignore organization organisation x-mailing-list: posted-to:
+unignore from to cc date subject
+unignore list-id posted-to
 
-hdr_order subject from to cc date
+hdr_order from to cc date subject
 
 # jellybeans-ish
 color attachment color162 color233
