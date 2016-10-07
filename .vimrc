@@ -88,6 +88,8 @@ endif
   Plugin 'vim-perl/vim-perl'
   Plugin 'sheerun/vim-polyglot'
   Plugin 'yko/mojo.vim'
+  Plugin 'slashmili/alchemist.vim'
+  Plugin 'nathangrigg/vim-beancount'
 
   let g:no_viewdoc_maps = 1
   Plugin 'powerman/vim-plugin-viewdoc'
