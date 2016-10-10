@@ -374,6 +374,7 @@ let perl_sync_dist = 200
 ">> Viewdoc
 let g:viewdoc_open = 'new'
 let g:viewdoc_perldoc_format = 'ansi'
+let g:viewdoc_winwidth_max = 100
 
 ">> Gundo
 " I prefer python3 on windows if I have to use it. Needs a dll in path.
