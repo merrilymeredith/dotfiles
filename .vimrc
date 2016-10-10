@@ -347,6 +347,15 @@ augroup vimrc
   autocmd BufLeave *.js                normal! mJ
   autocmd BufLeave *.pl,*.pm           normal! mP
 augroup END
+
+" https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
+augroup encrypted
+  autocmd!
+  autocmd BufReadPre,FileReadPre *.gpg set noswapfile noundofile nobackup viminfo=
+  autocmd BufReadPost *.gpg :%!gpg --decrypt 2> /dev/null
+  autocmd BufWritePre *.gpg :%!gpg -se -a --default-recipient-self
+  autocmd BufWritePost *.gpg u
+augroup END
 "}}}
 
 
