@@ -1,2 +1,2 @@
 #!/bin/sh
-exec vim -c 'set noswapfile noundofile nobackup' $*
+exec vim -c 'set noswapfile noundofile nobackup viminfo=' $*
