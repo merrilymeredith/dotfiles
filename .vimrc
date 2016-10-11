@@ -226,7 +226,7 @@ if has('patch-7.3-541')
 endif
 
 " set number
-set scrolloff=10
+set scrolloff=15
 set ruler
 set showcmd
 set wildmenu
@@ -346,6 +346,12 @@ augroup vimrc
   autocmd BufLeave *.html,*.ep,*.tt    normal! mH
   autocmd BufLeave *.js                normal! mJ
   autocmd BufLeave *.pl,*.pm           normal! mP
+
+  " Jump to last known pos
+  autocmd BufReadPost *
+    \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 augroup END
 
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
@@ -480,6 +486,14 @@ let g:neocomplcache_filename_include_exprs.perl = 'fnamemodify(substitute(v:fnam
 
 " }}}
 
+
+" {{{ Commands
+if !exists(":DiffOrig")
+  " Diff unsaved buffer
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+" }}}
 
 " Local stuff, finish up
 try
