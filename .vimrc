@@ -155,10 +155,6 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" Prefer using regexes like in perl code.
-map / /\v
-map ? ?\v
-
 " navigate by on-screen lines
 map j gj
 map k gk
@@ -198,6 +194,7 @@ filetype plugin indent on
 
 set encoding=utf-8
 
+set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -233,6 +230,9 @@ set scrolloff=10
 set ruler
 set showcmd
 set wildmenu
+
+set ttimeout
+set ttimeoutlen=200
 
 set tags+=.tags
 
@@ -320,7 +320,7 @@ endif
 
 " Autocmds  {{{
 function! AutoSessionConfig()
-  if strlen(v:servername) > 0
+  if strlen(v:servername) > 0 && match(v:servername, '^VIM') == -1
     let g:unite_source_session_default_session_name = tolower(v:servername)
     let g:unite_source_session_enable_auto_save = 1
 
