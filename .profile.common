@@ -1,6 +1,7 @@
 # simple profile stuff that is common to both zsh and bash
 
 export EDITOR=vim
+export LESS=-Ri
 export PERL_CPANM_OPT='-nq --prompt'
 export DEVEL_REPL_PROFILE='Standard'
 
