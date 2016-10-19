@@ -33,7 +33,7 @@ set assumed_charset = "utf-8:iso8859-1"
 set autoedit        = yes
 set edit_headers    = yes
 set editor          = "exec vim"
-set strict_threads  = yes
+set strict_threads  = no
 set wait_key        = no
 
 set send_charset    = "utf-8"
