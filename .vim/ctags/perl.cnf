@@ -1,6 +1,0 @@
---regex-perl=/^\s*fun +([0-9a-zA-Z_]+) *[{(]/\1/s,subroutines/
---regex-perl=/^\s*method +([0-9a-zA-Z_]+) *[{(]/\1/m,methods/
---regex-perl=/(['"]?)([0-9a-zA-Z_]+)\1\s+(,|=>)\s+sub\s+[{(]/\2/s,subroutines/
---regex-perl=/^\s*extends\s+(['"])(.+)\1/\2/e,extends/
---regex-perl=/^\s*with\s+(['"])(.+)\1/\2/r,role/
---regex-perl=/^\s*has\s+['"]?([0-9a-zA-Z_]+)/\1/a,attributes/
