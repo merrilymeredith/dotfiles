@@ -425,7 +425,23 @@ let g:tagbar_type_perl = {
         \ 'l:aliases',
         \ 'd:pod:1:0',
     \ ],
-  \ }
+\ }
+
+let g:tagbar_type_elixir = {
+  \ 'ctagstype' : 'Elixir',
+  \ 'kinds' : [
+    \ 'm:modules:1:0',
+    \ 'r:records',
+    \ 'f:functions',
+    \ 'a:macros',
+    \ 'o:operators',
+    \ 'p:protocols',
+    \ 'i:implementations',
+    \ 'd:delegates',
+    \ 'c:callbacks',
+    \ 'e:exceptions',
+  \ ],
+\ }
 
 
 ">> Unite
