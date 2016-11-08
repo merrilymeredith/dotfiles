@@ -425,6 +425,7 @@ let g:tagbar_type_perl = {
         \ 'l:aliases',
         \ 'd:pod:1:0',
     \ ],
+    \ 'deffile' : '$MYVIM/ctags/perl.cnf'
 \ }
 
 let g:tagbar_type_elixir = {

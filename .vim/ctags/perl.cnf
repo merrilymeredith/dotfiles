@@ -1,0 +1,15 @@
+--langmap=perl:+.pod
+--regex-perl=/^\s*\*([A-Za-z_][A-Za-z0-9:_]+)[ \t]+=/\1/l,alias,aliases/
+--regex-perl=/^\s*our[ \t]+([\$@%][A-Za-z_][A-Za-z0-9_]+)/\1/o,our,ours/
+--regex-perl=/^\s*use[ \t]+constant[ \t]+['"]*([A-Za-z_][A-Za-z0-9_]+)['" \t]*/\1/c,constants/
+--regex-perl=/^\s*with[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/w,role,roles/
+--regex-perl=/^\s*extends[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/e,extends/
+--regex-perl=/^\s*use[ \t]+base[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/e,extends/
+--regex-perl=/^\s*use[ \t]+parent[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/e,extends/
+--regex-perl=/^\s*use[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/u,use,uses/
+--regex-perl=/^\s*require[ \t]+['"]*([A-Za-z][A-Za-z0-9:]+)['" \t]*;/\1/r,require,requires/
+--regex-perl=/^\s*around[ \t]+['"]*([A-Za-z_][A-Za-z0-9_]+)['"]*[ \t]+/\1/x,around/
+--regex-perl=/^\=head1[ \t]+(.+)/- \1/d,pod,Plain Old Documentation/
+--regex-perl=/^\=head2[ \t]+(.+)/-- \1/d,pod,Plain Old Documentation/
+--regex-perl=/^\=head[3-5][ \t]+(.+)/--- \1/d,pod,Plain Old Documentation/
+
