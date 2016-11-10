@@ -236,6 +236,7 @@ set scrolloff=15
 set ruler
 set showcmd
 set wildmenu
+set wildignorecase
 
 set ttimeout
 set ttimeoutlen=200
