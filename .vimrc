@@ -188,7 +188,9 @@ function! AutoFmtToggle()
 endfunction
 
 map <silent> <leader>a :call AutoFmtToggle()<CR>
-map <silent> <leader>s :setl spell!<CR>:setl spell?<CR>
+
+cabbr Q q
+cabbr W w
 "}}}
 
 
