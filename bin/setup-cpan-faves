@@ -20,6 +20,7 @@ Carp::Always
 Proc::InvokeEditor
 B::Keywords
 Term::ReadLine::Gnu
+Class::Refresh
 
 Devel::Confess
 END
