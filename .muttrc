@@ -14,7 +14,14 @@ set imap_check_subscribed = yes
 set imap_keepalive        = 300
 set imap_peek             = no
 set mark_old              = no
+
+set hostname              = `openssl rand -hex 10`
 set ssl_usesystemcerts    = yes
+set ssl_force_tls         = yes
+set ssl_use_sslv2         = no
+set ssl_use_sslv3         = no
+set ssl_use_tlsv1         = no
+set ssl_use_tlsv1_1       = no
 
 set smtp_authenticators = "gssapi:login:plain"
 
@@ -31,6 +38,7 @@ set menu_scroll     = yes
 set mailcap_path    = ~/.mutt/mailcap
 set assumed_charset = "utf-8:iso8859-1"
 set autoedit        = yes
+set user_agent      = no
 set edit_headers    = yes
 set editor          = "exec vim"
 set strict_threads  = no
