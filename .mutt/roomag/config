@@ -11,7 +11,7 @@ set record    = "+Sent"
 set postponed = "+Drafts"
 set trash     = "+Trash"
 
-set smtp_url  = smtps://mhoward@ramdas.roomag.org/
+set smtp_url  = smtp://mhoward@ramdas.roomag.org:587/
 set realname  = "Meredith Howard"
 set from      = "mhoward@roomag.org"
 set signature = ~/.mutt/roomag/signature
