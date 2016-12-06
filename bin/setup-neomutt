@@ -27,7 +27,7 @@ esac
  --with-homespool=/var/spool/mail \
  --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
  --with-sasl \
- --enable-hcache \
+ --with-tokyocabinet \
  --enable-imap --enable-smtp \
  --with-regex
 
