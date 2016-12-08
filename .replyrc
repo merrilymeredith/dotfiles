@@ -1,4 +1,5 @@
 script_line1 = use strict; use warnings; use v5.14; use experimentals;
+script_line2 = require('~/.replyrc.local.pl') if -e '~/.replyrc.local.pl'; ();
 
 [Colors]
 [DataPrinter]
