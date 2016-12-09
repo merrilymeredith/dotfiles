@@ -28,7 +28,6 @@
 	out     = "!git log --pretty=onelinecustom @{u}.."
 	new     = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
 	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
-	ctags   = "!~/.git_helpers/ctags"
 	glog    = log --graph --pretty=onelinecustom
 	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\"' "$@"
 
