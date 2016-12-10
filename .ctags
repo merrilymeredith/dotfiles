@@ -1,9 +1,8 @@
---extra=+q
+--extra=fq
 --exclude=.git
 --exclude=.hg
 --exclude=*min.js
 
---langmap=perl:+.pod
 --regex-perl=/^\s*has[ \t]+['"]*([A-Za-z_+][A-Za-z0-9_]+)['"]*[ \t]+/\1/a,attribute,attributes/
 --regex-perl=/^\s*fun +([0-9a-zA-Z_]+) *[{(]/\1/s,subroutines/
 --regex-perl=/^\s*method +([0-9a-zA-Z_]+) *[{(]/\1/m,methods/
