@@ -1,6 +1,0 @@
-#!/bin/sh
-# in repo .hg/hgrc:
-# [hooks]
-# changegroup = ~/.hg_helpers/hooks/ctags-hook
-export CTAGS_HOOK=1
-~/.hg_helpers/ctags </dev/null >/dev/null 2>&1 &

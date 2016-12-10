@@ -2,17 +2,27 @@
 exit if ENV['CTAGS_SKIP']
 ARGV.each { |o| exec('perldoc', $0) if o.match('help') }
 
-ctags  = 'ctags'
+ctags_bin = ENV['CTAGS_BIN'] || 'ctags'
 
-dir    = `git rev-parse --show-toplevel`.chomp
+if (dir = `git rev-parse --show-toplevel 2>/dev/null`.chomp) != ''
+  list_cmd = 'git ls-files'
+  conf     = "#{dir}/.git/ctags.conf"
+elsif (dir = `hg root 2>/dev/null`.chomp) != ''
+  list_cmd = 'hg stat -Aqn'
+  conf     = "#{dir}/.hg/ctags.conf"
+else
+  abort 'not an hg or git repository'
+end
 
-conf   = "#{dir}/.git/ctags.conf"
 target = "#{dir}/.tags"
 tmp    = "#{dir}/.tags.#{$$}~"
 
 opts   = File.exists?(conf) ? "--options=#{conf}" : ''
 
-sleep 5 if ENV['CTAGS_HOOK']
+if ENV['CTAGS_HOOK']
+  fork and exit
+  sleep 5
+end
 
 open(target, File::RDONLY|File::CREAT, 0644) do |f|
   if ENV['CTAGS_HOOK']
@@ -21,8 +31,8 @@ open(target, File::RDONLY|File::CREAT, 0644) do |f|
   end
 
   system(<<-CMD) or exit $?.exitstatus
-    git ls-files \
-     | #{ctags} --tag-relative -L - -f"#{tmp}" #{opts} \
+    #{list_cmd} \
+     | #{ctags_bin} --tag-relative -L - -f"#{tmp}" #{opts} \
     && mv #{tmp} #{target}
   CMD
 end
@@ -38,7 +48,7 @@ git-ctags - run ctags on git tracked files
 
  git ctags
 
- echo 'CTAGS_HOOK=1 git ctags &' >> .git/hooks/post-checkout
+ echo 'CTAGS_HOOK=1 git ctags' >> .git/hooks/post-checkout
 
  git checkout some/branch
  CTAGS_SKIP=1 git checkout some/branch
@@ -48,12 +58,35 @@ git-ctags - run ctags on git tracked files
 Create a .tags file (target) using git's list of tracked files.  If
 C<.git/ctags.conf> exists in the repo it is passed to the ctags invocation.
 
-When run w/o env, immediately run ctags and replace tags file.
+When run with C<CTAGS_HOOK> set, additional behavior is enabled to avoid excess
+re-runs during multiple VCS operations, and the work is moved to background as
+well.
 
-When run with C<CTAGS_HOOK>, it's assumed to be a BG process and we want to
-wait for git to be done applying changes no matter how the hook is triggered.
-Wait five seconds, then bail if we can't get a lock on the tags file or if it's
-been updated within the last minute. Only then, run ctags and replace the tags
-file.
+=head2 Mercurial
+
+Mercurial repositories are supported too, with git taking priority when finding
+a repo root.  To add a hook, in the repository C<.hg/hgrc>, add:
+
+ [hooks]
+ update = CTAGS_HOOK=1 git ctags
+
+In a Mercurial repo, additional options can be put in C<.hg/ctags.conf>.
+
+=head1 ENVIRONMENT
+
+=head2 CTAGS_SKIP
+
+If true, exit immediately.
+
+=head2 CTAGS_HOOK
+
+If true, run as a VCS hook.  This causes git-ctags to fork and exit, wait five
+seconds, then try to lock and update the tags file if it hasn't been updated in
+the last minute.
+
+=head2 CTAGS_BIN
+
+If set, use this to invoke ctags rather than assuming C<ctags> can be found in
+path.
 
 =cut
