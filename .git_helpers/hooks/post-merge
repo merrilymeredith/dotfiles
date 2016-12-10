@@ -1,5 +1,3 @@
 #!/bin/sh
 export PATH=/opt/local/bin:${PATH}
-export CTAGS_HOOK=1
-
-git ctags >/dev/null 2>&1 </dev/null &
+CTAGS_HOOK=1 git ctags 2>&1
