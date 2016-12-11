@@ -1,8 +1,14 @@
 #!/usr/bin/env ruby
 exit if ENV['CTAGS_SKIP']
-ARGV.each { |o| exec('perldoc', $0) if o.match('help') }
+running_hook = ENV['CTAGS_HOOK'] || false
+ctags_cmd    = ENV['CTAGS_CMD']  || 'ctags'
 
-ctags_bin = ENV['CTAGS_BIN'] || 'ctags'
+case ARGV[0]
+when 'help'
+  exec 'perldoc', $0
+when 'hook'
+  running_hook = true
+end
 
 if (dir = `git rev-parse --show-toplevel 2>/dev/null`.chomp) != ''
   list_cmd = 'git ls-files'
@@ -16,30 +22,29 @@ end
 
 target = "#{dir}/.tags"
 tmp    = "#{dir}/.tags.#{$$}~"
-
 opts   = File.exists?(conf) ? "--options=#{conf}" : ''
 
-if ENV['CTAGS_HOOK']
+if running_hook
   fork and exit
   sleep 5
 end
 
 open(target, File::RDONLY|File::CREAT, 0644) do |f|
-  if ENV['CTAGS_HOOK']
+  if running_hook
     exit unless f.flock(File::LOCK_EX|File::LOCK_NB)
     exit unless (Time.now - f.mtime) > 60
   end
 
   system(<<-CMD) or exit $?.exitstatus
     #{list_cmd} \
-     | #{ctags_bin} --tag-relative -L - -f"#{tmp}" #{opts} \
+     | #{ctags_cmd} --tag-relative -L - -f"#{tmp}" #{opts} \
     && mv #{tmp} #{target}
   CMD
 end
 
 exit 0
 
-<<'=cut'
+__END__
 =head1 NAME
 
 git-ctags - run ctags on git tracked files
@@ -48,7 +53,7 @@ git-ctags - run ctags on git tracked files
 
  git ctags
 
- echo 'CTAGS_HOOK=1 git ctags' >> .git/hooks/post-checkout
+ echo 'git ctags hook 2>/dev/null' >> .git/hooks/post-checkout
 
  git checkout some/branch
  CTAGS_SKIP=1 git checkout some/branch
@@ -58,9 +63,9 @@ git-ctags - run ctags on git tracked files
 Create a .tags file (target) using git's list of tracked files.  If
 C<.git/ctags.conf> exists in the repo it is passed to the ctags invocation.
 
-When run with C<CTAGS_HOOK> set, additional behavior is enabled to avoid excess
-re-runs during multiple VCS operations, and the work is moved to background as
-well.
+When run with the C<hook> argument or C<CTAGS_HOOK> set, additional behavior is
+enabled to avoid excess re-runs during multiple VCS operations, and the work is
+moved to background as well.
 
 =head2 Mercurial
 
@@ -68,7 +73,7 @@ Mercurial repositories are supported too, with git taking priority when finding
 a repo root.  To add a hook, in the repository C<.hg/hgrc>, add:
 
  [hooks]
- update = CTAGS_HOOK=1 git ctags
+ update = git ctags hook
 
 In a Mercurial repo, additional options can be put in C<.hg/ctags.conf>.
 
@@ -76,17 +81,17 @@ In a Mercurial repo, additional options can be put in C<.hg/ctags.conf>.
 
 =head2 CTAGS_SKIP
 
-If true, exit immediately.
+If defined, exit immediately.
 
 =head2 CTAGS_HOOK
 
-If true, run as a VCS hook.  This causes git-ctags to fork and exit, wait five
+If defined, run as a VCS hook.  This causes git-ctags to fork and exit, wait five
 seconds, then try to lock and update the tags file if it hasn't been updated in
 the last minute.
 
-=head2 CTAGS_BIN
+=head2 CTAGS_CMD
 
-If set, use this to invoke ctags rather than assuming C<ctags> can be found in
+If defined, use this to invoke ctags rather than assuming C<ctags> can be found in
 path.
 
 =cut
