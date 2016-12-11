@@ -5,7 +5,7 @@ ctags_cmd    = ENV['CTAGS_CMD']  || 'ctags'
 
 case ARGV[0]
 when 'help'
-  exec 'perldoc', $0
+  exec 'perldoc', '-T', $0
 when 'hook'
   running_hook = true
 end

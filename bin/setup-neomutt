@@ -2,7 +2,7 @@
 set -eu
 
 case ${1:-} in *help|-h)
-  exec perldoc $0;;
+  exec perldoc -T $0;;
 esac
 
 cd
@@ -38,15 +38,15 @@ for BIN in mutt mutt_dotlock pgpewrap; do
   ln -sf ../sandbox/neomutt/$BIN
 done
 
-
 :<<=cut
 =head1 NAME
 
-setup-neomutt - clone/update, build, and link neomutt
+setup-neomutt - Clone/update and build neomutt
 
 =head1 DESCRIPTION
 
-Run to do the above.
+Run to do the above, incl. symlinking relevant binaries in C<~/bin> to the
+neomutt build.
 
 =head1 REQUIREMENTS
 
