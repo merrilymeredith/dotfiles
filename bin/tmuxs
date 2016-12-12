@@ -1,0 +1,32 @@
+#!/bin/sh
+set -eu
+
+case ${1:-} in *help|-h)
+  exec perldoc -T $0;;
+esac
+
+name=${1:-$(basename `pwd`)}
+
+if tmux ls -F '#S' | grep -x $name >/dev/null; then
+  if [[ ${TMUX:-} ]]; then
+    exec tmux switch-client -t $name
+  else
+    exec tmux attach -t $name
+  fi
+else
+  exec tmux new -s $name
+fi
+
+:<<=cut
+=head1 NAME
+
+tmuxs - Start or attach session based on cwd or given name
+
+=head1 SYNOPSIS
+
+ tmuxs foobaz
+
+ cd ~/proj/quux
+ tmuxs
+
+=cut
