@@ -74,7 +74,7 @@ endif
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
 
-  Plugin 'vimoutliner/vimoutliner'
+  Plugin 'vimwiki/vimwiki'
 
   Plugin 'Shougo/neocomplcache.vim'
   Plugin 'c9s/perlomni.vim'
@@ -397,6 +397,10 @@ let perl_sync_dist = 200
 
 
 " Plugin settings  {{{
+
+">> Vimwiki
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_tags': 1, 'auto_toc': 1}]
+let g:vimwiki_use_mouse = 1
 
 ">> Viewdoc
 let g:viewdoc_open = 'new'
