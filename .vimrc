@@ -571,13 +571,22 @@ if has('gui_running')
 
   colorscheme jellybeans
 else
-  if $TERM =~ 'screen'
+  if $TERM =~ '^screen'
     if $TERM == 'screen-bce'
-      " if i'm not screen-bce, i'm not sure i have a good .screenrc in place
       set t_Co=256
     endif
 
     set mouse=a
+  endif
+
+  " vertical bar in insert mode.
+  if &term =~ '^\(xterm\|screen\|rxvt\)'
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[0 q"
+    if exists("$TMUX")
+      let &t_SI = "\ePtmux;" . substitute(&t_SI, "\e", "\e\e", 'g') . "\e\\"
+      let &t_EI = "\ePtmux;" . substitute(&t_EI, "\e", "\e\e", 'g') . "\e\\"
+    endif
   endif
 
   if $TERM =~ 'rxvt-unicode'
