@@ -206,7 +206,7 @@ set ignorecase
 set smartcase
 
 if has('gui_running') || $LANG =~ 'UTF-8'
-  set listchars=tab:⇥·,trail:◾,nbsp:◻
+  set listchars=tab:⇥·,trail:◼,nbsp:◻
   " eol:↩   not as useful as trail i think
   set fillchars=fold:∷,vert:│
 endif
