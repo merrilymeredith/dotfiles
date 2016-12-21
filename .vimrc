@@ -231,6 +231,7 @@ if has('patch-7.3-541')
   set formatoptions+=j
 endif
 
+set splitright splitbelow
 set scrolloff=15
 set sidescrolloff=10
 set ruler
