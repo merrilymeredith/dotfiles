@@ -305,13 +305,13 @@ endif
 if on_windows == 1
   set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
   set linespace=0
+elseif has('osx')
+  set guifont=DejaVu\ Sans\ Mono:h11
 else
   set guifont=DejaVu\ Sans\ Mono\ 10
 endif
 
-set guioptions-=T    "disable toolbar and menu
-set guioptions-=m
-set guioptions-=t    "disable tearoffs
+set guioptions-=Tmt   "no toolbar, menu, tearoffs
 
 set backupdir=$MYVIM/var/backup//,.
 set directory=$MYVIM/var/tmp//,.
@@ -569,7 +569,6 @@ if has('gui_running')
   set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
 
   if on_windows == 1
-    " generally have a tiling wm on linux
     set columns=120 lines=40
   endif
 
