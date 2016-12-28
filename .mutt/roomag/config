@@ -6,7 +6,7 @@ unlists *
 source "gpg2 -d ~/.mutt/roomag/private.gpg |"
 
 set folder    = imaps://mhoward@ramdas.roomag.org/
-set spoolfile = "+INBOX"
+set spoolfile = "+Virtual.Mailbox"
 set record    = "+Sent"
 set postponed = "+Drafts"
 set trash     = "+Trash"
