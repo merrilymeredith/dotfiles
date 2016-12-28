@@ -11,9 +11,9 @@ if ! git --version >/dev/null; then
   exit 1
 fi
 
-pull () {
+pull() {
   echo "$1:"
-  git -C $1 pull --no-tags
+  git -C "$1" pull --no-tags
 }
 
 if ! [ -d .zgen ]; then
@@ -44,40 +44,11 @@ for LANG in ruby nodejs erlang elixir; do
   fi
 done
 
-# Transition older stuff to asdf
+# Get rid of older stuff
 if [ -d .rbenv ]; then
-  echo 'Removing rbenv and moving ruby installs'
-  echo 'bin/* in each version dir needs all shebang lines fixed'
-
-  if [ -d .rbenv/versions ]; then
-    mkdir -p .asdf/installs
-    mv .rbenv/versions .asdf/installs/ruby
-    for ver in .asdf/installs/ruby/*; do
-      bash -c "asdf reshim ruby $(basename $ver)"
-    done
-  fi
-
-  if [ -f .rbenv/version ]; then
-    echo "ruby $(cat .rbenv/version)" >> .tool-versions
-  fi
-
-  rm -rf .rbenv
+  echo 'rbenv is still installed' >&2
 fi
 
 if [ -d .ndenv ]; then
-  echo 'Removing ndenv and moving node installs'
-
-  if [ -d .ndenv/versions ]; then
-    mkdir -p .asdf/installs
-    mv .ndenv/versions .asdf/installs/nodejs
-    for ver in .asdf/installs/nodejs/*; do
-      bash -c "asdf reshim nodejs $(basename $ver)"
-    done
-  fi
-
-  if [ -f .ndenv/version ]; then
-    echo "nodejs $(cat .ndenv/version)" >> .tool-versions
-  fi
-
-  rm -rf .ndenv
+  echo 'ndenv is still installed' >&2
 fi
