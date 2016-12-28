@@ -407,7 +407,7 @@ let g:vimwiki_list = [
 let g:vimwiki_use_mouse = 1
 
 ">> Viewdoc
-let g:viewdoc_open = 'new'
+let g:viewdoc_open = 'topleft new'
 let g:viewdoc_perldoc_format = 'ansi'
 let g:viewdoc_winwidth_max = 100
 
