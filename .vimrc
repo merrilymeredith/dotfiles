@@ -312,7 +312,9 @@ else
   set guifont=DejaVu\ Sans\ Mono\ 10
 endif
 
-set guioptions-=Tmt   "no toolbar, menu, tearoffs
+set guioptions-=T "no toolbar, menu, tearoffs
+set guioptions-=m
+set guioptions-=t
 
 set backupdir=$MYVIM/var/backup//,.
 set directory=$MYVIM/var/tmp//,.
