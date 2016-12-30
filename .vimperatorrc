@@ -1,13 +1,18 @@
-"3.10.1 (created: 2015/08/25 00:41:59)
-
 set complete=sl
-
-source! ~/_vimperatorrc.local
 
 style browser .tab-close-button{ display: none; }
 
 nmap q <Nop>
-nmap s tgoogle 
-nmap S :winopen -private google 
+nmap s tddg 
+nmap S :winopen -private ddg 
+
+javascript <<EOJ
+  (function() {
+    var ddg = Services.search.getEngineByName('DuckDuckGo');
+    if (ddg) ddg.alias = 'ddg';
+  })();
+EOJ
+
+source! ~/.vimperatorrc.local
 
 " vim: set ft=vimperator:
