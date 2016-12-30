@@ -175,7 +175,7 @@ nmap gKK :call ViewDoc('doc', expand('%'))<CR>
 " Tabular shortcuts
 map <leader>ta :Tabularize first_arrow<CR>
 map <leader>te :Tabularize first_eq<CR>
-map <leader>tc :Tabularize /:\zs<CR>
+map <leader>tc :Tabularize first_colon<CR>
 map <leader>tm :Tabularize methods<CR>
 
 function! AutoFmtToggle()
