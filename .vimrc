@@ -352,12 +352,6 @@ augroup vimrc
   " double-click to edit
   autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
-  " Set file marks by "category" on switch-away
-  autocmd BufLeave *.css,*,less,*.scss normal! mC
-  autocmd BufLeave *.html,*.ep,*.tt    normal! mH
-  autocmd BufLeave *.js                normal! mJ
-  autocmd BufLeave *.pl,*.pm           normal! mP
-
   " Jump to last known pos
   autocmd BufReadPost *
     \ if &filetype != 'mail' && line("'\"") >= 1 && line("'\"") <= line("$") |
