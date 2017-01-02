@@ -96,23 +96,14 @@ let s:filename=expand('<sfile>')
 
 " Key maps {{{
 
-" F1 - Unite to switch buffers
 nmap <silent> <F1> :Unite buffer<CR>
-" S-F1 - Unite to switch windows or tabs
-nmap <silent> <S-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
+nmap <silent> <C-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <A-F1> :Unite session<CR>
 nmap <silent> <F2> :VimFilerExplorer<CR>
+nmap <silent> <C-F2> :Unite -start-insert file_rec/async:!<CR>
 map  <silent> <F4> :noh<CR>
 nmap <silent> <F5> :GundoToggle<CR>
 nmap <silent> <F8> :TagbarToggle<CR>
-
-" This is supposed to get a CtrlP workalike with fuzzy match but i need to fix
-" ignores and always chdir to a good place
-if s:on_windows == 1
-  nmap <silent> <S-F2> :Unite -start-insert file_rec:!<CR>
-else
-  nmap <silent> <S-F2> :Unite -start-insert file_rec/async:!<CR>
-endif
 
 " stop opening help by mistake
 imap <F1> <ESC>
@@ -446,7 +437,6 @@ let g:tagbar_type_elixir = {
 ">> Unite
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-" let g:unite_source_history_yank_enable = 1
 
 call unite#custom#profile('default', 'context', {'winheight': 10})
 
@@ -454,7 +444,10 @@ if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
+  
+  let g:unite_source_rec_async_command = ['ag', '-f', '--nocolor', '--nogroup', '-g', '']
 endif
+
 
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
