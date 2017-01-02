@@ -3,48 +3,35 @@
 
 set nocompatible
 
-let on_windows=0
-if has('win32') || has('win64') 
-  " vim in cygwin has win32 = 0 and win32unix = 1
-  let on_windows=1
-endif
+" on windows and not cygwin
+let s:on_windows=(has('win32') || has('win64'))
+let s:filename=expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
-  let installed_vundle=0
+  let s:installed_vundle=0
 
-  if on_windows == 0
-    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-  else
-    let vundle_readme=expand('~/vimfiles/bundle/vundle/README.md')
-  endif
+  let s:vundle_readme=expand(s:on_windows
+    \ ? '~/vimfiles/bundle/vundle/README.md'
+    \ : '~/.vim/bundle/vundle/README.md')
 
-  if !filereadable(vundle_readme)
+  if !filereadable(s:vundle_readme)
     if !executable('git')
       echo "You probably want git installed and in PATH."
-      if on_windows == 1
-        echo " http://chocolatey.org "
-      endif
       quit
     endif
 
-    let installed_vundle=1
-    if on_windows == 0
-      echo "Installing Vundle..."
-      echo ""
+    echo "Installing Vundle and Plugins...\n"
+    if s:on_windows == 0
       silent !mkdir -p ~/.vim/bundle
       silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     else
-      echo "Installing Vundle and Plugins..."
-      " This happens in a series of minimized cmd windows rather than the cool
-      " progress display we normally get.
-
-      " Also windows is weird about args and quoting:
       silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
       silent execute '!git clone https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
     endif
+    let s:installed_vundle=1
   endif
 
-  if on_windows == 0
+  if s:on_windows == 0
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
   else
@@ -96,24 +83,13 @@ endif
   Plugin 'powerman/vim-plugin-AnsiEsc'
 
   try
-    if on_windows == 1
-      source ~/_vimrc.local-pre
-    else
-      source ~/.vimrc.local-pre
-    endif
+    execute 'source ' . s:filename . '.local-pre'
   catch
   endtry
 
-  if installed_vundle == 1
-    echo "Installing Plugins, please ignore key map error messages"
-    echo ""
-    :PluginInstall
-    if on_windows == 1
-      " Windows build just isn't there with exec $0, so we already have some
-      " odd errors and get a weird UI at the end.
-      echo "Please restart vim to continue with plugins installed."
-      quit
-    endif
+  if s:installed_vundle == 1
+    echo "Installing Plugins, please ignore key map error messages\n"
+    call PluginInstall
   endif
 " }}}
 
@@ -132,7 +108,7 @@ nmap <silent> <F8> :TagbarToggle<CR>
 
 " This is supposed to get a CtrlP workalike with fuzzy match but i need to fix
 " ignores and always chdir to a good place
-if on_windows == 1
+if s:on_windows == 1
   nmap <silent> <S-F2> :Unite -start-insert file_rec:!<CR>
 else
   nmap <silent> <S-F2> :Unite -start-insert file_rec/async:!<CR>
@@ -168,8 +144,7 @@ nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 nnoremap <silent> <leader>gt :SignifyToggle<CR>
 
 " K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
-nmap K   :call ViewDoc('doc', '<cword>')<CR>
-nmap gK  :call ViewDoc('doc', expand('<cword>'))<CR>
+nmap K   :call ViewDoc('doc', expand('<cword>'))<CR>
 nmap gKK :call ViewDoc('doc', expand('%'))<CR>
 
 " Tabular shortcuts
@@ -247,7 +222,7 @@ set tags+=.tags
 
 " Ignore compiled files and repositories
 set wildignore=*.o,*~,*.pyc
-if on_windows == 1
+if s:on_windows == 1
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 else
     set wildignore+=.git\*,.hg\*,.svn\*
@@ -272,7 +247,7 @@ set sessionoptions=buffers,curdir,localoptions
 "set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
 set laststatus=2
 
-if on_windows == 1
+if s:on_windows == 1
   let $MYVIM=$HOME.'/vimfiles'
 
   if !filewritable( $MYVIM . '/var' )
@@ -303,7 +278,7 @@ else
 
 endif
 
-if on_windows == 1
+if s:on_windows == 1
   set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
   set linespace=0
 elseif has('osx')
@@ -342,23 +317,24 @@ endfunction
 augroup vimrc
   autocmd!
 
-  autocmd VimEnter * call AutoSessionConfig()
+  " set and load a session based on servername
+  autocmd VimEnter  * call AutoSessionConfig()
 
+  " complement to autowriteall
   autocmd FocusLost * silent! wa
-
-  " preload templates into new buffers by file extension
-  "autocmd BufNewFile * silent! 0r $MYVIM/templates/%:e.template
-
-  " double-click to edit
-  autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
   " Jump to last known pos
   autocmd BufReadPost *
     \ if &filetype != 'mail' && line("'\"") >= 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
+
+  " double-click to edit in vimfiler
+  autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+
 augroup END
 
+" Make paths when writing, as necessary
 function! s:MkNonExDir(file, buf)
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
     let dir=fnamemodify(a:file, ':h')
@@ -410,13 +386,13 @@ let g:viewdoc_winwidth_max = 100
 
 ">> Gundo
 " I prefer python3 on windows if I have to use it. Needs a dll in path.
-if on_windows == 1
+if s:on_windows == 1
   let g:gundo_prefer_python3=1
 endif
 
 
 ">> Tagbar
-if on_windows == 1
+if s:on_windows == 1
   if executable('ctags') == 0
     " if i haven't installed from chocolatey...
     let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
@@ -546,11 +522,7 @@ endif
 
 " Local stuff, finish up
 try
-  if on_windows == 1
-    source ~/_vimrc.local
-  else
-    source ~/.vimrc.local
-  endif
+  execute 'source ' . s:filename . '.local'
 catch
 endtry
 
@@ -565,7 +537,7 @@ if has('gui_running')
 
   set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
 
-  if on_windows == 1
+  if s:on_windows == 1
     set columns=120 lines=40
   endif
 
