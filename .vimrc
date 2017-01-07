@@ -41,7 +41,6 @@ let s:filename=expand('<sfile>')
 
   Plugin 'gmarik/vundle'
 
-  Plugin 'altercation/vim-colors-solarized'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'bling/vim-bufferline'
