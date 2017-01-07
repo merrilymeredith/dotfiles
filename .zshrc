@@ -49,6 +49,8 @@ setopt interactive_comments
 
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
+bindkey '\e\e' kill-whole-line
+
 source ~/.profile.common
 
 for envthing in $envthings; do
