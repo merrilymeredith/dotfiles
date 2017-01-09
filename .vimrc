@@ -143,17 +143,7 @@ map <leader>te :Tabularize first_eq<CR>
 map <leader>tc :Tabularize first_colon<CR>
 map <leader>tm :Tabularize methods<CR>
 
-function! AutoFmtToggle()
-  if &formatoptions =~ 'a'
-    setl fo-=a
-    echo '-a'
-  else
-    setl fo+=a
-    echo '+a'
-  endif
-endfunction
-
-map <silent> <leader>a :call AutoFmtToggle()<CR>
+map <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
 cabbr Q q
 cabbr W w
@@ -325,18 +315,9 @@ augroup vimrc
 augroup END
 
 " Make paths when writing, as necessary
-function! s:MkNonExDir(file, buf)
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
-    if !isdirectory(dir)
-      call mkdir(dir, 'p')
-    endif
-  endif
-endfunction
-
 augroup AutoMkdir
   autocmd!
-  autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+  autocmd BufWritePre * :call vimrc#MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
@@ -564,5 +545,4 @@ else
     colorscheme jellybeans
   endif
 endif
-
 
