@@ -2,6 +2,7 @@ set complete=sl
 
 style browser .tab-close-button{ display: none; }
 
+nmap <F4> :noh<CR>
 nmap q <Nop>
 nmap s tddg 
 nmap S :winopen -private ddg 
