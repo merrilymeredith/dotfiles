@@ -7,20 +7,20 @@ esac
 
 name=${1:-$(basename `pwd`)}
 
-if tmux ls -F '#S' | grep -x $name >/dev/null; then
-  if [[ ${TMUX:-} ]]; then
-    exec tmux switch-client -t $name
-  else
-    exec tmux attach -t $name
-  fi
+if ! tmux has-session -t "$name" 2>/dev/null; then
+  tmux new -d -s "$name"
+fi
+
+if [ -n "${TMUX:-}" ]; then
+  exec tmux switch-client -t "$name"
 else
-  exec tmux new -s $name
+  exec tmux attach -t "$name"
 fi
 
 :<<=cut
 =head1 NAME
 
-tmuxs - Start or attach session based on cwd or given name
+tmuxs - tmux session
 
 =head1 SYNOPSIS
 
@@ -28,5 +28,11 @@ tmuxs - Start or attach session based on cwd or given name
 
  cd ~/proj/quux
  tmuxs
+ # aka: tmuxs quux
+
+=head1 DESCRIPTION
+
+tmuxs attaches or switches to a session of the given name, or the cwd's name,
+creating it if necessary.
 
 =cut
