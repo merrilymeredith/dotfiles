@@ -2,7 +2,7 @@ set complete=sl
 
 style browser .tab-close-button{ display: none; }
 
-command reader execute "open about:reader?url=" + content.location.href
+command! reader execute "open about:reader?url=" + content.location.href
 
 nmap <F1> <Nop>
 nmap <F4> :noh<CR>
