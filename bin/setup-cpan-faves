@@ -23,4 +23,7 @@ Term::ReadLine::Gnu
 Class::Refresh
 
 Devel::Confess
+
+Path::Tiny
+Getopt::Long::Descriptive
 END
