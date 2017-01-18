@@ -19,7 +19,8 @@ sub main {
       }
     ],
     ['age|a=i' => "minimum age in days for archival", {default => 60}],
-    ['yes|y'   => "actually move files"],
+    ['files|f' => "operate on plain files only"],
+    ['yes|y'   => "actually move stuff"],
     ['help|h'  => "print usage message and exit", {shortcircuit => 1}],
   );
   print($usage->text), exit if $opt->help;
@@ -37,7 +38,10 @@ sub archive_dir {
   my $age     = $opt->age * 24 * 60 * 60;
 
   for my $child ($dir->children) {
-    next if $child->is_dir && ($child eq $destdir || $child =~ /^(?:\d{4}|\d\d)$/);
+    next if $child->is_dir && (
+      $opt->files || $child eq $destdir || $child =~ /^(?:\d{4}|\d\d)$/
+    );
+    next if $opt->files && $child->basename =~ /^\./;
 
     my $mtime = $child->stat->mtime;
     next unless ($nowish - $mtime) >= $age;
