@@ -1,0 +1,55 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+use Time::Piece;
+use Path::Tiny;
+use Getopt::Long::Descriptive;
+
+sub main {
+  my ($opt, $usage) = describe_options(
+    'archive-dir %o <directory> ...',
+    ['dest|d=s' => "destination path"],
+    ['subdir'   => hidden => {
+      one_of => [
+        ['year|y'  => 'file by year'],
+        ['month|m' => 'file by month'],
+      ],
+      default => 'year',
+      }
+    ],
+    ['age|a=i' => "minimum age in days for archival", {default => 60}],
+    ['yes|y'   => "actually move files"],
+    ['help|h'  => "print usage message and exit", {shortcircuit => 1}],
+  );
+  print($usage->text), exit if $opt->help;
+
+  archive_dir($opt, $_) for @ARGV;
+}
+
+sub archive_dir {
+  my $opt     = shift;
+  my $dir     = path(shift);
+  my $destdir = path($opt->dest // '.');
+     $destdir = $dir->child($destdir) if $destdir->is_relative;
+  my $destfmt = ($opt->subdir eq 'month') ? '%Y-%m' : '%Y';
+  my $nowish  = time;
+  my $age     = $opt->age * 24 * 60 * 60;
+
+  for my $child ($dir->children) {
+    next if $child->is_dir && ($child eq $destdir || $child =~ /^(?:\d{4}|\d\d)$/);
+
+    my $mtime = $child->stat->mtime;
+    next unless ($nowish - $mtime) >= $age;
+
+    my $dest = $destdir->child(localtime($mtime)->strftime($destfmt));
+
+    print "$dest \t $child\n";
+
+    next unless $opt->yes;
+    $dest->mkpath;
+    $child->move($dest . '/' . $child->relative($dir));
+  }
+}
+
+main();
