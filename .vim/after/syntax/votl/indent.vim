@@ -1,3 +1,0 @@
-
-setlocal sts=4
-
