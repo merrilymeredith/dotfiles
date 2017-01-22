@@ -23,10 +23,10 @@ let s:filename=expand('<sfile>')
     echo "Installing Vundle and Plugins...\n"
     if s:on_windows == 0
       silent !mkdir -p ~/.vim/bundle
-      silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+      silent !git clone --depth 1 https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     else
       silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
-      silent execute '!git clone https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
+      silent execute '!git clone --depth 1 https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
     endif
     let s:installed_vundle=1
   endif
@@ -88,7 +88,7 @@ let s:filename=expand('<sfile>')
 
   if s:installed_vundle == 1
     echo "Installing Plugins, please ignore key map error messages\n"
-    call PluginInstall
+    :PluginInstall
   endif
 " }}}
 
