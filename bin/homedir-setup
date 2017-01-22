@@ -17,28 +17,28 @@ pull() {
 }
 
 if ! [ -d .zgen ]; then
-  git clone 'https://github.com/tarjoilija/zgen.git' .zgen
+  git clone --depth 1 'https://github.com/tarjoilija/zgen.git' .zgen
 else
   pull .zgen
 fi
 
 if ! [ -d .plenv ]; then
-  git clone 'https://github.com/tokuhirom/plenv.git' .plenv
-  git clone 'https://github.com/tokuhirom/Perl-Build.git' .plenv/plugins/perl-build/
+  git clone --depth 1 'https://github.com/tokuhirom/plenv.git' .plenv
+  git clone --depth 1 'https://github.com/tokuhirom/Perl-Build.git' .plenv/plugins/perl-build/
 else
   pull .plenv
   pull .plenv/plugins/perl-build
 fi
 
 if ! [ -d .asdf ]; then
-  git clone 'https://github.com/asdf-vm/asdf' .asdf
+  git clone --depth 1 'https://github.com/asdf-vm/asdf' .asdf
 else
   pull .asdf
 fi
 
 for LANG in ruby nodejs erlang elixir; do
   if ! [ -d .asdf/plugins/$LANG ]; then
-    git clone "https://github.com/asdf-vm/asdf-$LANG" .asdf/plugins/$LANG
+    git clone --depth 1 "https://github.com/asdf-vm/asdf-$LANG" .asdf/plugins/$LANG
   else
     pull .asdf/plugins/$LANG
   fi

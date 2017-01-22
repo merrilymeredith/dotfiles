@@ -9,7 +9,7 @@ cd
 mkdir -p sandbox
 
 if [ ! -d sandbox/neomutt ]; then
-  git clone https://github.com/neomutt/neomutt.git sandbox/neomutt
+  git clone --depth 1 https://github.com/neomutt/neomutt.git sandbox/neomutt
 else
   git -C sandbox/neomutt pull
 fi
