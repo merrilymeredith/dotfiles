@@ -20,6 +20,7 @@ if ! [ -d .zgen ]; then
   git clone --depth 1 'https://github.com/tarjoilija/zgen.git' .zgen
 else
   pull .zgen
+  zsh -i -c 'zgen update'
 fi
 
 if ! [ -d .plenv ]; then
