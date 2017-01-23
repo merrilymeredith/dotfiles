@@ -68,7 +68,6 @@ let s:filename=expand('<sfile>')
 
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
-  Plugin 'mhinz/vim-signify'
 
   Plugin 'asciidoc/vim-asciidoc'
   Plugin 'vim-perl/vim-perl'
@@ -130,8 +129,6 @@ map gV `[v`]
 
 " clear all interestingwords with \\k since \K is ri.vim
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
-
-nnoremap <silent> <leader>gt :SignifyToggle<CR>
 
 " K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
 nmap K   :call ViewDoc('doc', expand('<cword>'))<CR>
@@ -332,12 +329,9 @@ augroup END
 
 
 " Perl type-specific settings  {{{
-
-" let perl_fold = 1    " perl fold scanning is slow
 let perl_include_pod = 1
 let perl_sub_signatures = 1
 let perl_sync_dist = 200
-
 " }}}
 
 
@@ -360,7 +354,6 @@ let g:viewdoc_winwidth_max = 100
 if s:on_windows == 1
   let g:gundo_prefer_python3=1
 endif
-
 
 ">> Tagbar
 if s:on_windows == 1
@@ -413,7 +406,6 @@ let g:tagbar_type_elixir = {
   \ ],
 \ }
 
-
 ">> Unite
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -428,10 +420,8 @@ if executable('ag')
   let g:unite_source_rec_async_command = ['ag', '-f', '--nocolor', '--nogroup', '-g', '']
 endif
 
-
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
-
 
 ">> Airline
 let g:airline#extensions#whitespace#enabled = 0
@@ -444,23 +434,13 @@ let g:bufferline_echo = 0
 let g:bufferline_rotate = 1
 let g:bufferline_fixed_index = -2
 
-
-">> Signify
-let g:signify_disable_by_default = 1
-let g:signify_vcs_list = [ 'git', 'hg' ]
-
-
 ">> interestingwords
 " These are jellybeans colors and some complements
 let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
 let g:interestingWordsRandomiseColors = 1
 
-
 ">> neocomplcache
-" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
-
-" Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
@@ -509,10 +489,6 @@ if has('gui_running')
   set background=dark
 
   set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
-
-  if s:on_windows == 1
-    set columns=120 lines=40
-  endif
 
   colorscheme jellybeans
 else
