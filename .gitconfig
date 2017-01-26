@@ -23,6 +23,7 @@
 	br      = branch
 	staged  = diff --cached
 	unstage = reset HEAD --
+	up      = pull --all --prune -r --autostash
 	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in      = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
 	out     = "!git log --pretty=onelinecustom @{u}.."
