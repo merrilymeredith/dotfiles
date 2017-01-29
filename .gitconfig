@@ -45,6 +45,9 @@
 [rebase]
 	stat = true
 
+[commit]
+	verbose = 1
+
 # include.path is available in git 1.7.10 and later
 [include]
 	path = ~/.gitconfig.local
