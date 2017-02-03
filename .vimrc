@@ -302,7 +302,7 @@ augroup vimrc
 
   " Jump to last known pos
   autocmd BufReadPost *
-    \ if &filetype != 'mail' && line("'\"") >= 1 && line("'\"") <= line("$") |
+    \ if &filetype !~ 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
 
