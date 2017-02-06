@@ -39,9 +39,14 @@ cmdCtrl('right', function () focusedWindow():moveOneScreenEast() end)
 
 cmd('return', function ()
   hs.applescript.applescript([[
-    tell application "iTerm2"
+    tell application "iTerm"
       create window with default profile
+      activate
     end tell
   ]])
 end)
+
+-- cache window frames before moving?
+-- save cache?
+-- focus by direction is a little strict
 
