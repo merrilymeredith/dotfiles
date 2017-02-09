@@ -1,7 +1,15 @@
 
-URxvt.foreground: #DFDFDF
-URxvt.background: #070707
-URxvt.font: xft:monospace-10
+Xft.antialias: 1
+Xft.autohint:  0
+Xft.hinting:   1
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcdlight
+Xft.rgba:      rgb
+
+Rxvt.foreground: #DFDFDF
+Rxvt.background: #070707
+Rxvt.font: xft:monospace-10
+URxvt.letterSpace: -1
 
 URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true
