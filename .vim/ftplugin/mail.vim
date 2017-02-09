@@ -1,6 +1,7 @@
 setl textwidth=72
 setl formatoptions=jaw12tcql
 setl spell
+setl noundofile noswapfile nobackup
 
 " http://cedricduval.free.fr/download/mail.vim
 function! Mail_Erase_Sig()
