@@ -105,7 +105,7 @@ set reflow_wrap       = 100
 set markers           = no
 
 set date_format   = "%m-%d %H:%M"
-set index_format  = "%2C %Z %D  %-25.25F  %s"
+set index_format  = "%3C %Z %D  %-25.25F %?M?〰&  ?%s%?M?%* (%M hidden)?"
 set status_format = " %r Mutt: %f [N:%n%?d? D:%d?%?t? *:%t?] %>- (%s/%S) %P"
 
 ignore *
