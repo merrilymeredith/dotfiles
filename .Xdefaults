@@ -15,10 +15,17 @@ URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true
 URxvt.scrollBar_floating: true
 
+URxvt.scrollTtyOutput: false
+URxvt.scrollWithBuffer: true
+URxvt.scrollTtyKeypress: true
+
+URxvt.skipScroll: true
+
 URxvt.visualBell: true
 URxvt.urgentOnBell: true
 
 URxvt.saveLines: 1000
+URxvt.fading: 15
 
 ! keep LCtrl+LShift+[0-9a-f] unicode insertion
 URxvt.iso14755: true
