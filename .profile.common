@@ -3,7 +3,7 @@
 make -s -C ~/.ssh
 
 export EDITOR=vim
-export LESS=-Ri
+export LESS='Ri'
 export PERL_CPANM_OPT='-nq --prompt'
 export DEVEL_REPL_PROFILE='Standard'
 

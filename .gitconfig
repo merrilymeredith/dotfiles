@@ -9,7 +9,7 @@
 	color = true
 
 [core]
-	pager = LESS='FSRX' less
+	pager = LESS='FSRXi' less
 
 [diff]
 	compactionheuristic = true
