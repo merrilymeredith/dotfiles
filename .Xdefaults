@@ -6,8 +6,8 @@ Xft.hintstyle: hintslight
 Xft.lcdfilter: lcdlight
 Xft.rgba:      rgb
 
-Rxvt.foreground: #DFDFDF
-Rxvt.background: #070707
+Rxvt.foreground: #d7d7d7
+Rxvt.background: #121212
 Rxvt.font: xft:monospace-10
 URxvt.letterSpace: -1
 
@@ -29,12 +29,31 @@ XTerm*termName: xterm-256color
 XTerm*locale: true
 XTerm*metaSendsEscape: true
 
-XTerm*foreground: #DFDFDF
-XTerm*background: #070707
+XTerm*foreground: #d7d7d7
+XTerm*background: #121212
 XTerm*faceName: monospace:size=10
 XTerm*saveLines: 1000
 XTerm*VT100.geometry: 120x40
 
+! Jellybeans-inspired colors
+Rxvt*color0: #393939
+Rxvt*color1: #ca674a
+Rxvt*color2: #96a967
+Rxvt*color3: #d3a94a
+Rxvt*color4: #5778c1
+Rxvt*color5: #9c35ac
+Rxvt*color6: #6eb5f3
+Rxvt*color7: #a9a9a9
+Rxvt*color8: #535551
+Rxvt*color9: #ea2828
+Rxvt*color10: #87dd32
+Rxvt*color11: #f7e44d
+Rxvt*color12: #6f9bca
+Rxvt*color13: #a97ca4
+Rxvt*color14: #32dddd
+Rxvt*color15: #e9e9e7
+
 #ifdef USE_LOCAL
 #include ".Xdefaults.local"
 #endif
+
