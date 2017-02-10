@@ -14,3 +14,16 @@ if (document.querySelector('div.story_content')) {
     e.parentNode.insertBefore(e, e.previousElementSibling)
   }
 }
+
+// only safe when you've guaranteed a parent matches
+function parentSelector (el, selector) {
+    while ((el = el.parentElement) && !el.matches(selector));
+    return el;
+}
+
+['angersock'].forEach(function (u) {
+  var collapse = document.querySelectorAll('div.comment > div.details > div.byline > a[href="/u/' + u + '"]')
+  for (var el of collapse) {
+    parentSelector(el, 'div.comment').previousElementSibling.click()
+  }
+})
