@@ -30,7 +30,6 @@ if [ "$VIRT" = "yes" ]; then
 else
   xset b off
   xautolock -detectsleep &
-  xfce4-power-manager
   pulseaudio --daemonize
   nm-applet &>/dev/null </dev/null &
 fi
