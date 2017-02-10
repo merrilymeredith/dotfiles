@@ -1,4 +1,9 @@
 
+Xautolock.time: 5
+Xautolock.locker: /usr/bin/i3lock -nde -c 101010
+Xautolock.corners: 0+00
+Xautolock.cornerredelay: 10
+
 Xft.antialias: 1
 Xft.autohint:  0
 Xft.hinting:   1

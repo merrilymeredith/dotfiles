@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VIRT='no'
+
 if [ "$(uname -s)" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
 fi
@@ -21,5 +23,15 @@ make -s -C ~/.i3
 
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
+fi
+
+if [ "$VIRT" = "yes" ]; then
+  xset b off -dpms s off
+else
+  xset b off
+  xautolock -detectsleep &
+  xfce4-power-manager
+  pulseaudio --daemonize
+  nm-applet &>/dev/null </dev/null &
 fi
 
