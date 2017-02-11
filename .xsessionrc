@@ -1,15 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 
+PLATFORM="$(uname -s)"
 VIRT='no'
 
-if [ "$(uname -s)" = "OpenBSD" ]; then
+if [ "$PLATFORM" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
 fi
 
-hsetroot -solid "#002244" &>/dev/null || \
+hsetroot -solid "#002244" >/dev/null 2>&1 || \
   xsetroot -def -solid "#002244"
 
-xcompmgr -n &>/dev/null </dev/null &
+xcompmgr -n >/dev/null 2>&1 </dev/null &
 
 xmodmap ~/.xmodmaprc
 
@@ -28,9 +29,9 @@ fi
 if [ "$VIRT" = "yes" ]; then
   xset b off -dpms s off
 else
-  xset b off
+  xset b off s 6 dpms standby 6
   xautolock -detectsleep &
   pulseaudio --daemonize
-  nm-applet &>/dev/null </dev/null &
+  nm-applet >/dev/null 2>&1 </dev/null &
 fi
 
