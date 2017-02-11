@@ -1,4 +1,4 @@
-typeset -U path omz_plugins zsh_plugins envthings
+typeset -U path manpath omz_plugins zsh_plugins envthings
 
 # Version/environment management tools to load
 envthings=(plenv rbenv ndenv rakudobrew)
