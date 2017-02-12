@@ -13,11 +13,6 @@ if path-prepend "$HOME/.plenv/bin"; then
   eval "$(plenv init -)"
 fi
 
-if path-prepend "$HOME/.rbenv/bin"; then
-  eval "$(rbenv init -)"
-fi
-
-
 if [ -f ~/.bashrc.local ]; then
   source ~/.bashrc.local
 fi

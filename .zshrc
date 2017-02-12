@@ -1,13 +1,12 @@
 typeset -U path manpath omz_plugins zsh_plugins envthings
 
 # Version/environment management tools to load
-envthings=(plenv rbenv ndenv rakudobrew)
+envthings=(plenv rakudobrew)
 
 DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 
 omz_plugins=(
   plugins/common-aliases
