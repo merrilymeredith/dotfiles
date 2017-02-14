@@ -11,10 +11,8 @@ nmap q <Nop>
 nmap s tddg 
 nmap S :winopen -private ddg 
 
-nmap [b gT
-nmap ]b gt
-nmap [t gT
-nmap ]t gt
+nmap J gt
+nmap K gT
 
 nmap <C-r> :reader<CR>
 
