@@ -103,6 +103,7 @@ set pager_index_lines = 7
 set wrap              = 100
 set reflow_wrap       = 100
 set markers           = no
+set collapse_unread   = no
 
 set date_format   = "%m-%d %H:%M"
 set index_format  = "%3C %Z %D  %-25.25F %?M?〰&  ?%s%?M?%* (%M hidden)?"
