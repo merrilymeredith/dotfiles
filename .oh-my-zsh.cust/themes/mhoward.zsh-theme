@@ -25,7 +25,7 @@ PROMPT_SUCCESS_COLOR=$FG[071]
 PROMPT_FAILURE_COLOR=$FG[124]
 PROMPT_VCS_INFO_COLOR=$FG[242]
 
-if [[ ! $LC_CTYPE =~ 'UTF-8$' || "$(print -P %l)" =~ '^[0-9v]' ]]
+if [[ ! "$(locale LC_CTYPE 2>/dev/null)" =~ 'UTF-8' || "$(print -P %l)" =~ '^[0-9v]' ]]
 then
   PROMPT_DEFAULT_END='%%'
   PROMPT_ROOT_END='#'
