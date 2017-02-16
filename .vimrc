@@ -479,7 +479,7 @@ try
 catch
 endtry
 
-if g:airline_powerline_fonts == 0 && $LANG =~ 'UTF-8'
+if g:airline_powerline_fonts == 0 && (has('gui_running') || $LANG =~ 'UTF-8')
   let g:airline_left_sep  = '▒'
   let g:airline_right_sep = g:airline_left_sep
 endif
@@ -487,6 +487,8 @@ endif
 if has('gui_running')
   set number
   set background=dark
+
+  set columns=120 lines=40
 
   set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
 
