@@ -124,6 +124,9 @@ nmap <C-l> <C-w>l
 map j gj
 map k gk
 
+" alt buffer
+nmap gb <C-^>
+
 " Select last paste
 map gV `[v`]
 
