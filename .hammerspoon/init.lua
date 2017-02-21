@@ -40,8 +40,8 @@ cmdCtrl('right', function () focusedWindow():moveOneScreenEast() end)
 cmd('return', function ()
   hs.applescript.applescript([[
     tell application "iTerm"
-      create window with default profile
-      activate
+      set newterm to (create window with default profile)
+      tell newterm to activate
     end tell
   ]])
 end)
