@@ -18,6 +18,7 @@
 	ci      = commit
 	rec     = commit -p
 	unrec   = checkout --patch
+	amend   = commit -p --amend
 	st      = status -sb
 	co      = checkout
 	br      = branch
