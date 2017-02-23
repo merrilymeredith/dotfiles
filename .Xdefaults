@@ -1,6 +1,6 @@
 
 Xautolock.time: 5
-Xautolock.locker: /usr/bin/i3lock -nde -c 101010
+Xautolock.locker: /usr/bin/i3lock -ne -c 101010
 Xautolock.corners: 0+00
 Xautolock.cornerredelay: 10
 

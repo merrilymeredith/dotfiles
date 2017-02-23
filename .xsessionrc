@@ -29,7 +29,7 @@ fi
 if [ "$VIRT" = "yes" ]; then
   xset b off -dpms s off
 else
-  xset b off s 6 dpms standby 6
+  xset b off s 300 dpms 360
   xautolock -detectsleep &
   pulseaudio --daemonize
   nm-applet >/dev/null 2>&1 </dev/null &
