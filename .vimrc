@@ -429,19 +429,23 @@ let g:vimfiler_as_default_explorer = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_powerline_fonts = 0
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled          = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#tab_nr_type      = 1
+let g:airline#extensions#tabline#buffer_nr_show   = 1
+let g:airline#extensions#tabline#formatter        = 'unique_tail_improved'
 let g:airline#extensions#tabline#buffer_nr_format = '%s:'
-let g:airline#extensions#tabline#buffers_label = 'BUF'
-let g:airline#extensions#tabline#tabs_label = 'TAB'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline#extensions#tabline#right_sep = ' '
-let g:airline#extensions#tabline#right_alt_sep = ' '
-let g:airline#extensions#tabline#excludes = [
+let g:airline#extensions#tabline#buffers_label    = 'BUF'
+let g:airline#extensions#tabline#tabs_label       = 'TAB'
+let g:airline#extensions#tabline#left_sep         = ' '
+let g:airline#extensions#tabline#left_alt_sep     = ' '
+let g:airline#extensions#tabline#right_sep        = ' '
+let g:airline#extensions#tabline#right_alt_sep    = ' '
+
+let g:airline#extensions#tabline#ignore_bufadd_pat =
   \ '\c\v^__gundo|^__tagbar|^vimfiler|^[doc\d+\]$'
+let g:airline#extensions#tabline#excludes = [
+  \ g:airline#extensions#tabline#ignore_bufadd_pat,
   \ ]
 
 let g:airline#extensions#branch#format = 2
