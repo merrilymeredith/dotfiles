@@ -440,8 +440,9 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline#extensions#tabline#right_sep = ' '
 let g:airline#extensions#tabline#right_alt_sep = ' '
-let g:airline#extensions#tabline#ignore_bufadd_pat =
+let g:airline#extensions#tabline#excludes = [
   \ '\c\v^__gundo|^__tagbar|^vimfiler|^[doc\d+\]$'
+  \ ]
 
 let g:airline#extensions#branch#format = 2
 
