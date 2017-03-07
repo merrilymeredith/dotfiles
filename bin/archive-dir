@@ -20,7 +20,7 @@ sub main {
     ],
     ['age|a=i' => "minimum age in days for archival", {default => 60}],
     ['files|f' => "operate on plain files only"],
-    ['yes|y'   => "actually move stuff"],
+    ['yes|Y'   => "actually move stuff"],
     ['help|h'  => "print usage message and exit", {shortcircuit => 1}],
   );
   print($usage->text), exit if $opt->help || !@ARGV;
