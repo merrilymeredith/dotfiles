@@ -341,9 +341,15 @@ let perl_sync_dist = 200
 
 ">> Vimwiki
 let g:vimwiki_list = [
-      \ {'path': '~/vimwiki/', 'auto_tags': 1, 'auto_toc': 1},
-      \ {'path': '~/Documents/SpiderOak Hive/vimwiki', 'auto_tags': 1, 'auto_toc': 1}
-      \ ]
+  \ {
+    \ 'path': '~/vimwiki/',
+    \ 'auto_tags': 1, 'auto_toc': 1, 'automatic_nested_syntaxes': 1
+  \ },
+  \ {
+    \ 'path': '~/Documents/SpiderOak Hive/vimwiki',
+    \ 'auto_tags': 1, 'auto_toc': 1, 'automatic_nested_syntaxes': 1
+  \ }
+\ ]
 let g:vimwiki_use_mouse = 1
 
 ">> Viewdoc
