@@ -5,6 +5,9 @@
 [transfer]
         fsckobjects = true
 
+[fsck]
+	badTimezone = ignore
+
 [ui]
 	color = true
 
