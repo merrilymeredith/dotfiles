@@ -130,7 +130,10 @@ nmap gb <C-^>
 map gV `[v`]
 
 " clear all interestingwords with \\k since \K is ri.vim
-nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
+nmap <silent> <leader><leader>k :call UncolorAllWords()<CR>
+
+" use Ag for a recursive *
+nmap <leader>* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
 
 " K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
 nmap K   :call ViewDoc('doc', expand('<cword>'))<CR>
