@@ -3,10 +3,10 @@
 if (document.querySelector('div.story_content')) {
   var sheet = document.createElement('style')
   sheet.innerHTML = "\
-    ol.list li.story { height: 7.5em; } \
+    ol.list li.story { height: 9em; } \
     li.story div.byline { color: #777; } \
     li.story div.byline a { color: #777; } \
-    li.story div.story_content { color: #999; font-size: 95%; }"
+    li.story div.story_content { color: #999; font-size: 95%; max-height: 3em !important; }"
   document.body.appendChild(sheet)
 
   var bylines = document.querySelectorAll('div.story_content + div.byline')
