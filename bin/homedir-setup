@@ -1,6 +1,11 @@
 #!/bin/sh
 set -eu
 
+minimal=0
+
+case ${1:-} in -m) minimal=1;;
+esac
+
 if [ ! -f .zshrc ]; then
   echo "Refusing to run without a .zshrc nearby" >&2
   exit 1
@@ -20,30 +25,32 @@ if ! [ -d .zgen ]; then
   git clone --depth 1 'https://github.com/tarjoilija/zgen.git' .zgen
 else
   pull .zgen
-  zsh -i -c 'zgen update'
+  zsh -i -c 'zgen update' || true
 fi
 
-if ! [ -d .plenv ]; then
-  git clone --depth 1 'https://github.com/tokuhirom/plenv.git' .plenv
-  git clone --depth 1 'https://github.com/tokuhirom/Perl-Build.git' .plenv/plugins/perl-build/
-else
-  pull .plenv
-  pull .plenv/plugins/perl-build
-fi
-
-if ! [ -d .asdf ]; then
-  git clone --depth 1 'https://github.com/asdf-vm/asdf' .asdf
-else
-  pull .asdf
-fi
-
-for LANG in ruby nodejs erlang elixir; do
-  if ! [ -d .asdf/plugins/$LANG ]; then
-    git clone --depth 1 "https://github.com/asdf-vm/asdf-$LANG" .asdf/plugins/$LANG
+if [ "$minimal" -ne 1 ]; then
+  if ! [ -d .plenv ]; then
+    git clone --depth 1 'https://github.com/tokuhirom/plenv.git' .plenv
+    git clone --depth 1 'https://github.com/tokuhirom/Perl-Build.git' .plenv/plugins/perl-build/
   else
-    pull .asdf/plugins/$LANG
+    pull .plenv
+    pull .plenv/plugins/perl-build
   fi
-done
+
+  if ! [ -d .asdf ]; then
+    git clone --depth 1 'https://github.com/asdf-vm/asdf' .asdf
+  else
+    pull .asdf
+  fi
+
+  for LANG in ruby nodejs erlang elixir; do
+    if ! [ -d .asdf/plugins/$LANG ]; then
+      git clone --depth 1 "https://github.com/asdf-vm/asdf-$LANG" .asdf/plugins/$LANG
+    else
+      pull .asdf/plugins/$LANG
+    fi
+  done
+fi
 
 # Get rid of older stuff
 if [ -d .rbenv ]; then
