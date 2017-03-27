@@ -68,6 +68,7 @@ let s:filename=expand('<sfile>')
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
 
+  Plugin 'Shougo/vinarise.vim'
   Plugin 'asciidoc/vim-asciidoc'
   Plugin 'vim-perl/vim-perl'
   Plugin 'sheerun/vim-polyglot'
