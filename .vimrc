@@ -193,6 +193,7 @@ set splitright splitbelow
 set scrolloff=15
 set sidescrolloff=10
 set ruler
+set noshowmode
 set showcmd
 set wildmenu
 set wildignorecase
