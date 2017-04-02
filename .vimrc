@@ -328,8 +328,8 @@ augroup END
 augroup encrypted
   autocmd!
   autocmd BufReadPre,FileReadPre *.gpg set noswapfile noundofile nobackup viminfo=
-  autocmd BufReadPost *.gpg :%!gpg2 --decrypt 2> /dev/null
-  autocmd BufWritePre *.gpg :%!gpg2 -se -a --default-recipient-self
+  autocmd BufReadPost *.gpg :%!GPG_TTY=/dev/tty gpg2 --decrypt 2> /dev/null
+  autocmd BufWritePre *.gpg :%!GPG_TTY=/dev/tty gpg2 -se -a --default-recipient-self
   autocmd BufWritePost *.gpg u
 augroup END
 "}}}
