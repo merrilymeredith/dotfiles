@@ -27,6 +27,7 @@
 	br      = branch
 	staged  = diff --cached
 	unstage = reset HEAD --
+	rollback = reset --soft ^HEAD
 	up      = pull -r --prune
 	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in      = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
