@@ -18,24 +18,24 @@
 	compactionheuristic = true
 
 [alias]
-	ci      = commit
-	rec     = commit -p
-	unrec   = checkout --patch
-	amend   = commit -p --amend
-	st      = status -sb
-	co      = checkout
-	br      = branch
-	staged  = diff --cached
-	unstage = reset HEAD --
+	ci       = commit
+	rec      = commit -p
+	unrec    = checkout --patch
+	amend    = commit -p --amend
+	st       = status -sb
+	co       = checkout
+	br       = branch
+	staged   = diff --cached
+	unstage  = reset HEAD --
 	rollback = reset --soft ^HEAD
-	up      = pull -r --prune
-	update  = "!git remote update -p && git merge --ff-only --stat @{u}"
-	in      = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
-	out     = "!git log --pretty=onelinecustom @{u}.."
-	new     = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
-	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
-	glog    = log --graph --pretty=onelinecustom
-	recent  = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${@:2}' -
+	up       = pull -r --prune
+	update   = "!git remote update -p && git merge --ff-only --stat @{u}"
+	in       = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
+	out      = "!git log --pretty=onelinecustom @{u}.."
+	new      = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
+	cleanup  = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
+	glog     = log --graph --pretty=onelinecustom
+	recent   = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${@:2}' -
 
 [pretty]
 	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
