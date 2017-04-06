@@ -51,7 +51,8 @@
 	stat = true
 
 [commit]
-	verbose = 1
+	verbose = true
+	gpgsign = true
 
 # include.path is available in git 1.7.10 and later
 [include]
