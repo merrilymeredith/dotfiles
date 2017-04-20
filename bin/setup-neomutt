@@ -24,12 +24,12 @@ case "${OSTYPE:-}" in
 esac
 
 ./prepare -q \
- --with-homespool=/var/spool/mail \
+ --with-mailpath=/var/spool/mail \
  --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
  --with-sasl \
  --with-tokyocabinet \
+ --enable-gpgme \
  --enable-imap --enable-smtp \
- --with-regex
 
 make -s -j3
 
@@ -52,14 +52,7 @@ neomutt build.
 
 =head2 Debian
 
-autoconf libncursesw5-dev libssl-dev libsasl2-dev libtokyocabinet-dev links
-gnupg2 urlscan
-
-=head2 Cygwin
-
-autoconf libncursesw-devel openssl-devel libsasl2-devel libgdbm4-devel links
-
-gpg2 isn't available in cygwin, but there is a windows build.  using it with
-cygwin paths requires a wrapper though.
+  apt install autoconf links gnupg2 gpgsm urlscan libncursesw5-dev \
+    libssl-dev libsasl2-dev libtokyocabinet-dev libgpgme11-dev
 
 =cut

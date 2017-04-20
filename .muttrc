@@ -5,7 +5,6 @@ source ~/.mutt/roomag/config
 
 macro index,pager <f2> '<sync-mailbox><imap-logout-all><enter-command>source ~/.mutt/roomag/config<enter><change-folder>!<enter>' 'switch roomag'
 
-source ~/.mutt/gpg2.rc
 source `F=$HOME/.mutt/local; if [ ! -s "$F" ]; then F=/dev/null;fi;echo "$F"`
 
 unset imap_passive
@@ -22,6 +21,8 @@ set ssl_use_sslv2         = no
 set ssl_use_sslv3         = no
 set ssl_use_tlsv1         = no
 set ssl_use_tlsv1_1       = no
+
+set crypt_use_gpgme       = yes
 
 set smtp_authenticators = "gssapi:login:plain"
 
