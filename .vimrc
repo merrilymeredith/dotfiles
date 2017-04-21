@@ -127,6 +127,7 @@ map k gk
 
 " alt buffer
 nmap gb <C-^>
+nmap gB :ls<CR>:b<Space>
 
 " Select last paste
 map gV `[v`]
