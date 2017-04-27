@@ -54,6 +54,9 @@
 	verbose = true
 	gpgsign = true
 
+[gpg]
+	program = "gpg2"
+
 # include.path is available in git 1.7.10 and later
 [include]
 	path = ~/.gitconfig.local
