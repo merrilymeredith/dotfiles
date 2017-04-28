@@ -44,6 +44,7 @@ set edit_headers    = yes
 set editor          = "exec vim"
 set strict_threads  = no
 set wait_key        = no
+set quit            = ask-no
 
 set send_charset    = "utf-8"
 set text_flowed     = yes
@@ -53,6 +54,7 @@ set reverse_name    = yes
 set envelope_from   = yes
 set fast_reply      = yes
 set include         = yes
+set recall          = no
 
 set header_cache     = ~/.cache/mutt
 set message_cachedir = ~/.cache/mutt
@@ -64,28 +66,24 @@ bind generic \`  help
 bind generic /   search
 bind generic ?   search-reverse
 bind generic n   search-next
-bind generic N   search-opposite
 bind generic \Cu half-up
 bind generic \Cd half-down
 
 bind index,pager <F5>      sync-mailbox
 bind index,pager <Tab>     previous-new-then-unread
 bind index,pager <BackTab> next-new-then-unread
+bind index,pager R         group-reply
 
 bind index gg   first-entry
 bind index G    last-entry
-
-# bind pager J next-unread
-# bind pager K previous-unread
+bind index M    recall-message
 
 bind pager <up>   previous-line
 bind pager <down> next-line
 bind pager gg     top
 bind pager G      bottom
-
-bind pager r reply
-bind pager R group-reply
-bind pager l list-reply
+bind pager ?      search-reverse
+bind pager i      noop
 
 macro index,pager    \Cb "<pipe-message> urlscan<enter>" 'urlscan'
 macro attach,compose \Cb "<pipe-entry> urlscan<enter>" 'urlscan'
