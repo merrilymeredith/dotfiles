@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-
+use 5.014;
 use warnings;
 use strict;
 use Time::Piece;
@@ -37,6 +37,8 @@ sub archive_dir {
   my $nowish  = time;
   my $age     = $opt->age * 24 * 60 * 60;
 
+  my @work;
+
   for my $child ($dir->children) {
     next if $child->is_dir && (
       $opt->files || $child eq $destdir || $child =~ /^(?:\d{4}|\d\d)$/
@@ -47,8 +49,17 @@ sub archive_dir {
     next unless ($nowish - $mtime) >= $age;
 
     my $dest = $destdir->child(localtime($mtime)->strftime($destfmt));
+    push @work, [$dest, $child];
+  }
 
-    print "$dest \t $child\n";
+  my $lastdest = '';
+  for my $work (sort {$a->[0] cmp $b->[0]} @work) {
+    my ($dest, $child) = @$work;
+
+    say $lastdest = $dest
+      if $dest ne $lastdest;
+
+    say "\t$child";
 
     next unless $opt->yes;
     $dest->mkpath;
