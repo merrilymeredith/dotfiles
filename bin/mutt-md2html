@@ -1,0 +1,2 @@
+#!/bin/sh
+exec pandoc -sS --self-contained --highlight-style=monochrome -f markdown -t html5 $*
