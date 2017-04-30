@@ -44,6 +44,7 @@ let s:filename=expand('<sfile>')
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'vasconcelloslf/vim-interestingwords'
+  Plugin 'google/vim-searchindex'
 
   Plugin 'editorconfig/editorconfig-vim'
 
