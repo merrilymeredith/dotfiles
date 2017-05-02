@@ -52,7 +52,7 @@ neomutt build.
 
 =head2 Debian
 
-  apt install autoconf links gnupg2 gpgsm urlscan libncursesw5-dev \
+  apt install autoconf links pandoc gnupg2 gpgsm urlscan libncursesw5-dev \
     libssl-dev libsasl2-dev libtokyocabinet-dev libgpgme11-dev
 
 =cut
