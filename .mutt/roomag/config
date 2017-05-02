@@ -18,6 +18,3 @@ set signature = ~/.mutt/roomag/signature
 
 # leave to gpg.conf default
 unset pgp_sign_as
-
-unhook folder-hook
-folder-hook $spoolfile exec collapse-all
