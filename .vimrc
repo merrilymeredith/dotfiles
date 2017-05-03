@@ -63,7 +63,6 @@ let s:filename=expand('<sfile>')
   Plugin 'vimwiki/vimwiki'
 
   Plugin 'Shougo/neocomplcache.vim'
-  Plugin 'c9s/perlomni.vim'
   Plugin 'rking/ag.vim'
 
   Plugin 'tpope/vim-fugitive'
