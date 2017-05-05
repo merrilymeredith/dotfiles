@@ -4,6 +4,7 @@
     <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <style type="text/css">
       code{white-space: pre;} body{font-family:sans-serif} p{line-height:1.2em}
+      blockquote{margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex}
       $if(quotes)$q { quotes: "“" "”" "‘" "’"; } $endif$
       $if(highlighting-css)$ $highlighting-css$ $endif$
     </style>
