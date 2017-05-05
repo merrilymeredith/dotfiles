@@ -1,2 +1,2 @@
 # text/html; pandoc -S -t markdown-raw_html %s; copiousoutput; description=HTML Part; nametemplate=%s.html
-text/html; links -dump %s; copiousoutput; description=HTML Part; nametemplate=%s.html
+text/html; mutt-html2txt %s; copiousoutput; description=HTML Part; nametemplate=%s.html

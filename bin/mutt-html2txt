@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+LINKS="links -html-tables 0 -html-image-names 0 -html-margin 0"
+FILE=${1:--}
+
+[ "$FILE" != '-' ] &&
+  exec $LINKS -dump $FILE
+
+TMPHTML="$(mktemp).html"
+cat > $TMPHTML
+$LINKS -dump $TMPHTML
+rm -f $TMPHTML

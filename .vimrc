@@ -498,8 +498,7 @@ let g:neocomplcache_filename_include_exprs.perl = 'fnamemodify(substitute(v:fnam
 
 " {{{ Commands
 " Preview markdown mail -- I edit with headers so I box them in a code block.
-command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html > #.~htm~'
-                           \ | silent exe '0r !links -dump #.~htm~' | silent exe '!rm -f #.~htm~' | 0
+command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
 command! MailPreviewHTML enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html' | 0
 
 if !exists(":DiffOrig")
