@@ -5,4 +5,5 @@ exec pandoc -sS \
   --self-contained \
   --template=mail \
   --highlight-style=monochrome \
+  --email-obfuscation=none \
    $*
