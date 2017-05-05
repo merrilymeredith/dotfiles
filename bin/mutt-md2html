@@ -1,6 +1,7 @@
 #!/bin/sh
 exec pandoc -sS \
-  -f markdown -t html5 \
+  -f markdown-blank_before_blockquote \
+  -t html5 \
   --self-contained \
   --template=mail \
   --highlight-style=monochrome \
