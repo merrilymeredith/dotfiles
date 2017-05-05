@@ -497,6 +497,10 @@ let g:neocomplcache_filename_include_exprs.perl = 'fnamemodify(substitute(v:fnam
 
 
 " {{{ Commands
+command! MailPreview     enew | set bt=nofile | silent exe '!mutt-md2html # > #.~htm~'
+                           \ | silent exe '0r !links -dump #.~htm~' | silent exe '!rm -f #.~htm~' | 0
+command! MailPreviewHTML enew | set bt=nofile | execute '0r !mutt-md2html #' | 0
+
 if !exists(":DiffOrig")
   " Diff unsaved buffer
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
