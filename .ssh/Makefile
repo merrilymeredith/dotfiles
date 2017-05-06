@@ -2,7 +2,7 @@
 # config.d/10-base to config and add an Include config.d/*
 
 config: config.d/*
-	cat config.d/* > $@
+	umask 277 && cat config.d/* > $@
 
 clean:
 	rm -f config
