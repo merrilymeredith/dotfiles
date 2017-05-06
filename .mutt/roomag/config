@@ -3,7 +3,7 @@
 unalternates *
 unlists *
 
-source "gpg2 -d ~/.mutt/roomag/private.gpg |"
+source "cd ~/.mutt/roomag && gpg2 -d private.gpg |"
 
 set folder    = imaps://mhoward@ramdas.roomag.org/
 set spoolfile = "+Virtual.Mailbox"

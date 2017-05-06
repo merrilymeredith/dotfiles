@@ -16,10 +16,16 @@ fi
 
 cd sandbox/neomutt
 
-case "${OSTYPE:-}" in
+PLATFORM="$(uname -o)"
+HCACHE="tokyocabinet"
+
+case "$PLATFORM" in
   darwin*)
     # Use macports' headers
     OPENSSL_PREFIX=/opt/local
+    ;;
+  Cygwin)
+    HCACHE=lmdb
     ;;
 esac
 
@@ -27,7 +33,7 @@ esac
  --with-mailpath=/var/spool/mail \
  --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
  --with-sasl \
- --with-tokyocabinet \
+ --with-${HCACHE} \
  --enable-gpgme \
  --enable-imap --enable-smtp \
 
@@ -54,5 +60,13 @@ neomutt build.
 
   apt install autoconf links pandoc gnupg2 gpgsm urlscan libncursesw5-dev \
     libssl-dev libsasl2-dev libtokyocabinet-dev libgpgme11-dev
+
+=head2 Cygwin / Babun
+
+ pact install autoconf links libncursesw-devel openssl-devel libsasl2-devel \
+   liblmdb-devel libgpgme-devel
+
+gpg2 isn't available in cygwin, but there is a windows build.  using it with
+cygwin paths requires a wrapper though.
 
 =cut
