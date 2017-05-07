@@ -33,7 +33,6 @@ endfunction
 call Mail_Erase_Sig()
 
 " Get right to composing the body:
-if line('$') > 1
-  :normal gg}o
-  :startinsert
+if line('$') > 1 && line("'\"") < 1
+  :normal gg}
 endif
