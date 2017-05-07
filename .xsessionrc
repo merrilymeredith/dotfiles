@@ -20,8 +20,10 @@ fi
 
 urxvtd -q -o -f
 
-make -s -C ~/.i3 || \
-  { cat .i3/config.d/* > .i3/config && cat .i3/status.d/* > .i3/status }
+make -s -C ~/.i3 || {
+  cat ~/.i3/config.d/* > ~/.i3/config
+  cat ~/.i3/status.d/* > ~/.i3/status
+}
 
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
