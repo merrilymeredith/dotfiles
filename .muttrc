@@ -27,6 +27,7 @@ set crypt_use_gpgme       = yes
 set smtp_authenticators = "gssapi:login:plain"
 
 # Behavior
+set sleep_time      = 0
 set connect_timeout = 7
 set timeout         = 10
 set mail_check      = 47
