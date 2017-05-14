@@ -54,6 +54,7 @@ let s:filename=expand('<sfile>')
   Plugin 'Shougo/unite-session'
   Plugin 'sjl/gundo.vim'
   Plugin 'majutsushi/tagbar'
+  Plugin 'rking/ag.vim'
 
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
@@ -61,9 +62,6 @@ let s:filename=expand('<sfile>')
   Plugin 'tpope/vim-endwise'
 
   Plugin 'vimwiki/vimwiki'
-
-  Plugin 'Shougo/neocomplcache.vim'
-  Plugin 'rking/ag.vim'
 
   Plugin 'tpope/vim-fugitive'
   Plugin 'ludovicchabant/vim-lawrencium'
