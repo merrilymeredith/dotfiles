@@ -8,35 +8,14 @@ let s:on_windows=(has('win32') || has('win64'))
 let s:filename=expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
-  let s:installed_vundle=0
-
-  let s:vundle_readme=expand(s:on_windows
-    \ ? '~/vimfiles/bundle/vundle/README.md'
-    \ : '~/.vim/bundle/vundle/README.md')
-
-  if !filereadable(s:vundle_readme)
-    if !executable('git')
-      echo "You probably want git installed and in PATH."
-      quit
-    endif
-
-    echo "Installing Vundle and Plugins...\n"
-    if s:on_windows == 0
-      silent !mkdir -p ~/.vim/bundle
-      silent !git clone --depth 1 https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    else
-      silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
-      silent execute '!git clone --depth 1 https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
-    endif
-    let s:installed_vundle=1
-  endif
+  call vimrc#VundleInstall()
 
   if s:on_windows == 0
     set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    call vundle#begin()
   else
     set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#rc('~/vimfiles/bundle')
+    call vundle#begin('~/vimfiles/bundle')
   endif
 
   Plugin 'gmarik/vundle'
@@ -84,15 +63,11 @@ let s:filename=expand('<sfile>')
   catch
   endtry
 
-  if s:installed_vundle == 1
-    echo "Installing Plugins, please ignore key map error messages\n"
-    :PluginInstall
-  endif
+  call vundle#end()
 " }}}
 
 
 " Key maps {{{
-
 nmap <silent> <F1> :Unite buffer<CR>
 nmap <silent> <C-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <A-F1> :Unite session<CR>

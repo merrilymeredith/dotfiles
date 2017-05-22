@@ -19,3 +19,29 @@ function! vimrc#MkNonExDir(file, buf) abort
   endif
 endfunction
 
+function! vimrc#VundleInstall() abort
+  " on windows and not cygwin
+  let l:on_windows = (has('win32') || has('win64'))
+
+  let l:vundle_readme = expand(l:on_windows
+    \ ? '~/vimfiles/bundle/vundle/README.md'
+    \ : '~/.vim/bundle/vundle/README.md')
+
+  if !filereadable(l:vundle_readme)
+    if !executable('git')
+      echo "Can't autoinstall Vundle without git"
+      return
+    endif
+
+    if l:on_windows == 0
+      silent !mkdir -p ~/.vim/bundle
+      silent !git clone --depth 1 https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    else
+      silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
+      silent execute '!git clone --depth 1 https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
+    endif
+
+    echo "Installed Vundle, run :PluginInstall if desired"
+  endif
+
+endfunction
