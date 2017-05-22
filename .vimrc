@@ -396,10 +396,13 @@ let g:tagbar_type_elixir = {
 \ }
 
 ">> Unite
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+try
+  " call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#filters#sorter_default#use(['sorter_rank'])
 
-call unite#custom#profile('default', 'context', {'winheight': 10})
+  call unite#custom#profile('default', 'context', {'winheight': 10})
+catch
+endtry
 
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
