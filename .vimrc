@@ -53,9 +53,10 @@ let s:filename=expand('<sfile>')
   Plugin 'nathangrigg/vim-beancount'
   Plugin 'chr4/sslsecure.vim'
 
-  let g:no_viewdoc_maps = 1
   Plugin 'powerman/vim-plugin-viewdoc'
   Plugin 'powerman/vim-plugin-AnsiEsc'
+
+  let g:no_viewdoc_maps = 1
 
   try
     execute 'source ' . s:filename . '.local-pre'
@@ -67,14 +68,14 @@ let s:filename=expand('<sfile>')
 
 
 " Key maps {{{
-nmap <silent> <F1> :Unite buffer<CR>
+nmap <silent> <F1>   :Unite buffer<CR>
 nmap <silent> <C-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
 nmap <silent> <A-F1> :Unite session<CR>
-nmap <silent> <F2> :VimFilerExplorer<CR>
+nmap <silent> <F2>   :VimFilerExplorer<CR>
 nmap <silent> <C-F2> :Unite -start-insert file_rec/async:!<CR>
-map  <silent> <F4> :noh<CR>
-nmap <silent> <F5> :GundoToggle<CR>
-nmap <silent> <F8> :TagbarToggle<CR>
+map  <silent> <F4>   :noh<CR>
+nmap <silent> <F5>   :GundoToggle<CR>
+nmap <silent> <F8>   :TagbarToggle<CR>
 
 " stop opening help by mistake
 imap <F1> <ESC>
