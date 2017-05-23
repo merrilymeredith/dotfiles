@@ -4,18 +4,18 @@
 set nocompatible
 
 " on windows and not cygwin
-let s:on_windows=(has('win32') || has('win64'))
-let s:filename=expand('<sfile>')
+let g:on_windows = (has('win32') || has('win64'))
+let s:filename   = expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
   call vimrc#VundleInstall()
 
-  if s:on_windows == 0
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#begin()
-  else
+  if g:on_windows
     set rtp+=~/vimfiles/bundle/vundle/
     call vundle#begin('~/vimfiles/bundle')
+  else
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#begin()
   endif
 
   Plugin 'gmarik/vundle'
@@ -182,7 +182,7 @@ set tags+=.tags
 
 " Ignore compiled files and repositories
 set wildignore=*.o,*~,*.pyc
-if s:on_windows == 1
+if g:on_windows
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 else
     set wildignore+=.git\*,.hg\*,.svn\*
@@ -207,7 +207,7 @@ set sessionoptions=buffers,curdir,localoptions
 "set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
 set laststatus=2
 
-if s:on_windows == 1
+if g:on_windows
   let $MYVIM=$HOME.'/vimfiles'
 
   if !filewritable( $MYVIM . '/var' )
@@ -238,7 +238,7 @@ else
 
 endif
 
-if s:on_windows == 1
+if g:on_windows
   set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
   set linespace=0
 elseif has('osx')
@@ -340,12 +340,12 @@ let g:viewdoc_winwidth_max = 100
 
 ">> Gundo
 " I prefer python3 on windows if I have to use it. Needs a dll in path.
-if s:on_windows == 1
-  let g:gundo_prefer_python3=1
+if g:on_windows
+  let g:gundo_prefer_python3 = 1
 endif
 
 ">> Tagbar
-if s:on_windows == 1
+if g:on_windows
   if executable('ctags') == 0
     " if i haven't installed from chocolatey...
     let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'

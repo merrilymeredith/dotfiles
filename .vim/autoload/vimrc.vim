@@ -20,10 +20,7 @@ function! vimrc#MkNonExDir(file, buf) abort
 endfunction
 
 function! vimrc#VundleInstall() abort
-  " on windows and not cygwin
-  let l:on_windows = (has('win32') || has('win64'))
-
-  let l:vundle_readme = expand(l:on_windows
+  let l:vundle_readme = expand(g:on_windows
     \ ? '~/vimfiles/bundle/vundle/README.md'
     \ : '~/.vim/bundle/vundle/README.md')
 
@@ -33,7 +30,7 @@ function! vimrc#VundleInstall() abort
       return
     endif
 
-    if l:on_windows == 0
+    if g:on_windows == 0
       silent !mkdir -p ~/.vim/bundle
       silent !git clone --depth 1 https://github.com/gmarik/vundle ~/.vim/bundle/vundle
     else
@@ -43,5 +40,4 @@ function! vimrc#VundleInstall() abort
 
     echo "Installed Vundle, run :PluginInstall if desired"
   endif
-
 endfunction
