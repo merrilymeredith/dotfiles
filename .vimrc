@@ -256,20 +256,11 @@ endif
 
 
 " Autocmds  {{{
-function! AutoSessionConfig()
-  if strlen(v:servername) > 0 && match(v:servername, 'VIM') == -1
-    let g:unite_source_session_default_session_name = tolower(v:servername)
-    let g:unite_source_session_enable_auto_save = 1
-
-    UniteSessionLoad
-  endif
-endfunction
-
 augroup vimrc
   autocmd!
 
   " set and load a session based on servername
-  autocmd VimEnter  * call AutoSessionConfig()
+  autocmd VimEnter  * call vimrc#AutoSessionConfig()
 
   " complement to autowriteall
   autocmd FocusLost * silent! wa

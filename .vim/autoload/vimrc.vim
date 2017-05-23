@@ -17,6 +17,15 @@ func! vimrc#MkNonExDir(file, buf) abort
   endif
 endfunc
 
+func! vimrc#AutoSessionConfig() abort
+  if strlen(v:servername) > 0 && match(v:servername, 'VIM') == -1
+    let g:unite_source_session_default_session_name = tolower(v:servername)
+    let g:unite_source_session_enable_auto_save = 1
+
+    UniteSessionLoad
+  endif
+endfunc
+
 func! vimrc#VundleInstallAndBegin() abort
   let l:vundle_readme = expand(g:on_windows
     \ ? '~/vimfiles/bundle/vundle/README.md'
