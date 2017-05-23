@@ -1,25 +1,23 @@
 
-function! vimrc#AutoFmtToggle() abort
+func! vimrc#AutoFmtToggle() abort
   if &formatoptions =~ 'a'
-    setl fo-=a
-    echo '-a'
+    setl fo-=a | echo '-a'
   else
-    setl fo+=a
-    echo '+a'
+    setl fo+=a | echo '+a'
   endif
-endfunction
+endfunc
 
 " Make paths when writing, as necessary
-function! vimrc#MkNonExDir(file, buf) abort
+func! vimrc#MkNonExDir(file, buf) abort
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
     let dir=fnamemodify(a:file, ':h')
     if !isdirectory(dir)
       call mkdir(dir, 'p')
     endif
   endif
-endfunction
+endfunc
 
-function! vimrc#VundleInstallAndBegin() abort
+func! vimrc#VundleInstallAndBegin() abort
   let l:vundle_readme = expand(g:on_windows
     \ ? '~/vimfiles/bundle/vundle/README.md'
     \ : '~/.vim/bundle/vundle/README.md')
@@ -48,4 +46,4 @@ function! vimrc#VundleInstallAndBegin() abort
     set rtp+=~/.vim/bundle/vundle/
     call vundle#begin()
   endif
-endfunction
+endfunc
