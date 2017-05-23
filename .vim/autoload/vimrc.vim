@@ -19,7 +19,7 @@ function! vimrc#MkNonExDir(file, buf) abort
   endif
 endfunction
 
-function! vimrc#VundleInstall() abort
+function! vimrc#VundleInstallAndBegin() abort
   let l:vundle_readme = expand(g:on_windows
     \ ? '~/vimfiles/bundle/vundle/README.md'
     \ : '~/.vim/bundle/vundle/README.md')
@@ -39,5 +39,13 @@ function! vimrc#VundleInstall() abort
     endif
 
     echo "Installed Vundle, run :PluginInstall if desired"
+  endif
+
+  if g:on_windows
+    set rtp+=~/vimfiles/bundle/vundle/
+    call vundle#begin('~/vimfiles/bundle')
+  else
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#begin()
   endif
 endfunction

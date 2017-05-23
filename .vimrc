@@ -1,6 +1,5 @@
 " vim: et sts=2 sw=2
 " vim: fdm=marker
-
 set nocompatible
 
 " on windows and not cygwin
@@ -8,15 +7,7 @@ let g:on_windows = (has('win32') || has('win64'))
 let s:filename   = expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
-  call vimrc#VundleInstall()
-
-  if g:on_windows
-    set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#begin('~/vimfiles/bundle')
-  else
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#begin()
-  endif
+  call vimrc#VundleInstallAndBegin()
 
   Plugin 'gmarik/vundle'
 
