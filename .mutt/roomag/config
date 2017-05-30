@@ -14,7 +14,6 @@ set trash     = "+Trash"
 set smtp_url  = smtp://mhoward@ramdas.roomag.org:587/
 set realname  = "Meredith Howard"
 set from      = "mhoward@roomag.org"
-set signature = ~/.mutt/roomag/signature
 
 # leave to gpg.conf default
 unset pgp_sign_as
