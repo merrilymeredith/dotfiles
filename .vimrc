@@ -97,6 +97,9 @@ nmap gB :ls<CR>:b<Space>
 " Select last paste
 map gV `[v`]
 
+" Use ltag over tselect
+nmap g<C-]> :ltag <C-r><C-w><CR>
+
 " clear all interestingwords with \\k since \K is ri.vim
 nmap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
