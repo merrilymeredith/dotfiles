@@ -448,11 +448,9 @@ let g:interestingWordsRandomiseColors = 1
 command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
 command! MailPreviewHTML enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html' | 0
 
-if !exists(":DiffOrig")
-  " Diff unsaved buffer
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
-endif
+" Diff unsaved buffer
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+                \ | wincmd p | diffthis
 " }}}
 
 " Local stuff, finish up
