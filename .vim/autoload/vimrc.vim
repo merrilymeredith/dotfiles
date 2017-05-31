@@ -7,6 +7,11 @@ func! vimrc#AutoFmtToggle() abort
   endif
 endfunc
 
+func! vimrc#Ltag(term) abort
+  exe "ltag " . a:term
+  lopen
+endfunc
+
 " Make paths when writing, as necessary
 func! vimrc#MkNonExDir(file, buf) abort
   if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'

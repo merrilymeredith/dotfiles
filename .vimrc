@@ -98,7 +98,7 @@ nmap gB :ls<CR>:b<Space>
 map gV `[v`]
 
 " Use ltag over tselect
-nmap g<C-]> :ltag <C-r><C-w><CR>
+nmap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
 
 " clear all interestingwords with \\k since \K is ri.vim
 nmap <silent> <leader><leader>k :call UncolorAllWords()<CR>
@@ -276,6 +276,16 @@ augroup vimrc
 
   " double-click to edit in vimfiler
   autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
+
+  " Simplify noisy ltag output
+  autocmd BufReadPost quickfix
+    \ if w:quickfix_title =~ '^:ltag' |
+      \ setl modifiable |
+      \ silent exe ':%s/\^\\V\s*\|\\\$|.*//g' |
+      \ setl nomodifiable |
+    \ endif
+
+  autocmd BufReadPost quickfix nmap <buffer> q <C-w>c
 
 augroup END
 
