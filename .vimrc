@@ -476,14 +476,6 @@ if has('gui_running')
 
   colorscheme jellybeans
 else
-  if $TERM =~ '^screen'
-    if $TERM == 'screen-bce'
-      set t_Co=256
-    endif
-
-    set mouse=a
-  endif
-
   " vertical bar in insert mode.
   if &term =~ '^\(xterm\|screen\|rxvt\)'
     let &t_SI = "\e[5 q"
