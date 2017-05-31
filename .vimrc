@@ -440,29 +440,6 @@ let g:airline#extensions#branch#format = 2
 let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
 let g:interestingWordsRandomiseColors = 1
 
-">> neocomplcache
-let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
-
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-
-"Required to get ruby omni
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-" allow module completion from CPAN when combined with perlomni
-"let g:neocomplcache_omni_patterns.perl = '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-" seems like overkill
-
-if !exists('g:neocomplcache_filename_include_exprs')
-  let g:neocomplcache_filename_include_exprs = {}
-endif
-
-"help scan into "use" statements
-let g:neocomplcache_filename_include_exprs.perl = 'fnamemodify(substitute(v:fname, "/", "::", "g"), ":r")'
-
 " }}}
 
 
