@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+if [ -d ~/.hgext/hg-git ]; then
+  hg -R ~/.hgext/hg-git fetch
+else
+  hg clone https://bitbucket.org/durin42/hg-git ~/.hgext/hg-git
+
+  [ -f ~/.hgext/hgrc ] || echo '[extensions]' > ~/.hgext/hgrc
+  echo 'hggit = ~/.hgext/hg-git/hggit' >> ~/.hgext/hgrc
+fi
+
