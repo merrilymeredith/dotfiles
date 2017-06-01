@@ -5,6 +5,8 @@ if [ -d ~/.hgext/evolve ]; then
   hg -R ~/.hgext/evolve fetch
 else
   hg clone https://www.mercurial-scm.org/repo/evolve ~/.hgext/evolve
-  printf '[extensions]\nevolve = ~/.hgext/evolve/hgext/evolve.py\n' >> ~/.hgrc.local
+
+  [ -f ~/.hgext/hgrc ] || echo '[extensions]' > ~/.hgext/hgrc
+  echo 'evolve = ~/.hgext/evolve/hgext3rd/evolve' >> ~/.hgext/hgrc
 fi
 

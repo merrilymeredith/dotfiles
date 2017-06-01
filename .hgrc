@@ -40,4 +40,5 @@ changeset = {desc}\n\n
    "HG: subrepo {subrepo}\n"              }
    {splitlines(diff()) % 'HG: {line}\n'}
 
+%include ~/.hgext/hgrc
 %include ~/.hgrc.local
