@@ -75,16 +75,18 @@ bind index,pager <Tab>     previous-new-then-unread
 bind index,pager <BackTab> next-new-then-unread
 bind index,pager R         group-reply
 
+bind index g    noop
 bind index gg   first-entry
 bind index G    last-entry
 bind index M    recall-message
 
+bind pager g      noop
+bind pager i      noop
 bind pager <up>   previous-line
 bind pager <down> next-line
 bind pager gg     top
 bind pager G      bottom
 bind pager ?      search-reverse
-bind pager i      noop
 
 macro index,pager    \Cb "<pipe-message> urlscan<enter>" 'urlscan'
 macro attach,compose \Cb "<pipe-entry> urlscan<enter>" 'urlscan'

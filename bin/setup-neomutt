@@ -11,16 +11,17 @@ mkdir -p sandbox
 if [ ! -d sandbox/neomutt ]; then
   git clone --depth 1 https://github.com/neomutt/neomutt.git sandbox/neomutt
 else
+  make -C sandbox/neomutt clean >/dev/null 2>&1 || true
   git -C sandbox/neomutt pull
 fi
 
 cd sandbox/neomutt
 
-PLATFORM="$(uname -o)"
+PLATFORM="$(uname -s)"
 HCACHE="tokyocabinet"
 
 case "$PLATFORM" in
-  darwin*)
+  Darwin)
     # Use macports' headers
     OPENSSL_PREFIX=/opt/local
     ;;
@@ -29,13 +30,15 @@ case "$PLATFORM" in
     ;;
 esac
 
-./prepare -q \
+autoreconf -i --force
+
+./configure -q \
  --with-mailpath=/var/spool/mail \
  --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
  --with-sasl \
  --with-${HCACHE} \
  --enable-gpgme \
- --enable-imap --enable-smtp \
+ --disable-doc --disable-po
 
 make -s -j3
 
