@@ -1,6 +1,7 @@
 [ui]
 username = Meredith Howard <mhoward@roomag.org>
 merge = vimdiff
+logtemplate = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
 
 [extensions]
 color =
@@ -30,6 +31,19 @@ vimdiff.check = changed, conflicts
 git = true
 showfunc = true
 
+[color]
+diff.hunk     = cyan
+log.changeset = magenta
+logcust.date  = green
+logcust.user  = cyan
+logcust.decorate = yellow
+changeset.draft   = dim
+changeset.secret  = dim underline
+
+[templatealias]
+phaseset = "{label("changeset.{phase}", rev)}:{label('log.changeset', node|short)}"
+decorate = "{if(branches, " ({branches})")}{if(tags, " <{tags}>")}{if(bookmarks, " [{bookmarks}]")}"
+
 [committemplate]
 changeset = {desc}\n\n
     HG: {extramsg}
@@ -37,8 +51,11 @@ changeset = {desc}\n\n
    "HG: branch merge\n")
    }HG: branch '{branch}'\n{if(currentbookmark,
    "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
-   "HG: subrepo {subrepo}\n"              }
-   {splitlines(diff()) % 'HG: {line}\n'}
+   "HG: subrepo {subrepo}\n"              }{if(files,
+   "HG: ------------------------ >8 ------------------------
+    HG: Do not touch the line above.
+    HG: Everything below will be removed.
+    {diff()}", "HG: no files changed")}
 
 %include ~/.hgext/hgrc
 %include ~/.hgrc.local
