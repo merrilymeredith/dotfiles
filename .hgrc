@@ -1,6 +1,6 @@
 [ui]
-username = Meredith Howard <mhoward@roomag.org>
-merge = vimdiff
+username    = Meredith Howard <mhoward@roomag.org>
+merge       = vimdiff
 logtemplate = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
 
 [extensions]
@@ -24,21 +24,25 @@ ctags = !~/bin/git-ctags
 
 [merge-tools]
 vimdiff.executable = vim
-vimdiff.args = -d $base $local $output $other +close +close
-vimdiff.check = changed, conflicts
+vimdiff.args       = -d $base $local $output $other +close +close
+vimdiff.check      = changed, conflicts
 
 [diff]
-git = true
+git      = true
 showfunc = true
 
+[schemes]
+gh     = git://github.com/
+gh+ssh = git+ssh://github.com/
+
 [color]
-diff.hunk     = cyan
-log.changeset = magenta
-logcust.date  = green
-logcust.user  = cyan
+diff.hunk        = cyan
+log.changeset    = magenta
+logcust.date     = green
+logcust.user     = cyan
 logcust.decorate = yellow
-changeset.draft   = dim
-changeset.secret  = dim underline
+changeset.draft  = dim
+changeset.secret = dim underline
 
 [templatealias]
 phaseset = "{label("changeset.{phase}", rev)}:{label('log.changeset', node|short)}"
