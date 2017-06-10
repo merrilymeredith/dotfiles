@@ -21,6 +21,7 @@ pager = LESS='FSRXi' less
 [alias]
 fetch = pull --rebase
 ctags = !~/bin/git-ctags
+draft = log -r 'not public()'
 
 [merge-tools]
 vimdiff.executable = vim
