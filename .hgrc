@@ -56,11 +56,8 @@ changeset = {desc}\n\n
    "HG: branch merge\n")
    }HG: branch '{branch}'\n{if(currentbookmark,
    "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
-   "HG: subrepo {subrepo}\n"              }{if(files,
-   "HG: ------------------------ >8 ------------------------
-    HG: Do not touch the line above.
-    HG: Everything below will be removed.
-    {diff()}", "HG: no files changed")}
+   "HG: subrepo {subrepo}\n"              }
+   {splitlines(diff()) % 'HG: {line}\n'}
 
 %include ~/.hgext/hgrc
 %include ~/.hgrc.local
