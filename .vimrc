@@ -87,8 +87,8 @@ nmap <C-l> <C-w>l
 nmap <C-\> <C-w>p
 
 " navigate by on-screen lines
-map j gj
-map k gk
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " alt buffer
 nmap gb <C-^>
