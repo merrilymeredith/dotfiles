@@ -4,6 +4,7 @@ set nocompatible
 
 " on windows and not cygwin
 let g:on_windows = (has('win32') || has('win64'))
+let g:myvim      = $HOME . (g:on_windows ? '/vimfiles' : '/.vim')
 let s:filename   = expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
@@ -195,35 +196,19 @@ set sessionoptions=buffers,curdir,localoptions
 " Enable enhanced % matching in ruby
 runtime macros/matchit.vim
 
-if g:on_windows
-  let $MYVIM=$HOME.'/vimfiles'
+for subdir in ['backup', 'tmp', 'undo']
+  if !filewritable(g:myvim . '/var/' . subdir)
+    call mkdir(g:myvim . '/var/' . subdir, 'p', 0700)
+  endif
+endfor
 
-  if !filewritable( $MYVIM . '/var' )
-    silent execute '!mkdir "'.$HOME.'\vimfiles\var"'
-  endif
-  if !filewritable( $MYVIM. '/var/backup' )
-    silent execute '!mkdir "'.$HOME.'\vimfiles\var\backup"'
-  endif
-  if !filewritable( $MYVIM . '/var/tmp' )
-    silent execute '!mkdir "'.$HOME.'\vimfiles\var\tmp"'
-  endif
-  if !filewritable( $MYVIM . '/var/undo' )
-    silent execute '!mkdir "'.$HOME.'\vimfiles\var\undo"'
-  endif
+set backup
+let &backupdir = g:myvim . '/var/backup//,.'
+let &directory = g:myvim . '/var/tmp//,.'
 
-else
-  let $MYVIM=$HOME.'/.vim'
-
-  if !filewritable( $MYVIM . '/var/backup' )
-    silent execute '!mkdir -p "'.$MYVIM.'/var/backup"'
-  endif
-  if !filewritable( $MYVIM . '/var/tmp' )
-    silent execute '!mkdir "'.$MYVIM.'/var/tmp"'
-  endif
-  if !filewritable( $MYVIM . '/var/undo' )
-    silent execute '!mkdir "'.$MYVIM.'/var/undo"'
-  endif
-
+if has('persistent_undo')
+  set undofile
+  let &undodir = g:myvim . '/var/undo//,.'
 endif
 
 if g:on_windows
@@ -239,16 +224,6 @@ set guioptions-=T "no toolbar, menu, tearoffs
 set guioptions-=m
 set guioptions-=t
 
-set backupdir=$MYVIM/var/backup//,.
-set directory=$MYVIM/var/tmp//,.
-
-set backup
-set autowriteall
-
-if has('persistent_undo')
-  set undofile
-  set undodir=$MYVIM/var/undo//,.
-endif
 " }}}
 
 
@@ -365,7 +340,7 @@ let g:tagbar_type_perl = {
         \ 'l:aliases',
         \ 'd:pod:1:0',
     \ ],
-    \ 'deffile' : '$MYVIM/ctags/perl.cnf'
+    \ 'deffile' : g:myvim . '/ctags/perl.cnf'
 \ }
 
 let g:tagbar_type_elixir = {
