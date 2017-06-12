@@ -58,7 +58,6 @@ let s:filename   = expand('<sfile>')
   call vundle#end()
 " }}}
 
-
 " Key maps {{{
 nmap <silent> <F1>   :Unite buffer<CR>
 nmap <silent> <C-F1> :Unite -quick-match -short-source-names window tab:no-current<CR>
@@ -122,7 +121,6 @@ map <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 cabbr Q q
 cabbr W w
 "}}}
-
 
 " General settings  {{{
 syntax on
@@ -223,9 +221,7 @@ endif
 set guioptions-=T "no toolbar, menu, tearoffs
 set guioptions-=m
 set guioptions-=t
-
 " }}}
-
 
 " Autocmds  {{{
 augroup vimrc
@@ -255,7 +251,6 @@ augroup vimrc
     \ endif
 
   autocmd BufReadPost quickfix nmap <buffer> q <C-w>c
-
 augroup END
 
 " Make paths when writing, as necessary
@@ -274,16 +269,13 @@ augroup encrypted
 augroup END
 "}}}
 
-
 " Perl type-specific settings  {{{
 let perl_include_pod = 1
 let perl_sub_signatures = 1
 let perl_sync_dist = 200
 " }}}
 
-
 " Plugin settings  {{{
-
 ">> Vimwiki
 let g:vimwiki_list = [
   \ {
@@ -408,9 +400,7 @@ let g:airline#extensions#branch#format = 2
 " These are jellybeans colors and some complements
 let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
 let g:interestingWordsRandomiseColors = 1
-
 " }}}
-
 
 " {{{ Commands
 " Preview markdown mail -- I edit with headers so I box them in a code block.
@@ -464,4 +454,3 @@ else
     colorscheme jellybeans
   endif
 endif
-
