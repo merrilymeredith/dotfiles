@@ -140,6 +140,8 @@ if has('gui_running') || $LANG =~ 'UTF-8'
   set fillchars=fold:∷,vert:│
 endif
 
+set linebreak
+set showbreak=»\ 
 if exists('&breakindent')
   set bri
   set briopt+=sbr
@@ -158,14 +160,18 @@ set backspace=indent,eol,start
 set splitright splitbelow
 set scrolloff=15
 set sidescrolloff=10
-set ruler
+set laststatus=2
 set noshowmode
 set showcmd
 set wildmenu
 set wildignorecase
 
+set autowriteall
+
 set ttimeout
 set ttimeoutlen=200
+
+set synmaxcol=200
 
 set tags+=.tags
 
@@ -177,24 +183,17 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Enable enhanced % matching in ruby
-runtime macros/matchit.vim
-
 " Don't assume to scan includes when autocompleting
 set complete-=i
 
 " Never open with folds collapsed
 set nofoldenable
 
-set linebreak
-set showbreak=»\ 
-
 " keep the junk out (imo)
 set sessionoptions=buffers,curdir,localoptions
 
-" Superseded by vim-airline
-"set statusline=%f%m%r%h%w\ %y\ %=%l,%c\ %p%%\ %L
-set laststatus=2
+" Enable enhanced % matching in ruby
+runtime macros/matchit.vim
 
 if g:on_windows
   let $MYVIM=$HOME.'/vimfiles'
