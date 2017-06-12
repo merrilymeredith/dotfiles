@@ -3,7 +3,7 @@
 umask 027
 
 make -s -C ~/.ssh ||
-  cat .ssh/config.d/* > .ssh/config
+  cat ~/.ssh/config.d/* > ~/.ssh/config
 
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
