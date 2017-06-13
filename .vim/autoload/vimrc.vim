@@ -32,32 +32,23 @@ func! vimrc#AutoSessionConfig() abort
 endfunc
 
 func! vimrc#VundleInstallAndBegin() abort
-  let l:vundle_readme = expand(g:on_windows
-    \ ? '~/vimfiles/bundle/vundle/README.md'
-    \ : '~/.vim/bundle/vundle/README.md')
-
-  if !filereadable(l:vundle_readme)
+  if !filereadable(g:myvim . '/bundle/vundle/README.md')
     if !executable('git')
       echo "Can't autoinstall Vundle without git"
       return
     endif
 
-    if g:on_windows == 0
-      silent !mkdir -p ~/.vim/bundle
-      silent !git clone --depth 1 https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    else
-      silent execute '!mkdir "'. $HOME .'\vimfiles\bundle"'
-      silent execute '!git clone --depth 1 https://github.com/gmarik/vundle "'. $HOME .'\vimfiles\bundle\vundle"'
-    endif
+    try
+      call mkdir(g:myvim . '/bundle', 'p')
+    catch
+    endtry
+    exec 'cd ' . g:myvim . '/bundle'
+    silent !git clone --depth 1 https://github.com/gmarik/vundle
+    cd -
 
     echo "Installed Vundle, run :PluginInstall if desired"
   endif
 
-  if g:on_windows
-    set rtp+=~/vimfiles/bundle/vundle/
-    call vundle#begin('~/vimfiles/bundle')
-  else
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#begin()
-  endif
+  let &rtp .= ',' . g:myvim . '/bundle/vundle'
+  call vundle#begin(g:myvim . '/bundle')
 endfunc
