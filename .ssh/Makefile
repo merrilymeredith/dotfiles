@@ -2,7 +2,7 @@
 # config.d/10-base to config and add an Include config.d/*
 
 config: config.d/*
-	umask 277 && cat config.d/* > $@
+	cat config.d/* > $@ && chmod 600 $@
 
 clean:
 	rm -f config

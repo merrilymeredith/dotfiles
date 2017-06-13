@@ -2,8 +2,10 @@
 
 umask 027
 
-make -s -C ~/.ssh ||
-  cat ~/.ssh/config.d/* > ~/.ssh/config
+make -s -C ~/.ssh || {
+  cat ~/.ssh/config.d/* > ~/.ssh/config &&
+  chmod 600 $_
+}
 
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
