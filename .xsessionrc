@@ -13,6 +13,9 @@ hsetroot -solid "#002244" >/dev/null 2>&1 || \
 xcompmgr -n >/dev/null 2>&1 </dev/null &
 
 xmodmap ~/.xmodmaprc
+if [ -r ~/.xmodmaprc.local ]; then
+  xmodmap ~/.xmodmaprc.local
+fi
 
 if [ -r ~/.Xdefaults.local ]; then
   xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
