@@ -5,6 +5,7 @@ set nocompatible
 " on windows and not cygwin
 let g:on_windows = (has('win32') || has('win64'))
 let g:myvim      = $HOME . (g:on_windows ? '/vimfiles' : '/.vim')
+let g:vimcache   = $HOME . '/.cache/vim'
 let s:filename   = expand('<sfile>')
 
 " Set up Vundle and plugins  {{{
@@ -195,18 +196,18 @@ set sessionoptions=buffers,curdir,localoptions
 runtime macros/matchit.vim
 
 for subdir in ['backup', 'tmp', 'undo']
-  if !filewritable(g:myvim . '/var/' . subdir)
-    call mkdir(g:myvim . '/var/' . subdir, 'p', 0700)
+  if !filewritable(g:vimcache . '/' . subdir)
+    call mkdir(g:vimcache . '/' . subdir, 'p', 0700)
   endif
 endfor
 
 set backup
-let &backupdir = g:myvim . '/var/backup//,.'
-let &directory = g:myvim . '/var/tmp//,.'
+let &backupdir = g:vimcache . '/backup//,.'
+let &directory = g:vimcache . '/tmp//,.'
 
 if has('persistent_undo')
   set undofile
-  let &undodir = g:myvim . '/var/undo//,.'
+  let &undodir = g:vimcache . '/undo//,.'
 endif
 
 if g:on_windows
