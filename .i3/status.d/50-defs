@@ -1,5 +1,5 @@
 wireless wlan0 {
-        format_up = "W: (%quality at %essid) %ip"
+        format_up = "W: %ip %essid(%quality)"
         format_down = "W: down"
 }
 
