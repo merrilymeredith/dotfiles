@@ -17,6 +17,9 @@
 [diff]
 	compactionheuristic = true
 
+[merge]
+	tool = vimdiff2
+
 [alias]
 	ci       = commit
 	rec      = commit -p

@@ -25,7 +25,7 @@ draft = log -r 'not public()'
 
 [merge-tools]
 vimdiff.executable = vim
-vimdiff.args       = -d $base $local $output $other +close +close
+vimdiff.args       = -d -c 'hid|hid' $base $local $output $other
 vimdiff.check      = changed, conflicts
 
 [diff]
