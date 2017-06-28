@@ -1,10 +1,9 @@
-wireless wlan0 {
+wireless _first_ {
         format_up = "W: %ip %essid(%quality)"
         format_down = "W: down"
 }
 
-ethernet eth0 {
-        # if you use %speed, i3status requires root privileges
+ethernet _first_ {
         format_up = "E: %ip"
         format_down = "E: down"
 }
@@ -21,13 +20,6 @@ volume master {
         mixer = "Master"
         mixer_idx = 0
 }
-run_watch DHCP {
-        pidfile = "/var/run/dhclient*.pid"
-}
-
-run_watch VPN {
-        pidfile = "/var/run/vpnc/pid"
-}
 
 tztime local {
         format = "%m-%d %H:%M"
@@ -39,4 +31,5 @@ load {
 
 disk "/" {
         format = "%avail"
+	prefix_type = "custom"
 }

@@ -1,4 +1,5 @@
-order += "ethernet eth0"
+order += "ethernet _first_"
 order += "load"
+order += "disk /"
 order += "tztime local"
 
