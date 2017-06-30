@@ -95,8 +95,8 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 nmap gb <C-^>
 nmap gB :ls<CR>:b<Space>
 
-" Select last paste
-map gV `[v`]
+" Select last paste, in the same mode it was pasted in
+nmap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Use ltag over tselect
 nmap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
