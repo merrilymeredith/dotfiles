@@ -1,4 +1,4 @@
-typeset -U path manpath omz_plugins zsh_plugins envthings
+typeset -U omz_plugins zsh_plugins envthings
 
 # Version/environment management tools to load
 envthings=(plenv rakudobrew)
@@ -33,9 +33,6 @@ if [ -f ~/.zgen/zgen.zsh ]; then
     zgen save
   fi
 fi
-
-
-path[1,0]="$HOME/bin"
 
 REPORTTIME=5
 
