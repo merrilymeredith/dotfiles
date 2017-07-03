@@ -10,7 +10,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 omz_plugins=(
   plugins/common-aliases
-  plugins/gitfast
   plugins/colored-man-pages
 )
 
