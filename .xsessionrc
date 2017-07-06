@@ -7,10 +7,13 @@ if [ "$PLATFORM" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
 fi
 
-hsetroot -solid "#002244" >/dev/null 2>&1 || \
-  xsetroot -def -solid "#002244"
+make -s -C ~/.i3 || {
+  cat ~/.i3/config.d/* > ~/.i3/config
+  cat ~/.i3/status.d/* > ~/.i3/status
+}
 
-xcompmgr -n >/dev/null 2>&1 </dev/null &
+hsetroot -solid "#002244" ||
+  xsetroot -def -solid "#002244"
 
 xmodmap ~/.xmodmaprc
 if [ -r ~/.xmodmaprc.local ]; then
@@ -21,12 +24,9 @@ if [ -r ~/.Xdefaults.local ]; then
   xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
 fi
 
-urxvtd -q -o -f
+xcompmgr -n &
 
-make -s -C ~/.i3 || {
-  cat ~/.i3/config.d/* > ~/.i3/config
-  cat ~/.i3/status.d/* > ~/.i3/status
-}
+urxvtd -o &
 
 if [ -r ~/.xsessionrc.local ]; then
   . ~/.xsessionrc.local
@@ -37,7 +37,9 @@ if [ "$VIRT" = "yes" ]; then
 else
   xset b off s 300 dpms 360
   xautolock -detectsleep &
-  pulseaudio --daemonize
-  nm-applet >/dev/null 2>&1 </dev/null &
+  pulseaudio --daemonize=no &
+  nm-applet &
 fi
+
+jobs >&2
 
