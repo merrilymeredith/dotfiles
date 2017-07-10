@@ -24,10 +24,7 @@ endfunc
 
 func! vimrc#AutoSessionConfig() abort
   if strlen(v:servername) > 0 && match(v:servername, 'VIM') == -1
-    let g:unite_source_session_default_session_name = tolower(v:servername)
-    let g:unite_source_session_enable_auto_save = 1
-
-    UniteSessionLoad
+    exec 'UniteSessionLoad ' . tolower(v:servername)
   endif
 endfunc
 

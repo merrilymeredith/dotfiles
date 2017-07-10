@@ -362,6 +362,9 @@ try
 catch
 endtry
 
+" like autowrite, applies to any loaded session
+let g:unite_source_session_enable_auto_save = 1
+
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
