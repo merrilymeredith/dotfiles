@@ -1,19 +1,19 @@
 hs.window.animationDuration = 0
 
-function reloadConfig(files)
-    hs.reload()
-end
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+-- set up reload on modify
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
 
+-- aliases and partial bindings to make life easier
 local bindKey  = hs.hotkey.bind
 local cmd      = hs.fnutils.partial(bindKey, {"cmd"})
 local cmdShift = hs.fnutils.partial(bindKey, {"cmd", "shift"})
 local cmdCtrl  = hs.fnutils.partial(bindKey, {"cmd", "ctrl"})
 
-cmdShift('r', reloadConfig)
-
 function focusedWindow() return hs.window.focusedWindow() or hs.window.desktop() end
 function focusTo(direction) hs.window['focusWindow' .. direction](focusedWindow()) end
+
+-- and the key bindings
+cmdShift('r', hs.reload)
 
 cmd('k',  function () focusTo('North') end)
 cmd('up', function () focusTo('North') end)
