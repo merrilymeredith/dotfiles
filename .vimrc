@@ -136,11 +136,12 @@ set ignorecase
 set smartcase
 
 if has('gui_running') || $LANG =~ 'UTF-8'
-  set listchars=tab:⇥·,trail:◼,nbsp:◻
+  set listchars=tab:⇥·,trail:◼,nbsp:◻,extends:⥂,precedes:⥃
   " eol:↩   not as useful as trail i think
   set fillchars=fold:∷,vert:│
 endif
 
+set nowrap
 set linebreak
 set showbreak=»\ 
 if exists('&breakindent')
