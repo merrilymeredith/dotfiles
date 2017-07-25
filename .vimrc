@@ -139,6 +139,8 @@ if has('gui_running') || $LANG =~ 'UTF-8'
   set listchars=tab:⇥·,trail:◼,nbsp:◻,extends:⥂,precedes:⥃
   " eol:↩   not as useful as trail i think
   set fillchars=fold:∷,vert:│
+else
+  set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 endif
 
 set nowrap
