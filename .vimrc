@@ -153,7 +153,7 @@ set virtualedit=block
 set autoindent
 set expandtab
 set shiftwidth=2
-set softtabstop=2
+set shiftround
 
 set formatoptions=cqln1j
 set backspace=indent,eol,start
