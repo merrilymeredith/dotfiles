@@ -170,7 +170,7 @@ set wildignorecase
 set autowriteall
 
 set ttimeout
-set ttimeoutlen=200
+set ttimeoutlen=25
 
 set synmaxcol=200
 
