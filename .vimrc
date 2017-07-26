@@ -142,7 +142,6 @@ else
   set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 endif
 
-set nowrap
 set linebreak
 set showbreak=»\ 
 if exists('&breakindent')
