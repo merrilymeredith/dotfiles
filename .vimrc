@@ -44,7 +44,6 @@ let s:filename   = expand('<sfile>')
   Plugin 'yko/mojo.vim'
   Plugin 'slashmili/alchemist.vim'
   Plugin 'nathangrigg/vim-beancount'
-  Plugin 'chr4/sslsecure.vim'
 
   Plugin 'powerman/vim-plugin-viewdoc'
   Plugin 'powerman/vim-plugin-AnsiEsc'
