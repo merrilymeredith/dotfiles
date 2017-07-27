@@ -2,24 +2,6 @@
 	email = mhoward@roomag.org
 	name  = Meredith Howard
 
-[transfer]
-        fsckobjects = true
-
-[fsck]
-	badTimezone = ignore
-
-[ui]
-	color = true
-
-[core]
-	pager = LESS='FSRXi' less
-
-[diff]
-	compactionheuristic = true
-
-[merge]
-	tool = vimdiff2
-
 [alias]
 	ci       = commit
 	rec      = commit -p
@@ -40,12 +22,31 @@
 	glog     = log --graph --pretty=onelinecustom
 	recent   = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${@:2}' -
 
-[pretty]
-	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
-
 [branch]
 	autosetuprebase = always
 	autosetupmerge  = always
+
+[commit]
+	verbose = true
+	gpgsign = true
+
+[core]
+	pager = LESS='FSRXi' less
+
+[diff]
+	compactionheuristic = true
+
+[fsck]
+	badTimezone = ignore
+
+[gpg]
+	program = "gpg2"
+
+[merge]
+	tool = vimdiff2
+
+[pretty]
+	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
 
 [push]
 	default = current
@@ -53,12 +54,11 @@
 [rebase]
 	stat = true
 
-[commit]
-	verbose = true
-	gpgsign = true
+[transfer]
+        fsckobjects = true
 
-[gpg]
-	program = "gpg2"
+[ui]
+	color = true
 
 # include.path is available in git 1.7.10 and later
 [include]
