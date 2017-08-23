@@ -1,3 +1,6 @@
+func! vimrc#CommandAlias(abbrev, expand) abort
+  execute printf('cnoreabbrev <expr> %s (getcmdtype()==":" && getcmdpos()==1) ? "%s" : "%s"', a:abbrev, a:expand, a:abbrev)
+endfunc
 
 func! vimrc#AutoFmtToggle() abort
   if &formatoptions =~ 'a'

@@ -49,7 +49,8 @@ let s:filename   = expand('<sfile>')
   Plugin 'powerman/vim-plugin-viewdoc'
   Plugin 'powerman/vim-plugin-AnsiEsc'
 
-  let g:no_viewdoc_maps = 1
+  let g:no_viewdoc_maps   = 1
+  let g:no_viewdoc_abbrev = 1
 
   try
     execute 'source ' . s:filename . '.local-pre'
@@ -127,8 +128,18 @@ if exists("g:loaded_mucomplete")
   set shortmess+=c
 endif
 
-cabbr Q q
-cabbr W w
+" Command Aliases  {{{
+command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
+CAlias Q q
+CAlias W w
+
+" make these default to one window/buffer too
+CAlias  doc      ViewDoc!
+CAlias  help     ViewDocHelp!
+CAlias  man      ViewDocMan!
+CAlias  perldoc  ViewDocPerl!
+"}}}
+
 "}}}
 
 " General settings  {{{
