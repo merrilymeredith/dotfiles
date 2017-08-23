@@ -8,7 +8,6 @@ color =
 graphlog =
 pager =
 progress =
-churn =
 rebase =
 record =
 shelve =
