@@ -207,7 +207,10 @@ endif
 " Don't assume to scan includes when autocompleting
 set complete-=i complete-=t
 
-set completeopt+=menuone,noinsert
+set completeopt+=menuone
+if has('patch-7.4-775')
+  set completeopt+=noinsert
+endif
 
 " Never open with folds collapsed
 set nofoldenable
