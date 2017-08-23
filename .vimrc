@@ -187,6 +187,8 @@ set showcmd
 set wildmenu
 set wildignorecase
 
+set belloff=all
+
 set autowriteall
 
 set ttimeout
