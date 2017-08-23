@@ -31,6 +31,7 @@ let s:filename   = expand('<sfile>')
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'tpope/vim-endwise'
+  Plugin 'lifepillar/vim-mucomplete'
 
   Plugin 'vimwiki/vimwiki'
 
@@ -119,6 +120,13 @@ map <leader>tm :Tabularize methods<CR>
 
 map <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
+if exists("g:loaded_mucomplete")
+  inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+  inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+  inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+  set shortmess+=c
+endif
+
 cabbr Q q
 cabbr W w
 "}}}
@@ -186,7 +194,9 @@ else
 endif
 
 " Don't assume to scan includes when autocompleting
-set complete-=i
+set complete-=i complete-=t
+
+set completeopt+=menuone,noinsert
 
 " Never open with folds collapsed
 set nofoldenable
@@ -221,9 +231,7 @@ else
   set guifont=DejaVu\ Sans\ Mono\ 10
 endif
 
-set guioptions-=T "no toolbar, menu, tearoffs
-set guioptions-=m
-set guioptions-=t
+set go-=T go-=m go-=t "no toolbar, menu, tearoffs
 " }}}
 
 " Autocmds  {{{
@@ -279,6 +287,11 @@ let perl_sync_dist = 200
 " }}}
 
 " Plugin settings  {{{
+">> mucomplete
+" enable and prefer local buffer before tags
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#chains = {'default': ['path', 'omni', 'c-n', 'tags', 'dict', 'uspl']}
+
 ">> Vimwiki
 let g:vimwiki_list = [
   \ {
