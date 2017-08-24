@@ -187,7 +187,7 @@ set showcmd
 set wildmenu
 set wildignorecase
 
-set belloff=all
+set noerrorbells
 
 set autowriteall
 
