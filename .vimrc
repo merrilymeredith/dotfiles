@@ -188,6 +188,9 @@ set wildmenu
 set wildignorecase
 
 set noerrorbells
+if has('patch-7.4-793')
+  set belloff=all
+endif
 
 set autowriteall
 
