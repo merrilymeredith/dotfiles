@@ -290,12 +290,13 @@ augroup AutoMkdir
 augroup END
 
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
+" hacked to work with vimwiki
 augroup encrypted
   autocmd!
-  autocmd BufReadPre,FileReadPre *.gpg set noswapfile noundofile nobackup viminfo=
-  autocmd BufReadPost *.gpg :%!GPG_TTY=/dev/tty gpg2 --decrypt 2> /dev/null
-  autocmd BufWritePre *.gpg :%!GPG_TTY=/dev/tty gpg2 -se -a --default-recipient-self
-  autocmd BufWritePost *.gpg u
+  autocmd BufReadPre,FileReadPre *.gpg,*.gpg.wiki setl noswapfile noundofile nobackup viminfo=
+  autocmd BufReadPost *.gpg,*.gpg.wiki :sil %!GPG_TTY=/dev/tty gpg2 --decrypt 2> /dev/null
+  autocmd BufWritePre *.gpg,*.gpg.wiki :sil %!GPG_TTY=/dev/tty gpg2 -se -a --default-recipient-self
+  autocmd BufWritePost *.gpg,*.gpg.wiki :sil undo
 augroup END
 "}}}
 
