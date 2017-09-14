@@ -151,7 +151,7 @@ set hlsearch
 set ignorecase
 set smartcase
 
-if has('gui_running') || $LANG =~ 'UTF-8'
+if has('gui_running') || $LANG =~# 'UTF-8'
   set listchars=tab:⇥·,trail:◼,nbsp:◻,extends:⥂,precedes:⥃
   " eol:↩   not as useful as trail i think
   set fillchars=fold:∷,vert:│
@@ -263,7 +263,7 @@ augroup vimrc
 
   " Jump to last known pos
   autocmd BufReadPost *
-    \ if &filetype !~ 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
+    \ if &filetype !~# 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
 
@@ -272,7 +272,7 @@ augroup vimrc
 
   " Simplify noisy ltag output
   autocmd BufReadPost quickfix
-    \ if w:quickfix_title =~ '^:ltag' |
+    \ if w:quickfix_title =~# '^:ltag' |
       \ setl modifiable |
       \ silent exe ':%s/\^\\V\s*\|\\\$|.*//g' |
       \ setl nomodifiable |
@@ -455,7 +455,7 @@ try
 catch
 endtry
 
-if g:airline_powerline_fonts == 0 && (has('gui_running') || $LANG =~ 'UTF-8')
+if g:airline_powerline_fonts == 0 && (has('gui_running') || $LANG =~# 'UTF-8')
   let g:airline_left_sep  = '▒'
   let g:airline_right_sep = g:airline_left_sep
 endif
@@ -471,7 +471,7 @@ if has('gui_running')
   colorscheme jellybeans
 else
   " vertical bar in insert mode.
-  if &term =~ '^\(xterm\|screen\|rxvt\)'
+  if &term =~# '^\(xterm\|screen\|rxvt\)'
     let &t_SI = "\e[5 q"
     let &t_EI = "\e[0 q"
     if exists("$TMUX")
@@ -480,7 +480,7 @@ else
     endif
   endif
 
-  if $TERM =~ 'rxvt-unicode'
+  if $TERM =~# 'rxvt-unicode'
     set ttymouse=urxvt
     set mouse=a
     map <Esc>[7~ <Home>

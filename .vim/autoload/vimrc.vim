@@ -3,7 +3,7 @@ func! vimrc#CommandAlias(abbrev, expand) abort
 endfunc
 
 func! vimrc#AutoFmtToggle() abort
-  if &formatoptions =~ 'a'
+  if &formatoptions =~# 'a'
     setl formatoptions-=a | echo '-a'
   else
     setl formatoptions+=a | echo '+a'
