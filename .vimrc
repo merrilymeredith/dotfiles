@@ -146,8 +146,6 @@ CAlias  perldoc  ViewDocPerl!
 syntax on
 filetype plugin indent on
 
-set encoding=utf-8
-
 set incsearch
 set hlsearch
 set ignorecase
@@ -443,8 +441,8 @@ let g:interestingWordsRandomiseColors = 1
 
 " {{{ Commands
 " Preview markdown mail -- I edit with headers so I box them in a code block.
-command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
-command! MailPreviewHTML enew | set bt=nofile | setf html | 0r # | exe 'norm 0O```<Esc>}O```' | silent exe '%!mutt-md2html' | 0
+command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm! 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
+command! MailPreviewHTML enew | set bt=nofile | setf html | 0r # | exe 'norm! 0O```<Esc>}O```' | silent exe '%!mutt-md2html' | 0
 
 " Diff unsaved buffer
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
