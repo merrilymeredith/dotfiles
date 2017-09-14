@@ -162,8 +162,8 @@ endif
 set linebreak
 set showbreak=»\ 
 if exists('&breakindent')
-  set bri
-  set briopt+=sbr
+  set breakindent
+  set breakindentopt+=sbr
 endif
 
 set virtualedit=block

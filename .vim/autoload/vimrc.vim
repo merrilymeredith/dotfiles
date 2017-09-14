@@ -4,9 +4,9 @@ endfunc
 
 func! vimrc#AutoFmtToggle() abort
   if &formatoptions =~ 'a'
-    setl fo-=a | echo '-a'
+    setl formatoptions-=a | echo '-a'
   else
-    setl fo+=a | echo '+a'
+    setl formatoptions+=a | echo '+a'
   endif
 endfunc
 
@@ -50,6 +50,6 @@ func! vimrc#VundleInstallAndBegin() abort
     echo "Installed Vundle, run :PluginInstall if desired"
   endif
 
-  let &rtp .= ',' . bundlepath . '/vundle'
+  let &runtimepath .= ',' . bundlepath . '/vundle'
   call vundle#begin(bundlepath)
 endfunc
