@@ -1,6 +1,9 @@
 " vim: et sts=2 sw=2
 " vim: fdm=marker
+
 set nocompatible
+set encoding=utf-8
+scriptencoding utf-8
 
 " on windows and not cygwin
 let g:on_windows = (has('win32') || has('win64'))
