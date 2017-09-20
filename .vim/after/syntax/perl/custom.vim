@@ -12,7 +12,7 @@ let b:indent_use_syntax = 0
 syn match podCommand "^=method" contained nextgroup=podCmdText contains=@NoSpell
 syn match podCommand "^=func" contained nextgroup=podCmdText contains=@NoSpell
 
-syn sync minlines=15
+syn sync minlines=50
 
 " Tweak some colors
 hi! def link perlPOD      Comment
