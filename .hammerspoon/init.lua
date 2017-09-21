@@ -46,6 +46,8 @@ cmd('return', function ()
   ]])
 end)
 
+cmdShift('return', function () os.execute('/opt/local/bin/mvim') end)
+
 -- cache window frames before moving?
 -- save cache?
 -- focus by direction is a little strict
