@@ -43,9 +43,10 @@ autoreconf -i --force
 make -s -j3
 
 cd ~/bin
-for BIN in mutt mutt_dotlock pgpewrap; do
+for BIN in neomutt mutt_dotlock pgpewrap; do
   ln -sf ../sandbox/neomutt/$BIN
 done
+ln -sf ../sandbox/neomutt/neomutt mutt
 
 :<<=cut
 =head1 NAME
