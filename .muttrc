@@ -79,6 +79,9 @@ bind index g    noop
 bind index gg   first-entry
 bind index G    last-entry
 bind index M    recall-message
+bind index -    collapse-thread
+bind index _    collapse-all
+bind index +    limit-current-thread
 
 bind pager g      noop
 bind pager i      noop
