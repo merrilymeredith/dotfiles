@@ -4,7 +4,8 @@ set $mod Mod4
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc || urxvt
+bindsym $mod+Return        exec urxvtc || urxvt
+bindsym $mod+Shift+Return  exec gvim
 
 # kill focused window
 bindsym $mod+Shift+q kill
