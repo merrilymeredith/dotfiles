@@ -41,7 +41,7 @@ cmd('return', function ()
   hs.applescript.applescript([[
     tell application "iTerm"
       set newterm to (create window with default profile)
-      tell newterm to activate
+      activate window newterm
     end tell
   ]])
 end)
