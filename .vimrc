@@ -282,6 +282,9 @@ augroup vimrc
     \ endif
 
   autocmd BufReadPost quickfix nmap <buffer> q <C-w>c
+
+  " Neomutt changed their tmpfile pattern, ugh
+  autocmd BufNewFile,BufRead neomutt-*-\w\+ setf mail
 augroup END
 
 " Make paths when writing, as necessary
