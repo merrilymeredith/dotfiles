@@ -8,6 +8,11 @@
 --maximum-consecutive-blank-lines=2
 --opening-token-right
 --all-containers-tightness=2
+--block-brace-tightness=1
 --indent-spaced-block-comments
 --closing-side-comments
 --closing-side-comment-interval=100
+--stack-opening-hash-brace
+--stack-closing-hash-brace
+--stack-opening-square-bracket
+--stack-closing-square-bracket
