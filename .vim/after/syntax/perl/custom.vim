@@ -5,6 +5,10 @@ compiler perl
 setlocal makeprg=perl\ -c\ %\ $*
 setlocal iskeyword+=:
 
+if g:perl_tidy_equalprg
+  setlocal equalprg=perltidy\ -q
+endif
+
 " this keeps indents from jumping more than one level
 let b:indent_use_syntax = 0
 
