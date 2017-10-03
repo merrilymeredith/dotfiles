@@ -1,4 +1,4 @@
---iterations=2
+--converge
 --extended-syntax
 --indent-columns=2
 --continuation-indentation=2
@@ -12,7 +12,5 @@
 --indent-spaced-block-comments
 --closing-side-comments
 --closing-side-comment-interval=100
---stack-opening-hash-brace
 --stack-closing-hash-brace
---stack-opening-square-bracket
 --stack-closing-square-bracket
