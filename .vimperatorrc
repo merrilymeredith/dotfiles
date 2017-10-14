@@ -8,20 +8,13 @@ nmap <F1> <Nop>
 nmap <F4> :noh<CR>
 
 nmap q <Nop>
-nmap s tddg 
-nmap S :winopen -private ddg 
+nmap s tgoogle 
+nmap S :winopen -private google 
 
 nmap J gt
 nmap K gT
 
 nmap <C-r> :reader<CR>
-
-javascript <<EOJ
-  (function() {
-    var ddg = Services.search.getEngineByName('DuckDuckGo');
-    if (ddg) ddg.alias = 'ddg';
-  })();
-EOJ
 
 source! ~/.vimperatorrc.local
 
