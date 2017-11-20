@@ -23,9 +23,6 @@ script_line2 = require('~/.replyrc.local.pl') if -e '~/.replyrc.local.pl'; ();
 [Autocomplete::Commands]
 [Autocomplete::Keywords]
 
-[Pager]
-pager = less -SRX
-
 [Timer]
 mintime = 1.0
 
