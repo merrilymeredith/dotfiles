@@ -4,8 +4,7 @@
 runtime contrib/carp.vim
 runtime contrib/highlight-all-pragmas.vim
 runtime contrib/moose.vim
-runtime contrib/method-signatures.vim
-runtime contrib/function-parameters.vim
+" runtime contrib/function-parameters.vim
 runtime contrib/test-more.vim
 runtime contrib/try-tiny.vim
 runtime contrib/heredoc-sql.vim
