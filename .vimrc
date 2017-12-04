@@ -308,7 +308,9 @@ augroup END
 let perl_include_pod     = 1
 let perl_sub_signatures  = 1
 let perl_sync_dist       = 200
-let g:perl_tidy_equalprg = executable('perltidy') ? 1 : 0
+
+let g:perl_compiler_force_warnings = 0
+let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 " }}}
 
 " Plugin settings  {{{

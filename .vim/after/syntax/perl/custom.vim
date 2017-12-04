@@ -1,8 +1,5 @@
 compiler perl
-" even with g:perl_compiler_force_warnings = 0, perl -w is used and
-" that's just noisy with intentional no-warnings blocks out there
 
-setlocal makeprg=perl\ -c\ %\ $*
 setlocal iskeyword+=:
 
 if g:perl_tidy_equalprg
