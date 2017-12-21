@@ -122,28 +122,28 @@ unignore list-id posted-to
 hdr_order from to cc date subject
 
 # jellybeans-ish
-color attachment color162 color233
-color bold color183 color233
-color hdrdefault color215 color233
-color indicator brightwhite color234
-color markers color215 color233
-color message color188 color233
-color normal color188 color233
-color search brightgreen color233
-color signature color222 color233
-color status color30 color235
-color tilde color244 color233
-color tree color104 color233
-# color underline brightmagenta color233
-color error color167 color233
+color   attachment   color162        color233
+color   bold         color183        color233
+color   hdrdefault   color215        color233
+color   indicator    brightwhite     color234
+color   markers      color215        color233
+color   message      color188        color233
+color   normal       color188        color233
+color   search       brightgreen     color233
+color   signature    color222        color233
+color   status       color30         color235
+color   tilde        color244        color233
+color   tree         color104        color233
+color   error        color167        color233
+# color   underline    brightmagenta   color233
 
-# Colours for items in the index
-color index color188 color233 ~A
-color index default color233 ~R
-color index color110 color233 ~U
-color index color213 color233 ~F
-color index color217 color233 ~T
-color index color246 color233 ~D
+# Colors for items in the index
+color   index   color188   color233   ~A
+color   index   default    color233   ~R
+color   index   color110   color233   ~U
+color   index   color213   color233   ~F
+color   index   color217   color233   ~T
+color   index   color246   color233   ~D
 
 # Highlights inside message body
 
