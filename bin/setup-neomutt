@@ -18,27 +18,26 @@ fi
 cd sandbox/neomutt
 
 PLATFORM="$(uname -s)"
+CONFIGURE_OPTIONS=''
 HCACHE="tokyocabinet"
 
 case "$PLATFORM" in
   Darwin)
     # Use macports' headers
-    OPENSSL_PREFIX=/opt/local
-    ;;
-  Cygwin)
-    HCACHE=lmdb
+    CONFIGURE_OPTIONS='--with-ssl=/opt/local --with-gpgme=/opt/local'
     ;;
 esac
 
-autoreconf -i --force
+autoreconf -i --force || true
 
-./configure -q \
+./configure \
  --with-mailpath=/var/spool/mail \
- --with-ssl${OPENSSL_PREFIX:+=$OPENSSL_PREFIX} \
- --with-sasl \
- --with-${HCACHE} \
- --enable-gpgme \
- --disable-doc --disable-po
+ --ssl \
+ --sasl \
+ --lmdb \
+ --gpgme \
+ $CONFIGURE_OPTIONS \
+ --disable-doc
 
 make -s -j3
 
@@ -63,7 +62,7 @@ neomutt build.
 =head2 Debian
 
   apt install autoconf links pandoc gnupg2 gpgsm urlscan libncursesw5-dev \
-    libssl-dev libsasl2-dev libtokyocabinet-dev libgpgme11-dev
+    libssl-dev libsasl2-dev liblmdb-dev libgpgme11-dev
 
 =head2 Cygwin / Babun
 
