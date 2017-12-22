@@ -17,14 +17,12 @@ fi
 
 cd sandbox/neomutt
 
-PLATFORM="$(uname -s)"
-CONFIGURE_OPTIONS=''
-HCACHE="tokyocabinet"
-
-case "$PLATFORM" in
+case "$(uname -s)" in
   Darwin)
-    # Use macports' headers
     CONFIGURE_OPTIONS='--with-ssl=/opt/local --with-gpgme=/opt/local'
+    ;;
+  *)
+    CONFIGURE_OPTIONS=''
     ;;
 esac
 
