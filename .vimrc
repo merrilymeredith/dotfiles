@@ -272,6 +272,11 @@ augroup vimrc
     \   exe "normal! g`\"" |
     \ endif
 
+  " Simple highlight conflict markers
+  autocmd BufReadPost *
+    \ syn match Error "^\(<\|>\||\)\1\{6,7}" |
+    \ syn match Error "^=\{7,8}$"
+
   " double-click to edit in vimfiler
   autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
 
