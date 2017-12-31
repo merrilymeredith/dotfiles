@@ -14,3 +14,4 @@
 --closing-side-comment-interval=100
 --stack-closing-hash-brace
 --stack-closing-square-bracket
+--weld-nested-containers
