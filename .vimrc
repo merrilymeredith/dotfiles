@@ -1,7 +1,6 @@
 " vim: et sts=2 sw=2
 " vim: fdm=marker
 
-set nocompatible
 set encoding=utf-8
 scriptencoding utf-8
 
@@ -64,65 +63,65 @@ let s:filename   = expand('<sfile>')
 " }}}
 
 " Key maps {{{
-nmap <silent> <F1>   :Unite buffer<CR>
-nmap <silent> <F2>   :VimFilerExplorer<CR>
-map  <silent> <F4>   :noh<CR>
-nmap <silent> <F5>   :GundoToggle<CR>
-nmap <silent> <F8>   :TagbarToggle<CR>
+nnoremap <silent> <F1>   :Unite buffer<CR>
+nnoremap <silent> <F2>   :VimFilerExplorer<CR>
+noremap  <silent> <F4>   :noh<CR>
+nnoremap <silent> <F5>   :GundoToggle<CR>
+nnoremap <silent> <F8>   :TagbarToggle<CR>
 
-nmap <leader>uw :Unite -quick-match -short-source-names window tab:no-current<CR>
-nmap <leader>us :Unite -quick-match session<CR>
-nmap <leader>uf :Unite -start-insert file_rec/async:!<CR>
+nnoremap <leader>uw :Unite -quick-match -short-source-names window tab:no-current<CR>
+nnoremap <leader>us :Unite -quick-match session<CR>
+nnoremap <leader>uf :Unite -start-insert file_rec/async:!<CR>
 
 " stop opening help by mistake
-imap <F1> <ESC>
+inoremap <F1> <ESC>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
 
 " chdir to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-map <leader>pp :setlocal paste!<cr>
+noremap <leader>pp :setlocal paste!<cr>
 
 " faster window nav
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-nmap <C-\> <C-w>p
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-\> <C-w>p
 
 " navigate by on-screen lines
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " alt buffer
-nmap gb <C-^>
-nmap gB :ls<CR>:b<Space>
+nnoremap gb <C-^>
+nnoremap gB :ls<CR>:b<Space>
 
 " Select last paste, in the same mode it was pasted in
-nmap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]'
+nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 " Use ltag over tselect
-nmap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
+nnoremap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
 
 " clear all interestingwords with \\k since \K is ri.vim
-nmap <silent> <leader><leader>k :call UncolorAllWords()<CR>
+nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
 " use Ag for a recursive *
-nmap g* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
+nnoremap g* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
 
 " K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
-nmap K   :call ViewDoc('doc', expand('<cword>'))<CR>
-nmap gKK :call ViewDoc('doc', expand('%'))<CR>
+nnoremap K   :call ViewDoc('doc', expand('<cword>'))<CR>
+nnoremap gKK :call ViewDoc('doc', expand('%'))<CR>
 
 " Tabular shortcuts
-map <leader>ta :Tabularize first_arrow<CR>
-map <leader>te :Tabularize first_eq<CR>
-map <leader>tc :Tabularize first_colon<CR>
-map <leader>tm :Tabularize methods<CR>
+noremap <leader>ta :Tabularize first_arrow<CR>
+noremap <leader>te :Tabularize first_eq<CR>
+noremap <leader>tc :Tabularize first_colon<CR>
+noremap <leader>tm :Tabularize methods<CR>
 
-map <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
+noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
 if exists("g:loaded_mucomplete")
   inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
@@ -264,6 +263,9 @@ augroup vimrc
   " complement to autowriteall
   autocmd FocusLost * silent! wa
 
+  " Make paths when writing, as necessary
+  autocmd BufWritePre * :call vimrc#MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+
   " Jump to last known pos
   autocmd BufReadPost *
     \ if &filetype !~# 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
@@ -285,12 +287,6 @@ augroup vimrc
 
   " Neomutt changed their tmpfile pattern, ugh
   autocmd BufNewFile,BufRead neomutt-*-\w\+ setf mail
-augroup END
-
-" Make paths when writing, as necessary
-augroup AutoMkdir
-  autocmd!
-  autocmd BufWritePre * :call vimrc#MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 augroup END
 
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
