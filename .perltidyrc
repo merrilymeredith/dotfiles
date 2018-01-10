@@ -2,7 +2,8 @@
 --extended-syntax
 --indent-columns=2
 --continuation-indentation=2
---maximum-line-length=100
+--maximum-line-length=80
+--ignore-old-breakpoints
 --no-outdent-long-quotes
 --no-blanks-before-comments
 --maximum-consecutive-blank-lines=2
