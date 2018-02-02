@@ -21,6 +21,7 @@ Proc::InvokeEditor
 B::Keywords
 Term::ReadLine::Gnu
 Class::Refresh
+Pry
 
 Devel::Confess
 
