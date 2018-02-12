@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+if [ -x "$(command -v cpandoc)" ]; then
+  exec cpandoc $*
+fi
+exec perldoc $*
