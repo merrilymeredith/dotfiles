@@ -315,6 +315,9 @@ let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 " }}}
 
 " Plugin settings  {{{
+">> vim-polyglot
+let g:polyglot_disabled = ['vifm']
+
 ">> mucomplete
 " enable and prefer local buffer before tags
 let g:mucomplete#enable_auto_at_startup = 1
