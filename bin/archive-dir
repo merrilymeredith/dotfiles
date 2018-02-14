@@ -1,7 +1,12 @@
 #!/usr/bin/env perl
+
 use 5.014;
 use warnings;
 use strict;
+
+use lib "$ENV{HOME}/.lib/perl5";
+use Autofetch;
+
 use Time::Piece;
 use Path::Tiny;
 use Getopt::Long::Descriptive;
