@@ -15,15 +15,19 @@ sub cachepath {
 
 sub modulefy { $_[0] =~ s/\.pm$//r =~ s|/|::|gr }
 
-my $path    = cachepath($0);
-my $incpath = catfile($path, 'lib', 'perl5');
+sub import {
+  return if our $INSTALLED++;
 
-push @INC, $incpath, sub {
-  my (undef, $file) = @_;
+  my $path    = cachepath($0);
+  my $incpath = catfile($path, 'lib', 'perl5');
 
-  fetch($path, modulefy($file));
+  push @INC, $incpath, sub {
+    my (undef, $file) = @_;
 
-  return IO::File->new(catfile($incpath, $file));
-};
+    fetch($path, modulefy($file));
+
+    return IO::File->new(catfile($incpath, $file));
+  };
+}
 
 1;
