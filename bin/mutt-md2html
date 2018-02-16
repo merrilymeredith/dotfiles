@@ -1,6 +1,8 @@
 #!/bin/sh
-exec pandoc -sS \
-  -f markdown-blank_before_blockquote \
+exec pandoc \
+  --quiet \
+  --standalone \
+  -f markdown-blank_before_blockquote+smart \
   -t html5 \
   --self-contained \
   --template=mail \
