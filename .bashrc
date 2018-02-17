@@ -5,7 +5,7 @@ if [ -f ~/.bashrc.dist ]; then
   source ~/.bashrc.dist
 fi
 
-source ~/.bashrc.lib
+source ~/.lib/bash/path.sh
 
 path-prepend "$HOME/bin"
 

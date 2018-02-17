@@ -1,5 +1,3 @@
-# vim: ft=sh
-
 path-append() {
   if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="${PATH:+"$PATH:"}$1"
@@ -15,4 +13,3 @@ path-prepend() {
   fi
   return 1
 }
-
