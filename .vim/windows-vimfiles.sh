@@ -1,7 +1,5 @@
-#!/bin/bash
-
-set -euo pipefail
-IFS=$'\n\t'
+#!/bin/sh
+set -eu
 
 if [ ! -L ~/userprofile ]; then
   echo "Please link ~/userprofile"
@@ -11,17 +9,19 @@ USERPROFILE="$(readlink ~/userprofile)"
 
 cd `hg root`
 
-cp -vu .vimrc ${USERPROFILE}/_vimrc
+mkdir -p ${USERPROFILE}/vimfiles
 
-if [ ! -d ${USERPROFILE}/vimfiles ]; then
-  mkdir ${USERPROFILE}/vimfiles
-fi
+cp -vu .vimrc ${USERPROFILE}/_vimrc
 
 cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 
-cp -vu .vimperatorrc ${USERPROFILE}/
+cp -vuRL -t ${USERPROFILE}/ \
+  .lib \
+  .ctags \
+  .perltidyrc \
+  .replyrc
 
-mkdir ${USERPROFILE}/{css,js} &>/dev/null || true
+mkdir -p ${USERPROFILE}/{css,js}
 cp -vuRL -t ${USERPROFILE}/css .css/*
 cp -vuRL -t ${USERPROFILE}/js .js/*
 
