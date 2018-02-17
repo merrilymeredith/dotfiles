@@ -1,4 +1,4 @@
-script_line1 = use lib "$ENV{HOME}/.lib/perl5"; use ReplyStartup;
+script_line1 = use lib glob('~/.lib/perl5'); use ReplyStartup;
 
 [Colors]
 [DataPrinter]
