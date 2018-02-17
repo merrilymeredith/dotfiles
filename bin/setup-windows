@@ -21,10 +21,6 @@ cp -vuRL -t ${USERPROFILE}/ \
   .perltidyrc \
   .replyrc
 
-mkdir -p ${USERPROFILE}/{css,js}
-cp -vuRL -t ${USERPROFILE}/css .css/*
-cp -vuRL -t ${USERPROFILE}/js .js/*
-
 cat <<ENDINSTR
 #  rebuilding vimproc dll on babun for w32 gvim:
 #  $ pact install mingw-gcc-core
