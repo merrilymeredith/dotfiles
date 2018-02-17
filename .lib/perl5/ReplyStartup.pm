@@ -11,7 +11,7 @@ sub import {
 
       use Path::Tiny;
 
-      -e \$_ && do(\$_) for "\$ENV{HOME}/.replyrc.local.pl";
+      -e \$_ && do(\$_) for glob('~/.replyrc.local.pl');
       die \$@ if \$@;
     }
 END_PERL

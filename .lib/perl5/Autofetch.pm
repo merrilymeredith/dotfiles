@@ -10,7 +10,7 @@ sub fetch {
 }
 
 sub cachepath {
-  catfile($ENV{HOME}, '.cache', 'lib', rel2abs($_[0]) =~ y|/ |-_|r);
+  catfile(glob('~'), '.cache', 'lib', rel2abs($_[0]) =~ y|/ |-_|r);
 }
 
 sub modulefy { $_[0] =~ s/\.pm$//r =~ s|/|::|gr }
