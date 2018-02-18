@@ -1,22 +1,29 @@
 package ReplyStartup;
+use warnings;
+use strict;
+use parent 'Import::Base';
+
+our @IMPORT_MODULES = (
+  'strict',
+  'warnings',
+  'feature' => [':5.14'],
+  'experimentals',
+  'Path::Tiny',
+);
 
 sub import {
-  my $code = eval(<<END_PERL) or die $@;
-    package main;
-    sub {
-      warnings->import;
-      strict->import;
-      require feature; feature->import(':5.14');
-      require experimentals; experimentals->import;
+  my $caller = caller(0);
 
-      use Path::Tiny;
-
+  # Run anything in .replyrc.local.pl in the context of main, at compile time.
+  eval(<<END_PERL)->();
+    package $caller; sub {
       -e \$_ && do(\$_) for glob('~/.replyrc.local.pl');
       die \$@ if \$@;
     }
 END_PERL
 
-  $code->();
+  our @ISA;
+  goto($ISA[0]->can('import'));
 }
 
 1;
