@@ -10,7 +10,7 @@ Pod::Cpandoc
 
 Perl::Tidy
 
-Import::Base
+Import::Into
 experimentals
 
 Reply
