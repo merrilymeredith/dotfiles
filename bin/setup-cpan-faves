@@ -1,31 +1,32 @@
-#!/bin/sh
-set -eu
+#!/usr/bin/env perl
+use warnings;
+use strict;
 
-exec cpanm -q <<END
+exec cpanm => -nq => qw(
+  Carton
 
-Carton
+  App::prowess
 
-App::prowess
-Pod::Cpandoc
+  Perl::Tidy
+  App::Cpandoc
 
-Perl::Tidy
+  experimentals
+  Import::Into
 
-Import::Into
-experimentals
+  Reply
+  IO::Pager
+  Data::Printer
+  Data::Printer::Filter::JSON
+  Data::Printer::Filter::URI
+  Carp::Always
+  Proc::InvokeEditor
+  B::Keywords
+  Term::ReadLine::Gnu
+  Class::Refresh
+  Pry
 
-Reply
-IO::Pager
-Data::Printer
-Data::Printer::Filter::JSON
-Data::Printer::Filter::URI
-Carp::Always
-Proc::InvokeEditor
-B::Keywords
-Term::ReadLine::Gnu
-Class::Refresh
-Pry
+  Devel::Confess
 
-Devel::Confess
-
-Path::Tiny
-END
+  Path::Tiny
+  Getopt::Long::Descriptive
+);
