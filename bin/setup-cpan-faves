@@ -8,7 +8,7 @@ exec cpanm => -nq => qw(
   App::prowess
 
   Perl::Tidy
-  App::Cpandoc
+  Pod::Cpandoc
 
   experimentals
   Import::Into
