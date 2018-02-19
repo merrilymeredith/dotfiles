@@ -7,13 +7,17 @@ use Import::Into;
 sub import {
   my $caller = caller(0);
 
-  import::into(feature => $caller, ':5.14');
   import::into($_ => $caller) for qw(
     strict
     warnings
     experimentals
     Path::Tiny
   );
+  import::into(feature => $caller, ':5.14');
+  import::into('Data::Printer' => $caller, {
+      filters => {-external => ['JSON', 'URI']},
+      class   => {show_methods => 'public', inherited => 'public'},
+  });
 
   # Run anything in .replyrc.local.pl in the context of
   # main, at compile time.
