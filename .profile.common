@@ -10,8 +10,12 @@ make -s -C ~/.ssh || {
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
 export LESS='Ri'
+
 export PERL_CPANM_OPT='-nq --prompt'
 export DEVEL_REPL_PROFILE='Standard'
+
+export ASDF_CONCURRENCY='2'
+export RUBY_EXTRA_CONFIGURE_OPTIONS="--enable-shared --enable-install-doc"
 
 alias hgcd='cd $(hg root)'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
