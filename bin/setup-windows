@@ -19,7 +19,8 @@ cp -vuRL -t ${USERPROFILE}/ \
   .lib \
   .ctags \
   .perltidyrc \
-  .replyrc
+  .replyrc \
+  .replyrc.pl
 
 cat <<ENDINSTR
 #  rebuilding vimproc dll on babun for w32 gvim:
