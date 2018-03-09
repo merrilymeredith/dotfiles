@@ -12,7 +12,6 @@ script_line1 = require glob('~/.replyrc.pl'); ()
 [LoadClass]
 
 [ReadLine]
-[Editor]
 
 [Autocomplete::Packages]
 [Autocomplete::Lexicals]
