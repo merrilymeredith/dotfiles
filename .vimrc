@@ -342,10 +342,7 @@ let g:viewdoc_perldoc_format = 'ansi'
 let g:viewdoc_winwidth_max = 100
 
 ">> Gundo
-" I prefer python3 on windows if I have to use it. Needs a dll in path.
-if g:on_windows
-  let g:gundo_prefer_python3 = 1
-endif
+let g:gundo_prefer_python3 = 1
 
 ">> Tagbar
 if g:on_windows
