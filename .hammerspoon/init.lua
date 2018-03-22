@@ -40,8 +40,10 @@ cmdCtrl('right', function () focusedWindow():moveOneScreenEast() end)
 cmd('return', function ()
   hs.applescript.applescript([[
     tell application "iTerm"
-      set newterm to (create window with default profile)
-      activate window newterm
+      set newterm to index of (create window with default profile)
+      tell application "System Events" to tell process "iTerm2"
+        perform action "AXRaise" of window newterm
+      end tell
     end tell
   ]])
 end)
