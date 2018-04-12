@@ -51,5 +51,8 @@ zstyle ':vcs_info:*:*' formats "%S" "%r/%s/%b %u%c"
 zstyle ':vcs_info:*:*' nvcsformats "%~" ""
 
 # Define prompts.
+
+MODE_INDICATOR='[N] '
+
 PROMPT="%(0?.%{$PROMPT_SUCCESS_COLOR%}.%{$PROMPT_FAILURE_COLOR%})${SSH_TTY:+[%n@%m]}%{$FX[bold]%}%$PROMPT_PATH_MAX_LENGTH<..<"'${vcs_info_msg_0_%%.}'"%<<%(!.$PROMPT_ROOT_END.$PROMPT_DEFAULT_END)%{$FX[no-bold]%}%{$FX[reset]%} "
-RPROMPT="%{$PROMPT_VCS_INFO_COLOR%}"'${vcs_info_msg_1_:- }'"%{$FX[reset]%}"
+RPROMPT='$(vi_mode_prompt_info)'"%{$PROMPT_VCS_INFO_COLOR%}"'${vcs_info_msg_1_:- }'"%{$FX[reset]%}"

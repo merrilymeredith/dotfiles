@@ -11,6 +11,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 omz_plugins=(
   plugins/common-aliases
   plugins/colored-man-pages
+  plugins/vi-mode
 )
 
 zsh_plugins=(
@@ -34,6 +35,7 @@ if [ -f ~/.zgen/zgen.zsh ]; then
   fi
 fi
 
+KEYTIMEOUT=1
 REPORTTIME=5
 
 setopt list_packed
@@ -44,7 +46,8 @@ setopt interactive_comments
 
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-bindkey '\e\e' kill-whole-line
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
 
 source ~/.profile.common
 
