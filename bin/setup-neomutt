@@ -29,7 +29,7 @@ esac
 autoreconf -i --force || true
 
 ./configure \
- --with-mailpath=/var/spool/mail \
+ --with-mailpath=/var/mail \
  --ssl \
  --sasl \
  --lmdb \
