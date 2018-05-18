@@ -3,6 +3,7 @@ use warnings;
 use strict;
 
 exec cpanm => -nq => qw(
+  App::cpanminus
   Carton
 
   Perl::Tidy
