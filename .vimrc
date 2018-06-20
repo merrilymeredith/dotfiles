@@ -124,9 +124,6 @@ noremap <leader>tm :Tabularize methods<CR>
 noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
 if exists("g:loaded_mucomplete")
-  inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-  inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-  inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
   set shortmess+=c
 endif
 
