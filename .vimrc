@@ -125,6 +125,8 @@ noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
 if exists("g:loaded_mucomplete")
   set shortmess+=c
+  imap <Plug>MyCR <Plug>(MUcompleteCR)
+  imap <cr> <Plug>MyCR
 endif
 
 " Command Aliases  {{{
