@@ -7,7 +7,9 @@ fi
 
 source ~/.lib/bash/path.sh
 
-path-prepend "$HOME/bin"
+for DIR in bin .cargo/bin .local/bin; do
+  path-prepend "$HOME/$DIR"
+done
 
 if path-prepend "$HOME/.plenv/bin"; then
   eval "$(plenv init -)"
