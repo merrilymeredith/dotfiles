@@ -40,10 +40,10 @@ autoreconf -i --force || true
 make -s -j3
 
 cd ~/bin
-for BIN in neomutt mutt_dotlock pgpewrap; do
-  ln -sf ../sandbox/neomutt/$BIN
+for BIN in neomutt pgpewrap; do
+  cp ../sandbox/neomutt/$BIN .
 done
-ln -sf ../sandbox/neomutt/neomutt mutt
+ln -sf neomutt mutt
 
 :<<=cut
 =head1 NAME
@@ -52,8 +52,8 @@ setup-neomutt - Clone/update and build neomutt
 
 =head1 DESCRIPTION
 
-Run to do the above, incl. symlinking relevant binaries in C<~/bin> to the
-neomutt build.
+Run to do the above, incl. copying binaries into C<~/bin> after the neomutt
+build.
 
 =head1 REQUIREMENTS
 
