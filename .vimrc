@@ -35,6 +35,11 @@ let s:filename   = expand('<sfile>')
   Plugin 'tpope/vim-endwise'
   Plugin 'lifepillar/vim-mucomplete'
 
+  if executable('rls')
+    Plugin 'prabirshrestha/async.vim'
+    Plugin 'prabirshrestha/vim-lsp'
+  end
+
   Plugin 'vimwiki/vimwiki'
 
   Plugin 'tpope/vim-fugitive'
@@ -321,6 +326,20 @@ let g:polyglot_disabled = ['vifm']
 " enable and prefer local buffer before tags
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#chains = {'default': ['path', 'omni', 'c-n', 'tags', 'dict', 'uspl']}
+
+">> vim-lsp
+augroup vim-lsp
+  autocmd!
+
+  if executable('rls')
+    autocmd FileType rust setlocal omnifunc=lsp#complete
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'rls',
+      \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+      \ 'whitelist': ['rust'],
+      \ })
+  endif
+augroup END
 
 ">> Vimwiki
 let g:vimwiki_list = [
