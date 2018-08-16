@@ -20,6 +20,7 @@ cd sandbox/neomutt
 case "$(uname -s)" in
   Darwin)
     CONFIGURE_OPTIONS='--with-ssl=/opt/local --with-gpgme=/opt/local'
+    export EXTRA_CFLAGS="-iquote $(pwd)"
     ;;
   *)
     CONFIGURE_OPTIONS=''
