@@ -7,7 +7,7 @@ fi
 
 source ~/.lib/bash/path.sh
 
-for DIR in bin .cargo/bin .local/bin; do
+for DIR in bin .cargo/bin .local/bin go/bin; do
   path-prepend "$HOME/$DIR"
 done
 
