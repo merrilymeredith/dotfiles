@@ -328,11 +328,20 @@ augroup vim-lsp
 
   if executable('rls')
     autocmd FileType rust setlocal omnifunc=lsp#complete
-    au User lsp_setup call lsp#register_server({
+    autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'rls',
       \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
       \ 'whitelist': ['rust'],
       \ })
+  endif
+
+  if executable('go-langserver')
+    autocmd FileType go setlocal omnifunc=lsp#complete
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'go-langserver',
+      \ 'cmd': {server_info->['go-langserver']},
+      \ 'whitelist': ['go'],
+      \})
   endif
 augroup END
 
