@@ -32,8 +32,8 @@ let s:filename   = expand('<sfile>')
   Plugin 'godlygeek/tabular'
   Plugin 'tomtom/tcomment_vim'
   Plugin 'tpope/vim-unimpaired'
-  Plugin 'tpope/vim-endwise'
   Plugin 'lifepillar/vim-mucomplete'
+  Plugin 'tpope/vim-endwise'
 
   if executable('rls')
     Plugin 'prabirshrestha/async.vim'
@@ -128,12 +128,6 @@ noremap <leader>tm :Tabularize methods<CR>
 
 noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
-if exists("g:loaded_mucomplete")
-  set shortmess+=c
-  imap <Plug>MyCR <Plug>(MUcompleteCR)
-  imap <cr> <Plug>MyCR
-endif
-
 " Command Aliases  {{{
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
 CAlias Q q
@@ -190,6 +184,7 @@ set noshowmode
 set showcmd
 set wildmenu
 set wildignorecase
+set shortmess+=c
 
 set noerrorbells
 if has('patch-7.4-793')
