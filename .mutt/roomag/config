@@ -7,6 +7,7 @@ source "cd ~/.mutt/roomag && gpg2 -d private.gpg |"
 
 set folder    = imaps://mhoward@ramdas.roomag.org/
 set spoolfile = "+Virtual.Mailbox"
+set copy      = yes
 set record    = "+Sent"
 set postponed = "+Drafts"
 set trash     = "+Trash"
