@@ -2,6 +2,9 @@
 	email = mhoward@roomag.org
 	name  = Meredith Howard
 
+[github]
+	user = merrilymeredith
+
 [alias]
 	ci       = commit
 	rec      = commit -p
