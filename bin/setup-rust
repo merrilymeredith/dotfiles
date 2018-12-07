@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu -o pipefail
+
+if rustup update; then
+  exit
+fi
+
+curl https://sh.rustup.rs -sSf | sh
+source ~/.cargo/env
+rustup component add rls rustfmt
