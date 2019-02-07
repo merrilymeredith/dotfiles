@@ -30,3 +30,20 @@ func! vimrc#AutoSessionConfig() abort
     exec 'UniteSessionLoad ' . tolower(v:servername)
   endif
 endfunc
+
+func! vimrc#Gcd() abort
+  let root = system('git rev-parse --show-toplevel 2>/dev/null')[:-2]
+  if ! v:shell_error
+    exec 'cd ' . root
+  endif
+  pwd
+endfunc
+
+func! vimrc#Hgcd() abort
+  let root = system('hg root 2>/dev/null')[:-2]
+  if ! v:shell_error
+    exec 'cd ' . root
+  endif
+  pwd
+endfunc
+

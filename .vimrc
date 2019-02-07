@@ -41,9 +41,6 @@ let s:filename   = expand('<sfile>')
 
   Plug 'vimwiki/vimwiki'
 
-  Plug 'tpope/vim-fugitive'
-  Plug 'ludovicchabant/vim-lawrencium'
-
   Plug 'Shougo/vinarise.vim'
   Plug 'asciidoc/vim-asciidoc'
   Plug 'vim-perl/vim-perl'
@@ -126,10 +123,16 @@ noremap <leader>tm :Tabularize methods<CR>
 
 noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
-" Command Aliases  {{{
+" Commands & Aliases  {{{
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
+command! Gcd call vimrc#Gcd()
+command! Hgcd call vimrc#Hgcd()
+
 CAlias Q q
 CAlias W w
+
+CAlias gcd Gcd
+CAlias hgcd Hgcd
 
 " make these default to one window/buffer too
 CAlias  doc      ViewDoc!
