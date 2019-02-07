@@ -32,6 +32,7 @@ let s:filename   = expand('<sfile>')
   Plug 'tpope/vim-unimpaired'
   Plug 'lifepillar/vim-mucomplete'
   Plug 'tpope/vim-endwise'
+  Plug 'tmsvg/pear-tree'
 
   if executable('rls')
     Plug 'prabirshrestha/async.vim'
