@@ -23,8 +23,8 @@ let s:filename   = expand('<sfile>')
   Plug 'Shougo/unite.vim'
   Plug 'Shougo/vimfiler.vim'
   Plug 'Shougo/unite-session'
-  Plug 'sjl/gundo.vim'
-  Plug 'majutsushi/tagbar'
+  Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+  Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
   Plug 'rking/ag.vim'
 
   Plug 'godlygeek/tabular'
