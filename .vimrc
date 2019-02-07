@@ -10,51 +10,49 @@ let g:myvim      = $HOME . (g:on_windows ? '/vimfiles' : '/.vim')
 let g:vimcache   = $HOME . '/.cache/vim'
 let s:filename   = expand('<sfile>')
 
-" Set up Vundle and plugins  {{{
-  call vimrc#VundleInstallAndBegin()
+" Set up plug and plugins  {{{
+  call plug#begin(g:myvim . '/bundle')
 
-  Plugin 'gmarik/vundle'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'vasconcelloslf/vim-interestingwords'
 
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'vasconcelloslf/vim-interestingwords'
+  Plug 'editorconfig/editorconfig-vim'
 
-  Plugin 'editorconfig/editorconfig-vim'
+  Plug 'Shougo/vimproc.vim'
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/vimfiler.vim'
+  Plug 'Shougo/unite-session'
+  Plug 'sjl/gundo.vim'
+  Plug 'majutsushi/tagbar'
+  Plug 'rking/ag.vim'
 
-  Plugin 'Shougo/vimproc.vim'
-  Plugin 'Shougo/unite.vim'
-  Plugin 'Shougo/vimfiler.vim'
-  Plugin 'Shougo/unite-session'
-  Plugin 'sjl/gundo.vim'
-  Plugin 'majutsushi/tagbar'
-  Plugin 'rking/ag.vim'
-
-  Plugin 'godlygeek/tabular'
-  Plugin 'tomtom/tcomment_vim'
-  Plugin 'tpope/vim-unimpaired'
-  Plugin 'lifepillar/vim-mucomplete'
-  Plugin 'tpope/vim-endwise'
+  Plug 'godlygeek/tabular'
+  Plug 'tomtom/tcomment_vim'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'lifepillar/vim-mucomplete'
+  Plug 'tpope/vim-endwise'
 
   if executable('rls')
-    Plugin 'prabirshrestha/async.vim'
-    Plugin 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
   end
 
-  Plugin 'vimwiki/vimwiki'
+  Plug 'vimwiki/vimwiki'
 
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'ludovicchabant/vim-lawrencium'
+  Plug 'tpope/vim-fugitive'
+  Plug 'ludovicchabant/vim-lawrencium'
 
-  Plugin 'Shougo/vinarise.vim'
-  Plugin 'asciidoc/vim-asciidoc'
-  Plugin 'vim-perl/vim-perl'
-  Plugin 'sheerun/vim-polyglot'
-  Plugin 'yko/mojo.vim'
-  Plugin 'slashmili/alchemist.vim'
-  Plugin 'nathangrigg/vim-beancount'
+  Plug 'Shougo/vinarise.vim'
+  Plug 'asciidoc/vim-asciidoc'
+  Plug 'vim-perl/vim-perl'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'yko/mojo.vim'
+  Plug 'slashmili/alchemist.vim'
+  Plug 'nathangrigg/vim-beancount'
 
-  Plugin 'powerman/vim-plugin-viewdoc'
-  Plugin 'powerman/vim-plugin-AnsiEsc'
+  Plug 'powerman/vim-plugin-viewdoc'
+  Plug 'powerman/vim-plugin-AnsiEsc'
 
   let g:no_viewdoc_maps   = 1
   let g:no_viewdoc_abbrev = 1
@@ -64,7 +62,7 @@ let s:filename   = expand('<sfile>')
   catch
   endtry
 
-  call vundle#end()
+  call plug#end()
 " }}}
 
 " Key maps {{{
@@ -314,6 +312,8 @@ let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 " }}}
 
 " Plugin settings  {{{
+let g:plug_threads = 3
+
 ">> vim-polyglot
 let g:polyglot_disabled = ['vifm']
 

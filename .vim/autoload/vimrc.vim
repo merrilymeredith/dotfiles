@@ -30,26 +30,3 @@ func! vimrc#AutoSessionConfig() abort
     exec 'UniteSessionLoad ' . tolower(v:servername)
   endif
 endfunc
-
-func! vimrc#VundleInstallAndBegin() abort
-  let bundlepath = g:myvim . '/bundle'
-
-  if !filereadable(bundlepath . '/vundle/README.md')
-    if !executable('git')
-      echo "Can't autoinstall Vundle without git"
-      return
-    endif
-
-    if !isdirectory(bundlepath)
-      call mkdir(bundlepath, 'p')
-    endif
-    exec 'cd ' . bundlepath
-    silent !git clone --depth 1 https://github.com/gmarik/vundle
-    cd -
-
-    echo "Installed Vundle, run :PluginInstall if desired"
-  endif
-
-  let &runtimepath .= ',' . bundlepath . '/vundle'
-  call vundle#begin(bundlepath)
-endfunc
