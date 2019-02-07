@@ -129,6 +129,7 @@ command! Gcd call vimrc#Gcd()
 command! Hgcd call vimrc#Hgcd()
 
 CAlias Q q
+CAlias Qa qa
 CAlias W w
 
 CAlias gcd Gcd
