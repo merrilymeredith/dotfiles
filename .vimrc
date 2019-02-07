@@ -50,7 +50,6 @@ let s:filename   = expand('<sfile>')
   Plug 'sheerun/vim-polyglot'
   Plug 'yko/mojo.vim'
   Plug 'slashmili/alchemist.vim'
-  Plug 'nathangrigg/vim-beancount'
 
   Plug 'powerman/vim-plugin-viewdoc'
   Plug 'powerman/vim-plugin-AnsiEsc'
