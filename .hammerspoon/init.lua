@@ -48,7 +48,9 @@ cmd('return', function ()
   ]])
 end)
 
-cmdShift('return', function () hs.execute('/opt/local/bin/mvim', true) end)
+cmdShift('return', function ()
+  os.execute(os.getenv('SHELL')..' -l -i -c "exec mvim"')
+end)
 
 -- cache window frames before moving?
 -- save cache?
