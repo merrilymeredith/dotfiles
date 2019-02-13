@@ -31,7 +31,7 @@ let s:filename   = expand('<sfile>')
   Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-unimpaired'
   Plug 'lifepillar/vim-mucomplete'
-  Plug 'tpope/vim-endwise'
+  " Plug 'tpope/vim-endwise'
   Plug 'tmsvg/pear-tree'
 
   if executable('rls')
@@ -293,12 +293,6 @@ augroup vimrc
 
   " Neomutt changed their tmpfile pattern, ugh
   autocmd BufNewFile,BufRead neomutt-*-\w\+ setf mail
-
-  " Make these two play nice
-  autocmd BufEnter *
-    \ if exists('g:loaded_pear_tree') && exists('g:loaded_endwise') |
-      \ imap <buffer> <CR> <Plug>(PearTreeExpand)<Plug>DiscretionaryEnd |
-    \ endif
 augroup END
 
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
