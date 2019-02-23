@@ -39,9 +39,6 @@
 [diff]
 	compactionheuristic = true
 
-[fsck]
-	badTimezone = ignore
-
 [gpg]
 	program = "gpg2"
 
