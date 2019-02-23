@@ -42,7 +42,7 @@ let s:filename   = expand('<sfile>')
 
   Plug 'Shougo/vinarise.vim'
   Plug 'asciidoc/vim-asciidoc'
-  Plug 'vim-perl/vim-perl'
+  Plug 'vim-perl/vim-perl', {'branch': 'dev'}
   Plug 'sheerun/vim-polyglot'
   Plug 'yko/mojo.vim'
   Plug 'slashmili/alchemist.vim'
