@@ -31,8 +31,7 @@ let s:filename   = expand('<sfile>')
   Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-unimpaired'
   Plug 'lifepillar/vim-mucomplete'
-  " Plug 'tpope/vim-endwise'
-  Plug 'tmsvg/pear-tree'
+  Plug 'tpope/vim-endwise'
 
   if executable('rls')
     Plug 'prabirshrestha/async.vim'
