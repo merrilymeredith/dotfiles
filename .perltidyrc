@@ -12,6 +12,7 @@
 --indent-spaced-block-comments
 --closing-side-comments
 --closing-side-comment-interval=100
---stack-closing-hash-brace
---stack-closing-square-bracket
---weld-nested-containers
+--stack-opening-hash-brace
+--stack-opening-square-bracket
+--stack-closing-paren
+--break-at-old-comma-breakpoints
