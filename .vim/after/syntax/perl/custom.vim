@@ -1,7 +1,7 @@
 " this keeps indents from jumping more than one level
 let b:indent_use_syntax = 0
 
-syn sync minlines=100
+syn sync minlines=50
 
 " Add match for =method and =func from Pod::Weaver
 syn match podCommand "^=method" contained nextgroup=podCmdText contains=@NoSpell
