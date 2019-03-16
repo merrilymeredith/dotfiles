@@ -1,6 +1,10 @@
 #!/bin/sh
 set -eu
 
+if [ -t 1 ]; then
+  export PERLDOC="-oterm ${PERLDOC:-}"
+fi
+
 if [ -x "$(command -v cpandoc)" ]; then
   exec cpandoc $*
 fi
