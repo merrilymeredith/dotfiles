@@ -318,7 +318,7 @@ let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 let g:plug_threads = 3
 
 ">> vim-polyglot
-let g:polyglot_disabled = ['vifm']
+let g:polyglot_disabled = ['vifm', 'perl']
 
 ">> mucomplete
 " enable and prefer local buffer before tags
