@@ -10,6 +10,7 @@ make -s -C ~/.ssh || {
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
 export LESS='Ri'
+export GPG_TTY="$(tty)"
 
 export PERL_CPANM_OPT='-nq --prompt'
 export DEVEL_REPL_PROFILE='Standard'

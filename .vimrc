@@ -298,10 +298,10 @@ augroup END
 " hacked to work with vimwiki
 augroup encrypted
   autocmd!
-  autocmd BufReadPre,FileReadPre *.gpg,*.gpg.wiki setl noswapfile noundofile nobackup viminfo=
-  autocmd BufReadPost *.gpg,*.gpg.wiki :sil %!GPG_TTY=/dev/tty gpg2 --decrypt 2> /dev/null
-  autocmd BufWritePre *.gpg,*.gpg.wiki :sil %!GPG_TTY=/dev/tty gpg2 -se -a --default-recipient-self
-  autocmd BufWritePost *.gpg,*.gpg.wiki :sil undo
+  autocmd BufReadPre,FileReadPre *.gpg,*.gpg.* setl noswapfile noundofile nobackup viminfo=
+  autocmd BufReadPost *.gpg,*.gpg.* :sil %!gpg2 -d
+  autocmd BufWritePre *.gpg,*.gpg.* :sil %!gpg2 -se -a --default-recipient-self
+  autocmd BufWritePost *.gpg,*.gpg.* :sil undo
 augroup END
 "}}}
 
