@@ -110,9 +110,9 @@ nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 " use Ag for a recursive *
 nnoremap g* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
 
-" K: doc, gK: Doc w/o using syntax hints, gKK: doc current filename
+" K: doc, gKK: doc current filename
 nnoremap K   :call ViewDoc('doc', expand('<cword>'))<CR>
-nnoremap gKK :call ViewDoc('doc', expand('%'))<CR>
+nnoremap gKK :call ViewDoc('doc', expand('%:p'))<CR>
 
 " Tabular shortcuts
 noremap <leader>ta :Tabularize first_arrow<CR>
