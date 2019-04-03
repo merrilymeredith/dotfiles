@@ -33,7 +33,7 @@ end
 open(target, File::RDONLY|File::CREAT, 0644) do |f|
   if running_hook
     exit unless f.flock(File::LOCK_EX|File::LOCK_NB)
-    exit unless (Time.now - f.mtime) > 60
+    exit unless f.size == 0 || (Time.now - f.mtime) > 60
   end
 
   system(<<-CMD) or exit $?.exitstatus
