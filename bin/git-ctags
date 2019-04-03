@@ -26,7 +26,7 @@ opts   = File.exists?(conf) ? "--options=#{conf}" : ''
 
 if running_hook
   fork and exit
-  [STDIN, STDOUT, STDERR].each(&:close)
+  [STDIN, STDOUT, STDERR].each {|p| p.reopen '/dev/null'}
   sleep 5
 end
 
