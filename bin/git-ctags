@@ -26,6 +26,7 @@ opts   = File.exists?(conf) ? "--options=#{conf}" : ''
 
 if running_hook
   fork and exit
+  [STDIN, STDOUT, STDERR].each(&:close)
   sleep 5
 end
 
@@ -53,7 +54,8 @@ git-ctags - run ctags on git tracked files
 
  git ctags
 
- echo 'git ctags hook 2>/dev/null' >> .git/hooks/post-checkout
+ echo 'git ctags hook 2>/dev/null' >> .git/hooks/post-checkout &&
+   chmod +x $_
 
  git checkout some/branch
  CTAGS_SKIP=1 git checkout some/branch
