@@ -7,6 +7,8 @@ make -s -C ~/.ssh || {
   chmod 600 $_
 }
 
+export MANPATH=$HOME/.man:
+
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
 export LESS='Ri'

@@ -50,6 +50,8 @@ if [ "$minimal" -ne 1 ]; then
       pull .asdf/plugins/$LANG
     fi
   done
+
+  bin/setup-man || true
 fi
 
 # Get rid of older stuff

@@ -1,0 +1,16 @@
+#!/bin/sh
+set -eu
+
+cd $(hg root)
+
+SOURCES="${@:-$(hg stat -Aqn -I 'bin/*')}"
+MAN1=".man/man1"
+
+mkdir -p $MAN1 || true
+
+for SRC in $(grep -El '^=(head|cut)' $SOURCES); do
+  DST="${MAN1}/$(basename $SRC).1"
+  if [ ! -f $DST ] || [ "$SRC" -nt "$SRC" ]; then
+    pod2man -v --errors=stderr "$SRC" "$DST"
+  fi
+done
