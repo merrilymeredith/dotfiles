@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+case ${1:-} in *help|-h)
+  exec perldoc -T $0;;
+esac
+
+UPSTREAM="${1:-@{u\}}"
+BRANCH="${2:-$(git symbolic-ref --short -q HEAD || echo HEAD)}"
+
+[ "$#" -ne 0 ] && shift
+[ "$#" -ne 0 ] && shift
+
+if git merge-base --is-ancestor "$UPSTREAM" "$BRANCH"; then
+  BASE=$(git rev-parse "$UPSTREAM")
+else
+  BASE=$(git merge-base "$UPSTREAM" "$BRANCH")
+fi
+
+exec git rebase --interactive --autosquash "$BASE" "$BRANCH" "$@"
+
+:<<=cut
+=head1 NAME
+
+git histedit
+
+=head1 SYNOPSIS
+
+  $ git histedit
+
+=head1 DESCRIPTION
+
+C<histedit> lets you edit a branch using interactive rebase, but without
+actually I<moving> the fork point of your branch, avoiding the complications of
+fixing up your history and dealing with merge conflicts at the same time.
+
+See also: C<hg histedit>
+
+=cut
