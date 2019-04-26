@@ -43,11 +43,11 @@ if [ "$minimal" -ne 1 ]; then
     pull .asdf
   fi
 
-  for LANG in ruby nodejs erlang elixir; do
-    if ! [ -d .asdf/plugins/$LANG ]; then
-      git clone --depth 1 "https://github.com/asdf-vm/asdf-$LANG" .asdf/plugins/$LANG
+  for PLUGIN in ruby nodejs erlang elixir; do
+    if ! [ -d .asdf/plugins/$PLUGIN ]; then
+      git clone --depth 1 "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$LANG
     else
-      pull .asdf/plugins/$LANG
+      pull .asdf/plugins/$PLUGIN
     fi
   done
 
