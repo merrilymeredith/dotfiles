@@ -5,7 +5,7 @@ case ${1:-} in *help|-h)
   exec perldoc -T $0;;
 esac
 
-UPSTREAM="${1:-@{u\}}"
+UPSTREAM="${1:-@{u}}"
 BRANCH="${2:-$(git symbolic-ref --short -q HEAD || echo HEAD)}"
 
 [ "$#" -ne 0 ] && shift
