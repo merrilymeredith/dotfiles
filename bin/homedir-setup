@@ -45,7 +45,7 @@ if [ "$minimal" -ne 1 ]; then
 
   for PLUGIN in ruby nodejs erlang elixir; do
     if ! [ -d .asdf/plugins/$PLUGIN ]; then
-      git clone --depth 1 "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$LANG
+      git clone --depth 1 "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$PLUGIN
     else
       pull .asdf/plugins/$PLUGIN
     fi
