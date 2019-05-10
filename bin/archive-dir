@@ -14,19 +14,14 @@ use Getopt::Long::Descriptive;
 sub main {
   my ($opt, $usage) = describe_options(
     'archive-dir %o <directory> ...',
-    ['dest|d=s' => "destination path"],
-    ['subdir'   => hidden => {
-      one_of => [
-        ['year|y'  => 'file by year'],
-        ['month|m' => 'file by month'],
-      ],
-      default => 'year',
-      }
-    ],
-    ['age|a=i' => "minimum age in days for archival", {default => 60}],
-    ['files|f' => "operate on plain files only"],
-    ['yes|Y'   => "actually move stuff"],
-    ['help|h'  => "print usage message and exit", {shortcircuit => 1}],
+    ['dest|d=s'     => 'destination path' => {default => '.'}],
+    ['fileinto|F=s' => 'file into, a strftime format', {default => '%Y'}],
+    ['age|a=i'      => "minimum age in days for archival", {default => 60}],
+    ['files|f'      => "operate on plain files only"],
+    [],
+    ['yes|Y'  => "actually move stuff"],
+    ['help|h' => "print usage message and exit", {shortcircuit => 1}],
+    {show_defaults => 1}
   );
   print($usage->text), exit if $opt->help || !@ARGV;
 
@@ -36,9 +31,9 @@ sub main {
 sub archive_dir {
   my $opt     = shift;
   my $dir     = path(shift);
-  my $destdir = path($opt->dest // '.');
+  my $destdir = path($opt->dest);
      $destdir = $dir->child($destdir) if $destdir->is_relative;
-  my $destfmt = ($opt->subdir eq 'month') ? '%Y-%m' : '%Y';
+  my $destfmt = $opt->fileinto;
   my $nowish  = time;
   my $age     = $opt->age * 24 * 60 * 60;
 
