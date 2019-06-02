@@ -17,3 +17,4 @@
 --stack-opening-square-bracket
 --stack-closing-paren
 --break-at-old-comma-breakpoints
+--break-at-old-method-breakpoints
