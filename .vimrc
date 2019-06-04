@@ -69,7 +69,6 @@ noremap  <silent> <F4>   :noh<CR>
 nnoremap <silent> <F5>   :GundoToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
-nnoremap <leader>uw :Unite -quick-match -short-source-names window tab:no-current<CR>
 nnoremap <leader>us :Unite -quick-match session<CR>
 nnoremap <leader>uf :Unite -start-insert file_rec/async:!<CR>
 
@@ -360,24 +359,15 @@ let g:vimwiki_list = [
     \ 'auto_tags': 1, 'auto_toc': 1, 'automatic_nested_syntaxes': 1
   \ }
 \ ]
-let g:vimwiki_use_mouse = 1
 
 ">> Viewdoc
 let g:viewdoc_open = 'topleft new'
-" let g:viewdoc_perldoc_format = 'ansi'
 let g:viewdoc_winwidth_max = 100
 
 ">> Gundo
 let g:gundo_prefer_python3 = 1
 
 ">> Tagbar
-if g:on_windows
-  if executable('ctags') == 0
-    " if i haven't installed from chocolatey...
-    let g:tagbar_ctags_bin = 'C:\Users\mhoward\bin\ctags.exe'
-  endif
-endif
-
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
