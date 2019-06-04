@@ -18,6 +18,7 @@ let s:filename   = expand('<sfile>')
   Plug 'vasconcelloslf/vim-interestingwords'
   Plug 'nathanaelkane/vim-indent-guides'
 
+  Plug 'ciaranm/securemodelines'
   Plug 'editorconfig/editorconfig-vim'
 
   Plug 'Shougo/vimproc.vim'
