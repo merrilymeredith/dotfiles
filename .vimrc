@@ -4,6 +4,9 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
 " on windows and not cygwin
 let g:on_windows = (has('win32') || has('win64'))
 let g:myvim      = $HOME . (g:on_windows ? '/vimfiles' : '/.vim')
@@ -145,10 +148,6 @@ CAlias  perldoc  ViewDocPerl!
 "}}}
 
 " General settings  {{{
-syntax on
-filetype plugin indent on
-
-set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -163,10 +162,8 @@ endif
 
 set linebreak
 let &showbreak = "» "
-if exists('&breakindent')
-  set breakindent
-  set breakindentopt+=sbr
-endif
+set breakindent
+set breakindentopt+=sbr
 
 set virtualedit=block
 
@@ -176,26 +173,20 @@ set shiftwidth=2
 set shiftround
 
 set formatoptions=cqln1j
-set backspace=indent,eol,start
 
 set splitright splitbelow
 set scrolloff=15
 set sidescrolloff=10
 set laststatus=2
 set noshowmode
-set showcmd
-set wildmenu
 set wildignorecase
 set shortmess+=c
 
 set noerrorbells
-if has('patch-7.4-793')
-  set belloff=all
-endif
+set belloff=all
 
 set autowriteall
 
-set ttimeout
 set ttimeoutlen=25
 
 set synmaxcol=200
@@ -470,10 +461,6 @@ let g:interestingWordsRandomiseColors = 1
 " Preview markdown mail -- I edit with headers so I box them in a code block.
 command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm! 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
 command! MailPreviewHTML enew | set bt=nofile | setf html | 0r # | exe 'norm! 0O```<Esc>}O```' | silent exe '%!mutt-md2html' | 0
-
-" Diff unsaved buffer
-command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-                \ | wincmd p | diffthis
 " }}}
 
 " Local stuff, finish up
