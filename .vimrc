@@ -53,7 +53,6 @@ let s:filename   = expand('<sfile>')
 
   Plug 'powerman/vim-plugin-viewdoc'
 
-  let g:no_viewdoc_maps   = 1
   let g:no_viewdoc_abbrev = 1
 
   try
@@ -65,17 +64,14 @@ let s:filename   = expand('<sfile>')
 " }}}
 
 " Key maps {{{
-nnoremap <silent> <F1>   :Unite buffer<CR>
 nnoremap <silent> <F2>   :VimFilerExplorer<CR>
 noremap  <silent> <F4>   :noh<CR>
 nnoremap <silent> <F5>   :GundoToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
-nnoremap <leader>us :Unite -quick-match session<CR>
+nnoremap <leader>ub :Unite buffer<CR>
+nnoremap <leader>us :Unite session<CR>
 nnoremap <leader>uf :Unite -start-insert file_rec/async:!<CR>
-
-" stop opening help by mistake
-inoremap <F1> <ESC>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
@@ -113,7 +109,6 @@ nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 nnoremap g* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
 
 " K: doc, gKK: doc current filename
-nnoremap K   :call ViewDoc('doc', expand('<cword>'))<CR>
 nnoremap gKK :call ViewDoc('doc', expand('%:p'))<CR>
 
 " Tabular shortcuts
