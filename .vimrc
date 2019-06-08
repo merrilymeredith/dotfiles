@@ -50,10 +50,8 @@ let s:filename   = expand('<sfile>')
   Plug 'vim-perl/vim-perl', {'branch': 'dev'}
   Plug 'sheerun/vim-polyglot'
   Plug 'yko/mojo.vim'
-  Plug 'slashmili/alchemist.vim'
 
   Plug 'powerman/vim-plugin-viewdoc'
-  Plug 'powerman/vim-plugin-AnsiEsc'
 
   let g:no_viewdoc_maps   = 1
   let g:no_viewdoc_abbrev = 1
