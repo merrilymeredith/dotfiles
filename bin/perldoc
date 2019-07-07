@@ -8,4 +8,6 @@ fi
 if [ -x "$(command -v cpandoc)" ]; then
   exec cpandoc $*
 fi
-exec perldoc $*
+
+BIN="$(which -a perldoc | grep -v $0 | head -n 1)"
+exec $BIN $*
