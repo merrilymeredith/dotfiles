@@ -1,11 +1,19 @@
-# Two escapes clear command line.
-"\e\e": "\C-a\C-k"
+$include /etc/inputrc
 
-# Tab to menu complete
-# "\t": menu-complete
+set completion-ignore-case on
+
+set expand-tilde on
+set mark-directories on
+set show-all-if-ambiguous on
+set visible-stats on
+set completion-display-width 120
+
+set bell-style none
+
+set input-meta on
+set output-meta on
 
 # Incremental searching with Up and Down and Left and Right
-
 $if mode=emacs
   "\e[A": history-search-backward
   "\e[B": history-search-forward
@@ -13,24 +21,7 @@ $if mode=emacs
   "\e\e[D": backward-word
 $endif
 
-set completion-ignore-case On
-#set completion-prefix-display-length 2
-set expand-tilde on
-set mark-directories on
-set show-all-if-ambiguous on
-set visible-stats on
-
-set bell-style off
-
-set meta-flag on
-set input-meta on
-set convert-meta off
-set output-meta on 
-
 $if Bash
-  #do history expansion when space entered
   Space: magic-space
 $endif
-
-$include /etc/inputrc
 
