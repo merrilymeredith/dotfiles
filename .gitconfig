@@ -6,6 +6,7 @@
 	user = merrilymeredith
 
 [alias]
+	alias    = "!git config -l | grep -v 'alias.alias' | perl -ne 's/^alias\\.// and s/=/#= / and print' | column -t -s#"
 	ci       = commit
 	rec      = commit -p
 	unrec    = checkout --patch

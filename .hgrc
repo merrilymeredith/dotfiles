@@ -18,6 +18,7 @@ schemes =
 pager = LESS='FSRXi' less
 
 [alias]
+alias = !$HG config alias | grep -v 'alias.alias' | perl -ne 's/^alias\.// and s/=/#= / and print' | column -t -s#
 fetch = pull --rebase
 rec   = record
 ctags = !~/bin/git-ctags
