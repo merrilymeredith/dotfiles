@@ -123,6 +123,7 @@ noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
 command! Gcd call vimrc#Gcd()
 command! Hgcd call vimrc#Hgcd()
+command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
 CAlias Q q
 CAlias Qa qa
