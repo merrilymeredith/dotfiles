@@ -280,6 +280,9 @@ augroup vimrc
   autocmd BufNewFile,BufRead neomutt-*-\w\+ setf mail
 augroup END
 
+" clear defaults.vim 'jump to last known pos'
+augroup vimStartup | au! | augroup END
+
 " https://mjj.io/2015/01/27/encrypting-files-with-gpg-and-vim/
 " hacked to work with vimwiki
 augroup encrypted
