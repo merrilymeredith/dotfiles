@@ -26,6 +26,21 @@
 	glog     = log --graph --pretty=onelinecustom
 	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
 
+[pretty]
+	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
+
+[ui]
+	color = true
+
+[core]
+	pager = LESS=FSRXi less
+
+[gpg]
+	program = "gpg2"
+
+[merge]
+	tool = vimdiff2
+
 [branch]
 	autosetuprebase = always
 	autosetupmerge  = always
@@ -34,20 +49,8 @@
 	verbose = true
 	gpgsign = true
 
-[core]
-	pager = LESS='FSRXi' less
-
 [diff]
 	compactionheuristic = true
-
-[gpg]
-	program = "gpg2"
-
-[merge]
-	tool = vimdiff2
-
-[pretty]
-	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
 
 [push]
 	default = current
@@ -62,9 +65,6 @@
 
 [transfer]
         fsckobjects = true
-
-[ui]
-	color = true
 
 # include.path is available in git 1.7.10 and later
 [include]
