@@ -56,6 +56,10 @@
 	autosquash = true
 	stat = true
 
+[rerere]
+	enabled = true
+	autoupdate = true
+
 [transfer]
         fsckobjects = true
 
