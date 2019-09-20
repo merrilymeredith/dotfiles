@@ -24,7 +24,7 @@
 	new      = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
 	cleanup  = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
 	glog     = log --graph --pretty=onelinecustom
-	recent   = !sh -c 'git for-each-ref --count=${1:-20} --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${@:2}' -
+	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
 
 [branch]
 	autosetuprebase = always
