@@ -30,7 +30,6 @@ let s:filename   = expand('<sfile>')
   Plug 'Shougo/unite-session'
   Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
   Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-  Plug 'rking/ag.vim'
 
   Plug 'godlygeek/tabular'
   Plug 'tomtom/tcomment_vim'
@@ -123,6 +122,9 @@ command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
 command! Gcd call vimrc#Gcd()
 command! Hgcd call vimrc#Hgcd()
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
+
+command! -nargs=+ -complete=file -bar Ag  sil! gr <args>|cope|redr!|let @/="<args>"|set hls
+CAlias Rg Ag
 
 CAlias Q q
 CAlias Qa qa
@@ -224,6 +226,14 @@ let &directory = g:vimcache . '/tmp//,.'
 if has('persistent_undo')
   set undofile
   let &undodir = g:vimcache . '/undo//,.'
+endif
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m
+elseif executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+  set grepformat^=%f:%l:%c:%m
 endif
 
 if g:on_windows
