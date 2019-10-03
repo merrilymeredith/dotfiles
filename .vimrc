@@ -71,7 +71,6 @@ nnoremap <silent> <F8>   :TagbarToggle<CR>
 
 nnoremap <leader>ub :Unite buffer<CR>
 nnoremap <leader>us :Unite session<CR>
-nnoremap <leader>uf :Unite -start-insert file_rec/async:!<CR>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
@@ -415,10 +414,6 @@ endtry
 
 " like autowrite, applies to any loaded session
 let g:unite_source_session_enable_auto_save = 1
-
-if executable('ag')
-  let g:unite_source_rec_async_command = ['ag', '-f', '--nocolor', '--nogroup', '-g', '']
-endif
 
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
