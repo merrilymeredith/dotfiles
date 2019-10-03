@@ -104,7 +104,7 @@ nnoremap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
 " use Ag for a recursive *
-nnoremap g* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
+nnoremap g* :Ag <cword><CR>
 
 " K: doc, gKK: doc current filename
 nnoremap gKK :call ViewDoc('doc', expand('%:p'))<CR>
