@@ -12,7 +12,6 @@ rebase =
 record =
 shelve =
 histedit =
-schemes =
 
 [pager]
 pager = LESS='FSRXi' less
@@ -32,10 +31,6 @@ vimdiff.check      = changed, conflicts
 [diff]
 git      = true
 showfunc = true
-
-[schemes]
-gh     = git://github.com/
-gh+ssh = git+ssh://github.com/
 
 [color]
 diff.hunk        = cyan
