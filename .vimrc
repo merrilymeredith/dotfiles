@@ -104,7 +104,7 @@ nnoremap g<C-]> :call vimrc#Ltag(expand('<cword>'))<CR>
 nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 
 " mark line
-nmap <slient> <leader>l V<leader>k
+nmap <leader>l V<leader>k
 
 " use Ag for a recursive *
 nnoremap g* :Ag <cword><CR>
