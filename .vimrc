@@ -64,7 +64,7 @@ let s:filename   = expand('<sfile>')
 
 " Key maps {{{
 nnoremap <silent> <F2>   :VimFilerExplorer<CR>
-noremap  <silent> <F4>   :noh<CR>
+noremap  <silent> <F4>   :set hls!<CR>
 nnoremap <silent> <F5>   :GundoToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
