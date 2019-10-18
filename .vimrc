@@ -427,9 +427,6 @@ try
 catch
 endtry
 
-" like autowrite, applies to any loaded session
-let g:unite_source_session_enable_auto_save = 1
-
 ">> vimfiler
 let g:vimfiler_as_default_explorer = 1
 
