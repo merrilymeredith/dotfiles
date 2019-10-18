@@ -126,7 +126,7 @@ command! Gcd call vimrc#Gcd()
 command! Hgcd call vimrc#Hgcd()
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
-command! -nargs=+ -complete=file -bar Ag  sil! gr <args>|cope|redr!|let @/="<args>"|set hls
+command! -nargs=+ -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
 
 CAlias Q q
@@ -232,10 +232,10 @@ if has('persistent_undo')
 endif
 
 if executable('rg')
-  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepprg=rg\ --vimgrep
   set grepformat=%f:%l:%c:%m,%f:%l%m,%f\ \ %l%m
 elseif executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+  set grepprg=ag\ --vimgrep
   set grepformat^=%f:%l:%c:%m
 endif
 

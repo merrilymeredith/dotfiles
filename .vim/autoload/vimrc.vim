@@ -31,6 +31,27 @@ func! vimrc#AutoSessionConfig() abort
   endif
 endfunc
 
+func! vimrc#Ag(args) abort
+  let orig_t_ti = &t_ti
+  let orig_t_te = &t_te
+  let orig_shellpipe = &shellpipe
+
+  set t_ti= t_te=
+  let &shellpipe = substitute(&shellpipe, '| tee', ' >', '')
+
+  try
+    silent! execute "grep " . escape(a:args, '|')
+    copen
+
+    let @/ = matchstr(a:args, "\\v(-)\@<!(\<)\@<=\\w+|['\"]\\zs.{-}\\ze['\"]")
+    call feedkeys(":let &hlsearch=1 \| echo \<CR>", 'n')
+  finally
+    let &t_ti = orig_t_ti
+    let &t_te = orig_t_te
+    let &shellpipe = orig_shellpipe
+  endtry
+endfunc
+
 func! vimrc#Gcd() abort
   let root = system('git rev-parse --show-toplevel 2>/dev/null')[:-2]
   if ! v:shell_error
