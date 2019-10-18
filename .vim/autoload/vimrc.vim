@@ -25,9 +25,13 @@ func! vimrc#MkNonExDir(file, buf) abort
   endif
 endfunc
 
-func! vimrc#AutoSessionConfig() abort
+func! vimrc#AutoSessionCheck() abort
   if strlen(v:servername) > 0 && match(v:servername, 'VIM') == -1
-    exec 'UniteSessionLoad ' . tolower(v:servername)
+    let sessionfile = g:vimcache . "/session/" . tolower(v:servername) . ".vim"
+
+    if filereadable(sessionfile)
+      execute "source " . sessionfile
+    endif
   endif
 endfunc
 

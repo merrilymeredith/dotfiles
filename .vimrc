@@ -27,7 +27,6 @@ let s:filename   = expand('<sfile>')
   Plug 'Shougo/vimproc.vim'
   Plug 'Shougo/unite.vim'
   Plug 'Shougo/vimfiler.vim'
-  Plug 'Shougo/unite-session'
   Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
   Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
@@ -69,7 +68,6 @@ nnoremap <silent> <F5>   :GundoToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
 nnoremap <leader>ub :Unite buffer<CR>
-nnoremap <leader>us :Unite session<CR>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
@@ -122,9 +120,13 @@ noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
 " Commands & Aliases  {{{
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
+
 command! Gcd call vimrc#Gcd()
 command! Hgcd call vimrc#Hgcd()
+
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
+
+command! Mksession execute v:this_session ? ("mksession! " . v:this_session) : ("echo 'no this_session'")
 
 command! -nargs=+ -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
@@ -216,7 +218,7 @@ set sessionoptions=buffers,curdir,localoptions
 " Enable enhanced % matching in ruby
 runtime macros/matchit.vim
 
-for subdir in ['backup', 'tmp', 'undo']
+for subdir in ['backup', 'tmp', 'undo', 'session']
   if !filewritable(g:vimcache . '/' . subdir)
     call mkdir(g:vimcache . '/' . subdir, 'p', 0700)
   endif
@@ -258,7 +260,7 @@ augroup vimrc
   autocmd WinLeave * stopinsert
 
   " set and load a session based on servername
-  autocmd VimEnter  * call vimrc#AutoSessionConfig()
+  autocmd VimEnter * ++nested call vimrc#AutoSessionCheck()
 
   " complement to autowriteall
   autocmd FocusLost * silent! wa
