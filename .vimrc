@@ -260,7 +260,7 @@ augroup vimrc
   autocmd WinLeave * stopinsert
 
   " set and load a session based on servername
-  autocmd VimEnter * ++nested call vimrc#AutoSessionCheck()
+  autocmd VimEnter * nested call vimrc#AutoSessionCheck()
 
   " complement to autowriteall
   autocmd FocusLost * silent! wa
