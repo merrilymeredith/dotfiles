@@ -24,9 +24,7 @@ let s:filename   = expand('<sfile>')
   Plug 'ciaranm/securemodelines'
   Plug 'editorconfig/editorconfig-vim'
 
-  Plug 'Shougo/vimproc.vim'
-  Plug 'Shougo/unite.vim'
-  Plug 'Shougo/vimfiler.vim'
+  Plug 'tpope/vim-vinegar'
   Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
   Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
@@ -62,12 +60,10 @@ let s:filename   = expand('<sfile>')
 " }}}
 
 " Key maps {{{
-nnoremap <silent> <F2>   :VimFilerExplorer<CR>
+nnoremap <silent> <F2>   :Lexplore<CR>
 noremap  <silent> <F4>   :set hls!<CR>
 nnoremap <silent> <F5>   :UndotreeToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
-
-nnoremap <leader>ub :Unite buffer<CR>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
@@ -279,9 +275,6 @@ augroup vimrc
     \ syn match Error "^\(<\|>\||\)\1\{6,7}" |
     \ syn match Error "^=\{7,8}$"
 
-  " double-click to edit in vimfiler
-  autocmd FileType vimfiler nmap <buffer> <2-LeftMouse> <Plug>(vimfiler_edit_file)
-
   " Simplify noisy ltag output
   autocmd BufReadPost quickfix
     \ if w:quickfix_title =~# '^:ltag' |
@@ -321,6 +314,11 @@ let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 
 " Plugin settings  {{{
 let g:plug_threads = 3
+
+">> Netrw
+let g:netrw_browse_split = 4
+let g:netrw_winsize      = 20
+let g:netrw_liststyle    = 3
 
 ">> vim-polyglot
 let g:polyglot_disabled = ['vifm', 'perl']
@@ -423,18 +421,6 @@ let g:tagbar_type_elixir = {
   \ ],
 \ }
 
-">> Unite
-try
-  " call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  call unite#filters#sorter_default#use(['sorter_rank'])
-
-  call unite#custom#profile('default', 'context', {'winheight': 10})
-catch
-endtry
-
-">> vimfiler
-let g:vimfiler_as_default_explorer = 1
-
 ">> Airline
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_powerline_fonts = 0
@@ -453,7 +439,7 @@ let g:airline#extensions#tabline#right_sep        = ' '
 let g:airline#extensions#tabline#right_alt_sep    = ' '
 
 let g:airline#extensions#tabline#ignore_bufadd_pat =
-  \ '\c\v^__gundo|^__tagbar|^vimfiler|^[doc\d+\]$'
+  \ '\c\v^__gundo|^__tagbar||^[doc\d+\]$'
 let g:airline#extensions#tabline#excludes = [
   \ g:airline#extensions#tabline#ignore_bufadd_pat,
   \ ]
