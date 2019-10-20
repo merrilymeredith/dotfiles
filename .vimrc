@@ -122,7 +122,7 @@ command! Hgcd call vimrc#Hgcd()
 
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
-command! Mksession execute v:this_session ? ("mksession! " . v:this_session) : ("echo 'no this_session'")
+command! Mksession execute "mksession! " . v:this_session
 
 command! -nargs=+ -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
