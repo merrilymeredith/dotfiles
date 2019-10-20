@@ -27,7 +27,7 @@ let s:filename   = expand('<sfile>')
   Plug 'Shougo/vimproc.vim'
   Plug 'Shougo/unite.vim'
   Plug 'Shougo/vimfiler.vim'
-  Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+  Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
   Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 
   Plug 'godlygeek/tabular'
@@ -64,7 +64,7 @@ let s:filename   = expand('<sfile>')
 " Key maps {{{
 nnoremap <silent> <F2>   :VimFilerExplorer<CR>
 noremap  <silent> <F4>   :set hls!<CR>
-nnoremap <silent> <F5>   :GundoToggle<CR>
+nnoremap <silent> <F5>   :UndotreeToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
 nnoremap <leader>ub :Unite buffer<CR>
@@ -373,8 +373,11 @@ let g:vimwiki_list = [
 let g:viewdoc_open = 'topleft new'
 let g:viewdoc_winwidth_max = 100
 
-">> Gundo
-let g:gundo_prefer_python3 = 1
+">> Undotree
+let g:undotree_SplitWidth = 45
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_ShortIndicators = 1
+let g:undotree_DiffCommand = "diff -dp -U 1"
 
 ">> Tagbar
 let g:tagbar_autoclose = 1
