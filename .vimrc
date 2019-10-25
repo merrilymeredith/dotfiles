@@ -61,12 +61,16 @@ let s:filename   = expand('<sfile>')
 
 " Key maps {{{
 nnoremap <silent> <F2>   :20Lexplore<CR>
+nnoremap <silent> <F3>   n
+nnoremap <silent> <S-F3> N
 noremap  <silent> <F4>   :set hls!<CR>
 nnoremap <silent> <F5>   :UndotreeToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
 " let F4, :noh work as-is in insert mode
 imap <F4> <C-O><F4>
+
+cmap <F3> <CR>
 
 " chdir to the directory of the open buffer
 noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
