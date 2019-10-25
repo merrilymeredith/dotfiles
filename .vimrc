@@ -60,7 +60,7 @@ let s:filename   = expand('<sfile>')
 " }}}
 
 " Key maps {{{
-nnoremap <silent> <F2>   :Lexplore<CR>
+nnoremap <silent> <F2>   :20Lexplore<CR>
 noremap  <silent> <F4>   :set hls!<CR>
 nnoremap <silent> <F5>   :UndotreeToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
@@ -314,11 +314,6 @@ let g:perl_tidy_equalprg           = executable('perltidy') ? 1 : 0
 
 " Plugin settings  {{{
 let g:plug_threads = 3
-
-">> Netrw
-let g:netrw_browse_split = 4
-let g:netrw_winsize      = 20
-let g:netrw_liststyle    = 3
 
 ">> vim-polyglot
 let g:polyglot_disabled = ['vifm', 'perl']

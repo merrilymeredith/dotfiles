@@ -1,0 +1,1 @@
+nnoremap <buffer> gb <C-^>
