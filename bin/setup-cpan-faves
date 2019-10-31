@@ -2,6 +2,8 @@
 set -eu -o pipefail
 
 dists=(
+  App::cpm
+
   Perl::Tidy
   Pod::Cpandoc
 
@@ -21,7 +23,13 @@ dists=(
   Getopt::Long::Descriptive
 )
 
-command -v cpm &>/dev/null ||
-  cpanm App::cpm
+if ! command -v cpm &>/dev/null; then
+  curl -fsSL --compressed https://git.io/cpm |
+    perl - install -g App::cpm
 
-exec cpm install -g "${dists[@]}"
+  plenv rehash || :
+fi
+
+cpm install -g "${dists[@]}"
+
+plenv rehash || :
