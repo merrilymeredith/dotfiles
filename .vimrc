@@ -438,10 +438,7 @@ let g:airline#extensions#tabline#right_sep        = ' '
 let g:airline#extensions#tabline#right_alt_sep    = ' '
 
 let g:airline#extensions#tabline#ignore_bufadd_pat =
-  \ '\c\v^__gundo|^__tagbar||^[doc\d+\]$'
-let g:airline#extensions#tabline#excludes = [
-  \ g:airline#extensions#tabline#ignore_bufadd_pat,
-  \ ]
+  \ '\c\v^__tagbar|^[doc\d*\]$|^diffpanel'
 
 let g:airline#extensions#branch#format = 2
 
