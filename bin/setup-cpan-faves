@@ -23,7 +23,7 @@ dists=(
   Getopt::Long::Descriptive
 )
 
-if ! command -v cpm &>/dev/null; then
+if ! (command -v cpm && cpm -V) &>/dev/null; then
   curl -fsSL --compressed https://git.io/cpm |
     perl - install -g App::cpm
 
