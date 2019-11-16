@@ -121,6 +121,8 @@ WaitClassName()
 
 if [ -r ~/.i3/auto-start.local ]; then
   . .i3/auto-start.local
+else
+  urxvtcd
 fi
 
 exit 0
