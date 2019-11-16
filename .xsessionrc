@@ -1,7 +1,6 @@
 #!/bin/sh
 
 PLATFORM="$(uname -s)"
-VIRT='no'
 
 if [ "$PLATFORM" = "OpenBSD" ]; then
   PATH="/usr/X11R6/bin:$PATH"
@@ -24,15 +23,7 @@ if [ -r ~/.Xdefaults.local ]; then
   xrdb -quiet -merge -DUSE_LOCAL ~/.Xdefaults
 fi
 
-xcompmgr -n &
-
-urxvtd -o &
-
-if [ -r ~/.xsessionrc.local ]; then
-  . ~/.xsessionrc.local
-fi
-
-if [ "$VIRT" = "yes" ]; then
+if lspci | grep -q VirtualBox; then
   xset b off -dpms s off
 else
   xset b off s 300 dpms 360
@@ -41,5 +32,9 @@ else
   nm-applet &
 fi
 
-jobs >&2
+if [ -r ~/.xsessionrc.local ]; then
+  . ~/.xsessionrc.local
+fi
+
+jobs -l >&2
 
