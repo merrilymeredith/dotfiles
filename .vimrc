@@ -128,10 +128,8 @@ command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
 command! Mksession execute "mksession! " . v:this_session
 
-command! TigBlame   term ++curwin tig blame -- %
-command! Tig        term ++curwin tig
-command! TigLog     term ++curwin tig log
-command! TigLogThis term ++curwin tig log -- %
+command! -nargs=+ -complete=file Tig      call tig#Tig(<f-args>)
+command!                         TigBlame call tig#TigBlame()
 
 command! -nargs=+ -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
