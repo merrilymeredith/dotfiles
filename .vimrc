@@ -473,7 +473,10 @@ if has('gui_running')
   set number
   set background=dark
 
-  set columns=120 lines=40
+  if get(g:, 'vimrc_window_sized', 0)
+    set columns=120 lines=40
+    let g:vimrc_window_sized = 1
+  endif
 
   set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
 
