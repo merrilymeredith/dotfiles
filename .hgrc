@@ -20,6 +20,7 @@ pager = LESS='FSRXi' less
 alias = !$HG config alias | grep -v 'alias.alias' | perl -ne 's/^alias\.// and s/=/#= / and print' | column -t -s#
 fetch = pull --rebase
 rec   = record
+unrec = revert -iC
 ctags = !~/bin/git-ctags
 draft = log -r 'reverse(not public())'
 
