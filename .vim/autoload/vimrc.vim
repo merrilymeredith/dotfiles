@@ -44,7 +44,7 @@ func! vimrc#Ag(args) abort
   let &shellpipe = substitute(&shellpipe, '| tee', ' >', '')
 
   try
-    silent! execute "grep " . escape(a:args, '|')
+    silent! execute "grep " . escape(a:args . join(a:000, ' '), '|')
     copen
 
     let @/ = matchstr(a:args, "\\v(-)\@<!(\<)\@<=\\w+|['\"]\\zs.{-}\\ze['\"]")
