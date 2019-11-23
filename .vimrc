@@ -105,7 +105,7 @@ nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 nmap <leader>l V<leader>k
 
 " use Ag for a recursive *
-nnoremap g* :Ag <cword><CR>
+nnoremap g* :Ag<CR>
 
 " K: doc, gKK: doc current filename
 nnoremap gKK :call ViewDoc('doc', expand('%:p'))<CR>
@@ -131,7 +131,7 @@ command! Mksession execute "mksession! " . v:this_session
 command! -nargs=* -complete=file Tig      call tig#Tig(<f-args>)
 command!                         TigBlame call tig#TigBlame()
 
-command! -nargs=+ -complete=file -bar Ag call vimrc#Ag(<q-args>)
+command! -nargs=* -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
 
 CAlias Q q

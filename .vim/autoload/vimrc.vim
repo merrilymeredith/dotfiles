@@ -43,8 +43,10 @@ func! vimrc#Ag(args) abort
   set t_ti= t_te=
   let &shellpipe = substitute(&shellpipe, '| tee', ' >', '')
 
+  let grepargs = a:args == '' ? expand('<cword>') : a:args . join(a:000, ' ')
+
   try
-    silent! execute "grep " . escape(a:args . join(a:000, ' '), '|')
+    silent! execute "grep " . escape(grepargs, '|')
     copen
 
     let @/ = matchstr(a:args, "\\v(-)\@<!(\<)\@<=\\w+|['\"]\\zs.{-}\\ze['\"]")
