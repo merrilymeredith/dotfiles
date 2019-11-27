@@ -322,7 +322,7 @@ let g:perl_compiler_force_warnings = 0
 let g:plug_threads = 3
 
 ">> vim-polyglot
-let g:polyglot_disabled = ['vifm', 'perl']
+let g:polyglot_disabled = ['vifm', 'perl', 'go']
 
 ">> mucomplete
 " enable and prefer local buffer before tags
@@ -346,11 +346,11 @@ augroup vim-lsp
       \ })
   endif
 
-  if executable('go-langserver')
+  if executable('gopls')
     autocmd FileType go setlocal omnifunc=lsp#complete
     autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-langserver',
-      \ 'cmd': {server_info->['go-langserver']},
+      \ 'name': 'go-lang',
+      \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
       \})
   endif
