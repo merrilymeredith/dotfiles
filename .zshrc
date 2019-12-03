@@ -9,7 +9,6 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 omz_plugins=(
-  plugins/common-aliases
   plugins/colored-man-pages
   plugins/vi-mode
 )
@@ -37,6 +36,7 @@ fi
 
 KEYTIMEOUT=1
 REPORTTIME=5
+HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 setopt list_packed
 setopt correct
@@ -44,7 +44,8 @@ setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt interactive_comments
 
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 # Altered from what's shown on Arch wiki
 [[ -n "${terminfo[khome]}" ]] && bindkey -- "${terminfo[khome]}" beginning-of-line

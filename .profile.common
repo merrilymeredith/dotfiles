@@ -20,6 +20,14 @@ export DEVEL_REPL_PROFILE='Standard'
 export ASDF_CONCURRENCY='2'
 export RUBY_EXTRA_CONFIGURE_OPTIONS="--enable-shared --enable-install-doc"
 
+alias l='ls -lFh'     #size,show type,human readable
+alias la='ls -lAFh'   #long list,show almost all,show type,human readable
+alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
+alias ll='ls -l'      #long list
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
 alias hgcd='cd $(hg root)'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 
