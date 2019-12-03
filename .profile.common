@@ -1,3 +1,4 @@
+# vim: ft=bash
 # simple profile stuff that is common to both zsh and bash
 
 umask 027
