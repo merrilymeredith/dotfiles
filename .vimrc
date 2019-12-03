@@ -18,7 +18,7 @@ let s:filename   = expand('<sfile>')
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'vasconcelloslf/vim-interestingwords'
+  Plug 'lfv89/vim-interestingwords'
   Plug 'nathanaelkane/vim-indent-guides'
 
   Plug 'ciaranm/securemodelines'
