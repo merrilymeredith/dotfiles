@@ -279,8 +279,7 @@ augroup vimrc
 
   " Simple highlight conflict markers
   autocmd BufReadPost *
-    \ syn match Error "^\(<\|>\||\)\1\{6,7}" |
-    \ syn match Error "^=\{7,8}$"
+    \ match Error "^\([<>|]\)\{7} \@=\|^=\{7}$"
 
   " Simplify noisy ltag output
   autocmd BufReadPost quickfix
