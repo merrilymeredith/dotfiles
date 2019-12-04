@@ -1,5 +1,8 @@
+--standard-error-output
+--warning-output
 --converge
 --extended-syntax
+--sub-alias-list='method fun'
 --indent-columns=2
 --continuation-indentation=2
 --maximum-line-length=80
@@ -18,3 +21,6 @@
 --stack-closing-paren
 --break-at-old-comma-breakpoints
 --break-at-old-method-breakpoints
+--one-line-block-semicolons=0
+--nowant-right-space="A"
+--space-prototype-paren=2
