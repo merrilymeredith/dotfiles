@@ -1,12 +1,13 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -eu -o pipefail
 
-if [ -d ~/.hgext/hg-git ]; then
-  hg -R ~/.hgext/hg-git fetch
-else
-  hg clone https://bitbucket.org/durin42/hg-git ~/.hgext/hg-git
-
-  [ -f ~/.hgext/hgrc ] || echo '[extensions]' > ~/.hgext/hgrc
-  echo 'hggit = ~/.hgext/hg-git/hggit' >> ~/.hgext/hgrc
+if ! (command -v pip2 && pip2 -V) &>/dev/null; then
+  curl -fsSL --compressed https://bootstrap.pypa.io/get-pip.py |
+    python2 - --user
 fi
 
+pip2 install --user --upgrade hg-git
+
+if ! grep -qsw hggit ~/.hgext/hgrc; then
+  printf '[extensions]\nhggit =\n' >> ~/.hgext/hgrc
+fi

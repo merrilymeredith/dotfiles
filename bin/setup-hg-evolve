@@ -1,12 +1,14 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -eu -o pipefail
 
-if [ -d ~/.hgext/evolve ]; then
-  hg -R ~/.hgext/evolve fetch
-else
-  hg clone https://www.mercurial-scm.org/repo/evolve ~/.hgext/evolve
+if ! (command -v pip2 && pip2 -V) &>/dev/null; then
+  curl -fsSL --compressed https://bootstrap.pypa.io/get-pip.py |
+    python2 - --user
+fi
 
-  [ -f ~/.hgext/hgrc ] || echo '[extensions]' > ~/.hgext/hgrc
-  echo 'evolve = ~/.hgext/evolve/hgext3rd/evolve' >> ~/.hgext/hgrc
+pip2 install --user --upgrade hg-evolve
+
+if ! grep -qsw evolve ~/.hgext/hgrc; then
+  printf '[extensions]\nevolve =\n' >> ~/.hgext/hgrc
 fi
 
