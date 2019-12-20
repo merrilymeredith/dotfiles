@@ -12,3 +12,6 @@ if ! grep -qsw evolve ~/.hgext/hgrc; then
   printf '[extensions]\nevolve =\n' >> ~/.hgext/hgrc
 fi
 
+if ! grep -qsw topic ~/.hgext/hgrc; then
+  printf '[extensions]\ntopic =\n' >> ~/.hgext/hgrc
+fi
