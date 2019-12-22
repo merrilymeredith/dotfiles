@@ -4,12 +4,7 @@ merge       = vimdiff
 logtemplate = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
 
 [extensions]
-color =
-graphlog =
-pager =
-progress =
 rebase =
-record =
 shelve =
 histedit =
 
@@ -17,12 +12,15 @@ histedit =
 pager = LESS='FSRXi' less
 
 [alias]
-alias = !$HG config alias | grep -v 'alias.alias' | perl -ne 's/^alias\.// and s/=/#= / and print' | column -t -s#
-fetch = pull --rebase
-rec   = record
-unrec = revert -iC
-ctags = !~/bin/git-ctags
-draft = log -r 'reverse(not public())'
+alias   = !$HG config alias | grep -v 'alias.alias' | perl -ne 's/^alias\.// and s/=/#= / and print' | column -t -s#
+fetch   = pull --rebase
+rec     = commit -i
+record  = commit -i
+crecord = !hg commit -i --config ui.interface=curses
+unrec   = revert -iC
+ctags   = !~/bin/git-ctags
+glog    = log -G
+draft   = log -r 'reverse(not public())'
 
 [merge-tools]
 vimdiff.executable = vim
