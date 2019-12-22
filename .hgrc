@@ -30,31 +30,6 @@ vimdiff.check      = changed, conflicts
 git      = true
 showfunc = true
 
-[color]
-diff.hunk        = cyan
-log.changeset    = magenta
-logcust.date     = green
-logcust.user     = cyan
-logcust.decorate = yellow
-changeset.draft  = dim
-changeset.secret = dim underline
-
-[templates]
-logcust = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
-
-[templatealias]
-phaseset = "{label("changeset.{phase}", rev)}:{label('log.changeset', node|short)}"
-decorate = "{if(branches, " ({branches})")}{if(tags, " <{tags}>")}{if(bookmarks, " [{bookmarks}]")}{if(topics, " @{topics}")}"
-
-[committemplate]
-changeset = {desc}\n\n
-    HG: {extramsg}
-    HG: user: {author}\n{ifeq(p2rev, "-1", "",
-   "HG: branch merge\n")
-   }HG: branch '{branch}'\n{if(currentbookmark,
-   "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
-   "HG: subrepo {subrepo}\n"              }
-   {splitlines(diff()) % 'HG: {line}\n'}
-
+%include ~/.hgrc.logtemplates
 %include ~/.hgext/hgrc
 %include ~/.hgrc.local
