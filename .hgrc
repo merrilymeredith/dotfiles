@@ -1,7 +1,7 @@
 [ui]
 username    = Meredith Howard <mhoward@roomag.org>
 merge       = vimdiff
-logtemplate = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
+logtemplate = "{logcust}"
 
 [extensions]
 rebase =
@@ -39,9 +39,12 @@ logcust.decorate = yellow
 changeset.draft  = dim
 changeset.secret = dim underline
 
+[templates]
+logcust = "{phaseset} -{label('logcust.decorate', decorate)} {desc|strip|firstline} {label('logcust.date', "({date|age})")} {label('logcust.user' , "<{author|person}>")}\n"
+
 [templatealias]
 phaseset = "{label("changeset.{phase}", rev)}:{label('log.changeset', node|short)}"
-decorate = "{if(branches, " ({branches})")}{if(tags, " <{tags}>")}{if(bookmarks, " [{bookmarks}]")}"
+decorate = "{if(branches, " ({branches})")}{if(tags, " <{tags}>")}{if(bookmarks, " [{bookmarks}]")}{if(topics, " @{topics}")}"
 
 [committemplate]
 changeset = {desc}\n\n
