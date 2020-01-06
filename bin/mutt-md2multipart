@@ -1,0 +1,37 @@
+#!/bin/sh
+set -eu
+
+output=$1
+
+# Output directory is going to be one-per-process.  I'd like to have a fully
+# random tmpdir but doing that and having it mutt clean up is "hard".  Note
+# that when these two parts get attached, we can't just clean files inside the
+# macro, because they aren't read into memory until send/save.
+
+mkdir -p $output
+
+# Store stdin because we're using it twice.
+cat - > $output/msg.orig
+
+# Noting the above, there may be old output here.  pandoc likes to confirm
+# overwrites so we handle it.
+rm -f $output/msg.{txt,html}
+
+pandoc \
+  --quiet \
+  -f markdown-blank_before_blockquote+smart \
+  -t plain \
+  -o $output/msg.txt \
+  $output/msg.orig
+
+pandoc \
+  --quiet \
+  --standalone \
+  -f markdown-blank_before_blockquote+smart \
+  -t html5 \
+  --self-contained \
+  --template=mail \
+  --highlight-style=monochrome \
+  --email-obfuscation=none \
+  -o $output/msg.html \
+  $output/msg.orig
