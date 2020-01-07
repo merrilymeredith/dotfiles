@@ -100,13 +100,11 @@ macro compose \eh "F mutt-md2html \ny^T^Utext/html\n" 'htmlify'
 # Turn a text/plain markdown part into proper multipart
 macro compose \em \
 "<enter-command>set pipe_decode<enter>\
-<pipe-entry>~/bin/mutt-md2multipart /tmp/$hostname<enter>\
-<enter-command>unset pipe-decode<enter>\
-a^U/tmp/$hostname/msg.txt\n^Da^U/tmp/$hostname/msg.html\n^D^T^Utext/html; charset=utf-8\n\
-=DTT&d^U\n" \
+<pipe-entry>~/bin/mutt-md2html -o /tmp/mutt-$hostname.msg.html<enter>\
+<enter-command>unset pipe_decode<enter>\
+a^U/tmp/mutt-$hostname.msg.html\n^Du^T^Utext/html; charset=utf-8\n\
+=TT&d^U\n" \
 "multipartify"
-
-shutdown-hook 'shell-escape rm -rf /tmp/$hostname'
 
 push <first-entry>
 
