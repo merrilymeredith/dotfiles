@@ -1,11 +1,10 @@
-script_line1 = use warnings; use strict; ()
-script_line2 = use feature ':all'; use experimentals; ()
+script_line1 = use warnings; use strict;
+script_line2 = use feature ':all'; use experimentals;
 script_line3 = require glob('~/.replyrc.pl'); ()
 script_line4 = -e $_ && require($_) for glob('~/.replyrc.local.pl'); ()
 
 [Colors]
 [DataPrinter]
-[FancyPrompt]
 [Interrupt]
 
 [Hints]
