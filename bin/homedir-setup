@@ -16,49 +16,36 @@ if ! git --version >/dev/null; then
   exit 1
 fi
 
-pull() {
-  echo "$1:"
-  git -C "$1" pull --no-tags
+clone_or_pull() {
+  if ! [ -d $2 ]; then
+    git clone --depth 1 "$1" $2
+  else
+    echo "$1:"
+    git -C "$1" pull --no-tags
+  fi
 }
 
-if ! [ -d .zgen ]; then
-  git clone --depth 1 'https://github.com/tarjoilija/zgen.git' .zgen
-else
-  pull .zgen
-  zsh -i -c 'zgen update' || true
-fi
+clone_or_pull 'https://github.com/tarjoilija/zgen.git' .zgen
+
+zsh -i -c 'zgen update' || :
 
 if [ "$minimal" -ne 1 ]; then
-  if ! [ -d .plenv ]; then
-    git clone --depth 1 'https://github.com/tokuhirom/plenv.git' .plenv
-    git clone --depth 1 'https://github.com/tokuhirom/Perl-Build.git' .plenv/plugins/perl-build/
-  else
-    pull .plenv
-    pull .plenv/plugins/perl-build
-  fi
+  clone_or_pull 'https://github.com/tokuhirom/plenv.git' .plenv
+  clone_or_pull 'https://github.com/skaji/perl-install'  .plenv/plugins/perl-install
 
-  if ! [ -d .asdf ]; then
-    git clone --depth 1 'https://github.com/asdf-vm/asdf' .asdf
-  else
-    pull .asdf
-  fi
+  clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
 
   for PLUGIN in ruby nodejs erlang elixir; do
-    if ! [ -d .asdf/plugins/$PLUGIN ]; then
-      git clone --depth 1 "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$PLUGIN
-    else
-      pull .asdf/plugins/$PLUGIN
-    fi
+    clone_or_pull "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$PLUGIN
   done
 
-  bin/setup-man || true
+  bin/setup-man || :
 fi
 
 # Get rid of older stuff
-if [ -d .rbenv ]; then
-  echo 'rbenv is still installed' >&2
-fi
-
-if [ -d .ndenv ]; then
-  echo 'ndenv is still installed' >&2
-fi
+for OLD in .plenv/plugins/perl-build .rbenv .ndenv; do
+  if [ -e $OLD ]; then
+    echo "Pruning $OLD" >&2
+    rm -rf $OLD
+  fi
+done
