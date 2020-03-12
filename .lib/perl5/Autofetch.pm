@@ -6,6 +6,8 @@ use File::Spec::Functions qw(catfile rel2abs);
 
 sub fetch {
   my ($path, $module) = @_;
+  return if
+    system('cpm', 'install', -L => $path, $module) == 0;
   system 'cpanm', -nq, -l => $path, $module;
 }
 
