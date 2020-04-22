@@ -260,7 +260,7 @@ set go-=T go-=m go-=t "no toolbar, menu, tearoffs
 augroup vimrc
   autocmd!
 
-  autocmd WinLeave * stopinsert
+  autocmd WinLeave * if !pumvisible() | stopinsert | endif
 
   " set and load a session based on servername
   autocmd VimEnter * nested call vimrc#AutoSessionCheck()
