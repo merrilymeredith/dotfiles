@@ -333,6 +333,8 @@ let g:mucomplete#chains = {
 let g:mucomplete#user_mappings = {'sqla' : "\<c-c>a"}
 
 ">> vim-lsp
+let g:lsp_diagnostics_echo_cursor = 1
+
 augroup vim-lsp
   autocmd!
 
