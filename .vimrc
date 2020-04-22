@@ -327,8 +327,8 @@ let g:polyglot_disabled = ['vifm', 'perl', 'go']
 " enable and prefer local buffer before tags
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#chains = {
-  \ 'default': ['path', 'omni', 'c-n', 'tags', 'dict', 'uspl'],
-  \ 'sql': ['keyn', 'sqla', 'dict', 'uspl']
+  \ 'default': ['path', 'c-n', 'tags', 'omni', 'dict', 'uspl'],
+  \ 'sql': ['keyn', 'sqla', 'dict', 'uspl'],
   \}
 let g:mucomplete#user_mappings = {'sqla' : "\<c-c>a"}
 
