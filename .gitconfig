@@ -55,7 +55,6 @@
 	default = current
 
 [rebase]
-	autosquash = true
 	stat = true
 
 [rerere]
