@@ -34,7 +34,7 @@ let s:filename   = expand('<sfile>')
   Plug 'lifepillar/vim-mucomplete'
   Plug 'tpope/vim-endwise'
 
-  if executable('rls')
+  if executable('rls') || executable('gopls')
     Plug 'prabirshrestha/async.vim'
     Plug 'prabirshrestha/vim-lsp'
   end
