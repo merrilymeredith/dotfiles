@@ -34,10 +34,8 @@ let s:filename   = expand('<sfile>')
   Plug 'lifepillar/vim-mucomplete'
   Plug 'tpope/vim-endwise'
 
-  if executable('rls') || executable('gopls')
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-  end
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
 
   Plug 'vimwiki/vimwiki'
 
@@ -350,9 +348,18 @@ augroup vim-lsp
   if executable('gopls')
     autocmd FileType go setlocal omnifunc=lsp#complete
     autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'go-lang',
+      \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
+      \})
+  endif
+
+  if executable('nimlsp')
+    autocmd FileType nim setlocal omnifunc=lsp#complete
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name': 'nimlsp',
+      \ 'cmd': {server_info->['nimlsp']},
+      \ 'whitelist': ['nim'],
       \})
   endif
 augroup END
