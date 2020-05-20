@@ -89,10 +89,9 @@ func! vimrc#SafeFilterFile(cmd)
 endfunc
 
 func! vimrc#on_lsp_buffer_enabled() abort
-    setl omnifunc=lsp#complete
-    setl signcolumn=yes
-    nmap <buffer> <F9> <plug>(lsp-hover)
-    nmap <buffer> gd   <plug>(lsp-definition)
-    nmap <buffer> ]d   <plug>(lsp-next-diagnostic)
-    nmap <buffer> [d   <plug>(lsp-previous-diagnostic)
+  setl omnifunc=lsp#complete
+  nmap <buffer> <F9> <plug>(lsp-hover)
+  nmap <buffer> gd   <plug>(lsp-definition)
+  nmap <buffer> ]d   <plug>(lsp-next-diagnostic)
+  nmap <buffer> [d   <plug>(lsp-previous-diagnostic)
 endfunc
