@@ -335,9 +335,9 @@ let g:lsp_diagnostics_echo_cursor = 1
 
 augroup vim-lsp
   autocmd!
+  autocmd User lsp_buffer_enabled call vimrc#on_lsp_buffer_enabled()
 
   if executable('rls')
-    autocmd FileType rust setlocal omnifunc=lsp#complete
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'rls',
       \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
@@ -346,7 +346,6 @@ augroup vim-lsp
   endif
 
   if executable('gopls')
-    autocmd FileType go setlocal omnifunc=lsp#complete
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
@@ -355,7 +354,6 @@ augroup vim-lsp
   endif
 
   if executable('nimlsp')
-    autocmd FileType nim setlocal omnifunc=lsp#complete
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'nimlsp',
       \ 'cmd': {server_info->['nimlsp']},
