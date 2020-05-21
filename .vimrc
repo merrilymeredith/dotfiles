@@ -252,6 +252,11 @@ else
 endif
 
 set go-=T go-=m go-=t "no toolbar, menu, tearoffs
+
+let g:jellybeans_overrides = {
+    \ 'SignColumn': {'ctermbg': 235, 'guibg':'222222'},
+  \ }
+
 " }}}
 
 " Autocmds  {{{
