@@ -64,19 +64,3 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin'  : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 \ }
-
-let g:tagbar_type_nim = {
-    \ 'ctagstype': 'nim',
-    \ 'kinds' : [
-        \'c:classes',
-        \'e:enums',
-        \'t:tuples',
-        \'r:subranges',
-        \'P:proctypes',
-        \'p:procedures',
-        \'m:methods',
-        \'o:operators',
-        \'T:templates',
-        \'M:macros'
-    \ ]
-\}
