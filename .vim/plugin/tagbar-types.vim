@@ -13,7 +13,7 @@ let g:tagbar_type_perl = {
         \ 'a:attributes',
         \ 'm:methods',
         \ 's:subroutines',
-        \ 'x:around',
+        \ 'x:modifier',
         \ 'l:aliases',
         \ 'd:pod:1:0',
     \ ],
