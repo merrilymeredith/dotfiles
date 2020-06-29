@@ -128,6 +128,7 @@ command! Mksession execute "mksession! " . v:this_session
 
 command! -nargs=* -complete=file Tig      call tig#Tig(<f-args>)
 command!                         TigBlame call tig#TigBlame()
+command!                         TigLog   call tig#Tig('log', '-p', '--', expand('%'))
 
 command! -nargs=* -complete=file -bar Ag call vimrc#Ag(<q-args>)
 CAlias Rg Ag
