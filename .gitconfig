@@ -5,6 +5,9 @@
 [github]
 	user = merrilymeredith
 
+[init]
+	defaultBranch = main
+
 [alias]
 	ci       = commit
 	rec      = commit -p
