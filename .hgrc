@@ -1,6 +1,6 @@
 [ui]
 username    = Meredith Howard <mhoward@roomag.org>
-merge       = vimdiff
+merge       = vimdiff3
 logtemplate = "{logcust}"
 
 [extensions]
@@ -22,9 +22,10 @@ glog    = log -G
 draft   = log -r 'reverse(not public())'
 
 [merge-tools]
-vimdiff.executable = vim
-vimdiff.args       = -d -c 'hid|hid' $base $local $output $other
-vimdiff.check      = changed, conflicts
+vimdiff3.executable = vim
+vimdiff3.args       = -f -d -M $local $base $other $output -c 'hid|hid|hid|set ma write'
+vimdiff3.check      = changed, conflicts
+vimdiff3.premerge   = keep-merge3
 
 [diff]
 git      = true

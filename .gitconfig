@@ -41,7 +41,9 @@
 	program = "gpg2"
 
 [merge]
-	tool = vimdiff2
+	tool = vimdiff3
+	guitool = gvimdiff
+	conflictstyle = diff3
 
 [branch]
 	autosetuprebase = always
