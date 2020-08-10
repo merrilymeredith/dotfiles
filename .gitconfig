@@ -61,7 +61,6 @@
 	stat = true
 
 [rerere]
-	enabled = true
 	autoupdate = true
 
 [transfer]
