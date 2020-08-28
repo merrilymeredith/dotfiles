@@ -16,9 +16,12 @@
 	st       = status -sb
 	co       = checkout
 	br       = branch
+	brd      = diff @{u}..
+	brf      = diff --name-only @{u}..
 	staged   = diff --cached
 	unstage  = reset HEAD --
 	rollback = reset --soft ^HEAD
+	pushF    = push --force-with-lease
 	up       = pull -r --prune
 	update   = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in       = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
