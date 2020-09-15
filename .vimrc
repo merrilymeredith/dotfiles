@@ -131,7 +131,6 @@ command!                         TigBlame call tig#TigBlame()
 command!                         TigLog   call tig#Tig('log', '-p', '--', expand('%'))
 
 command! -nargs=* -complete=file -bar Ag call vimrc#Ag(<q-args>)
-CAlias Rg Ag
 
 CAlias Q q
 CAlias Qa qa
@@ -235,10 +234,7 @@ if has('persistent_undo')
   let &undodir = g:vimcache . '/undo//,.'
 endif
 
-if executable('rg')
-  let &grepprg    = "rg -S --vimgrep"
-  let &grepformat = "%f:%l:%c:%m,%f:%l%m,%f  %l%m"
-elseif executable('ag')
+if executable('ag')
   let &grepprg = "ag --vimgrep"
   set grepformat^=%f:%l:%c:%m
 endif
