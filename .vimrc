@@ -236,7 +236,7 @@ endif
 
 if executable('ag')
   let &grepprg = "ag --vimgrep"
-  set grepformat^=%f:%l:%c:%m
+  set grepformat^=%f:%l:%c:%m,%f
 endif
 
 if g:on_windows
