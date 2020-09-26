@@ -321,6 +321,8 @@ let g:perl_compiler_force_warnings = 0
 " Plugin settings  {{{
 let g:plug_threads = 3
 
+let g:netrw_altfile = 1
+
 ">> mucomplete
 " enable and prefer local buffer before tags
 let g:mucomplete#enable_auto_at_startup = 1
