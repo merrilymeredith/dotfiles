@@ -48,6 +48,7 @@ let s:filename   = expand('<sfile>')
   Plug 'powerman/vim-plugin-viewdoc'
 
   let g:no_viewdoc_abbrev = 1
+  let g:polyglot_disabled = ['vifm', 'perl', 'go']
 
   try
     execute 'source ' . s:filename . '.local-pre'
@@ -319,9 +320,6 @@ let g:perl_compiler_force_warnings = 0
 
 " Plugin settings  {{{
 let g:plug_threads = 3
-
-">> vim-polyglot
-let g:polyglot_disabled = ['vifm', 'perl', 'go']
 
 ">> mucomplete
 " enable and prefer local buffer before tags
