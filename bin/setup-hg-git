@@ -1,12 +1,12 @@
 #!/bin/bash
 set -eu -o pipefail
 
-if ! (command -v pip2 && pip2 -V) &>/dev/null; then
+if ! (command -v pip3 && pip3 -V) &>/dev/null; then
   curl -fsSL --compressed https://bootstrap.pypa.io/get-pip.py |
-    python2 - --user
+    python3 - --user
 fi
 
-pip2 install --user --upgrade hg-git
+pip3 install --user --upgrade hg-git
 
 if ! grep -qsw hggit ~/.hgext/hgrc; then
   printf '[extensions]\nhggit =\n' >> ~/.hgext/hgrc
