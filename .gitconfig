@@ -27,7 +27,6 @@
 	in       = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
 	out      = "!git log --pretty=onelinecustom @{u}.."
 	new      = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
-	cleanup  = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 echo git branch -d"
 	glog     = log --graph --pretty=onelinecustom
 	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
 
