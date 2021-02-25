@@ -1,7 +1,7 @@
 use lib glob('~/.lib/perl5');
 
-use Data::Printer {
-  filters => {-external => ['JSON', 'URI']},
+use Data::Printer 1.0 {
+  filters => ['JSON', 'URI'],
   class   => {show_methods => 'public', inherited => 'public'},
 };
 
