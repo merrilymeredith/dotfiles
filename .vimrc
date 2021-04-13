@@ -334,6 +334,7 @@ let g:mucomplete#user_mappings = {'sqla' : "\<c-c>a"}
 
 ">> vim-lsp
 let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
 augroup vim-lsp
