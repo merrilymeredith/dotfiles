@@ -349,12 +349,17 @@ augroup vim-lsp
       \ })
   endif
 
+  " GO111MODULE=off go get -u golang.org/x/tools/gopls mvdan.cc/gofumpt
   if executable('gopls')
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
+      \ 'workspace_config': {'gopls':
+        \ {'formatting.gofumpt': executable('gofumpt') ? v:true : v:false}
+      \ },
       \})
+    autocmd BufWritePre *.go LspDocumentFormatSync
   endif
 
   if executable('nimlsp')
