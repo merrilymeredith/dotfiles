@@ -120,10 +120,16 @@ noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 " Maps that only apply when an LSP is available
 func! s:on_lsp_buffer_enabled() abort
   setl omnifunc=lsp#complete
-  nmap <buffer> <F9> <plug>(lsp-hover)
-  nmap <buffer> gd   <plug>(lsp-definition)
-  nmap <buffer> ]d   <plug>(lsp-next-diagnostic)
-  nmap <buffer> [d   <plug>(lsp-previous-diagnostic)
+  nmap <buffer> <F9>       <plug>(lsp-hover)
+  nmap <buffer> gd         <plug>(lsp-definition)
+  nmap <buffer> gr         <plug>(lsp-references)
+  nmap <buffer> gt         <plug>(lsp-peek-type-definition)
+  nmap <buffer> ]d         <plug>(lsp-next-diagnostic)
+  nmap <buffer> [d         <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]r         <plug>(lsp-next-reference)
+  nmap <buffer> [r         <plug>(lsp-previous-reference)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> <leader>gt <plug>(lsp-type-definition)
 endfunc
 
 " Commands & Aliases  {{{
