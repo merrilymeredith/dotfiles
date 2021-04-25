@@ -117,6 +117,15 @@ noremap <leader>tm :Tabularize methods<CR>
 
 noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 
+" Maps that only apply when an LSP is available
+func! s:on_lsp_buffer_enabled() abort
+  setl omnifunc=lsp#complete
+  nmap <buffer> <F9> <plug>(lsp-hover)
+  nmap <buffer> gd   <plug>(lsp-definition)
+  nmap <buffer> ]d   <plug>(lsp-next-diagnostic)
+  nmap <buffer> [d   <plug>(lsp-previous-diagnostic)
+endfunc
+
 " Commands & Aliases  {{{
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
 
@@ -339,7 +348,7 @@ let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
 augroup vim-lsp
   autocmd!
-  autocmd User lsp_buffer_enabled call vimrc#on_lsp_buffer_enabled()
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 
   if executable('rls')
     autocmd User lsp_setup call lsp#register_server({
