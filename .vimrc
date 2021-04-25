@@ -370,11 +370,13 @@ augroup vim-lsp
       \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
-      \ 'workspace_config': {'gopls':
-        \ {'formatting.gofumpt': executable('gofumpt') ? v:true : v:false}
-      \ },
       \})
-    autocmd BufWritePre *.go LspDocumentFormatSync
+  endif
+
+  if executable('gofumpt')
+    autocmd BufWritePre *.go :%!gofumpt
+  else
+    autocmd BufWritePre *.go :%!gofmt
   endif
 
   if executable('nimlsp')
