@@ -373,12 +373,6 @@ augroup vim-lsp
       \})
   endif
 
-  if executable('gofumpt')
-    autocmd BufWritePre *.go :%!gofumpt
-  else
-    autocmd BufWritePre *.go :%!gofmt
-  endif
-
   if executable('nimlsp')
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'nimlsp',
