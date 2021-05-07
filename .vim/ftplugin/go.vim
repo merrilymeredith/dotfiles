@@ -1,1 +1,1 @@
-set noet sw=8
+set noet ts=8 sw=8
