@@ -352,7 +352,7 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
-if !has('patch-8.1.1517') || !has('neovim')
+if !has('patch-8.1.1517') && !has('neovim')
   let g:lsp_signature_help_enabled = 0
 endif
 
