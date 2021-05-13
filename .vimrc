@@ -368,13 +368,16 @@ augroup vim-lsp
       \ })
   endif
 
-  " GO111MODULE=off go get -u golang.org/x/tools/gopls mvdan.cc/gofumpt
+  " go install golang.org/x/tools/gopls@latest
+  " go install mvdan.cc/gofumpt@latest
   if executable('gopls')
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'gopls',
       \ 'cmd': {server_info->['gopls']},
       \ 'whitelist': ['go'],
+      \ 'workspace_config': {'gopls': {'formatter.gofumpt': v:true}},
       \})
+    autocmd BufWritePre *.go LspDocumentFormatSync
   endif
 
   if executable('nimlsp')
