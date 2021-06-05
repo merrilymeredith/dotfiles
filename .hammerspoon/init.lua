@@ -17,6 +17,10 @@ function focusTo(direction)
   end
 end
 
+function findOrLaunch(a)
+  return hs.application.find(a) or hs.application.open(a, 3)
+end
+
 -- and the key bindings
 cmdShift('r', hs.reload)
 
@@ -43,21 +47,17 @@ cmdCtrl('left',  function () focusedWindow():moveOneScreenWest() end)
 cmdCtrl('right', function () focusedWindow():moveOneScreenEast() end)
 
 cmd('return', function ()
-  hs.applescript.applescript([[
-    tell application "iTerm"
-      set newterm to index of (create window with default profile)
-      tell application "System Events" to tell process "iTerm2"
-        perform action "AXRaise" of window newterm
-      end tell
-    end tell
-  ]])
+  local a = findOrLaunch('iTerm')
+  a:selectMenuItem({"Shell", "New Window"})
+  a:activate()
 end)
 
 cmdShift('return', function ()
   os.execute(os.getenv('SHELL')..' -l -i -c "exec mvim"')
 end)
 
--- cache window frames before moving?
--- save cache?
--- focus by direction is a little strict
-
+cmdCtrl('return', function ()
+  local a = findOrLaunch('MacVim')
+  a:selectMenuItem({"File", "New Window"})
+  a:activate()
+end)
