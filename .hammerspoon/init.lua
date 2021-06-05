@@ -1,8 +1,5 @@
 hs.window.animationDuration = 0
 
--- set up reload on modify
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
-
 -- aliases and partial bindings to make life easier
 local bindKey  = hs.hotkey.bind
 local cmd      = hs.fnutils.partial(bindKey, {"cmd"})
