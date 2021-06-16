@@ -1,7 +1,13 @@
 " this keeps indents from jumping more than one level
 let b:indent_use_syntax = 0
 
-syn sync minlines=50
+syn sync minlines=1500
+
+" Weird behavior in sql heredocs
+syn clear sqlFold
+
+" fix highlight-all-pragma for vN.NN
+syn match perlStatementInclude   "\<\%(use\|no\)\s\+v\(\d\|.\)\+"
 
 " Add match for =method and =func from Pod::Weaver
 syn match podCommand "^=method" contained nextgroup=podCmdText contains=@NoSpell
