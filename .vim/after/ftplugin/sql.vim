@@ -9,4 +9,4 @@
 
 " cpanm https://github.com/darold/pgFormatter.git
 let &l:equalprg = "pg_format -"
-
+let &l:omnifunc = "syntaxcomplete#Complete"

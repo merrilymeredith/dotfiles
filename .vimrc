@@ -343,9 +343,7 @@ let g:netrw_altfile = 1
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#chains = {
   \ 'default': ['path', 'c-n', 'omni', 'tags', 'dict', 'uspl'],
-  \ 'sql': ['keyn', 'sqla', 'dict', 'uspl'],
   \}
-let g:mucomplete#user_mappings = {'sqla' : "\<c-c>a"}
 
 ">> vim-lsp
 let g:lsp_diagnostics_echo_cursor = 1
