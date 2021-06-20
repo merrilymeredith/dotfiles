@@ -4,7 +4,9 @@ set -eu
 
 stubexec $*
 
-cpanm -n 'https://github.com/darold/pgFormatter.git'
+curl -fsSL --compressed https://git.io/cpm |
+  perl - install -g App::cpm
+
 plenv rehash || :
 
 stubexec $*
