@@ -21,7 +21,7 @@
 	staged   = diff --cached
 	unstage  = reset HEAD --
 	rollback = reset --soft ^HEAD
-	pushF    = push --force-with-lease
+	pushf    = push --force-with-lease
 	up       = pull -r --prune
 	update   = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in       = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
@@ -29,6 +29,7 @@
 	new      = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
 	glog     = log --graph --pretty=onelinecustom
 	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
+	orphan   = "!f() { git fsck --dangling | grep commit | cut -d' ' -f3 | xargs git show --compact-summary; }; f"
 
 [pretty]
 	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
@@ -68,10 +69,10 @@
 	autoupdate = true
 
 [transfer]
-        fsckobjects = true
+	fsckobjects = true
 
 # include.path is available in git 1.7.10 and later
 [include]
 	path = ~/.gitconfig.local
 
-# vim: noet:sw=8
+# vim: noet:ts=8:sw=8
