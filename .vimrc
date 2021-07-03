@@ -444,8 +444,8 @@ let g:airline#extensions#branch#format = 2
 
 ">> interestingwords
 " These are jellybeans colors and some complements
-let g:interestingWordsGUIColors = ['#C4A258', '#D8AD4C', '#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C']
-let g:interestingWordsRandomiseColors = 1
+let g:interestingWordsGUIColors = ['#C4A258','#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C', '#D8AD4C']
+let g:interestingWordsTermColors = ['179', '73', '75', '133', '167', '136']
 " }}}
 
 " {{{ Commands
