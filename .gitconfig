@@ -70,6 +70,10 @@
 
 [transfer]
 	fsckobjects = true
+[fetch "fsck"]
+	zeroPaddedFilemode = ignore
+	badDate = ignore
+	badTimezone = ignore
 
 # include.path is available in git 1.7.10 and later
 [include]
