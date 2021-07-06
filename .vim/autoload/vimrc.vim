@@ -87,3 +87,20 @@ func! vimrc#SafeFilterFile(cmd)
     call delete(errors)
   endtry
 endfunc
+
+if has('perl')
+  func! vimrc#PruneSession() abort
+    perl <<END_PERL
+      my @bufs =
+        grep { !-e $_->Name || -d _ || (-M _ >= 30) }
+        grep { $_->Name } VIM::Buffers();
+
+      while (my $b = shift @bufs) {
+        VIM::Msg 'pruned: ' . $b->Name, 'Comment';
+        VIM::DoCommand 'bwipeout ' . $b->Number;
+      }
+      VIM::DoCommand 'bprev'
+        unless $curbuf->Name;
+END_PERL
+  endfunc
+endif

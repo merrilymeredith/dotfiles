@@ -141,6 +141,7 @@ command! Hgcd call vimrc#Hgcd()
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
 command! Mksession execute "mksession! " . v:this_session
+command! PruneSession call vimrc#PruneSession()
 
 command! -nargs=* -complete=file Tig      call tig#Tig(<f-args>)
 command!                         TigBlame call tig#TigBlame()
