@@ -374,6 +374,7 @@ let g:lsp_settings = {
 ">> Vimwiki
 let g:vimwiki_auto_chdir  = 1
 let g:vimwiki_auto_header = 1
+let g:vimwiki_ext2syntax = {}
 
 let g:vimwiki_list = [
   \ {
