@@ -365,7 +365,6 @@ augroup vim-lsp
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
-" go install mvdan.cc/gofumpt@latest
 let g:lsp_settings = {
   \ 'gopls': {
     \ 'workspace_config': { 'gopls': { 'formatter.gofumpt': v:true } },
