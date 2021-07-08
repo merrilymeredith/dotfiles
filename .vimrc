@@ -367,7 +367,7 @@ augroup END
 
 let g:lsp_settings = {
   \ 'gopls': {
-    \ 'workspace_config': { 'gopls': { 'formatter.gofumpt': v:true } },
+    \ 'workspace_config': { 'gopls': { 'gofumpt': v:true } },
   \ },
 \ }
 
