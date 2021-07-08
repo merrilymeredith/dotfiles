@@ -36,6 +36,7 @@ let s:filename   = expand('<sfile>')
 
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
 
   Plug 'vimwiki/vimwiki'
 
@@ -351,6 +352,10 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 
+let g:lsp_settings_enable_suggestions = 0
+let g:lsp_settings_deny_local_keys    = ['cmd', 'config', 'disabled', 'workspace_config']
+let g:lsp_settings_filetype_perl      = v:false
+
 if !has('patch-8.1.1517') && !has('neovim')
   let g:lsp_signature_help_enabled = 0
 endif
@@ -358,35 +363,14 @@ endif
 augroup vim-lsp
   autocmd!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-
-  if executable('rls')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'rls',
-      \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-      \ 'whitelist': ['rust'],
-      \ })
-  endif
-
-  " go install golang.org/x/tools/gopls@latest
-  " go install mvdan.cc/gofumpt@latest
-  if executable('gopls')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'gopls',
-      \ 'cmd': {server_info->['gopls']},
-      \ 'whitelist': ['go'],
-      \ 'workspace_config': {'gopls': {'formatter.gofumpt': v:true}},
-      \})
-    autocmd BufWritePre *.go LspDocumentFormatSync
-  endif
-
-  if executable('nimlsp')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'nimlsp',
-      \ 'cmd': {server_info->['nimlsp']},
-      \ 'whitelist': ['nim'],
-      \})
-  endif
 augroup END
+
+" go install mvdan.cc/gofumpt@latest
+let g:lsp_settings = {
+  \ 'gopls': {
+    \ 'workspace_config': { 'gopls': { 'formatter.gofumpt': v:true } },
+  \ },
+\ }
 
 ">> Vimwiki
 let g:vimwiki_auto_chdir  = 1
