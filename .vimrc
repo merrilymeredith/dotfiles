@@ -121,6 +121,9 @@ noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
 " Maps that only apply when an LSP is available
 func! s:on_lsp_buffer_enabled() abort
   setl omnifunc=lsp#complete
+  if exists('+tagfunc')
+    setl tagfunc=lsp#tagfunc
+  endif
   nmap <buffer> K          <plug>(lsp-hover)
   nmap <buffer> gd         <plug>(lsp-definition)
   nmap <buffer> gr         <plug>(lsp-references)
@@ -131,6 +134,8 @@ func! s:on_lsp_buffer_enabled() abort
   nmap <buffer> [r         <plug>(lsp-previous-reference)
   nmap <buffer> <leader>rn <plug>(lsp-rename)
   nmap <buffer> <leader>gt <plug>(lsp-type-definition)
+  let &signcolumn = (has('gui_running') ? 'number' : 'yes')
+  hi lspReference ctermfg=217 guifg=#f0a0c0
 endfunc
 
 " Commands & Aliases  {{{
@@ -371,8 +376,6 @@ augroup END
 func! s:on_lsp_float_opened() abort
   call win_execute(popup_list()[0], 'setl sbr=NONE nobri linebreak')
 endfunc
-
-hi lspReference ctermfg=217 guifg=#f0a0c0
 
 let g:lsp_settings = {
   \ 'gopls': {
