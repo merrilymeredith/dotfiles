@@ -182,7 +182,7 @@ endif
 set linebreak
 let &showbreak = "» "
 set breakindent
-set breakindentopt+=sbr
+set breakindentopt=min:66,shift:2
 
 set virtualedit=block
 
@@ -363,7 +363,16 @@ endif
 augroup vim-lsp
   autocmd!
   autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  autocmd User lsp_float_opened call s:on_lsp_float_opened()
+  autocmd FileType markdown.lsp-hover nmap <silent><buffer>q :pclose<CR>
+  autocmd FileType markdown.lsp-hover exe "%s/](/]\r(/g"
 augroup END
+
+func! s:on_lsp_float_opened() abort
+  call win_execute(popup_list()[0], 'setl sbr=NONE nobri linebreak')
+endfunc
+
+hi lspReference ctermfg=217 guifg=#f0a0c0
 
 let g:lsp_settings = {
   \ 'gopls': {
