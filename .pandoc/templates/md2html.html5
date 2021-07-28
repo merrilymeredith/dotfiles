@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html$if(lang)$ lang="$lang$"$endif$$if(dir)$ dir="$dir$"$endif$>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>$if(docmeta-title)$$docmeta-title$$else$$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$$endif$</title>
+    <style type="text/css">
+      nav {
+        float: right;
+        max-width: 25%;
+        font-size: 90%;
+        white-space: nowrap;
+        hyphens: none;
+      }
+      nav ul {
+        list-style: none;
+      }
+      body {
+        font-family: sans-serif;
+        line-height: 1.2em;
+        max-width: 62em;
+        margin: 5em;
+        background: floralwhite;
+      }
+      article ul {
+        margin-right: 8em;
+      }
+      blockquote, div.sourceCode {
+        margin:0 0 0 .8ex;
+        border-left:1px #ccc solid;
+        padding-left:1ex;
+      }
+      a, a:visited {
+        color: blue;
+        text-decoration-style: dotted;
+      }
+      $if(quotes)$q { quotes: "“" "”" "‘" "’"; } $endif$
+      $if(highlighting-css)$ $highlighting-css$ $endif$
+    </style>
+  </head>
+  <body>
+$if(toc)$
+<nav id="$idprefix$TOC">
+$toc$
+</nav>
+$endif$
+<article>
+$body$
+</article>
+  </body>
+</html>

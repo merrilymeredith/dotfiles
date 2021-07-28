@@ -1,0 +1,11 @@
+#!/bin/sh
+exec pandoc \
+  --quiet \
+  --standalone \
+  -f markdown+smart \
+  -t html5 \
+  --toc \
+  --toc-depth=5 \
+  --self-contained \
+  --template=md2html \
+   $*
