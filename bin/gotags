@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+. ~/.lib/sh/stubexec.sh
+
+stubexec "$@"
+
+go install github.com/jstemmer/gotags@latest
+asdf reshim || :
+
+stubexec "$@"
