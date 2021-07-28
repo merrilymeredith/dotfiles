@@ -8,4 +8,4 @@ exec pandoc \
   --template=mail \
   --highlight-style=monochrome \
   --email-obfuscation=none \
-   $*
+  "$@"
