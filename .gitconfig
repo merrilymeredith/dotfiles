@@ -9,27 +9,27 @@
 	defaultBranch = main
 
 [alias]
-	ci       = commit
-	rec      = commit -p
-	unrec    = checkout --patch
-	amend    = commit -p --amend
-	st       = status -sb
-	co       = checkout
-	br       = branch
-	brd      = diff @{u}..
-	brf      = diff --name-only @{u}..
-	staged   = diff --cached
-	unstage  = reset HEAD --
-	rollback = reset --soft ^HEAD
-	pushf    = push --force-with-lease
-	up       = pull -r --prune
-	update   = "!git remote update -p && git merge --ff-only --stat @{u}"
-	in       = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
-	out      = "!git log --pretty=onelinecustom @{u}.."
-	new      = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
-	glog     = log --graph --pretty=onelinecustom
-	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
-	orphan   = "!f() { git fsck --dangling | grep commit | cut -d' ' -f3 | xargs git show --compact-summary; }; f"
+	ci         = commit
+	rec        = commit -p
+	unrec      = checkout --patch
+	amend      = commit -p --amend
+	st         = status -sb
+	co         = checkout
+	br         = branch
+	brd        = diff @{u}..
+	brf        = diff --name-only @{u}..
+	staged     = diff --cached
+	unstage    = reset HEAD --
+	rollback   = reset --soft ^HEAD
+	pushf      = push --force-with-lease
+	up         = pull -r --prune
+	update     = "!git remote update -p && git merge --ff-only --stat @{u}"
+	in         = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
+	out        = "!git log --pretty=onelinecustom @{u}.."
+	new        = "!git log --pretty=onelinecustom $1@{1}..$1@{0}"
+	glog       = log --graph --pretty=onelinecustom
+	recent     = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
+	orphan     = "!f() { git fsck --dangling | grep commit | cut -d' ' -f3 | xargs git show --compact-summary; }; f"
 	fork-point = merge-base --fork-point @{u}
 
 [pretty]
