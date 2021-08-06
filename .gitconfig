@@ -30,6 +30,7 @@
 	glog     = log --graph --pretty=onelinecustom
 	recent   = "!f() { git for-each-ref --count=20 --sort=-committerdate --format=\"%(committerdate:short) %(refname:short)\" ${1:-refs/heads} ${@:2}; }; f"
 	orphan   = "!f() { git fsck --dangling | grep commit | cut -d' ' -f3 | xargs git show --compact-summary; }; f"
+	fork-point = merge-base --fork-point @{u}
 
 [pretty]
 	onelinecustom = tformat:%C(magenta)%h%Creset %G? -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(cyan)<%an>%Creset
