@@ -31,6 +31,7 @@ let s:filename   = expand('<sfile>')
   Plug 'godlygeek/tabular'
   Plug 'tomtom/tcomment_vim'
   Plug 'tpope/vim-unimpaired'
+  Plug 'kshenoy/vim-signature'
   Plug 'lifepillar/vim-mucomplete'
   Plug 'tpope/vim-endwise'
 
