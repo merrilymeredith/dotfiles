@@ -241,11 +241,11 @@ set sessionoptions=buffers,curdir,localoptions
 " Enable enhanced % matching in ruby
 runtime macros/matchit.vim
 
-for subdir in ['backup', 'tmp', 'undo', 'session']
-  if !filewritable(g:vimcache . '/' . subdir)
-    call mkdir(g:vimcache . '/' . subdir, 'p', 0700)
-  endif
+for subdir in ['backup', 'tmp', 'undo']
+  call vimrc#PrepDir(g:vimcache . '/' . subdir)
+  call vimrc#PruneFiles(g:vimcache . '/' . subdir)
 endfor
+call vimrc#PrepDir(g:vimcache . '/session')
 
 set backup
 let &backupdir = g:vimcache . '/backup//,.'

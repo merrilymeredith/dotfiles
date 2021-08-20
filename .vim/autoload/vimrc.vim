@@ -104,3 +104,20 @@ if has('perl')
 END_PERL
   endfunc
 endif
+
+func! vimrc#PrepDir(path, prune_days) abort
+  if !filewritable(path)
+    call mkdir(path, 'p', 0700)
+  endif
+endfunc
+
+func! vimrc#PruneFiles(path, days) abort
+  let l:path = expand(a:path)
+  if isdirectory(l:path)
+    for file in split(globpath(l:path, "*"), "\n")
+      if localtime() > getftime(file) + 86400 * a:days
+        delete(file) != 0
+      endif
+    endfor
+  else
+endfunc
