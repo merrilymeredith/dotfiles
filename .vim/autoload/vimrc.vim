@@ -105,9 +105,9 @@ END_PERL
   endfunc
 endif
 
-func! vimrc#PrepDir(path, prune_days) abort
-  if !filewritable(path)
-    call mkdir(path, 'p', 0700)
+func! vimrc#PrepDir(path) abort
+  if !filewritable(a:path)
+    call mkdir(a:path, 'p', 0700)
   endif
 endfunc
 
@@ -116,8 +116,8 @@ func! vimrc#PruneFiles(path, days) abort
   if isdirectory(l:path)
     for file in split(globpath(l:path, "*"), "\n")
       if localtime() > getftime(file) + 86400 * a:days
-        delete(file) != 0
+        call delete(file)
       endif
     endfor
-  else
+  endif
 endfunc
