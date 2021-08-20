@@ -49,7 +49,7 @@ let s:filename   = expand('<sfile>')
   Plug 'powerman/vim-plugin-viewdoc'
 
   let g:no_viewdoc_abbrev = 1
-  let g:polyglot_disabled = ['vifm', 'perl', 'go']
+  let g:polyglot_disabled = ['autoindent', 'sensible', 'vifm', 'perl', 'go']
 
   try
     execute 'source ' . s:filename . '.local-pre'
@@ -192,6 +192,7 @@ set breakindentopt=min:66,shift:2
 set virtualedit=block
 
 set autoindent
+set smarttab
 set expandtab
 set shiftwidth=2
 set shiftround
@@ -210,12 +211,13 @@ set noerrorbells
 set belloff=all
 
 set autowriteall
+set autoread
 
 set ttimeoutlen=25
 
-set synmaxcol=200
+set synmaxcol=350
 
-set tags+=.tags
+set tags+=.tags,./.tags;
 
 " Ignore compiled files and repositories
 set wildignore=*.o,*~,*.pyc
