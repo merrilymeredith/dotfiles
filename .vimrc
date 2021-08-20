@@ -243,7 +243,7 @@ runtime macros/matchit.vim
 
 for subdir in ['backup', 'tmp', 'undo']
   call vimrc#PrepDir(g:vimcache . '/' . subdir)
-  call vimrc#PruneFiles(g:vimcache . '/' . subdir, 60)
+  " call vimrc#PruneFiles(g:vimcache . '/' . subdir, 60)
 endfor
 call vimrc#PrepDir(g:vimcache . '/session')
 
