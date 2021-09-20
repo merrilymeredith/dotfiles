@@ -1,2 +1,2 @@
 setl textwidth=72
-setl formatoptions+=awt12
+setl formatoptions+=at12
