@@ -34,6 +34,8 @@ let s:filename   = expand('<sfile>')
   Plug 'kshenoy/vim-signature'
   Plug 'lifepillar/vim-mucomplete'
   Plug 'tpope/vim-endwise'
+  Plug 'kana/vim-textobj-user'
+  Plug 'glts/vim-textobj-comment'
 
   Plug 'prabirshrestha/vim-lsp'
   Plug 'mattn/vim-lsp-settings'
