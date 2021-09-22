@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  gem 'debug', '>= 1.0.0'
+end
+
+def run
+  if File.exist?(Bundler.unbundled_env.fetch('BUNDLE_GEMFILE', 'Gemfile'))
+    Bundler.with_unbundled_env do
+      Bundler.reset!
+      yield
+      exit
+    end
+  end
+  yield
+end
+
+run do
+  load Gem.bin_path('debug', 'rdbg')
+end
