@@ -345,6 +345,7 @@ let g:perl_compiler_force_warnings = 0
 let g:plug_threads = 3
 
 let g:netrw_altfile = 1
+let g:netrw_use_errorwindow = 0
 
 ">> mucomplete
 " enable and prefer local buffer before tags
