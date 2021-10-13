@@ -79,6 +79,8 @@ noremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 noremap <leader>pp :setlocal paste!<cr>
 
+noremap <leader>cc :MUcompleteAutoToggle<cr>
+
 " faster window nav
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -350,6 +352,7 @@ let g:netrw_use_errorwindow = 0
 ">> mucomplete
 " enable and prefer local buffer before tags
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 300
 let g:mucomplete#chains = {
   \ 'default': ['path', 'c-n', 'omni', 'tags', 'dict', 'uspl'],
   \}
