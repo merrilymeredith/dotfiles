@@ -7,6 +7,8 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+VI_MODE_SET_CURSOR="true"
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE="true"
 
 omz_plugins=(
   plugins/colored-man-pages
@@ -34,7 +36,7 @@ if [ -f ~/.zgen/zgen.zsh ]; then
   fi
 fi
 
-KEYTIMEOUT=1
+KEYTIMEOUT=25
 REPORTTIME=5
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
