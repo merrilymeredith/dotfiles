@@ -1,26 +1,41 @@
+# vim: set ft=bash
 --standard-error-output
 --warning-output
 --converge
---extended-syntax
---sub-alias-list='method fun'
+
 --indent-columns=2
 --continuation-indentation=2
---maximum-line-length=80
+--extended-continuation-indentation
+
+--trim-pod
+
+--maximum-line-length=90
 --no-outdent-long-quotes
+--no-outdent-long-comments
+--no-outdent-labels
+
+--extended-syntax
+--sub-alias-list='method fun'
+--space-prototype-paren=2
+--nowant-right-space="A"
+
+--break-at-old-method-breakpoints
+
 --no-blanks-before-comments
 --maximum-consecutive-blank-lines=2
---opening-token-right
+
+--one-line-block-semicolons=0
+
 --all-containers-tightness=2
 --block-brace-tightness=1
---indent-spaced-block-comments
---closing-side-comments
---closing-side-comment-interval=100
---stack-opening-paren
---stack-opening-hash-brace
---stack-opening-square-bracket
---stack-closing-paren
---break-at-old-comma-breakpoints
---break-at-old-method-breakpoints
---one-line-block-semicolons=0
---nowant-right-space="A"
---space-prototype-paren=2
+--weld-nested-containers
+
+--opening-token-right
+--opening-brace-always-on-right
+
+refactor {
+  --closing-side-comments
+  --closing-side-comments-balanced
+  --closing-side-comment-interval=100
+  --keyword-group-blanks
+}
