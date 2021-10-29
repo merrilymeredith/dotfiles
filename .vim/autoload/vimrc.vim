@@ -35,27 +35,15 @@ func! vimrc#AutoSessionCheck() abort
   endif
 endfunc
 
-func! vimrc#Ag(args) abort
-  let orig_t_ti = &t_ti
-  let orig_t_te = &t_te
-  let orig_shellpipe = &shellpipe
+func! vimrc#Grep(...) abort
+  let pattern = get(a:000, 0, expand('<cword>'))
+  let cmd = join([&grepprg, shellescape(pattern)] + a:000[1:], ' ')
 
-  set t_ti= t_te=
-  let &shellpipe = substitute(&shellpipe, '| tee', ' >', '')
-
-  let grepargs = a:args == '' ? expand('<cword>') : a:args . join(a:000, ' ')
-
-  try
-    silent! execute "grep " . escape(grepargs, '|')
-    copen
-
-    let @/ = matchstr(a:args, "\\v(-)\@<!(\<)\@<=\\w+|['\"]\\zs.{-}\\ze['\"]")
-    call feedkeys(":let &hlsearch=1 \| echo \<CR>", 'n')
-  finally
-    let &t_ti = orig_t_ti
-    let &t_te = orig_t_te
-    let &shellpipe = orig_shellpipe
-  endtry
+  cgetexpr system(cmd)
+  call setqflist([], 'a', {"title": cmd})
+  let @/ = '\v' . pattern
+  copen
+  cfirst
 endfunc
 
 func! vimrc#Gcd() abort

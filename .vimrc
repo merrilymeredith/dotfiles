@@ -108,8 +108,8 @@ nnoremap <silent> <leader><leader>k :call UncolorAllWords()<CR>
 " mark line
 nmap <leader>l V<leader>k
 
-" use Ag for a recursive *
-nnoremap g* :Ag<CR>
+" use Grep for a recursive *
+nnoremap g* :Grep<CR>
 
 " K: doc, gKK: doc current filename
 nnoremap gKK :call ViewDoc('doc', expand('%:p'))<CR>
@@ -157,7 +157,9 @@ command! -nargs=* -complete=file Tig      call tig#Tig(<f-args>)
 command!                         TigBlame call tig#TigBlame()
 command!                         TigLog   call tig#Tig('log', '-p', '--', expand('%'))
 
-command! -nargs=* -complete=file -bar Ag call vimrc#Ag(<q-args>)
+command! -nargs=* -complete=file Grep call vimrc#Grep(<f-args>)
+CAlias Ag Grep
+CAlias grep Grep
 
 CAlias Q q
 CAlias Qa qa
@@ -263,6 +265,7 @@ endif
 if executable('ag')
   let &grepprg = "ag --vimgrep"
   set grepformat^=%f:%l:%c:%m,%f
+  set errorformat+=%f
 endif
 
 if g:on_windows
