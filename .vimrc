@@ -236,7 +236,7 @@ endif
 " Don't assume to scan includes when autocompleting
 set complete-=i complete-=t
 
-set completeopt+=menuone,noinsert
+set completeopt+=menuone,noselect
 
 " Never open with folds collapsed
 set nofoldenable
