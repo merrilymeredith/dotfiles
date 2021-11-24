@@ -1,7 +1,8 @@
 #!/bin/bash
-set -eu -o pipefail
+set -euo pipefail
 
 dists=(
+  App::cpanminus
   App::cpm
 
   Perl::Tidy
@@ -24,10 +25,9 @@ dists=(
 )
 
 if ! (command -v cpm && cpm -V) &>/dev/null; then
-  curl -fsSL --compressed https://git.io/cpm |
-    perl - install -g App::cpm
-
-  plenv rehash || :
+  cpm() {
+    curl -fsSL --compressed https://git.io/cpm | perl - $@
+  }
 fi
 
 cpm install -g "${dists[@]}"
