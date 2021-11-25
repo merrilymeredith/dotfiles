@@ -4,10 +4,17 @@ realpath() {
   (cd "$dir" 2>/dev/null && printf '%s/%s\n' "$(pwd -P)" "$file")
 }
 
+realbin() {
+  which -a $(basename $1) |
+    grep -v "$(realpath $1)" |
+    head -n 1
+}
+
 stubexec() {
-  local real_me="$(realpath "$0")"
-  local real_bin="$(which -a $(basename $0) | grep -v "$real_me" | head -n 1)"
+  local real_bin="$(realbin "$0")"
   if [ -x "$real_bin" ]; then
-    exec $real_bin $*
+    exec "$real_bin" $*
   fi
+  install_it
+  stubexec $*
 }

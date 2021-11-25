@@ -2,9 +2,9 @@
 set -eu
 . ~/.lib/sh/stubexec.sh
 
-stubexec "$@"
-
-cpanm -n 'https://github.com/darold/pgFormatter.git'
-plenv rehash || :
+install_it() {
+  cpanm -n 'https://github.com/darold/pgFormatter.git'
+  plenv rehash || :
+}
 
 stubexec "$@"

@@ -2,11 +2,11 @@
 set -eu
 . ~/.lib/sh/stubexec.sh
 
-stubexec "$@"
+install_it() {
+  curl -fsSL --compressed https://git.io/cpm |
+    perl - install -g App::cpm
 
-curl -fsSL --compressed https://git.io/cpm |
-  perl - install -g App::cpm
-
-plenv rehash || :
+  plenv rehash || :
+}
 
 stubexec "$@"
