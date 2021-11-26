@@ -20,9 +20,10 @@ shim_filter() {
 }
 
 realbin() {
-  which -a $(basename $1) |
+  local bn="$(basename $1)"
+  which -a "$bn" |
     grep -v "$(realpath $1)" |
-    shim_filter |
+    shim_filter "$bn" |
     head -n 1
 }
 
