@@ -21,6 +21,7 @@
 	staged     = diff --cached
 	unstage    = reset HEAD --
 	rollback   = reset --soft ^HEAD
+	histedit   = rebase -i --autosquash --onto @{u}... @{u}
 	pushf      = push --force-with-lease
 	up         = pull -r --prune
 	update     = "!git remote update -p && git merge --ff-only --stat @{u}"
