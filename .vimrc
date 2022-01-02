@@ -292,24 +292,26 @@ augroup vimrc
 
   autocmd WinLeave * if !pumvisible() | stopinsert | endif
 
-  " set and load a session based on servername
-  autocmd VimEnter * nested call vimrc#AutoSessionCheck()
-
   " complement to autowriteall
   autocmd FocusLost * silent! wa
 
   " Make paths when writing, as necessary
   autocmd BufWritePre * :call vimrc#MkNonExDir(expand('<afile>'), +expand('<abuf>'))
 
-  " Jump to last known pos
-  autocmd BufReadPost *
-    \ if &filetype !~# 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+  if ! &diff
+    " set and load a session based on servername
+    autocmd VimEnter * nested call vimrc#AutoSessionCheck()
 
-  " Simple highlight conflict markers
-  autocmd BufReadPost *
-    \ match Error "^\([<>|]\)\{7} \@=\|^=\{7}$"
+    " Jump to last known pos
+    autocmd BufReadPost *
+      \ if &filetype !~# 'mail\|^git\|^hg' && line("'\"") >= 1 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
+
+    " Simple highlight conflict markers
+    autocmd BufReadPost *
+      \ match Error "^\([<>|]\)\{7} \@=\|^=\{7}$"
+  endif
 
   " Simplify noisy ltag output
   autocmd BufReadPost quickfix
