@@ -204,6 +204,7 @@ set shiftwidth=2
 set shiftround
 
 set formatoptions=cqln1j
+set diffopt=internal,filler,algorithm:patience
 
 set splitright splitbelow
 set scrolloff=15
