@@ -13,10 +13,10 @@ fi
 
 clone_or_pull() {
   if ! [ -d $2 ]; then
-    git clone --depth 1 "$1" $2
+    git clone --single-branch --depth 1 "$1" $2
   else
     echo "$2:"
-    git -C "$2" pull --no-tags
+    git -C "$2" pull
   fi
 }
 
