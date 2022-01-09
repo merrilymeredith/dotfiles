@@ -1,15 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-if [ ! -f .zshrc ]; then
-  echo "Refusing to run without a .zshrc nearby" >&2
-  exit 1
-fi
-
-if ! git --version >/dev/null; then
-  echo "Please install git!" >&2
-  exit 1
-fi
+warn() { echo "$*" >&2; }
+die() { warn "$*"; exit 1; }
 
 clone_or_pull() {
   if ! [ -d $2 ]; then
@@ -19,6 +12,12 @@ clone_or_pull() {
     git -C "$2" pull
   fi
 }
+
+[ -f .zshrc ] ||
+  die "Refusing to run without a .zshrc nearby"
+
+git --version >/dev/null ||
+  die "Please install git!"
 
 clone_or_pull 'https://github.com/tarjoilija/zgen.git' .zgen
 
@@ -35,7 +34,7 @@ bin/setup-man || :
 # Get rid of older stuff
 for OLD in .plenv .rbenv .ndenv; do
   if [ -e $OLD ]; then
-    echo "Pruning $OLD" >&2
+    warn "Pruning $OLD"
     rm -rf $OLD
   fi
 done
