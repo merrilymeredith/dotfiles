@@ -1,11 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-minimal=0
-
-case ${1:-} in -m) minimal=1;;
-esac
-
 if [ ! -f .zshrc ]; then
   echo "Refusing to run without a .zshrc nearby" >&2
   exit 1
@@ -29,15 +24,13 @@ clone_or_pull 'https://github.com/tarjoilija/zgen.git' .zgen
 
 zsh -i -c 'zgen update' || :
 
-if [ "$minimal" -ne 1 ]; then
-  clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
-  source .asdf/asdf.sh
+clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
+source .asdf/asdf.sh
 
-  asdf plugin add perl || :
-  asdf plugin update --all
+asdf plugin add perl || :
+asdf plugin update --all
 
-  bin/setup-man || :
-fi
+bin/setup-man || :
 
 # Get rid of older stuff
 for OLD in .plenv .rbenv .ndenv; do
