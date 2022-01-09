@@ -5,7 +5,7 @@ if [ -f ~/.bashrc.dist ]; then
   source ~/.bashrc.dist
 fi
 
-source ~/.lib/bash/path.sh
+source ~/.lib/sh/path.bash
 
 for DIR in bin .cargo/bin .local/bin go/bin; do
   path-prepend "$HOME/$DIR"
