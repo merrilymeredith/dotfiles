@@ -1,5 +1,5 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -euo pipefail
 
 minimal=0
 
@@ -30,20 +30,17 @@ clone_or_pull 'https://github.com/tarjoilija/zgen.git' .zgen
 zsh -i -c 'zgen update' || :
 
 if [ "$minimal" -ne 1 ]; then
-  clone_or_pull 'https://github.com/tokuhirom/plenv.git' .plenv
-  clone_or_pull 'https://github.com/skaji/perl-install'  .plenv/plugins/perl-install
-
   clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
+  source .asdf/asdf.sh
 
-  for PLUGIN in ruby nodejs erlang elixir; do
-    clone_or_pull "https://github.com/asdf-vm/asdf-$PLUGIN" .asdf/plugins/$PLUGIN
-  done
+  asdf plugin add perl || :
+  asdf plugin update --all
 
   bin/setup-man || :
 fi
 
 # Get rid of older stuff
-for OLD in .plenv/plugins/perl-build .rbenv .ndenv; do
+for OLD in .plenv .rbenv .ndenv; do
   if [ -e $OLD ]; then
     echo "Pruning $OLD" >&2
     rm -rf $OLD

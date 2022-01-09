@@ -11,10 +11,6 @@ for DIR in bin .cargo/bin .local/bin go/bin; do
   path-prepend "$HOME/$DIR"
 done
 
-if path-prepend "$HOME/.plenv/bin"; then
-  eval "$(plenv init -)"
-fi
-
 if [ -f ~/.bashrc.local ]; then
   source ~/.bashrc.local
 fi

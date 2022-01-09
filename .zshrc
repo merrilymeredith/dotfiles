@@ -1,8 +1,5 @@
 typeset -U omz_plugins zsh_plugins envthings
 
-# Version/environment management tools to load
-envthings=(plenv rakudobrew)
-
 DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -64,13 +61,6 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 [[ -n "${terminfo[kcbt]}"  ]] && bindkey -- "${terminfo[kcbt]}"  reverse-menu-complete
 
 source ~/.profile.common
-
-for envthing in $envthings; do
-  if [ -d ~/.$envthing ]; then
-    path[1,0]="$HOME/.$envthing/bin"
-    eval "$($envthing init - zsh)"
-  fi
-done
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
