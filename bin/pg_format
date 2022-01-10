@@ -4,7 +4,7 @@ set -eu
 
 install_it() {
   cpanm -n 'https://github.com/darold/pgFormatter.git'
-  plenv rehash || :
+  asdf reshim perl || :
 }
 
 stubexec "$@"

@@ -6,7 +6,7 @@ install_it() {
   curl -fsSL --compressed https://git.io/cpm |
     perl - install -g App::cpm
 
-  plenv rehash || :
+  asdf reshim perl || :
 }
 
 stubexec "$@"

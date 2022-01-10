@@ -24,12 +24,6 @@ dists=(
   Getopt::Long::Descriptive
 )
 
-if ! (command -v cpm && cpm -V) &>/dev/null; then
-  cpm() {
-    curl -fsSL --compressed https://git.io/cpm | perl - $@
-  }
-fi
-
 cpm install -g "${dists[@]}"
 
-plenv rehash || :
+asdf reshim perl || :
