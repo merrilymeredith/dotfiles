@@ -19,6 +19,7 @@ syn match perlFunction +\<fun\>\(\_s*=>\)\@!\_s*+ nextgroup=perlSubName
 
 " Tweak some colors, making POD stand out less
 hi! def link perlPOD      Comment
+hi! def link podOrdinary  Comment
 hi! def link podCommand   SpecialComment
 hi! def link podCmdText   Question
 hi! def link podFormat    StorageClass
