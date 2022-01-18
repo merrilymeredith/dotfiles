@@ -16,8 +16,8 @@
 	st         = status -sb
 	co         = checkout
 	br         = branch
-	brd        = diff @{u}..
-	brf        = diff --name-only @{u}..
+	brd        = diff @{u}...
+	brf        = diff --name-only @{u}...
 	staged     = diff --cached
 	unstage    = reset HEAD --
 	rollback   = reset --soft ^HEAD
