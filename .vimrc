@@ -373,6 +373,7 @@ let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
 let g:lsp_settings_enable_suggestions = 0
 let g:lsp_settings_deny_local_keys    = ['cmd', 'config', 'disabled', 'workspace_config']
 let g:lsp_settings_filetype_perl      = v:false
+let g:lsp_settings_filetype_ruby      = ['solargraph', 'typeprof']
 
 if !has('patch-8.1.1517') && !has('neovim')
   let g:lsp_signature_help_enabled = 0
