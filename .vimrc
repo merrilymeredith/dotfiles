@@ -65,7 +65,7 @@ let s:filename   = expand('<sfile>')
 nnoremap <silent> <F2>   :20Lexplore<CR>
 nnoremap <silent> <F3>   n
 nnoremap <silent> <S-F3> N
-noremap  <silent> <F4>   :set hls!<CR>
+noremap  <silent> <F4>   :let v:hlsearch = !v:hlsearch<CR>
 nnoremap <silent> <F5>   :UndotreeToggle<CR>
 nnoremap <silent> <F8>   :TagbarToggle<CR>
 
