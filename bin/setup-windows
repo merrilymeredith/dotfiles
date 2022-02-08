@@ -12,6 +12,7 @@ cd `hg root`
 mkdir -p ${USERPROFILE}/vimfiles
 
 cp -vu .vimrc ${USERPROFILE}/_vimrc
+cp -vu .gvimrc ${USERPROFILE}/_gvimrc
 
 cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 
