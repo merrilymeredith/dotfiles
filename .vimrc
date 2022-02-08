@@ -178,6 +178,8 @@ CAlias  perldoc  ViewDocPerl!
 "}}}
 
 " General settings  {{{
+set background=dark
+
 set hlsearch
 set ignorecase
 set smartcase
@@ -269,21 +271,11 @@ if executable('ag')
   set errorformat+=%f
 endif
 
-if g:on_windows
-  set guifont=DejaVu_Sans_Mono:h10:cDEFAULT
-  set linespace=0
-elseif has('osx')
-  set guifont=DejaVu\ Sans\ Mono:h11
-else
-  set guifont=DejaVu\ Sans\ Mono\ 10
-endif
-
-set go-=T go-=m go-=t "no toolbar, menu, tearoffs
-
 let g:jellybeans_overrides = {
     \ 'SignColumn': {'ctermbg': 235, 'guibg':'222222'},
   \ }
 
+colorscheme jellybeans
 " }}}
 
 " Autocmds  {{{
@@ -471,42 +463,21 @@ try
 catch
 endtry
 
-if g:airline_powerline_fonts == 0 && (has('gui_running') || $LANG =~# 'UTF-8')
-  let g:airline_left_sep  = '▒'
-  let g:airline_right_sep = g:airline_left_sep
-endif
-
-if has('gui_running')
-  set number
-  set background=dark
-
-  if get(g:, 'vimrc_window_sized', 0)
-    set columns=120 lines=40
-    let g:vimrc_window_sized = 1
-  endif
-
-  set guicursor+=a:blinkwait1000-blinkon1200-blinkoff250
-
-  colorscheme jellybeans
-else
-  " vertical bar in insert mode.
-  if &term =~# '^\(xterm\|screen\|rxvt\)'
-    let &t_SI = "\e[5 q"
-    let &t_EI = "\e[0 q"
-    if exists("$TMUX")
-      let &t_SI = "\ePtmux;" . substitute(&t_SI, "\e", "\e\e", 'g') . "\e\\"
-      let &t_EI = "\ePtmux;" . substitute(&t_EI, "\e", "\e\e", 'g') . "\e\\"
-    endif
-  endif
-
-  if $TERM =~# 'rxvt-unicode'
-    set ttymouse=urxvt
-    set mouse=a
-    map <Esc>[7~ <Home>
-    map <Esc>[8~ <End>
-  endif
-
-  if &t_Co == 256
-    colorscheme jellybeans
+" {{{ Terminal tweaks
+" vertical bar in insert mode.
+if &term =~# '^\(xterm\|screen\|rxvt\)'
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[0 q"
+  if exists("$TMUX")
+    let &t_SI = "\ePtmux;" . substitute(&t_SI, "\e", "\e\e", 'g') . "\e\\"
+    let &t_EI = "\ePtmux;" . substitute(&t_EI, "\e", "\e\e", 'g') . "\e\\"
   endif
 endif
+
+if $TERM =~# 'rxvt-unicode'
+  set ttymouse=urxvt
+  set mouse=a
+  map <Esc>[7~ <Home>
+  map <Esc>[8~ <End>
+endif
+" }}}
