@@ -1,12 +1,16 @@
 #!/bin/bash
 set -eu -o pipefail
 
-if ! (command -v pip3 && pip3 -V) &>/dev/null; then
+hg --version >/dev/null
+
+shebang="$(head -n 1 $(which hg) | sed 's/^#!//')"
+
+if ! ($shebang -m pip -V) &>/dev/null; then
   curl -fsSL --compressed https://bootstrap.pypa.io/get-pip.py |
-    python3 - --user
+    $shebang - --user
 fi
 
-pip3 install --user --upgrade hg-evolve
+$shebang -m pip install --user --upgrade hg-evolve
 
 if ! grep -qsw evolve ~/.hgext/hgrc; then
   printf '[extensions]\nevolve =\n' >> ~/.hgext/hgrc
