@@ -140,9 +140,6 @@ func! s:on_lsp_buffer_enabled() abort
   nmap <buffer> <leader>gt <plug>(lsp-type-definition)
   let &signcolumn = (has('gui_running') ? 'number' : 'yes')
   hi lspReference ctermfg=217 guifg=#f0a0c0
-
-  " Workaround for vim-lsp mapping esc
-  nmap <plug>() <Plug>(lsp-float-close)
 endfunc
 
 " Commands & Aliases  {{{
