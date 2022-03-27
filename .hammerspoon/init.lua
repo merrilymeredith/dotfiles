@@ -1,3 +1,4 @@
+hs.fs.chdir(os.getenv("HOME"))
 hs.window.animationDuration = 0
 
 -- aliases and partial bindings to make life easier
