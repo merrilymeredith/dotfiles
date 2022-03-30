@@ -40,6 +40,10 @@ alias mv='mv -i'
 alias hgcd='cd $(hg root)'
 alias gcd='cd "$(git rev-parse --show-toplevel)"'
 
+vg() {
+  vim +copen -q <(ag --vimgrep "${@:?No pattern provided.}")
+}
+
 alias tmux-env='eval "$(tmux show-environment -s)"'
 alias :e=vim
 alias :q=exit
