@@ -1,26 +1,14 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/bin/sh
+set -eu
+. ~/.lib/sh/stubexec.sh
 
-require 'bundler/inline'
+install_it() {
+  [ -w "$(gem env gemdir)" ] ||
+    opt="--user-install"
 
-gemfile do
-  source 'https://rubygems.org'
-  gem 'pry', '~> 0.13.1'
-  gem 'pry-byebug'
-  gem 'pry-inline'
-end
+  gem install -q ${opt:-} \
+    "pry:~>0.13.1" pry-byebug pry-inline
+  asdf reshim ruby || :
+}
 
-def run
-  if File.exist?(Bundler.unbundled_env.fetch('BUNDLE_GEMFILE', 'Gemfile'))
-    Bundler.with_unbundled_env do
-      Bundler.reset!
-      yield
-      exit
-    end
-  end
-  yield
-end
-
-run do
-  load Gem.bin_path('pry', 'pry')
-end
+stubexec "$@"

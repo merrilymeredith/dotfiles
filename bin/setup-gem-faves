@@ -1,9 +1,17 @@
 #!/bin/sh
 set -eu
 
+if ! [ -w "$(gem env gemdir)" ]; then
+  export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+fi
+
 if ! bundle --version >/dev/null 2>&1; then
   gem install bundler
 fi
 
+export \
+  BUNDLE_IGNORE_CONFIG=1 \
+  BUNDLE_FROZEN=0
+
+bundle install --jobs=2 --gemfile=~/.Gemfile
 rm -f ~/.Gemfile.lock
-exec bundle install --system --jobs=2 --gemfile=~/.Gemfile
