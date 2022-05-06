@@ -25,6 +25,10 @@ if [ -d ~/perl5/lib ]; then
   eval "$(perl -Mlocal::lib)"
 fi
 
+if [ -d /opt/homebrew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 if [ -d ~/.asdf ]; then
   source ~/.asdf/asdf.sh
 fi
