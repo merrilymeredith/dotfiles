@@ -1,10 +1,9 @@
 #!/bin/sh
 set -eu
-. ~/.lib/sh/stubexec.sh
 
 install_it() {
   cpanm -n 'https://github.com/darold/pgFormatter.git'
   asdf reshim perl || :
 }
 
-stubexec "$@"
+. ~/.lib/sh/stubexec.sh

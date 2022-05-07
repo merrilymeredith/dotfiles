@@ -35,3 +35,5 @@ stubexec() {
   install_it
   stubexec $*
 }
+
+stubexec "$@"

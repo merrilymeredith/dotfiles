@@ -1,6 +1,5 @@
 #!/bin/sh
 set -eu
-. ~/.lib/sh/stubexec.sh
 
 install_it() {
   curl -fsSL --compressed https://git.io/cpm |
@@ -9,4 +8,4 @@ install_it() {
   asdf reshim perl || :
 }
 
-stubexec "$@"
+. ~/.lib/sh/stubexec.sh

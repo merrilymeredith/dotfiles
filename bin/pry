@@ -1,6 +1,5 @@
 #!/bin/sh
 set -eu
-. ~/.lib/sh/stubexec.sh
 
 install_it() {
   [ -w "$(gem env gemdir)" ] ||
@@ -11,4 +10,4 @@ install_it() {
   asdf reshim ruby || :
 }
 
-stubexec "$@"
+. ~/.lib/sh/stubexec.sh
