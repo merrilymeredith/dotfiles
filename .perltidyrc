@@ -30,8 +30,9 @@
 --block-brace-tightness=1
 --weld-nested-containers
 
+--keyword-paren-inner-tightness=0
+
 --opening-token-right
---opening-brace-always-on-right
 
 refactor {
   --closing-side-comments
