@@ -31,6 +31,7 @@
 --weld-nested-containers
 
 --keyword-paren-inner-tightness=0
+--keyword-paren-inner-tightness-list='if elsif unless'
 
 --opening-token-right
 
