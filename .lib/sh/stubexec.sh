@@ -30,10 +30,10 @@ realbin() {
 stubexec() {
   local real_bin="$(realbin "$0")"
   if [ -x "$real_bin" ]; then
-    exec "$real_bin" $*
+    exec "$real_bin" "$@"
   fi
   install_it
-  stubexec $*
+  stubexec "$@"
 }
 
 stubexec "$@"
