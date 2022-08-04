@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+# TODO: add an expiry system to stubexec?
+
+install_it() {
+  go install github.com/charmbracelet/gum@latest
+  asdf reshim || :
+}
+
+. ~/.lib/sh/stubexec.sh
