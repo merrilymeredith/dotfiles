@@ -23,7 +23,7 @@
 	rollback   = reset --soft ^HEAD
 	histedit   = rebase -i --autosquash --onto @{u}... @{u}
 	pushf      = push --force-with-lease
-	up         = pull -r --prune
+	up         = pull
 	update     = "!git remote update -p && git merge --ff-only --stat @{u}"
 	in         = "!git remote update -p; git log --pretty=onelinecustom ..@{u}"
 	out        = "!git log --pretty=onelinecustom @{u}.."
@@ -51,7 +51,6 @@
 	conflictstyle = diff3
 
 [branch]
-	autosetuprebase = always
 	autosetupmerge  = always
 
 [commit]
@@ -61,17 +60,22 @@
 [diff]
 	compactionheuristic = true
 
+[pull]
+	rebase = true
+
 [push]
 	default = current
 
-[rebase]
-	stat = true
+[fetch]
+	prune = true
 
-[rerere]
-	autoupdate = true
+[rebase]
+	autostash = true
+	stat = true
 
 [transfer]
 	fsckobjects = true
+
 [fetch "fsck"]
 	zeroPaddedFilemode = ignore
 	badDate = ignore
