@@ -206,7 +206,9 @@ set shiftwidth=2
 set shiftround
 
 set formatoptions=cqln1j
-set diffopt=internal,filler,algorithm:patience
+if has("patch-8.1.0360")
+  set diffopt+=algorithm:patience
+endif
 
 set splitright splitbelow
 set scrolloff=15
