@@ -16,7 +16,9 @@ zsh -i -c 'zgen update' || :
 clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
 source .asdf/asdf.sh
 
-asdf plugin add perl 'https://github.com/merrilymeredith/asdf-perl.git' || :
+[ -d .asdf/plugins/perl ] ||
+    asdf plugin add perl
+
 asdf plugin update --all
 
 bin/setup-man || :
