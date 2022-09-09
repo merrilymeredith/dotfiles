@@ -19,6 +19,12 @@ shim_filter() {
   done
 }
 
+age_check() {
+  local subject=''
+  read subject
+  find "$subject" -mtime -${age_limit:-90} -print
+}
+
 realbin() {
   local bn="$(basename $1)"
   which -a "$bn" |
@@ -28,11 +34,12 @@ realbin() {
 }
 
 stubexec() {
-  local real_bin="$(realbin "$0")"
+  local real_bin="$(realbin "$0" | age_check)"
   if [ -x "$real_bin" ]; then
     exec "$real_bin" "$@"
   fi
   install_it
+  touch "$(realbin "$0")"  # In case of no updates
   stubexec "$@"
 }
 
