@@ -66,3 +66,4 @@ if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
 fi
 
+path[1,0]=(~/bin)
