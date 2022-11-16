@@ -24,6 +24,7 @@ let s:filename   = expand('<sfile>')
   Plug 'ciaranm/securemodelines'
   Plug 'editorconfig/editorconfig-vim'
 
+  Plug 'wsdjeg/vim-fetch'
   Plug 'tpope/vim-vinegar'
   Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}
   Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
