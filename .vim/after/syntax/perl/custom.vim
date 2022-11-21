@@ -23,3 +23,7 @@ hi! def link podOrdinary  Comment
 hi! def link podCommand   SpecialComment
 hi! def link podCmdText   Question
 hi! def link podFormat    StorageClass
+
+syntax region perlHereDocSQL matchgroup=perlStringStartEnd start=+<<\~\s*'\z(\%(END_\)\=SQL\)'+ end='^\s*\z1$' contains=@SQL
+syntax region perlHereDocSQL matchgroup=perlStringStartEnd start='<<\~\s*"\z(\%(END_\)\=SQL\)"' end='^\s*\z1$' contains=@perlInterpDQ,@SQL
+syntax region perlHereDocSQL matchgroup=perlStringStartEnd start='<<\~\s*\z(\%(END_\)\=SQL\)'   end='^\s*\z1$' contains=@perlInterpDQ,@SQL
