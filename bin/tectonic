@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+age_limit=30
+
+install_it() {
+  mkdir -p ~/.local/bin
+  cd ~/.local/bin
+  curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net |
+    sh
+  cd -
+  asdf reshim || :
+}
+
+. ~/.lib/sh/stubexec.sh
