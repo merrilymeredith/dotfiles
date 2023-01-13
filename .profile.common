@@ -8,7 +8,7 @@ make -s -C ~/.ssh || {
 
 umask 027
 
-export MANPATH=$HOME/.man:
+export MANPATH=$HOME/.man:$HOME/.local/share/man:
 
 export EDITOR=vim
 export SUDO_EDITOR=$HOME/bin/privim
