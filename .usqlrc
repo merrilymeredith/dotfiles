@@ -1,0 +1,6 @@
+\setenv LESS FSRX~
+
+\set SYNTAX_HL_STYLE catppuccin-mocha
+
+\x auto
+\timing on
