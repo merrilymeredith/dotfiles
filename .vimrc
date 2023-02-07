@@ -352,7 +352,6 @@ let g:netrw_use_errorwindow = 0
 
 ">> mucomplete
 " enable and prefer local buffer before tags
-let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 300
 let g:mucomplete#chains = {
   \ 'default': ['path', 'c-n', 'omni', 'tags', 'dict', 'uspl'],
