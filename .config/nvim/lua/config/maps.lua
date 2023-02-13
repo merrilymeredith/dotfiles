@@ -13,7 +13,15 @@ map.set("",  "<F4>", ":let v:hlsearch = !v:hlsearch<CR>", opts)
 map.set("i", "<F4>", "<C-O><F4>")
 
 -- cover for search habit
-map.set("c", "<F3>", "<CR>")
+map.set("c", "<F3>", "<CR>", opts)
 
-map.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>")
+map.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", opts)
 
+map.set("n", "<C-h>", "<C-w>h", opts)
+map.set("n", "<C-j>", "<C-w>j", opts)
+map.set("n", "<C-k>", "<C-w>k", opts)
+map.set("n", "<C-l>", "<C-w>l", opts)
+map.set("n", "<C-\\>", "<C-w>p", opts)
+
+map.set("n", "gb", "<C-^>", opts)
+map.set("n", "gB", ":ls<CR>:b ", {noremap = true})
