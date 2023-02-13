@@ -26,21 +26,25 @@ end
 
 -- Behavior
 o.autowriteall = true
+o.backup = true
+o.completeopt:append({"menuone", "noselect"})
 o.ignorecase = true
 o.scrolloff = 15
+o.sessionoptions = {"buffers", "curdir", "localoptions"}
 o.sidescrolloff = 10
 o.smartcase = true
 o.splitbelow = true
 o.splitright = true
+o.undofile = true
 o.wildignorecase = true
 
 -- Paths
-o.tags:append(".tags,./.tags;")
+o.tags:append({".tags", "./.tags;"})
 o.wildignore = "*~,*.o,*.pyc,.git/*,hg/*,.svn/*"
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  once = true,
-  callback = function(args)
-    vim.opt.number = true
-  end,
-})
+if vim.fn.executable("ag") then
+  o.grepprg = "ag --vimgrep"
+  o.grepformat:prepend({"%f:%l:%c:%m", "%f"})
+  o.errorformat:append("%f")
+end
+

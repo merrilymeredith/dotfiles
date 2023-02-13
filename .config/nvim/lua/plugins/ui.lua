@@ -7,11 +7,11 @@ return {
         icons_enabled = false,
         section_separators = "",
         component_separators = "",
-        globalstatus = true
       },
       tabline = {
         lualine_a = { {'buffers', mode = 4} },
-      }
+      },
+      extensions = {"quickfix"},
     }
   },
 

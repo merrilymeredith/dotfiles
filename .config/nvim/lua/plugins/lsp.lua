@@ -35,20 +35,21 @@ return {
           ["<Tab>"] = cmp.mapping.select_next_item(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           ["<C-g>"] = cmp.mapping.abort(),
+          -- FIXME: add extra space after in select case?
           ["<Space>"] = cmp.mapping.confirm({select = false}),
           ["<Right>"] = cmp.mapping.confirm({select = true}),
         }),
-	sources = cmp.config.sources({
-	  { name = "nvim_lsp" },
-	  { name = "nvim_lsp_signature_help" },
-	  { name = "buffer" },
-	  { name = "path" },
-	}),
-	experimental = {
-	  ghost_text = {
-	    hl_group = "LspCodeLens",
-	  },
-	},
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "buffer" },
+          { name = "path" },
+        }),
+        experimental = {
+          ghost_text = {
+            hl_group = "LspCodeLens",
+          },
+        },
       }
     end,
   },
