@@ -39,6 +39,7 @@ o.undofile = true
 o.wildignorecase = true
 
 -- Paths
+o.backupdir:remove(".")
 o.tags:append({".tags", "./.tags;"})
 o.wildignore = "*~,*.o,*.pyc,.git/*,hg/*,.svn/*"
 

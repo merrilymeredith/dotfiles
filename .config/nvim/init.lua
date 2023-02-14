@@ -1,4 +1,4 @@
 require("config.options")
-require("config.lazy")
+require("lazy-bootstrap")
 require("config.maps")
 require("config.lsp")

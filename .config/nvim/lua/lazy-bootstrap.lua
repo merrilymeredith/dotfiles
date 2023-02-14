@@ -4,4 +4,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-return require("lazy")
+require("lazy").setup({
+  spec = {
+    { "nanotech/jellybeans.vim",
+      priority = 1000,
+      config = function() vim.cmd.colorscheme("jellybeans") end },
+    { import = "plugins" }
+  },
+  change_detection = { enabled = false },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "zipPlugin",
+        "tutor",
+      },
+    },
+  },
+})
