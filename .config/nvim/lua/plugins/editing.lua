@@ -18,7 +18,7 @@ return {
   "tpope/vim-unimpaired",
   "tomtom/tcomment_vim",
   "tpope/vim-endwise",
-  {"godlygeek/tabular", cmd = "Tabularize"},
+  "godlygeek/tabular",
   {"mbbill/undotree", cmd = "UndotreeToggle"},
 
   "tpope/vim-vinegar",

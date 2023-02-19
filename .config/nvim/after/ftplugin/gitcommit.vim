@@ -1,0 +1,1 @@
+setl noswapfile noundofile nobackup
