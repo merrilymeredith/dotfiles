@@ -1,4 +1,13 @@
+local g = vim.g
+
+-- >> Viewdoc
+g.no_viewdoc_abbrev = 1
+g.viewdoc_open = "topleft new"
+g.viewdoc_winwidth_max = 100
+
 return {
+  "powerman/vim-plugin-viewdoc",
+
   {
     "nvim-lualine/lualine.nvim",
     opts = {
@@ -24,7 +33,7 @@ return {
     opts = {
       enabled = false,
       char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+      -- filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
       show_trailing_blankline_indent = false,
       show_current_context = false,
     },

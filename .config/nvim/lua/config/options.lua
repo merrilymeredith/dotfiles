@@ -45,7 +45,6 @@ o.wildignore = "*~,*.o,*.pyc,.git/*,hg/*,.svn/*"
 
 if vim.fn.executable("ag") then
   o.grepprg = "ag --vimgrep"
-  o.grepformat:prepend({"%f:%l:%c:%m", "%f"})
-  o.errorformat:append("%f")
+  -- o.grepformat:prepend({"%f:%l:%c:%m", "%f"})
+  -- o.errorformat:append("%f")
 end
-
