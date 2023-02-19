@@ -1,8 +1,11 @@
-local diag_threshold = "WARN"
+local diag_virtual_min_threshold = "WARN"
+local diag_float_max_threshold = "INFO"
 
 vim.diagnostic.config({
-  underline = { severity = {min = diag_threshold} },
-  virtual_text = { true, severity = {min = diag_threshold} },
+  severity_sort = true,
+  underline = { severity = {min = diag_virtual_min_threshold} },
+  virtual_text = { true, severity = {min = diag_virtual_min_threshold} },
+  float = { source = "if_many" },
 })
 
 -- Some options are more chill in text mode, this unchills them if a LSP is in
@@ -24,27 +27,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- enable auto diags in message area for below threshold
     vim.api.nvim_create_augroup('lsp_diags', {clear = false})
-
-    vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+    vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_diags",
       buffer = bufnr,
       callback = function(opts, bufnr, line_nr, client_id)
-        bufnr = bufnr or 0
-        line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
-        opts = opts or {['lnum'] = line_nr}
-
-        local line_diagnostics = vim.diagnostic.get(bufnr, {lnum = line_nr, severity = {max = diag_threshold}})
-        if vim.tbl_isempty(line_diagnostics) then return end
-
-        local diagnostic_message = ""
-        for i, diagnostic in ipairs(line_diagnostics) do
-          diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
-          print(diagnostic_message)
-          if i ~= #line_diagnostics then
-            diagnostic_message = diagnostic_message .. "\n"
-          end
-        end
-        vim.api.nvim_echo({{diagnostic_message, "Normal"}}, false, {})
+        vim.diagnostic.open_float(nil, {
+          focusable = false,
+          close_events = {"BufLeave", "CursorMoved", "InsertEnter", "FocusLost"},
+          scope = "line",
+          severity = {max = diag_float_max_threshold},
+        })
       end,
     })
 
