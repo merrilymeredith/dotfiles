@@ -11,13 +11,16 @@ o.shiftwidth = 2
 -- Display
 o.breakindent = true
 o.breakindentopt = "min:66,shift:2"
+o.conceallevel = 3
 o.diffopt:append("algorithm:patience")
 o.fillchars = "fold: ,vert:│"
 o.linebreak = true
 o.listchars = "tab:⇥·,trail:◼,nbsp:◻,extends:»,precedes:«"
+o.pumheight = 10
 o.showbreak = "» "
 o.termguicolors = true
 o.signcolumn = "number"
+o.winminwidth = 5
 
 -- set font etc
 if vim.fn.has("gui") then
@@ -46,6 +49,5 @@ o.wildignore = "*~,*.o,*.pyc,.git/*,hg/*,.svn/*"
 
 if vim.fn.executable("ag") then
   o.grepprg = "ag --vimgrep"
-  -- o.grepformat:prepend({"%f:%l:%c:%m", "%f"})
-  -- o.errorformat:append("%f")
+  o.grepformat = {"%f:%l:%c:%m", "%f"}
 end
