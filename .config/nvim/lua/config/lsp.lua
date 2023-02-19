@@ -22,32 +22,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    -- Enable highlight-under-cursor
-    if client.server_capabilities.documentHighlightProvider then
-      vim.cmd [[
-        hi! LspReferenceRead ctermfg=0 ctermbg=11 guifg=#f0a0c0 guibg=#302028
-        hi! LspReferenceText ctermfg=0 ctermbg=11 guifg=#f0a0c0 guibg=#302028
-        hi! LspReferenceWrite ctermfg=0 ctermbg=11 cterm=underline guifg=#f0a0c0 guibg=#302028 gui=underline
-      ]]
-      vim.api.nvim_create_augroup('lsp_document_highlight', {
-        clear = false
-      })
-      vim.api.nvim_clear_autocmds({
-        buffer = bufnr,
-        group = 'lsp_document_highlight',
-      })
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        group = 'lsp_document_highlight',
-        buffer = bufnr,
-        callback = vim.lsp.buf.document_highlight,
-      })
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        group = 'lsp_document_highlight',
-        buffer = bufnr,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
-
     -- enable auto diags in message area for below threshold
     vim.api.nvim_create_augroup('lsp_diags', {clear = false})
 
