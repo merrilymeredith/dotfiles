@@ -28,6 +28,7 @@ end
 o.autowriteall = true
 o.backup = true
 o.completeopt:append({"menuone", "noselect"})
+o.hidden = false
 o.ignorecase = true
 o.scrolloff = 15
 o.sessionoptions = {"buffers", "curdir", "localoptions"}

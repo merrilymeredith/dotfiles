@@ -1,6 +1,8 @@
 augroup vimrc
   autocmd!
 
+  autocmd TermOpen * startinsert
+
   autocmd WinLeave * if !pumvisible() | stopinsert | endif
 
   " complement to autowriteall
