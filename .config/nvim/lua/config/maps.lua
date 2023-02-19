@@ -61,7 +61,10 @@ map.set('n', '[d', vim.diagnostic.goto_prev, opts)
 map.set('n', ']d', vim.diagnostic.goto_next, opts)
 map.set('n', '<leader>ld', vim.diagnostic.setloclist, opts)
 
+vim.api.nvim_create_augroup("lsp_attach", {})
+
 vim.api.nvim_create_autocmd("LspAttach", {
+  group = "lsp_attach",
   callback = function(args)
     local bufnr = args.buf
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
