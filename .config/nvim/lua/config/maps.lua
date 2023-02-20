@@ -1,62 +1,83 @@
 
-local map = vim.keymap
-local opts = {noremap = true, silent = true}
+local function map(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts.silent = opts.silent ~= false
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
 
-map.set("n", "<F2>", ":20Lexplore<CR>", opts)
-map.set("n", "<F3>", "n", opts)
-map.set("n", "<S-F3>", "N", opts)
-map.set("",  "<F4>", ":let v:hlsearch = !v:hlsearch<CR>", opts)
-map.set("n", "<F5>", ":UndotreeToggle<CR>", opts)
-map.set("n", "<F8>", ":TagbarToggle<CR>", opts)
+map("n", "<F2>", ":20Lexplore<CR>")
+map("n", "<F3>", "n")
+map("n", "<S-F3>", "N")
+map("",  "<F4>", ":let v:hlsearch = !v:hlsearch<CR>")
+map("n", "<F5>", ":UndotreeToggle<CR>")
+map("n", "<F8>", ":TagbarToggle<CR>")
 
 -- Allow :noh even in insert mode
-map.set("i", "<F4>", "<C-O><F4>")
+map("i", "<F4>", "<C-O><F4>")
 
 -- cover for search habit
-map.set("c", "<F3>", "<CR>", opts)
+map("c", "<F3>", "<CR>")
 
 -- change to file's directory
-map.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", opts)
+map("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>")
 
 -- window switching
-map.set("n", "<C-h>", "<C-w>h", opts)
-map.set("n", "<C-j>", "<C-w>j", opts)
-map.set("n", "<C-k>", "<C-w>k", opts)
-map.set("n", "<C-l>", "<C-w>l", opts)
-map.set("n", "<C-\\>", "<C-w>p", opts)
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
+map("n", "<C-\\>", "<C-w>p")
+
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +2<cr>")
+map("n", "<C-Down>", "<cmd>resize -2<cr>")
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>")
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>")
 
 -- buffer switching
-map.set("n", "gb", "<C-^>", opts)
-map.set("n", "gB", ":ls<CR>:b ", {noremap = true})
+map("n", "gb", "<C-^>")
+map("n", "gB", ":ls<CR>:b ", {silent = false})
 
 -- Select last paste, in the same mode it was pasted in
-map.set("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", {noremap=true, expr=true})
+map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", {expr=true})
+
+-- Add undo break-points
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+
+-- better indenting
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
 
 -- Use ltag over tselect
-map.set("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>", opts)
+map("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>")
 
 -- clear all interestingwords with \\k since \K is ri.vim
-map.set("n", "<leader><leader>k", ":call UncolorAllWords()<CR>", opts)
+map("n", "<leader><leader>k", ":call UncolorAllWords()<CR>")
 
 -- use Grep for a recursive *
-map.set("n", "g*", ":Grep<CR>", opts)
+map("n", "g*", ":Grep<CR>")
 
 -- K: doc, gKK: doc current filename
-map.set("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>", opts)
+map("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>")
 
 -- Tabular shortcuts
-map.set("n", "<leader>ta", ":Tabularize first_arrow<CR>", opts)
-map.set("n", "<leader>te", ":Tabularize first_eq<CR>", opts)
-map.set("n", "<leader>tc", ":Tabularize first_colon<CR>", opts)
-map.set("n", "<leader>tm", ":Tabularize methods<CR>", opts)
+map("n", "<leader>ta", ":Tabularize first_arrow<CR>")
+map("n", "<leader>te", ":Tabularize first_eq<CR>")
+map("n", "<leader>tc", ":Tabularize first_colon<CR>")
+map("n", "<leader>tm", ":Tabularize methods<CR>")
 
-map.set("n", "<leader>a", ":call vimrc#AutoFmtToggle()<CR>", opts)
+map("n", "<leader>a", ":call vimrc#AutoFmtToggle()<CR>")
 
 -- LSP features
-map.set('n', '<leader>d', vim.diagnostic.open_float, opts)
-map.set('n', '[d', vim.diagnostic.goto_prev, opts)
-map.set('n', ']d', vim.diagnostic.goto_next, opts)
-map.set('n', '<leader>ld', vim.diagnostic.setloclist, opts)
+map('n', '<leader>d', vim.diagnostic.open_float)
+map('n', '[d', vim.diagnostic.goto_prev)
+map('n', ']d', vim.diagnostic.goto_next)
+map('n', '<leader>ld', vim.diagnostic.setloclist)
 
 vim.api.nvim_create_augroup("lsp_attach", {})
 
@@ -64,23 +85,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = "lsp_attach",
   callback = function(args)
     local bufnr = args.buf
-    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    local bufopts = { buffer=bufnr }
 
-    map.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    map.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    map.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    map.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    map.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    map.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    map.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    map.set('n', '<leader>wl', function()
+    map('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    map('n', 'gd', vim.lsp.buf.definition, bufopts)
+    map('n', 'K', vim.lsp.buf.hover, bufopts)
+    map('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    map('n', '<leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    map.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    map.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    map.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    map.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    map.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+    map('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+    map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+    map('n', 'gr', vim.lsp.buf.references, bufopts)
+    map('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
   end,
 })
 
