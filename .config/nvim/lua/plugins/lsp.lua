@@ -51,8 +51,9 @@ return {
           ["<Right>"] = cmp.mapping.confirm({select = true}),
           ["<Space>"] = function(fallback)
             if cmp.visible() then
-              cmp.confirm({select = false})
-              vim.api.nvim_feedkeys(" ", "n", false)
+              cmp.confirm({select = false}, function()
+                vim.api.nvim_feedkeys(" ", "n", false)
+              end)
             end
             fallback()
           end,
