@@ -23,6 +23,7 @@
   "vim-asciidoc": { "branch": "master", "commit": "81530e5e9228cb0da1132fdcd51a89df3bf8e585" },
   "vim-endwise": { "branch": "master", "commit": "43301cf9a0fafd78cec7c2e5b9c0e2cfd9436e8a" },
   "vim-illuminate": { "branch": "master", "commit": "49062ab1dd8fec91833a69f0a1344223dd59d643" },
+  "vim-interestingwords": { "branch": "master", "commit": "e59f97aca15c6180e6f3aceaf4f7b50ca04326ed" },
   "vim-perl": { "branch": "dev", "commit": "f40ece108099df561157ed7fdb764f8c183a8bfc" },
   "vim-plugin-viewdoc": { "branch": "master", "commit": "c9d4e2c3ce6c932091f500053681638f1b39870d" },
   "vim-signature": { "branch": "master", "commit": "6bc3dd1294a22e897f0dcf8dd72b85f350e306bc" },

@@ -38,9 +38,6 @@ map.set("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>", opts)
 -- clear all interestingwords with \\k since \K is ri.vim
 map.set("n", "<leader><leader>k", ":call UncolorAllWords()<CR>", opts)
 
--- mark line
-map.set("n", "<leader>l", "V<leader>k", opts)
-
 -- use Grep for a recursive *
 map.set("n", "g*", ":Grep<CR>", opts)
 

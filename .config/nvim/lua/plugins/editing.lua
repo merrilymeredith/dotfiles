@@ -12,6 +12,15 @@ g.tagbar_autofocus = 1
 g.tagbar_compact = 1
 g.tagbar_width = 30
 
+-- >> interestingwords
+-- These are jellybeans colors and some complements
+g.interestingWordsGUIColors = {
+  '#C4A258','#6AADA0', '#71B9F8', '#A037B0', '#CF6A4C', '#D8AD4C',
+}
+g.interestingWordsTermColors = {
+  '179', '73', '75', '133', '167', '136',
+}
+
 return {
   "editorconfig/editorconfig-vim",
 
@@ -22,6 +31,7 @@ return {
   {"mbbill/undotree", cmd = "UndotreeToggle"},
 
   "tpope/vim-vinegar",
+  "lfv89/vim-interestingwords",
   "kshenoy/vim-signature",
   {"majutsushi/tagbar", cmd = "TagbarToggle"},
 
