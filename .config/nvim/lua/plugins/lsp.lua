@@ -39,17 +39,29 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<Tab>"] = cmp.mapping.select_next_item(),
+          ["<Tab>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              cmp.complete()
+            end
+          end,
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           ["<C-g>"] = cmp.mapping.abort(),
-          -- FIXME: add extra space after in select case?
-          ["<Space>"] = cmp.mapping.confirm({select = false}),
           ["<Right>"] = cmp.mapping.confirm({select = true}),
+          ["<Space>"] = function(fallback)
+            if cmp.visible() then
+              cmp.confirm({select = false})
+              vim.api.nvim_feedkeys(" ", "n", false)
+            end
+            fallback()
+          end,
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
           { name = "nvim_lua" },
+        }, {
           { name = "buffer" },
           { name = "path" },
         }),
