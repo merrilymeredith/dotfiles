@@ -16,6 +16,8 @@ cp -vu .gvimrc ${USERPROFILE}/_gvimrc
 
 cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 
+cp -vuRL -t ${USERPROFILE}/AppData/Local/nvim .config/nvim/*
+
 cp -vuRL -t ${USERPROFILE}/ \
   .lib \
   .ctags \
