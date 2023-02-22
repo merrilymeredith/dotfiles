@@ -17,8 +17,17 @@ return {
         section_separators = "",
         component_separators = "",
       },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'filename'},
+        lualine_c = {'diagnostics'},
+        lualine_x = {'encoding', 'fileformat'},
+        lualine_y = {'filetype'},
+        lualine_z = {'progress', 'location'}
+      },
       tabline = {
-        lualine_a = { {'buffers', mode = 4} },
+        lualine_a = { {'buffers', mode = 4, show_filename_only = false} },
+        lualine_z = { 'branch' },
       },
       extensions = {"quickfix"},
     }
