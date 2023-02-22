@@ -1,0 +1,7 @@
+[Editor]
+WindowGeometryBasedOnFontmetrics = true
+DisableLigatures = true
+
+# GUI External elements font
+FontFamily = "DejaVu Sans Mono"
+FontSize = 10
