@@ -44,11 +44,6 @@ return {
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
-      vim.cmd([[
-        hi! IlluminatedWordRead ctermfg=0 ctermbg=11 guifg=#f0a0c0 guibg=#302028
-        hi! IlluminatedWordText ctermfg=0 ctermbg=11 guifg=#f0a0c0 guibg=#302028
-        hi! IlluminatedWordWrite ctermfg=0 ctermbg=11 cterm=underline guifg=#f0a0c0 guibg=#302028 gui=underline
-      ]])
     end,
   },
 }
