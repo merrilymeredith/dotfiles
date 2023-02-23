@@ -6,9 +6,13 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    { "nanotech/jellybeans.vim",
+    {
+      "themercorp/themer.lua",
       priority = 1000,
-      config = function() vim.cmd.colorscheme("jellybeans") end },
+      opts = {
+        colorscheme = "jellybeans",
+      },
+    },
     { import = "plugins" }
   },
   change_detection = { enabled = false },
