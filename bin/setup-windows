@@ -19,6 +19,9 @@ cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 mkdir -p ${USERPROFILE}/AppData/Local/nvim
 cp -vuRL -t ${USERPROFILE}/AppData/Local/nvim .config/nvim/*
 
+mkdir -p ${USERPROFILE}/AppData/Local/goneovim
+cp -vu .config/goneovim/settings.toml ${USERPROFILE}/AppData/Local/goneovim/
+
 cp -vuRL -t ${USERPROFILE}/ \
   .lib \
   .ctags \
