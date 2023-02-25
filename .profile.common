@@ -1,6 +1,7 @@
 # vim: ft=bash
 # simple profile stuff that is common to both zsh and bash
 
+# most ssh versions support include now, see if i can...
 make -s -C ~/.ssh || {
   umask 077
   cat ~/.ssh/config.d/* > ~/.ssh/config
@@ -8,15 +9,17 @@ make -s -C ~/.ssh || {
 
 umask 027
 
+HISTIGNORE="ls:cd:cd -:pwd:exit:date:privim"
+
 export MANPATH=$HOME/.man:$HOME/.local/share/man:
 
-export EDITOR=vim
+# TODO: detect presence
+export EDITOR=nvim
 export SUDO_EDITOR=$HOME/bin/privim
 export LESS='Ri'
 export GPG_TTY="$(tty)"
 
 export PERL_CPANM_OPT='-nq --prompt'
-export DEVEL_REPL_PROFILE='Standard'
 
 export ASDF_CONCURRENCY='2'
 export RUBY_EXTRA_CONFIGURE_OPTIONS="--enable-shared --enable-install-doc"

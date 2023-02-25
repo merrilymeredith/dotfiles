@@ -35,7 +35,6 @@ fi
 
 KEYTIMEOUT=25
 REPORTTIME=5
-HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 setopt list_packed
 setopt correct
