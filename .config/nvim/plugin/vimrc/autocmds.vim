@@ -3,7 +3,10 @@ augroup vimrc
 
   autocmd TermOpen * startinsert
 
-  autocmd WinLeave * if !pumvisible() | stopinsert | endif
+  autocmd WinLeave,FocusLost * if !pumvisible() | stopinsert | endif
+
+  " complement to autoread?
+  autocmd FocusGained * silent! checktime
 
   " complement to autowriteall
   autocmd FocusLost * silent! wa
