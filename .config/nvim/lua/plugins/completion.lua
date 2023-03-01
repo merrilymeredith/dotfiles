@@ -20,7 +20,9 @@ return {
         },
         formatting = {
           format = function(entry, vim_item)
-            if vim_item.kind == "Text" then
+            if entry.source.name == "nvim_lsp_signature_help" then
+              vim_item.kind = ""
+            elseif vim_item.kind == "Text" then
               vim_item.kind = entry.source.name
             end
             return vim_item
