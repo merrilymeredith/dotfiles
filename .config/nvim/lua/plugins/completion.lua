@@ -17,7 +17,6 @@ return {
       return {
         completion = {
           keyword_length = 3,
-          completeopt = "menu,menuone,noinsert,noselect",
         },
         formatting = {
           format = function(entry, vim_item)
@@ -49,7 +48,7 @@ return {
           { name = "nvim_lua" },
           { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
           { name = "path" },
-          { name = "omni" },
+          -- { name = "omni" },
           { name = "tags" },
           { name = "calc" },
         }),

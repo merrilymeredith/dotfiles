@@ -26,7 +26,7 @@ o.winminwidth = 5
 -- Behavior
 o.autowriteall = true
 o.backup = true
-o.completeopt:append({"menuone", "noselect"})
+o.completeopt = {"menu", "menuone", "noselect"}
 o.hidden = false
 o.ignorecase = true
 o.scrolloff = 15
