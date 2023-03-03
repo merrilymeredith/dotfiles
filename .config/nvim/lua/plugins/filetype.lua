@@ -17,10 +17,14 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         ensure_installed = {
+          'c',
           'eex',
           'elixir',
           'heex',
+          'help',
+          'lua',
           'surface',
+          'vim',
         },
       })
     end,
