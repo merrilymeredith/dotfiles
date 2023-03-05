@@ -44,21 +44,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- This can be removed when mason-lspconfig gets support for standardrb
 if vim.fn.executable("standardrb") == 1 then
-  local lsp_ruby = vim.api.nvim_create_augroup("lsp_ruby", {clear = true})
-
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "ruby",
-    group = lsp_ruby,
+    group = vim.api.nvim_create_augroup("lsp_ruby", {clear = true}),
     once = true,
     callback = function()
-      require("lspconfig").standardrb.setup({})
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "ruby",
-    group = lsp_ruby,
-    callback = function()
+      require("lspconfig").standardrb.setup({
+        autostart = true,
+        single_file_support = true
+      })
       vim.cmd.LspStart("standardrb")
     end,
   })
