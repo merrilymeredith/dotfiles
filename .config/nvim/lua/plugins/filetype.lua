@@ -18,6 +18,7 @@ return {
         indent = { enable = true },
         ensure_installed = {
           'c',
+          'comment',
           'eex',
           'elixir',
           'heex',
