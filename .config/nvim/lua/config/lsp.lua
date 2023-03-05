@@ -26,9 +26,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
     -- enable auto diags in message area for below threshold
-    vim.api.nvim_create_augroup('lsp_diags', {clear = false})
     vim.api.nvim_create_autocmd("CursorHold", {
-      group = "lsp_diags",
+      group = vim.api.nvim_create_augroup("lsp_buf_diags", {clear = true}),
       buffer = bufnr,
       callback = function(opts, bufnr, line_nr, client_id)
         vim.diagnostic.open_float(nil, {
@@ -40,6 +39,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end,
     })
   end
+})
+
+-- Format on write, but only certain languages
+local autoformat_filetypes = { elixir = true, go = true }
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("lsp_autoformat", {clear = true}),
+  callback = function(opts, bufnr)
+    if autoformat_filetypes[vim.bo.filetype] then
+      vim.lsp.buf.formatting_seq_sync(nil, 100)
+    end
+  end,
 })
 
 -- This can be removed when mason-lspconfig gets support for standardrb
