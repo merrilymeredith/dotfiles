@@ -1,0 +1,2 @@
+# disable rubocop so we can load standardrb lsp
+reporters: []

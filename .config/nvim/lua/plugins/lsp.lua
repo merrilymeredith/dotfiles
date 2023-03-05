@@ -18,7 +18,13 @@ return {
             capabilities = require('cmp_nvim_lsp').default_capabilities(),
             settings = { gopls = { gofumpt = true } }
           })
-        end
+        end,
+        solargraph = function ()
+          require("lspconfig").solargraph.setup({
+            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            init_options = { formatting = false }
+          })
+        end,
       })
     end,
   },
