@@ -45,10 +45,6 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
--- better indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
