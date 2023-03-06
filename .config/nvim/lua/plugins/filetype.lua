@@ -8,30 +8,30 @@ g.perl_compiler_force_warnings = 0
 
 return {
   {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     build = function()
-      require('nvim-treesitter.install').update({ with_sync = true })
+      require("nvim-treesitter.install").update({ with_sync = true })
     end,
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require("nvim-treesitter.configs").setup({
         highlight = { enable = true },
         indent = { enable = true },
         ensure_installed = {
-          'c',
-          'comment',
-          'eex',
-          'elixir',
-          'heex',
-          'help',
-          'lua',
-          'surface',
-          'vim',
+          "c",
+          "comment",
+          "eex",
+          "elixir",
+          "heex",
+          "help",
+          "lua",
+          "surface",
+          "vim",
         },
       })
     end,
   },
-  'Shougo/vinarise.vim',
-  'asciidoc/vim-asciidoc',
-  {'vim-perl/vim-perl', branch = 'dev'},
-  'yko/mojo.vim',
+  "Shougo/vinarise.vim",
+  "asciidoc/vim-asciidoc",
+  { "vim-perl/vim-perl", branch = "dev" },
+  "yko/mojo.vim",
 }

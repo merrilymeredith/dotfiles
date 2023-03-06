@@ -18,26 +18,26 @@ return {
         component_separators = "",
       },
       sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'filename'},
-        lualine_c = {'diagnostics'},
-        lualine_x = {'encoding', 'fileformat'},
-        lualine_y = {'filetype'},
-        lualine_z = {'progress', 'location'}
+        lualine_a = { "mode" },
+        lualine_b = { "filename" },
+        lualine_c = { "diagnostics" },
+        lualine_x = { "encoding", "fileformat" },
+        lualine_y = { "filetype" },
+        lualine_z = { "progress", "location" },
       },
       tabline = {
-        lualine_a = { {'buffers', mode = 4, show_filename_only = false} },
-        lualine_z = { 'branch' },
+        lualine_a = { { "buffers", mode = 4, show_filename_only = false } },
+        lualine_z = { "branch" },
       },
-      extensions = {"quickfix"},
-    }
+      extensions = { "quickfix" },
+    },
   },
 
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
     keys = {
-      {"<leader>ig", "<cmd>IndentBlanklineToggle<cr>"},
+      { "<leader>ig", "<cmd>IndentBlanklineToggle<cr>" },
     },
     opts = {
       enabled = false,
@@ -57,7 +57,9 @@ return {
       -- symbol = "▏",
       options = { try_as_border = true },
       draw = {
-        animation = function() return 2 end,
+        animation = function()
+          return 2
+        end,
       },
     },
     config = function(_, opts)

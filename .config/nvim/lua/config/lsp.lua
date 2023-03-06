@@ -3,8 +3,8 @@ local diag_float_max_threshold = "INFO"
 
 vim.diagnostic.config({
   severity_sort = true,
-  underline = { severity = {min = diag_virtual_min_threshold} },
-  virtual_text = { true, severity = {min = diag_virtual_min_threshold} },
+  underline = { severity = { min = diag_virtual_min_threshold } },
+  virtual_text = { true, severity = { min = diag_virtual_min_threshold } },
   float = { source = "if_many" },
 })
 
@@ -27,25 +27,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- enable auto diags in message area for below threshold
     vim.api.nvim_create_autocmd("CursorHold", {
-      group = vim.api.nvim_create_augroup("lsp_buf_diags", {clear = true}),
+      group = vim.api.nvim_create_augroup("lsp_buf_diags", { clear = true }),
       buffer = bufnr,
       callback = function(opts, bufnr, line_nr, client_id)
         vim.diagnostic.open_float(nil, {
           focusable = false,
-          close_events = {"BufLeave", "CursorMoved", "InsertEnter", "FocusLost"},
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
           scope = "line",
-          severity = {max = diag_float_max_threshold},
+          severity = { max = diag_float_max_threshold },
         })
       end,
     })
-  end
+  end,
 })
 
 -- Format on write, but only certain languages
 local autoformat_filetypes = { elixir = true, go = true }
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("lsp_autoformat", {clear = true}),
+  group = vim.api.nvim_create_augroup("lsp_autoformat", { clear = true }),
   callback = function(opts, bufnr)
     if autoformat_filetypes[vim.bo.filetype] then
       vim.lsp.buf.formatting_seq_sync(nil, 100)
@@ -57,15 +57,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 if vim.fn.executable("standardrb") == 1 then
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "ruby",
-    group = vim.api.nvim_create_augroup("lsp_ruby", {clear = true}),
+    group = vim.api.nvim_create_augroup("lsp_ruby", { clear = true }),
     once = true,
     callback = function()
       require("lspconfig").standardrb.setup({
         autostart = true,
-        single_file_support = true
+        single_file_support = true,
       })
       vim.cmd.LspStart("standardrb")
     end,
   })
 end
-

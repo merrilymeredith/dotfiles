@@ -1,4 +1,3 @@
-
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
   opts.silent = opts.silent ~= false
@@ -8,7 +7,7 @@ end
 map("n", "<F2>", ":20Lexplore<CR>")
 map("n", "<F3>", "n")
 map("n", "<S-F3>", "N")
-map("",  "<F4>", ":let v:hlsearch = !v:hlsearch<CR>")
+map("", "<F4>", ":let v:hlsearch = !v:hlsearch<CR>")
 map("n", "<F5>", ":UndotreeToggle<CR>")
 map("n", "<F8>", ":TagbarToggle<CR>")
 
@@ -36,10 +35,10 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>")
 
 -- buffer switching
 map("n", "gb", "<C-^>")
-map("n", "gB", ":ls<CR>:b ", {silent = false})
+map("n", "gB", ":ls<CR>:b ", { silent = false })
 
 -- Select last paste, in the same mode it was pasted in
-map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", {expr=true})
+map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -50,8 +49,8 @@ map("i", ";", ";<c-g>u")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true})
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true})
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
 -- Use ltag over tselect
 map("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>")
@@ -74,10 +73,10 @@ map("n", "<leader>tm", ":Tabularize methods<CR>")
 map("n", "<leader>a", ":call vimrc#AutoFmtToggle()<CR>")
 
 -- LSP features
-map('n', '<leader>d', vim.diagnostic.open_float)
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', ']d', vim.diagnostic.goto_next)
-map('n', '<leader>ld', vim.diagnostic.setloclist)
+map("n", "<leader>d", vim.diagnostic.open_float)
+map("n", "[d", vim.diagnostic.goto_prev)
+map("n", "]d", vim.diagnostic.goto_next)
+map("n", "<leader>ld", vim.diagnostic.setloclist)
 
 vim.api.nvim_create_augroup("lsp_attach", {})
 
@@ -85,23 +84,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = "lsp_attach",
   callback = function(args)
     local bufnr = args.buf
-    local bufopts = { buffer=bufnr }
+    local bufopts = { buffer = bufnr }
 
-    map('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    map('n', 'gd', vim.lsp.buf.definition, bufopts)
-    map('n', 'K', vim.lsp.buf.hover, bufopts)
-    map('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    map('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    map('n', '<leader>wl', function()
+    map("n", "gD", vim.lsp.buf.declaration, bufopts)
+    map("n", "gd", vim.lsp.buf.definition, bufopts)
+    map("n", "K", vim.lsp.buf.hover, bufopts)
+    map("n", "gi", vim.lsp.buf.implementation, bufopts)
+    map("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    map("n", "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
-    map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-    map('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    map('n', 'gr', vim.lsp.buf.references, bufopts)
-    map('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    map("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+    map("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+    map("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+    map("n", "gr", vim.lsp.buf.references, bufopts)
+    map("n", "<leader>f", function()
+      vim.lsp.buf.format({ async = true })
+    end, bufopts)
   end,
 })
-

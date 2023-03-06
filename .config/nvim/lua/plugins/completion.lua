@@ -34,10 +34,10 @@ return {
           ["<Tab>"] = cmp.mapping.select_next_item(),
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           ["<C-g>"] = cmp.mapping.abort(),
-          ["<Right>"] = cmp.mapping.confirm({select = true}),
+          ["<Right>"] = cmp.mapping.confirm({ select = true }),
           ["<Space>"] = function(fallback)
             if cmp.visible() then
-              cmp.confirm({select = false}, function()
+              cmp.confirm({ select = false }, function()
                 vim.api.nvim_feedkeys(" ", "n", false)
               end)
             end
@@ -58,4 +58,3 @@ return {
     end,
   },
 }
-
