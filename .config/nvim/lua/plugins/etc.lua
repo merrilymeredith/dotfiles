@@ -20,5 +20,5 @@ g.vimwiki_list = {
 }
 
 return {
-  "vimwiki/vimwiki",
+  { "vimwiki/vimwiki", event = "VeryLazy" },
 }

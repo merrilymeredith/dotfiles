@@ -1,10 +1,14 @@
 return {
-  "neovim/nvim-lspconfig",
+  -- mason is nonlazy so my executable tests works
   { "williamboman/mason.nvim", config = true },
-  { "j-hui/fidget.nvim", config = true },
 
   {
-    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      { "j-hui/fidget.nvim", config = true },
+    },
     config = function(plugin, opts)
       require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers({

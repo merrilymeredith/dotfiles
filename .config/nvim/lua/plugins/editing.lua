@@ -32,7 +32,10 @@ g.interestingWordsTermColors = {
 }
 
 return {
-  "editorconfig/editorconfig-vim",
+  {
+    "editorconfig/editorconfig-vim",
+    event = { "BufReadPost", "BufNewFile" },
+  },
 
   "tpope/vim-unimpaired",
   "tomtom/tcomment_vim",

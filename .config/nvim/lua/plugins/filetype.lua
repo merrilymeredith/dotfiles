@@ -9,6 +9,7 @@ g.perl_compiler_force_warnings = 0
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    event = { "BufReadPost", "BufNewFile" },
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })
     end,
@@ -30,7 +31,7 @@ return {
       })
     end,
   },
-  "Shougo/vinarise.vim",
+  { "Shougo/vinarise.vim", cmd = "Vinarise" },
   "asciidoc/vim-asciidoc",
   { "vim-perl/vim-perl", branch = "dev" },
   "yko/mojo.vim",

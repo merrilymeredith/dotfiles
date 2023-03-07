@@ -6,7 +6,7 @@ g.viewdoc_open = "topleft new"
 g.viewdoc_winwidth_max = 100
 
 return {
-  "powerman/vim-plugin-viewdoc",
+  { "powerman/vim-plugin-viewdoc", event = "VeryLazy" },
 
   {
     "nvim-lualine/lualine.nvim",
@@ -35,7 +35,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPost",
+    event = { "BufReadPost", "BufNewFile" },
     keys = {
       { "<leader>ig", "<cmd>IndentBlanklineToggle<cr>" },
     },
