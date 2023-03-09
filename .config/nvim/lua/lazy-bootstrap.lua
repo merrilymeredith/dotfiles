@@ -13,12 +13,34 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
+    -- {
+    --   "themercorp/themer.lua",
+    --   priority = 1000,
+    --   opts = {
+    --     -- colorscheme = "jellybeans",
+    --   },
+    -- },
     {
-      "themercorp/themer.lua",
+      "rebelot/kanagawa.nvim",
       priority = 1000,
       opts = {
-        colorscheme = "jellybeans",
+        keywordStyle = { italic = false },
+        statementStyle = { bold = false },
+        colors = {
+          theme = {
+            all = {
+              ui = {
+                bg = "none",
+                bg_gutter = "none",
+              },
+            },
+          },
+        },
       },
+      config = function(_, opts)
+        require("kanagawa").setup(opts)
+        vim.cmd("colorscheme kanagawa")
+      end,
     },
     { import = "plugins" },
   },
