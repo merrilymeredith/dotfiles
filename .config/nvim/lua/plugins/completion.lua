@@ -36,6 +36,7 @@ return {
           ["<S-Tab>"] = cmp.mapping.select_prev_item(),
           ["<C-g>"] = cmp.mapping.abort(),
           ["<Right>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-Space>"] = cmp.mapping.complete(),
           ["<Space>"] = function(fallback)
             if cmp.visible() then
               cmp.confirm({ select = false }, function()
