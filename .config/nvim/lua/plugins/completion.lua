@@ -12,9 +12,10 @@ return {
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-tags",
     },
-    opts = function()
+    config = function()
       local cmp = require("cmp")
-      return {
+      cmp.setup({
+        preselect = cmp.PreselectMode.None,
         completion = {
           keyword_length = 3,
         },
@@ -54,7 +55,7 @@ return {
           { name = "tags" },
           { name = "calc" },
         }),
-      }
+      })
     end,
   },
 }
