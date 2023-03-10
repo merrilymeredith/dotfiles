@@ -4,6 +4,7 @@ require("config.options")
 require("lazy-bootstrap")
 require("config.maps")
 require("config.lsp")
+require("local.tig").setup()
 
 -- >> Builtin
 g.netrw_altfile = 1
