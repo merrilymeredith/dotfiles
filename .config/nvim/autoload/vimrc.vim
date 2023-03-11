@@ -10,26 +10,6 @@ func! vimrc#AutoFmtToggle() abort
   endif
 endfunc
 
-" Make paths when writing, as necessary
-func! vimrc#MkNonExDir(file, buf) abort
-  if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-    let dir=fnamemodify(a:file, ':h')
-    if !isdirectory(dir)
-      call mkdir(dir, 'p')
-    endif
-  endif
-endfunc
-
-func! vimrc#AutoSessionCheck() abort
-  if strlen(v:servername) > 0 && match(v:servername, 'VIM') == -1
-    let sessionfile = g:vimcache . "/session/" . tolower(v:servername) . ".vim"
-
-    if filereadable(sessionfile)
-      execute "source " . sessionfile
-    endif
-  endif
-endfunc
-
 func! vimrc#Grep(...) abort
   let pattern = get(a:000, 0, expand('<cword>'))
   let cmd = join([&grepprg, shellescape(pattern)] + a:000[1:], ' ')
@@ -88,12 +68,6 @@ if has('perl')
 END_PERL
   endfunc
 endif
-
-func! vimrc#PrepDir(path) abort
-  if !filewritable(a:path)
-    call mkdir(a:path, 'p', 0700)
-  endif
-endfunc
 
 if has('ruby')
   func! s:PruneFiles(path, days) abort

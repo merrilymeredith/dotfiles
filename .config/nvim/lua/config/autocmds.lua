@@ -4,7 +4,8 @@ local fn = vim.fn
 local vimrc = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 local function autocmd(event, pattern, opts)
-  vim.api.nvim_create_autocmd(event,
+  vim.api.nvim_create_autocmd(
+    event,
     vim.tbl_extend("keep", opts, {
       group = vimrc,
       pattern = pattern,
@@ -13,7 +14,11 @@ local function autocmd(event, pattern, opts)
 end
 
 local function cb(func)
-  return { callback = function(_) func() end }
+  return {
+    callback = function(_)
+      func()
+    end,
+  }
 end
 
 -- >> neovim specific
@@ -25,52 +30,59 @@ autocmd("FocusGained", "*", cb(cmd.checktime))
 
 -- >> autowriteall improvment
 -- Stopinsert on leave, or autowriteall doesn't work.
-autocmd({"WinLeave", "FocusLost"}, "*", { callback = function(_)
-  if not fn.pumvisible() then
-    fn.stopinsert()
-  end
-end })
+autocmd({ "WinLeave", "FocusLost" }, "*", {
+  callback = function(_)
+    if not fn.pumvisible() then
+      fn.stopinsert()
+    end
+  end,
+})
 
 -- write all on leave
 autocmd("FocusLost", "*", cb(cmd.wa))
 
-
 -- >> auto mkpath on write
-autocmd("BufWritePre", "*", { callback = function(ctx)
-  if vim.bo[ctx.buf].buftype == "" 
-    and not string.match(ctx.file, "^[%w]+:")
-  then
-    fn.mkdir(fn.fnamemodify(ctx.file, ":p:h"), "p")
-  end
-end })
+autocmd("BufWritePre", "*", {
+  callback = function(ctx)
+    if vim.bo[ctx.buf].buftype == "" and not string.match(ctx.file, "^[%w]+:") then
+      fn.mkdir(fn.fnamemodify(ctx.file, ":p:h"), "p")
+    end
+  end,
+})
 
 -- >> auto session ?
 
 -- >> jump to last position on open
-autocmd("BufReadPost", "*", { callback = function(_)
-  local ft = vim.bo.filetype
-  if ft == "mail" or string.match(ft, "^git") or string.match(ft, "^hg") then
-    return ''
-  end
+autocmd("BufReadPost", "*", {
+  callback = function(_)
+    local ft = vim.bo.filetype
+    if ft == "mail" or string.match(ft, "^git") or string.match(ft, "^hg") then
+      return ""
+    end
 
-  local lastpos = fn.line([['"]])
-  if lastpos >= 1 and lastpos <= fn.line("$") then
-    vim.cmd([[normal! g`"]])
-  end
-end })
+    local lastpos = fn.line([['"]])
+    if lastpos >= 1 and lastpos <= fn.line("$") then
+      vim.cmd([[normal! g`"]])
+    end
+  end,
+})
 
 -- >> simple highlight conflict markers
-autocmd("BufReadPost", "*", { callback = function(_)
-  fn.matchadd("Error", [[^\([<>|]\)\{7} \@=\|^=\{7}$]])
-end })
+autocmd("BufReadPost", "*", {
+  callback = function(_)
+    fn.matchadd("Error", [[^\([<>|]\)\{7} \@=\|^=\{7}$]])
+  end,
+})
 
 -- >> nicer quickfix
-autocmd("BufReadPost", "quickfix", { callback = function(ctx)
-  -- simplify noisy :ltag output
-  if string.match(vim.w.quickfix_title, "^ltag") then
-    fn.matchadd("Conceal", [[|\zs\^\\V\|\\$|.*]])
-  end
+autocmd("BufReadPost", "quickfix", {
+  callback = function(ctx)
+    -- simplify noisy :ltag output
+    if string.match(vim.w.quickfix_title, "^ltag") then
+      fn.matchadd("Conceal", [[|\zs\^\\V\|\\$|.*]])
+    end
 
-  -- easy close
-  vim.keymap.set("n", "q", "<C-w>q", {buffer = true})
-end })
+    -- easy close
+    vim.keymap.set("n", "q", "<C-w>q", { buffer = true })
+  end,
+})
