@@ -6,18 +6,6 @@ func! vimrc#AutoFmtToggle() abort
   endif
 endfunc
 
-func! vimrc#Grep(...) abort
-  let pattern = get(a:000, 0, expand('<cword>'))
-  let cmd = join([&grepprg, shellescape(pattern)] + a:000[1:], ' ')
-
-  echo cmd
-  cgetexpr system(cmd)
-  call setqflist([], 'a', {"title": cmd})
-  let @/ = '\v' . pattern
-  copen
-  cfirst
-endfunc
-
 func! vimrc#SafeFilterFile(cmd)
   let errors = tempname()
   try

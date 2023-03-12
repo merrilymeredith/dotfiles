@@ -17,6 +17,20 @@ command("Gcd", function()
   end
 end, {})
 
+command("Grep", function(ctx)
+  local pattern = ctx.fargs[1] or fn.expand("<cword>")
+  local grepcmd = table.concat({
+    vim.o.grepprg,
+    fn.shellescape(pattern),
+    table.concat(vim.list_slice(ctx.fargs, 2, #ctx.fargs), " "),
+  }, " ")
+
+  fn.setqflist({}, " ", { title = grepcmd, lines = fn.systemlist(grepcmd) })
+  fn.setreg("/", [[\V]] .. pattern)
+  cmd.copen()
+  cmd.cfirst()
+end, { nargs = "*", complete = "file" })
+
 calias("Q", "q")
 calias("Qa", "qa")
 calias("W", "w")
