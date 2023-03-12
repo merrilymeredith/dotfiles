@@ -35,7 +35,7 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    lazy = false,
     keys = {
       { "<leader>ig", "<cmd>IndentBlanklineToggle<cr>" },
     },
