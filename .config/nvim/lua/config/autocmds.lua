@@ -59,9 +59,9 @@ autocmd(g, "BufReadPost", "quickfix", {
       -- Hide ctags regex anchors
       fn.matchadd("Conceal", [[\m|\zs\^\\V\|\\$\ze|]])
 
-      -- highlight match in line. if tagname begins with / the rest is a \V
+      -- highlight match in line. if tagname begins with / the rest is a \v
       -- regex. match must be between vertical bars, so its the 2nd column.
-      local tagmatch = string.gsub(vim.fn.gettagstack().items[1].tagname, "^/", "\\V", 1)
+      local tagmatch = string.gsub(vim.fn.gettagstack().items[1].tagname, "^/", "\\v", 1)
       fn.matchadd("Underlined", [[\m|.*\zs]] .. tagmatch .. [[\m\ze.*|]])
     end
 

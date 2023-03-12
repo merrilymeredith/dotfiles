@@ -26,7 +26,7 @@ command("Grep", function(ctx)
   }, " ")
 
   fn.setqflist({}, " ", { title = grepcmd, lines = fn.systemlist(grepcmd) })
-  fn.setreg("/", [[\V]] .. pattern)
+  fn.setreg("/", [[\v]] .. pattern)
   cmd.copen()
   cmd.cfirst()
 end, { nargs = "*", complete = "file" })
