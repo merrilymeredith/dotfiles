@@ -70,7 +70,7 @@ autocmd("BufReadPost", "*", {
 -- >> simple highlight conflict markers
 autocmd("BufReadPost", "*", {
   callback = function(_)
-    fn.matchadd("Error", [[^\([<>|]\)\{7} \@=\|^=\{7}$]])
+    fn.matchadd("Error", [[\m^\([<>|]\)\{7} \@=\|^=\{7}$]])
   end,
 })
 
@@ -79,7 +79,13 @@ autocmd("BufReadPost", "quickfix", {
   callback = function(ctx)
     -- simplify noisy :ltag output
     if string.match(vim.w.quickfix_title, "^ltag") then
-      fn.matchadd("Conceal", [[|\zs\^\\V\|\\$|.*]])
+      -- Hide ctags regex anchors
+      fn.matchadd("Conceal", [[\m|\zs\^\\V\|\\$\ze|]])
+
+      -- highlight match in line. if tagname begins with / the rest is a \V
+      -- regex. match must be between vertical bars, so its the 2nd column.
+      local tagmatch = string.gsub(vim.fn.gettagstack().items[1].tagname, "^/", "\\V", 1)
+      fn.matchadd("Underlined", [[\m|.*\zs]] .. tagmatch .. [[\m\ze.*|]])
     end
 
     -- easy close
