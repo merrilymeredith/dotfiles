@@ -5,6 +5,7 @@ require("lazy-bootstrap")
 require("config.maps")
 require("config.lsp")
 require("config.autocmds")
+require("config.commands")
 
 require("local.tig").setup()
 

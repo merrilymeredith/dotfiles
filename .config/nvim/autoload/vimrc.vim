@@ -1,7 +1,3 @@
-func! vimrc#CommandAlias(abbrev, expand) abort
-  execute printf('cnoreabbrev <expr> %s (getcmdtype()==":" && getcmdline()=="%s") ? "%s" : "%s"', a:abbrev, a:abbrev, a:expand, a:abbrev)
-endfunc
-
 func! vimrc#AutoFmtToggle() abort
   if &formatoptions =~# 'a'
     setl formatoptions-=a | echo '-a'
@@ -20,22 +16,6 @@ func! vimrc#Grep(...) abort
   let @/ = '\v' . pattern
   copen
   cfirst
-endfunc
-
-func! vimrc#Gcd() abort
-  let root = system('git rev-parse --show-toplevel 2>/dev/null')[:-2]
-  if ! v:shell_error
-    exec 'cd ' . root
-  endif
-  pwd
-endfunc
-
-func! vimrc#Hgcd() abort
-  let root = system('hg root 2>/dev/null')[:-2]
-  if ! v:shell_error
-    exec 'cd ' . root
-  endif
-  pwd
 endfunc
 
 func! vimrc#SafeFilterFile(cmd)
