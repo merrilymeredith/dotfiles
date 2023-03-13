@@ -52,19 +52,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
   end,
 })
-
--- This can be removed when mason-lspconfig gets support for standardrb
-if vim.fn.executable("standardrb") == 1 then
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "ruby",
-    group = vim.api.nvim_create_augroup("lsp_ruby", { clear = true }),
-    once = true,
-    callback = function()
-      require("lspconfig").standardrb.setup({
-        autostart = true,
-        single_file_support = true,
-      })
-      vim.cmd.LspStart("standardrb")
-    end,
-  })
-end
