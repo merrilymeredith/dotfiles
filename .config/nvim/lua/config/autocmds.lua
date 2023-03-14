@@ -34,10 +34,12 @@ autocmd(g, "BufWritePre", "*", {
 -- >> auto session ?
 
 -- >> jump to last position on open
+local nojump = vim.regex([[mail\|commit\|rebase]])
+assert(nojump, "Couldn't compile nojump regexp?")
+
 autocmd(g, "BufReadPost", "*", function()
-  local ft = vim.bo.filetype
-  if ft == "mail" or string.match(ft, "^git") or string.match(ft, "^hg") then
-    return ""
+  if nojump:match_str(vim.bo.filetype or "") then
+    return
   end
 
   local lastpos = fn.line([['"]])
