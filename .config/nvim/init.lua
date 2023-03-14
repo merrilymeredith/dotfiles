@@ -7,7 +7,8 @@ require("config.lsp")
 require("config.autocmds")
 require("config.commands")
 
-require("local.tig").setup()
+require("local.tig")
+require("local.encrypted")
 
 -- >> Builtin
 g.netrw_altfile = 1

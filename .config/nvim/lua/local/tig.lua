@@ -20,18 +20,12 @@ local function tig(ctx)
   })
 end
 
-local function setup(config)
-  api.nvim_create_user_command("Tig", tig, { nargs = "*", complete = "file" })
+api.nvim_create_user_command("Tig", tig, { nargs = "*", complete = "file" })
 
-  api.nvim_create_user_command("TigBlame", function()
-    tig({ fargs = { "blame", "+" .. fn.line("."), "--", fn.expand("%") } })
-  end, {})
+api.nvim_create_user_command("TigBlame", function()
+  tig({ fargs = { "blame", "+" .. fn.line("."), "--", fn.expand("%") } })
+end, {})
 
-  api.nvim_create_user_command("TigLog", function()
-    tig({ fargs = { "log", "-p", "--", fn.expand("%") } })
-  end, {})
-end
-
-return {
-  setup = setup,
-}
+api.nvim_create_user_command("TigLog", function()
+  tig({ fargs = { "log", "-p", "--", fn.expand("%") } })
+end, {})
