@@ -14,13 +14,11 @@ autocmd(g, "FocusGained", "*", cmd.checktime)
 -- >> autowriteall improvment
 -- Stopinsert on leave, or autowriteall doesn't work.
 autocmd(g, { "WinLeave", "FocusLost" }, "*", function()
-  if not fn.pumvisible() then
+  if fn.pumvisible() == 0 then
     fn.stopinsert()
   end
+  cmd.wa()
 end)
-
--- write all on leave
-autocmd(g, "FocusLost", "*", cmd.wa)
 
 -- >> auto mkpath on write
 autocmd(g, "BufWritePre", "*", {
