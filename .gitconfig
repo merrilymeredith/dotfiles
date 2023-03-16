@@ -1,3 +1,4 @@
+# vim: noet:ts=8:sw=8
 [user]
 	email = mhoward@roomag.org
 	name  = Meredith Howard
@@ -50,6 +51,10 @@
 	guitool = gvimdiff
 	conflictstyle = diff3
 
+[mergetool]
+	keepBackup = false
+	hideResolved = true
+
 [branch]
 	autosetupmerge  = always
 
@@ -84,5 +89,3 @@
 # include.path is available in git 1.7.10 and later
 [include]
 	path = ~/.gitconfig.local
-
-# vim: noet:ts=8:sw=8
