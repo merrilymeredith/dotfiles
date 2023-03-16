@@ -15,7 +15,7 @@ autocmd(g, "FocusGained", "*", cmd.checktime)
 -- Stopinsert on leave, or autowriteall doesn't work.
 autocmd(g, { "WinLeave", "FocusLost" }, "*", function()
   if fn.pumvisible() == 0 then
-    fn.stopinsert()
+    cmd.stopinsert()
   end
   cmd.wa()
 end)
