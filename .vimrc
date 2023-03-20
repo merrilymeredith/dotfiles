@@ -38,9 +38,6 @@ let s:filename   = expand('<sfile>')
   Plug 'kana/vim-textobj-user'
   Plug 'glts/vim-textobj-comment'
 
-  Plug 'prabirshrestha/vim-lsp'
-  Plug 'mattn/vim-lsp-settings'
-
   Plug 'vimwiki/vimwiki'
 
   Plug 'Shougo/vinarise.vim'
@@ -122,26 +119,6 @@ noremap <leader>tc :Tabularize first_colon<CR>
 noremap <leader>tm :Tabularize methods<CR>
 
 noremap <silent> <leader>a :call vimrc#AutoFmtToggle()<CR>
-
-" Maps that only apply when an LSP is available
-func! s:on_lsp_buffer_enabled() abort
-  setl omnifunc=lsp#complete
-  if exists('+tagfunc')
-    setl tagfunc=lsp#tagfunc
-  endif
-  nmap <buffer> K          <plug>(lsp-hover)
-  nmap <buffer> gd         <plug>(lsp-definition)
-  nmap <buffer> gr         <plug>(lsp-references)
-  nmap <buffer> gt         <plug>(lsp-peek-type-definition)
-  nmap <buffer> ]d         <plug>(lsp-next-diagnostic)
-  nmap <buffer> [d         <plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]r         <plug>(lsp-next-reference)
-  nmap <buffer> [r         <plug>(lsp-previous-reference)
-  nmap <buffer> <leader>rn <plug>(lsp-rename)
-  nmap <buffer> <leader>gt <plug>(lsp-type-definition)
-  let &signcolumn = (has('gui_running') ? 'number' : 'yes')
-  hi lspReference ctermfg=217 guifg=#f0a0c0
-endfunc
 
 " Commands & Aliases  {{{
 command! -nargs=+ CAlias call vimrc#CommandAlias(<f-args>)
@@ -356,41 +333,6 @@ let g:mucomplete#completion_delay = 300
 let g:mucomplete#chains = {
   \ 'default': ['path', 'c-n', 'omni', 'tags', 'dict', 'uspl'],
   \}
-
-">> vim-lsp
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = 200
-let g:lsp_diagnostics_highlight_enabled = 0
-let g:lsp_diagnostics_signs_insert_mode_enabled = 0
-let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
-
-let g:lsp_settings_enable_suggestions = 0
-let g:lsp_settings_deny_local_keys    = ['cmd', 'config', 'disabled', 'workspace_config']
-let g:lsp_settings_filetype_perl      = v:false
-let g:lsp_settings_filetype_ruby      = ['solargraph']
-
-if !has('patch-8.1.1517') && !has('neovim')
-  let g:lsp_signature_help_enabled = 0
-endif
-
-augroup vim-lsp
-  autocmd!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-  autocmd User lsp_float_opened call s:on_lsp_float_opened()
-  autocmd FileType markdown.lsp-hover nmap <silent><buffer>q :pclose<CR>
-  autocmd FileType markdown.lsp-hover exe "%s/](/]\r(/g"
-augroup END
-
-func! s:on_lsp_float_opened() abort
-  call win_execute(popup_list()[0], 'setl sbr=NONE nobri linebreak')
-endfunc
-
-let g:lsp_settings = {
-  \ 'gopls': {
-    \ 'workspace_config': { 'gopls': { 'gofumpt': v:true } },
-  \ },
-\ }
 
 ">> Vimwiki
 let g:vimwiki_auto_chdir  = 1
