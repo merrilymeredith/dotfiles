@@ -69,18 +69,16 @@ map("n", "<leader>tm", ":Tabularize methods<CR>")
 map("n", "<leader>a", ":call vimrc#AutoFmtToggle()<CR>")
 
 -- LSP features
-map("n", "<leader>d", vim.diagnostic.open_float)
-map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_next)
-map("n", "<leader>ld", vim.diagnostic.setloclist)
-
-vim.api.nvim_create_augroup("lsp_attach", {})
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = "lsp_attach",
+  group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
   callback = function(args)
-    local bufnr = args.buf
-    local bufopts = { buffer = bufnr }
+    local bufopts = { buffer = args.buf }
+
+    map("n", "<leader>d", vim.diagnostic.open_float, bufopts)
+    map("n", "[d", vim.diagnostic.goto_prev, bufopts)
+    map("n", "]d", vim.diagnostic.goto_next, bufopts)
+    map("n", "<leader>ld", vim.diagnostic.setqflist, bufopts)
 
     map("n", "gD", vim.lsp.buf.declaration, bufopts)
     map("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -96,7 +94,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
     map("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
     map("n", "gr", vim.lsp.buf.references, bufopts)
-    map("n", "<leader>f", function()
+    map({ "n", "x" }, "<leader>f", function()
       vim.lsp.buf.format({ async = true })
     end, bufopts)
   end,
