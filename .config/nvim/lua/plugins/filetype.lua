@@ -9,6 +9,9 @@ g.perl_compiler_force_warnings = 0
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "RRethy/nvim-treesitter-endwise",
+    },
     event = { "BufReadPost", "BufNewFile" },
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })
@@ -17,6 +20,7 @@ return {
       require("nvim-treesitter.configs").setup({
         highlight = { enable = true },
         indent = { enable = true },
+        endwise = { enable = true },
         ensure_installed = {
           "c",
           "comment",
