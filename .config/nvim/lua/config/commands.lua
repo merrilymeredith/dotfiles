@@ -1,7 +1,5 @@
 local command = vim.api.nvim_create_user_command
-local calias = require("config.util").calias
-local cmd = vim.cmd
-local fn = vim.fn
+local cmd, fn = vim.cmd, vim.fn
 
 command("Hgcd", function()
   local root = fn.systemlist("hg root 2>/dev/null")[1]
@@ -31,16 +29,20 @@ command("Grep", function(ctx)
   cmd.cfirst()
 end, { nargs = "*", complete = "file" })
 
-calias("Q", "q")
-calias("Qa", "qa")
-calias("W", "w")
-calias("grep", "Grep")
+require("config.util").calias({
+  -- replace default:
+  grep = "Grep",
 
-calias("gcd", "Gcd")
-calias("hgcd", "Hgcd")
+  -- typos:
+  Q = "q",
+  Qa = "qa",
+  W = "w",
+  gcd = "Gcd",
+  hgcd = "Hgcd",
 
--- Switch these to default to stay in one window + buffer
-calias("doc", "ViewDoc!")
-calias("help", "ViewDocHelp!")
-calias("man", "ViewDocMan!")
-calias("perldoc", "ViewDocPerl!")
+  -- Make the ! versions default to stay in one window + buffer:
+  doc = "ViewDoc!",
+  help = "ViewDocHelp!",
+  man = "ViewDocMan!",
+  perldoc = "ViewDocPerl!",
+})

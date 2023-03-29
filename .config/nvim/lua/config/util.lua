@@ -1,18 +1,19 @@
 local M = {}
 
-local api = vim.api
-local fn = vim.fn
+local api, fn = vim.api, vim.fn
 
-function M.calias(abbrev, expand)
-  vim.cmd.cnoreabbrev(
-    string.format(
-      [[<expr> %s (getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s"]],
-      abbrev,
-      abbrev,
-      expand,
-      abbrev
+function M.calias(aliases)
+  for abbrev, expand in pairs(aliases) do
+    vim.cmd.cnoreabbrev(
+      string.format(
+        [[<expr> %s (getcmdtype() == ":" && getcmdline() == "%s") ? "%s" : "%s"]],
+        abbrev,
+        abbrev,
+        expand,
+        abbrev
+      )
     )
-  )
+  end
 end
 
 function M.autocmd(group, event, pattern, opts)
