@@ -39,6 +39,7 @@ return {
             elseif vim_item.kind == "Text" then
               vim_item.kind = entry.source.name
             end
+            vim_item.menu = nil
             return vim_item
           end,
         },
