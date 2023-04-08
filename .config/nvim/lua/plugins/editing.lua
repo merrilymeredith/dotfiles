@@ -35,6 +35,7 @@ return {
   {
     "editorconfig/editorconfig-vim",
     event = { "BufReadPost", "BufNewFile" },
+    cond = function() return vim.fn.has("nvim-0.9") == 0 end,
   },
 
   "tpope/vim-unimpaired",
