@@ -1,11 +1,15 @@
-local diag_virtual_min_threshold = "WARN"
-local diag_float_max_threshold = "INFO"
-
 vim.diagnostic.config({
+  float = {
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    focusable = false,
+    header = "",
+    max_width = 72,
+    source = "if_many",
+    style = "minimal",
+  },
   severity_sort = true,
-  underline = { severity = { min = diag_virtual_min_threshold } },
-  virtual_text = { true, severity = { min = diag_virtual_min_threshold } },
-  float = { source = "if_many" },
+  underline = true,
+  virtual_text = false,
 })
 
 -- Some options are more chill in text mode, this unchills them if a LSP is in
@@ -22,21 +26,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("LspAttach", {
   group = "lsp_attach",
   callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    -- enable auto diags in message area for below threshold
     vim.api.nvim_create_autocmd("CursorHold", {
       group = vim.api.nvim_create_augroup("lsp_buf_diags", { clear = true }),
-      buffer = bufnr,
-      callback = function(opts, bufnr, line_nr, client_id)
-        vim.diagnostic.open_float(nil, {
-          focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-          scope = "line",
-          severity = { max = diag_float_max_threshold },
-        })
-      end,
+      buffer = args.buf,
+      callback = vim.diagnostic.open_float,
     })
   end,
 })
