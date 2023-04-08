@@ -27,10 +27,10 @@ return {
           "eex",
           "elixir",
           "heex",
-          "help",
           "lua",
           "surface",
           "vim",
+          "vimdoc",
         },
       })
     end,
