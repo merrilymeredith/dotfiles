@@ -77,8 +77,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "<leader>d", vim.diagnostic.open_float, bufopts)
     map("n", "<leader>ld", vim.diagnostic.setqflist, bufopts)
-    map("n", "[d", function() vim.diagnostic.goto_prev({float = false}) end, bufopts)
-    map("n", "]d", function() vim.diagnostic.goto_next({float = false}) end, bufopts)
+    map("n", "[d", function()
+      vim.diagnostic.goto_prev({ float = false })
+    end, bufopts)
+    map("n", "]d", function()
+      vim.diagnostic.goto_next({ float = false })
+    end, bufopts)
 
     map("n", "gD", vim.lsp.buf.declaration, bufopts)
     map("n", "gd", vim.lsp.buf.definition, bufopts)

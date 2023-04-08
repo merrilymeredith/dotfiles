@@ -10,7 +10,7 @@ local function autocmd(event, opts)
 end
 
 autocmd({ "BufReadPre", "FileReadPre" }, {
-  command = [[ setl noswapfile noundofile nobackup viminfo= ]]
+  command = [[ setl noswapfile noundofile nobackup viminfo= ]],
 })
 
 autocmd("BufReadPost", function(_)

@@ -20,7 +20,7 @@ if is_loc then
 
     -- Hide lsp tagfunc line/col seek references
     fn.matchadd("Conceal", [[|\zs\\V\\%\|c\ze|]])
-    fn.matchadd("Conceal", [[|\\V\\%\d\+\zsl\\%]], 10, -1, {conceal = ","})
+    fn.matchadd("Conceal", [[|\\V\\%\d\+\zsl\\%]], 10, -1, { conceal = "," })
 
     -- highlight match in line. if tagname begins with / the rest is a \v
     -- regex. match must be between vertical bars, so its the 2nd column.

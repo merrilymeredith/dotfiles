@@ -13,13 +13,6 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    -- {
-    --   "themercorp/themer.lua",
-    --   priority = 1000,
-    --   opts = {
-    --     -- colorscheme = "jellybeans",
-    --   },
-    -- },
     {
       "rebelot/kanagawa.nvim",
       priority = 1000,
