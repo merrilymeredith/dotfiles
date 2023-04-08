@@ -1,12 +1,6 @@
 # vim: ft=bash
 # simple profile stuff that is common to both zsh and bash
 
-# most ssh versions support include now, see if i can...
-make -s -C ~/.ssh || {
-  umask 077
-  cat ~/.ssh/config.d/* > ~/.ssh/config
-}
-
 umask 027
 
 HISTIGNORE="ls:cd:cd -:pwd:exit:date:privim"
