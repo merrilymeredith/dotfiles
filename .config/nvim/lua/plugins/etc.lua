@@ -12,7 +12,7 @@ g.vimwiki_list = {
     automatic_nested_syntaxes = 1,
   },
   {
-    path = "~/Documents/SpiderOak Hive/vimwiki",
+    path = "~/SynologyDrive/vimwiki",
     auto_tags = 1,
     auto_toc = 1,
     automatic_nested_syntaxes = 1,
