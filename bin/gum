@@ -4,8 +4,12 @@ set -eu
 age_limit=7
 
 install_it() {
-  go install github.com/charmbracelet/gum@latest
-  asdf reshim || :
+  mkdir -p ~/.local/bin
+  cd ~/.local/bin
+  curl -fsSL 'https://bina.egoist.dev/charmbracelet/gum?dir=.' | sh
+  cd -
+  # go install github.com/charmbracelet/gum@latest
+  # asdf reshim || :
 }
 
 . ~/.lib/sh/stubexec.sh

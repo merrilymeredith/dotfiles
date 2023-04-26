@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+
+install_it() {
+  mkdir -p ~/.local/bin
+  cd ~/.local/bin
+  curl -fsSL 'https://bina.egoist.dev/casey/just?dir=.' | sh
+  cd -
+  # cargo install just
+}
+
+# This can probably be removed next time you look here
+export JUST_CHOOSER="fzf --preview 'just --show {}'"
+
+. ~/.lib/sh/stubexec.sh

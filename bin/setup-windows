@@ -19,7 +19,7 @@ cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
 mkdir -p ${USERPROFILE}/AppData/Local/nvim
 cp -vuRL -t ${USERPROFILE}/AppData/Local/nvim .config/nvim/*
 
-mkdir -p ${USERPROFILE}/.oneovim
+mkdir -p ${USERPROFILE}/.goneovim
 cp -vu .config/goneovim/settings.toml ${USERPROFILE}/.goneovim/
 
 cp -vuRL -t ${USERPROFILE}/ \
