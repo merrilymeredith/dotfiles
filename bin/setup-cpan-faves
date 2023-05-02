@@ -10,16 +10,6 @@ dists=(
 
   experimentals
 
-  Reply
-  Data::Printer
-  Data::Printer::Filter::JSON
-  Data::Printer::Filter::URI
-  Carp::Always
-  B::Keywords
-  Term::ReadLine::Gnu
-  Class::Refresh
-  Pry
-
   Path::Tiny
   Getopt::Long::Descriptive
 )

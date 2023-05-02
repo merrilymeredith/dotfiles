@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+
+install_it() {
+  cpm install -g \
+    Reply \
+    experimentals \
+    B::Keywords \
+    Carp::Always \
+    Class::Refresh \
+    Data::Printer \
+    Data::Printer::Filter::JSON \
+    Data::Printer::Filter::URI \
+    Path::Tiny \
+    Pry \
+    Term::ReadLine::Gnu
+
+  asdf reshim perl || :
+}
+
+. ~/.lib/sh/stubexec.sh
