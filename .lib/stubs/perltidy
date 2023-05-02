@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+install_it() {
+  cpm install -g Perl::Tidy
+  asdf reshim perl || :
+}
+
+. ~/.lib/sh/stubexec.sh

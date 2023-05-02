@@ -5,9 +5,6 @@ dists=(
   App::cpanminus
   App::cpm
 
-  Perl::Tidy
-  Pod::Cpandoc
-
   experimentals
 
   Path::Tiny
