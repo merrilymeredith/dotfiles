@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+install_it() {
+  mkdir -p ~/.local/bin
+  curl -fsSL https://direnv.net/install.sh |
+    bin_path=~/.local/bin bash >/dev/null
+}
+
+. ~/.lib/sh/stubexec.sh
