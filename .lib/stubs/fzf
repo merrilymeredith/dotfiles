@@ -2,10 +2,7 @@
 set -eu
 
 install_it() {
-  mkdir -p ~/.local/bin
-  cd ~/.local/bin
-  curl -fsSL 'https://bina.egoist.dev/junegunn/fzf?dir=.' | sh
-  cd -
+  bina_install "junegunn/fzf"
 }
 
 . ~/.lib/sh/stubexec.sh

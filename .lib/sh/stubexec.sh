@@ -43,4 +43,12 @@ stubexec() {
   stubexec "$@"
 }
 
+bina_install() {
+  local github_repo="$1"
+  mkdir -p ~/.local/bin
+  cd ~/.local/bin
+  curl -fsSL "https://bina.egoist.dev/${github_repo}?dir=." | sh
+  cd -
+}
+
 stubexec "$@"
