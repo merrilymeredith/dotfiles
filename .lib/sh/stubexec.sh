@@ -38,9 +38,21 @@ stubexec() {
   if [ -x "$real_bin" ]; then
     exec "$real_bin" "$@"
   fi
+  try_nix_run "$@"
   install_it
   touch "$(realbin "$0")"  # In case of no updates
   stubexec "$@"
+}
+
+has() {
+  type "$1" >/dev/null 2>&1
+}
+
+try_nix_run() {
+  if [ "${nix_ref:-}" ] && has nix; then
+    # FIXME: this can be GC'd and doesn't allow running alternate commands
+    exec nix run "$nix_ref" -- "$@"
+  fi
 }
 
 bina_install() {

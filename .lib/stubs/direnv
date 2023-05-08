@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+nix_ref='nixpkgs#direnv'
+
 install_it() {
   mkdir -p ~/.local/bin
   curl -fsSL https://direnv.net/install.sh |

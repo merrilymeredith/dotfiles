@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+nix_ref='nixpkgs#fzf'
+
 install_it() {
   bina_install "junegunn/fzf"
 }

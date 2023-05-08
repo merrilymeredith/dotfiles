@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+nix_ref='nixpkgs#stow'
+
 install_it() {
   cpanm -n Stow
   asdf reshim perl || :

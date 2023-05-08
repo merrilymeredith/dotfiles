@@ -2,6 +2,7 @@
 set -eu
 
 age_limit=30
+nix_ref='nixpkgs#tectonic'
 
 install_it() {
   mkdir -p ~/.local/bin
