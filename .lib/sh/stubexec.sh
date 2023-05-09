@@ -38,9 +38,8 @@ stubexec() {
   if [ -x "$real_bin" ]; then
     exec "$real_bin" "$@"
   fi
-  try_nix_run "$@"
-  install_it
-  touch "$(realbin "$0")"  # In case of no updates
+  try_nix "$@"
+  try_install_callback
   stubexec "$@"
 }
 
@@ -48,11 +47,25 @@ has() {
   type "$1" >/dev/null 2>&1
 }
 
-try_nix_run() {
-  if [ "${nix_ref:-}" ] && has nix; then
-    # FIXME: this can be GC'd and doesn't allow running alternate commands
-    exec nix run "$nix_ref" -- "$@"
+try_nix() {
+  [ "${nix_ref:-}" ] && has nix || return 1
+  local installed_slot="$(
+    nix profile list | perl -anE 'BEGIN { $m = shift =~ s/#/#.+/r } say $F[0] if $F[1] =~ $m' "$nix_ref"
+  )"
+  if [ "$installed_slot" ]; then
+    nix profile upgrade "$installed_slot"
+  else
+    nix profile install "$nix_ref"
   fi
+  # skip age check
+  exec "$(realbin "$0")" "$@"
+  # FIXME: so right now, this works but will check for upgrades every run past
+  # the age check
+}
+
+try_install_callback() {
+  install_it
+  touch "$(realbin "$0")"  # In case of no updates
 }
 
 bina_install() {
