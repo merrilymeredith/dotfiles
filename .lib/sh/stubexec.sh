@@ -1,3 +1,29 @@
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/stubexec"
+
+stubexec() {
+  local real_bin="$(realbin "$0")"
+  if [ ! -x "$real_bin" ] || age_check $0; then
+    try_nix "$@" ||
+      try_install_callback
+    touch_checktime "$0"
+    stubexec "$@"
+  fi
+  exec "$real_bin" "$@"
+}
+
+db() {
+  mkdir -p "$cache"
+  kv "$cache/db" "$@"
+}
+
+touch_checktime() {
+  db touch "$(basename $1)"
+}
+
+age_check() {
+  db age_days_gt "$(basename $1)" "${age_limit:-90}"
+}
+
 realpath() {
   local dir="$(dirname -- "$1")"
   local file="$(basename -- "$1")"
@@ -19,12 +45,6 @@ shim_filter() {
   done
 }
 
-age_check() {
-  local subject=''
-  read subject
-  find "$subject" -mtime -${age_limit:-90} -print
-}
-
 realbin() {
   local bn="$(basename $1)"
   which -a "$bn" |
@@ -33,22 +53,13 @@ realbin() {
     head -n 1
 }
 
-stubexec() {
-  local real_bin="$(realbin "$0" | age_check)"
-  if [ -x "$real_bin" ]; then
-    exec "$real_bin" "$@"
-  fi
-  try_nix "$@"
-  try_install_callback
-  stubexec "$@"
-}
-
 has() {
   type "$1" >/dev/null 2>&1
 }
 
 try_nix() {
   [ "${nix_ref:-}" ] && has nix || return 1
+
   local installed_slot="$(
     nix profile list | perl -anE 'BEGIN { $m = shift =~ s/#/#.+/r } say $F[0] if $F[1] =~ $m' "$nix_ref"
   )"
@@ -57,15 +68,10 @@ try_nix() {
   else
     nix profile install "$nix_ref"
   fi
-  # skip age check
-  exec "$(realbin "$0")" "$@"
-  # FIXME: so right now, this works but will check for upgrades every run past
-  # the age check
 }
 
 try_install_callback() {
   install_it
-  touch "$(realbin "$0")"  # In case of no updates
 }
 
 bina_install() {

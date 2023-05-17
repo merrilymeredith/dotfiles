@@ -1,0 +1,25 @@
+#!/usr/bin/env perl
+use v5.32;
+use Fcntl;
+use AnyDBM_File;
+
+my ($filename, $method, @args) = @ARGV;
+
+tie my %h, 'AnyDBM_File', $filename, O_RDWR|O_CREAT, 0660
+  or die "tie $filename: $!";
+
+$, = "\n";
+
+say main->can($method)->(@args);
+
+sub get { $h{+shift} }
+sub set { $h{$_[0]} = $_[1] and exit }
+sub del { delete $h{+shift} }
+
+sub touch { $h{+shift} = time and exit }
+sub age { time - $h{+shift} }
+sub age_days { int(age(shift) / 86_400) }
+sub age_days_gt { exit 0+!(age_days(shift) > shift) }
+
+sub keys { keys %h }
+sub dump { map { "$_ = $h{$_}" } keys %h }
