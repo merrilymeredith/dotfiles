@@ -4,7 +4,7 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-map("n", "<F2>", ":20Lexplore<CR>")
+map("n", "<F2>", ":Neotree reveal<CR>")
 map("n", "<F3>", "n")
 map("n", "<S-F3>", "N")
 map("", "<F4>", ":let v:hlsearch = !v:hlsearch<CR>")

@@ -5,6 +5,8 @@ g.no_viewdoc_abbrev = 1
 g.viewdoc_open = "topleft new"
 g.viewdoc_winwidth_max = 100
 
+g.neo_tree_remove_legacy_commands = 1
+
 return {
   { "powerman/vim-plugin-viewdoc", event = "VeryLazy" },
 
@@ -71,5 +73,39 @@ return {
       })
       require("mini.indentscope").setup(opts)
     end,
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    cmd = "Neotree",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      {
+        "s1n7ax/nvim-window-picker",
+        config = function(_, _)
+          local theme = require("kanagawa.colors").setup().theme
+          require("window-picker").setup({
+            use_winbar = "always",
+            fg_color = theme.ui.fg_reverse,
+            current_win_hl_color = theme.syn.constant,
+            other_win_hl_color = theme.syn.fun,
+          })
+        end,
+      },
+    },
+    opts = {
+      enable_git_status = false,
+      window = { mappings = { ["<F2>"] = "close_window" } },
+      filesystem = { hijack_netrw_behavior = "disabled" },
+      default_component_configs = {
+        icon = {
+          folder_closed = "▷",
+          folder_open = "▽",
+          folder_empty = "¤",
+          default = "•",
+        },
+      },
+    },
   },
 }
