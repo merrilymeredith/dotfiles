@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+nix_ref='nixpkgs#go-task'
+
+install_it() {
+  bina_install "go-task/task"
+}
+
+. ~/.lib/sh/stubexec.sh
