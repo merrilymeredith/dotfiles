@@ -6,7 +6,6 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-omni",
       "hrsh7th/cmp-path",
@@ -34,9 +33,7 @@ return {
         },
         formatting = {
           format = function(entry, vim_item)
-            if entry.source.name == "nvim_lsp_signature_help" then
-              vim_item.kind = ""
-            elseif vim_item.kind == "Text" then
+            if vim_item.kind == "Text" then
               vim_item.kind = entry.source.name
             end
             vim_item.menu = nil
@@ -83,7 +80,6 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
           { name = "nvim_lua" },
           { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
           { name = "path" },
@@ -93,5 +89,18 @@ return {
         }),
       })
     end,
+  },
+
+  {
+    "ray-x/lsp_signature.nvim",
+    events = { "LspAttach" },
+    opts = {
+      toggle_key = "<F12>",
+      toggle_key_flip_floatwin_setting = true,
+      floating_window = false,
+      fix_pos = true,
+      hint_enable = false,
+      handler_opts = { border = "none" },
+    },
   },
 }
