@@ -8,7 +8,7 @@ return {
     dependencies = {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "folke/neodev.nvim", config = true },
-      { "j-hui/fidget.nvim", config = true },
+      { "j-hui/fidget.nvim", config = true, branch = "legacy" },
     },
     config = function(_, _)
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
