@@ -1,8 +1,6 @@
 #!/bin/sh
 set -eu
 
-nix_ref='nixpkgs#just'
-
 install_it() {
   bina_install "casey/just"
   # cargo install just

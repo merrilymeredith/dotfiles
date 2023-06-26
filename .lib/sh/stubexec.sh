@@ -1,27 +1,23 @@
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/stubexec"
 
 stubexec() {
+  mkdir -p "$cache"
+
   local real_bin="$(realbin "$0")"
   if [ ! -x "$real_bin" ] || age_check $0; then
-    try_nix "$@" ||
-      try_install_callback
+    install_it
     touch_checktime "$0"
     stubexec "$@"
   fi
   exec "$real_bin" "$@"
 }
 
-db() {
-  mkdir -p "$cache"
-  kv "$cache/db" "$@"
-}
-
 touch_checktime() {
-  db touch "$(basename $1)"
+  kv "$cache/db" touch "$(basename $1)"
 }
 
 age_check() {
-  db age_days_gt "$(basename $1)" "${age_limit:-90}"
+  kv "$cache/db" age_days_gt "$(basename $1)" "${age_limit:-90}"
 }
 
 realpath() {
@@ -55,23 +51,6 @@ realbin() {
 
 has() {
   type "$1" >/dev/null 2>&1
-}
-
-try_nix() {
-  [ "${nix_ref:-}" ] && has nix || return 1
-
-  local installed_slot="$(
-    nix profile list | perl -anE 'BEGIN { $m = shift =~ s/#/#.+/r } say $F[0] if $F[1] =~ $m' "$nix_ref"
-  )"
-  if [ "$installed_slot" ]; then
-    nix profile upgrade "$installed_slot"
-  else
-    nix profile install "$nix_ref"
-  fi
-}
-
-try_install_callback() {
-  install_it
 }
 
 bina_install() {
