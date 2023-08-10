@@ -1,1 +1,1 @@
-let &l:equalprg = "shfmt -i " . &shiftwidth
+let &l:formatprg = "shfmt -i " . &shiftwidth

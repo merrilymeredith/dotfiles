@@ -1,2 +1,2 @@
 compiler perl
-setl equalprg=perltidy\ -q
+setl formatprg=perltidy\ -q
