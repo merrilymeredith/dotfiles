@@ -42,7 +42,38 @@ return {
 
   "tpope/vim-unimpaired",
   "tomtom/tcomment_vim",
-  "tpope/vim-endwise",
+
+  {
+    "windwp/nvim-autopairs",
+    event = { "InsertEnter" },
+    config = function (_, _)
+      local npairs = require("nvim-autopairs")
+      npairs.setup({})
+      local Rule = require("nvim-autopairs.rule")
+
+      -- Only run autopairs for opening a multiline block
+      npairs.clear_rules()
+      for _,bracket in pairs { { '(', ')' }, { '[', ']' }, { '{', '}' } } do
+        npairs.add_rules {
+          Rule(bracket[1], bracket[2])
+            :end_wise(function() return true end)
+        }
+      end
+    end,
+  },
+
+  -- "tpope/vim-endwise",
+  -- treesitter-endwise only applies if the parser is installed. do i want to
+  -- worry about a fallback?
+  {
+    "RRethy/nvim-treesitter-endwise",
+    config = function (_,_)
+      require("nvim-treesitter.configs").setup({
+        endwise = { enable = true },
+      })
+    end,
+  },
+
   "godlygeek/tabular",
   { "mbbill/undotree", cmd = "UndotreeToggle" },
 
