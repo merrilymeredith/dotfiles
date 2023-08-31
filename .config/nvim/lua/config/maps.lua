@@ -96,7 +96,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, bufopts)
     map("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
     map("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-    map("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+    -- map("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
     map("n", "gr", vim.lsp.buf.references, bufopts)
     map({ "n", "x" }, "<leader>f", function()
       vim.lsp.buf.format({ async = true })
