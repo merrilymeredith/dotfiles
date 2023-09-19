@@ -17,7 +17,7 @@ autocmd(g, { "WinLeave", "FocusLost" }, "*", function()
   if fn.pumvisible() == 0 then
     cmd.stopinsert()
   end
-  cmd.wa()
+  pcall(cmd.wa)
 end)
 
 -- >> auto mkpath on write
