@@ -21,6 +21,7 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         endwise = { enable = true },
+        sync_install = true,
         ensure_installed = {
           "c",
           "comment",
@@ -38,13 +39,12 @@ return {
   { "Shougo/vinarise.vim", cmd = "Vinarise" },
   "asciidoc/vim-asciidoc",
   { "vim-perl/vim-perl", branch = "dev" },
-  "yko/mojo.vim",
+  { "yko/mojo.vim", branch = "master" },
 
   -- Because of Elixir/OTP mismatches, this is more reliable than Mason for
   -- elixir-ls
   {
     "elixir-tools/elixir-tools.nvim",
-    version = "*",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local elixir = require("elixir")

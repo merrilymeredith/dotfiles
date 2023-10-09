@@ -78,7 +78,7 @@ return {
   { "mbbill/undotree", cmd = "UndotreeToggle" },
 
   "tpope/vim-vinegar",
-  "lfv89/vim-interestingwords",
+  { "lfv89/vim-interestingwords", branch = "master" },
   "kshenoy/vim-signature",
   { "majutsushi/tagbar", cmd = "TagbarToggle" },
 

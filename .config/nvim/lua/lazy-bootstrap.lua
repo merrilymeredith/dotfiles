@@ -38,6 +38,9 @@ require("lazy").setup({
     { import = "plugins" },
   },
   change_detection = { enabled = false },
+  defaults = {
+    version = "*",
+  },
   performance = {
     rtp = {
       disabled_plugins = {

@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    branch = "main",
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-buffer",
@@ -91,6 +92,7 @@ return {
 
   {
     "ray-x/lsp_signature.nvim",
+    branch = "master",
     events = { "LspAttach" },
     opts = {
       toggle_key = "<F12>",
