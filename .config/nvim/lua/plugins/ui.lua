@@ -37,16 +37,16 @@ return {
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    lazy = false,
+    version = "^3.0.0",
+    main = "ibl",
     keys = {
-      { "<leader>ig", "<cmd>IndentBlanklineToggle<cr>" },
+      { "<leader>ig", "<cmd>IBLToggle<cr>" },
     },
     opts = {
       enabled = false,
-      char = "│",
-      -- filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
+      indent = { char = "│" },
+      whitespace = { remove_blankline_trail = true },
+      scope = { enabled = false },
     },
   },
 
