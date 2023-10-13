@@ -93,7 +93,7 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     branch = "master",
-    events = { "LspAttach" },
+    event = { "LspAttach" },
     opts = {
       toggle_key = "<F12>",
       toggle_key_flip_floatwin_setting = true,
