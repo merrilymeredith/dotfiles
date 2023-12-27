@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+install_it() {
+  [ -w "$(gem env gemdir)" ] ||
+    opt="--user-install"
+
+  gem install -q ${opt:-} timetrap
+  asdf reshim ruby || :
+}
+
+. ~/.lib/sh/stubexec.sh
