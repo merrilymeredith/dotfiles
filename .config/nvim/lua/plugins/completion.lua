@@ -9,7 +9,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
-      { "L3MON4D3/LuaSnip", opts = { history = true, delete_check_events = "TextChanged" } },
       "quangnguyen30192/cmp-nvim-tags",
     },
     config = function()
@@ -89,7 +88,15 @@ return {
       })
     end,
   },
-
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    build = "make install_jsregexp",
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+    },
+  },
   {
     "ray-x/lsp_signature.nvim",
     branch = "master",
