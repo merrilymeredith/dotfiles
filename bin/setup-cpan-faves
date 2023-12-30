@@ -1,16 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-dists=(
-  App::cpanminus
-  App::cpm
-
-  experimentals
-
-  Path::Tiny
-  Getopt::Long::Descriptive
-)
-
-cpm install -g "${dists[@]}"
+cpm install -g $(cat $(dirname $0)/../.default-perl-modules)
 
 asdf reshim perl || :

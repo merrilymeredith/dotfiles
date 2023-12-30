@@ -1,0 +1,6 @@
+App::cpanminus
+App::cpm
+Getopt::Long::Descriptive
+Path::Tiny
+Perl::Tidy
+experimentals
