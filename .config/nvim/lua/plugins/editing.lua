@@ -56,7 +56,9 @@ return {
       for _,bracket in pairs { { '(', ')' }, { '[', ']' }, { '{', '}' } } do
         npairs.add_rules {
           Rule(bracket[1], bracket[2])
-            :end_wise(function() return true end)
+            :end_wise(function(opts)
+              return opts.next_char == ''
+            end)
         }
       end
     end,
