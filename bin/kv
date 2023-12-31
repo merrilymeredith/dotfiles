@@ -5,6 +5,8 @@ use AnyDBM_File;
 
 my ($filename, $method, @args) = @ARGV;
 
+$filename .= ".$]";
+
 tie my %h, 'AnyDBM_File', $filename, O_RDWR|O_CREAT, 0660
   or die "tie $filename: $!";
 
