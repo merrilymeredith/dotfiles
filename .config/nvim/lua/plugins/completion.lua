@@ -91,7 +91,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
-    build = "make install_jsregexp",
+    build = jit.os:find("Windows") and nil or "make install_jsregexp",
     opts = {
       history = true,
       delete_check_events = "TextChanged",
