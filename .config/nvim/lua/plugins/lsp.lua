@@ -9,7 +9,6 @@ return {
     dependencies = {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "folke/neodev.nvim", config = true },
-      { "j-hui/fidget.nvim", config = true },
     },
     config = function(_, _)
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -33,6 +32,11 @@ return {
       })
     end,
   },
+
+  { "j-hui/fidget.nvim", event = "LspAttach", config = true },
+
+  -- Support pull diagnostics until 0.10
+  { "catlee/pull_diags.nvim", event = "LspAttach", config = true },
 
   {
     "aznhe21/actions-preview.nvim",
