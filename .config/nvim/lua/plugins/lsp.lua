@@ -59,6 +59,7 @@ return {
     lazy = true,
     opts = {
       toggle_key = "<F12>",
+      select_signature_key = "<M-n>",
       toggle_key_flip_floatwin_setting = true,
       doc_lines = 0,
       floating_window = true,

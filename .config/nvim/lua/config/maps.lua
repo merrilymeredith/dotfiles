@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "gd", vim.lsp.buf.definition, bufopts)
     map("n", "K", vim.lsp.buf.hover, bufopts)
     map("n", "gi", vim.lsp.buf.implementation, bufopts)
-    map({ "n", "i" }, "<F12>", vim.lsp.buf.signature_help, bufopts)
+    map("n", "<F12>", vim.lsp.buf.signature_help, bufopts)
     map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
     map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
     map("n", "<leader>wl", function()
