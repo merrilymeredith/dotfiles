@@ -9,6 +9,7 @@ return {
     dependencies = {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "folke/neodev.nvim", config = true },
+      "ray-x/lsp_signature.nvim",
     },
     config = function(_, _)
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -50,5 +51,19 @@ return {
       require("actions-preview").setup(opts)
       vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions, { silent = true })
     end,
+  },
+
+  {
+    "ray-x/lsp_signature.nvim",
+    branch = "master",
+    lazy = true,
+    opts = {
+      toggle_key = "<F12>",
+      toggle_key_flip_floatwin_setting = true,
+      doc_lines = 0,
+      floating_window = true,
+      fix_pos = true,
+      hint_enable = false,
+    },
   },
 }

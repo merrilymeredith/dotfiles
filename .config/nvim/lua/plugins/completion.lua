@@ -97,17 +97,4 @@ return {
       delete_check_events = "TextChanged",
     },
   },
-  {
-    "ray-x/lsp_signature.nvim",
-    branch = "master",
-    event = { "LspAttach" },
-    opts = {
-      toggle_key = "<F12>",
-      toggle_key_flip_floatwin_setting = true,
-      floating_window = false,
-      fix_pos = true,
-      hint_enable = false,
-      handler_opts = { border = "none" },
-    },
-  },
 }
