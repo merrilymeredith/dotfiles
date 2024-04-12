@@ -12,11 +12,11 @@ return {
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
     },
-    event = { "BufReadPost", "BufNewFile" },
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
+    event = "VeryLazy",
+    build = ":TSUpdate",
+    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
         highlight = { enable = true },
         indent = { enable = true },
@@ -36,6 +36,7 @@ return {
       })
     end,
   },
+
   { "Shougo/vinarise.vim", cmd = "Vinarise" },
   "asciidoc/vim-asciidoc",
   { "vim-perl/vim-perl", branch = "dev" },
