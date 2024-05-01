@@ -9,7 +9,6 @@ return {
     dependencies = {
       { "williamboman/mason-lspconfig.nvim", config = true },
       { "folke/neodev.nvim", config = true },
-      "ray-x/lsp_signature.nvim",
     },
     config = function(_, _)
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -52,9 +51,9 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     branch = "master",
-    lazy = true,
+    event = "VeryLazy",
     opts = {
-      toggle_key = "<F12>",
+      toggle_key = "<C-S>",
       select_signature_key = "<M-n>",
       toggle_key_flip_floatwin_setting = true,
       doc_lines = 0,
