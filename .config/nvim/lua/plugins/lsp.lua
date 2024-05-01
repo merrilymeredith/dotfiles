@@ -41,16 +41,12 @@ return {
 
   {
     "aznhe21/actions-preview.nvim",
-    keys = "<leader>ca",
+    event = "LspAttach",
     opts = {
       nui = {
         keymap = { close = { "<ESC>", "<C-c>", "q" } },
       },
     },
-    config = function(_, opts)
-      require("actions-preview").setup(opts)
-      vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions, { silent = true })
-    end,
   },
 
   {
