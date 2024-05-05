@@ -45,4 +45,8 @@ function M.safe_filter_file(cmd)
   fn.delete(errorfile)
 end
 
+function M.last_modified_days(fname)
+  return (os.time() - vim.fn.getftime(fname)) / 86400
+end
+
 return M

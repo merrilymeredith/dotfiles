@@ -1,7 +1,8 @@
 local command = vim.api.nvim_create_user_command
 local cmd, fn = vim.cmd, vim.fn
+local util = require("config.util")
 
-require("config.util").calias({
+util.calias({
   -- replace default:
   grep = "Grep",
 
@@ -55,7 +56,7 @@ command("PruneSession", function()
     if name then
       local type = vim.fn.getftype(name)
       if type == "" or type == "dir"
-        or (os.time() - vim.fn.getftime(name)) > 2592000
+        or util.last_modified_days(name) > 30
       then
         vim.print("pruned: " .. name)
         vim.cmd.bwipeout(bufnr)
