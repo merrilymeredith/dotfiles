@@ -1,7 +1,6 @@
 command! SyntaxCompleteOn setl omnifunc=syntaxcomplete#Complete
 
 command! Mksession execute "mksession! " . v:this_session
-command! PruneSession call vimrc#PruneSession()
 
 " Preview markdown mail -- I edit with headers so I box them in a code block.
 command! MailPreview     enew | set bt=nofile | 0r # | exe 'norm! 0O```<Esc>}O```' | silent exe '%!mutt-md2html | mutt-html2txt' | 0
