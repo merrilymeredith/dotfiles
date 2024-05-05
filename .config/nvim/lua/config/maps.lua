@@ -66,7 +66,16 @@ map("n", "<leader>te", ":Tabularize first_eq<CR>")
 map("n", "<leader>tc", ":Tabularize first_colon<CR>")
 map("n", "<leader>tm", ":Tabularize methods<CR>")
 
-map("n", "<leader>a", ":call vimrc#AutoFmtToggle()<CR>")
+map("n", "<leader>a", function()
+  local fo = vim.bo.formatoptions
+  if fo:find("a") then
+    vim.bo.formatoptions = fo:gsub("a", "")
+    vim.print("-a")
+  else
+    vim.bo.formatoptions = fo .. "a"
+    vim.print("+a")
+  end
+end)
 
 -- LSP features
 
