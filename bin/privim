@@ -1,2 +1,2 @@
 #!/bin/sh
-exec nvim -c 'set noswapfile noundofile nobackup viminfo=' $*
+exec nvim -c 'set noswapfile noundofile nobackup shada=' $*

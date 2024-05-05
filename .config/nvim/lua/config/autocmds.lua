@@ -50,3 +50,11 @@ end)
 autocmd(g, "BufReadPost", "*", function()
   fn.matchadd("Error", [[\m^\([<>|]\)\{7} \@=\|^=\{7}$]])
 end)
+
+-- >> Prune old backup and undo files at startup
+autocmd(g, "User", "VeryLazy", function()
+  local prune_files = require("config.util").prune_files
+  if vim.go.backup then prune_files(vim.go.backupdir, 90) end
+  if vim.go.undofile then prune_files(vim.go.undodir, 90) end
+end)
+

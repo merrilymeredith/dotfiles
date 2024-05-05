@@ -19,26 +19,3 @@ func! vimrc#SafeFilterFile(cmd)
     call delete(errors)
   endtry
 endfunc
-
-if has('ruby')
-  func! s:PruneFiles(path, days) abort
-    ruby <<END_RUBY
-      require 'pathname'
-
-      (path, days) = VIM.evaluate('[a:path, a:days]')
-      sunset       = Time.now - (days * 86400)
-
-      Pathname(path).realpath.each_child do |file|
-        file.delete if file.mtime < sunset
-      end
-END_RUBY
-  endfunc
-else
-  func! s:PruneFiles(path, days) abort
-  endfunc
-endif
-
-func! vimrc#PruneFiles(path, days) abort
-  call s:PruneFiles(a:path, a:days)
-endfunc
-

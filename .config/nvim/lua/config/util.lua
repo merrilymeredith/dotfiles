@@ -49,4 +49,18 @@ function M.last_modified_days(fname)
   return (os.time() - vim.fn.getftime(fname)) / 86400
 end
 
+function M.prune_files(path, days)
+  local sunset = os.time() - (days * 86400)
+  path = vim.fs.normalize(path)
+
+  if fn.getftype(path) == "" then return end
+
+  for fname, type in vim.fs.dir(path) do
+    local fpath = vim.fs.normalize(path .. "/" .. fname)
+    if type == "file" and fn.getftime(fpath) < sunset then
+      os.remove(fpath)
+    end
+  end
+end
+
 return M

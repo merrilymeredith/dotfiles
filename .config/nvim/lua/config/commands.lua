@@ -54,16 +54,16 @@ command("PruneSession", function()
   for _, bufnr in ipairs(bufs) do
     local name = vim.api.nvim_buf_get_name(bufnr)
     if name then
-      local type = vim.fn.getftype(name)
+      local type = fn.getftype(name)
       if type == "" or type == "dir"
         or util.last_modified_days(name) > 30
       then
         vim.print("pruned: " .. name)
-        vim.cmd.bwipeout(bufnr)
+        cmd.bwipeout(bufnr)
       end
     end
   end
   if not vim.api.nvim_buf_get_name(0) then
-    vim.cmd.bprev()
+    cmd.bprev()
   end
 end, {})
