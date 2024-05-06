@@ -16,13 +16,17 @@ local function prune_files(path, days)
   end
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*",
-  group = vim.api.nvim_create_augroup("AutoPrune", { clear = true }),
-  callback = function()
-    if vim.v.vim_did_enter then return end
+local function auto_prune()
     if vim.go.swapfile then prune_files(vim.go.directory, 90) end
     if vim.go.backup then prune_files(vim.go.backupdir, 90) end
     if vim.go.undofile then prune_files(vim.go.undodir, 90) end
-  end
-})
+end
+
+if vim.v.vim_did_enter then
+  auto_prune()
+else
+  vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("AutoPrune", { clear = true }),
+    callback = auto_prune,  })
+end
