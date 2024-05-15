@@ -7,6 +7,7 @@ local o = vim.opt
 o.expandtab = true
 o.shiftround = true
 o.shiftwidth = 2
+o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- Display
 o.breakindent = true

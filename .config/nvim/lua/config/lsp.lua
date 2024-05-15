@@ -33,15 +33,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
   end,
 })
-
--- Format on write, but only certain languages
-local autoformat_filetypes = { elixir = true, go = true }
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("lsp_autoformat", { clear = true }),
-  callback = function()
-    if autoformat_filetypes[vim.bo.filetype] then
-      vim.lsp.buf.format({ timeout_ms = 100 })
-    end
-  end,
-})

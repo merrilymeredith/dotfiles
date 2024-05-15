@@ -1,5 +1,4 @@
 runtime ftplugin/text.vim
-setl equalprg=pandoc\ -f\ markdown\ -t\ markdown
 
 if !exists('b:markdown_autohtml')
   let b:markdown_autohtml = 0

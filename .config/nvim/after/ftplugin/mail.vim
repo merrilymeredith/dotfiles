@@ -3,8 +3,6 @@ setl formatoptions=jaw12tcql
 setl spell
 setl noundofile noswapfile nobackup
 
-setl formatprg=pandoc\ -f\ markdown\ -t\ markdown
-
 " http://cedricduval.free.fr/download/mail.vim
 function! Mail_Erase_Sig()
   " search for the signature pattern (takes into account signature delimiters

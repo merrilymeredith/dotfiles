@@ -8,5 +8,5 @@
 " augroup END
 
 " cpanm https://github.com/darold/pgFormatter.git
-let &l:formatprg = "pg_format -"
+"let &l:formatprg = "pg_format -"
 let &l:omnifunc = "syntaxcomplete#Complete"
