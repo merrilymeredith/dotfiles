@@ -7,7 +7,7 @@ local o = vim.opt
 o.expandtab = true
 o.shiftround = true
 o.shiftwidth = 2
-o.formatexpr = "v:lua.require'conform'.formatexpr()"
+o.formatexpr = "v:lua.require'conform'.formatexpr({'timeout_ms':4000})"
 
 -- Display
 o.breakindent = true
