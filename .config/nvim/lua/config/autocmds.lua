@@ -21,13 +21,11 @@ autocmd(g, { "WinLeave", "FocusLost" }, "*", function()
 end)
 
 -- >> auto mkpath on write
-autocmd(g, "BufWritePre", "*", {
-  callback = function(ctx)
-    if vim.bo[ctx.buf].buftype == "" and not string.match(ctx.file, "^[%w]+:") then
-      fn.mkdir(fn.fnamemodify(ctx.file, ":p:h"), "p")
-    end
-  end,
-})
+autocmd(g, "BufWritePre", "*", function(ctx)
+  if vim.bo[ctx.buf].buftype == "" and not string.match(ctx.file, "^[%w]+:") then
+    fn.mkdir(fn.fnamemodify(ctx.file, ":p:h"), "p")
+  end
+end)
 
 -- >> auto session ?
 

@@ -27,6 +27,7 @@ return {
           "comment",
           "eex",
           "elixir",
+          "go",
           "heex",
           "lua",
           "surface",
@@ -46,7 +47,7 @@ return {
   -- elixir-ls
   {
     "elixir-tools/elixir-tools.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    ft = { "elixir", "eelixir", "heex" },
     config = function()
       local elixir = require("elixir")
       local elixirls = require("elixir.elixirls")
