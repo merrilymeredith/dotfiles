@@ -2,6 +2,8 @@ local M = {}
 
 local api, fn = vim.api, vim.fn
 
+--- Bulk-define aliases.
+---@param aliases table<string, string>
 function M.calias(aliases)
   for abbrev, expand in pairs(aliases) do
     vim.cmd.cnoreabbrev(
@@ -16,14 +18,16 @@ function M.calias(aliases)
   end
 end
 
+--- Shortcut for autocmd creation.
+--- @param group string | number
+--- @param event string | string[]
+--- @param pattern string | string[]
+--- @param opts table | string | fun(ctx) `nvim_create_autocmd` options OR a function for the `callback` option OR a string for the command option
 function M.autocmd(group, event, pattern, opts)
   if type(opts) == "function" then
-    local func = opts
-    opts = {
-      callback = function(_)
-        func()
-      end,
-    }
+    opts = { callback = opts }
+  elseif type(opts) == "string" then
+    opts = { command = opts }
   end
 
   api.nvim_create_autocmd(

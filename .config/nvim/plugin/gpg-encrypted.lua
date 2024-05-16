@@ -9,9 +9,7 @@ local function autocmd(event, opts)
   util.autocmd(g, event, filepattern, opts)
 end
 
-autocmd({ "BufReadPre", "FileReadPre" }, {
-  command = [[ setl noswapfile noundofile nobackup shada= ]],
-})
+autocmd({ "BufReadPre", "FileReadPre" }, [[ setl noswapfile noundofile nobackup shada= ]])
 
 autocmd("BufReadPost", function(_)
   safe_filter_file("gpg -d")
@@ -21,4 +19,4 @@ autocmd("BufWritePre", function(_)
   safe_filter_file("gpg -se -a --default-recipient-self")
 end)
 
-autocmd("BufWritePost", { command = [[ silent undo ]] })
+autocmd("BufWritePost", [[ silent undo ]])

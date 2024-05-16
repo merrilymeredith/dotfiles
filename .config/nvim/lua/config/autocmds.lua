@@ -6,14 +6,14 @@ local g = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 -- >> neovim specific
 -- Always start terminals in insert/terminal mode
-autocmd(g, "TermOpen", "*", cmd.startinsert)
+autocmd(g, "TermOpen", "*", function(_) cmd.startinsert() end)
 
 -- neovim's autoread doesn't do this by default.
-autocmd(g, "FocusGained", "*", cmd.checktime)
+autocmd(g, "FocusGained", "*", function(_) cmd.checktime() end)
 
 -- >> autowriteall improvment
 -- Stopinsert on leave, or autowriteall doesn't work.
-autocmd(g, { "WinLeave", "FocusLost" }, "*", function()
+autocmd(g, { "WinLeave", "FocusLost" }, "*", function(_)
   if fn.pumvisible() == 0 then
     cmd.stopinsert()
   end
@@ -33,7 +33,7 @@ end)
 local nojump = vim.regex([[mail\|commit\|rebase]])
 assert(nojump, "Couldn't compile nojump regexp?")
 
-autocmd(g, "BufReadPost", "*", function()
+autocmd(g, "BufReadPost", "*", function(_)
   if nojump:match_str(vim.bo.filetype or "") then
     return
   end
@@ -45,6 +45,6 @@ autocmd(g, "BufReadPost", "*", function()
 end)
 
 -- >> simple highlight conflict markers
-autocmd(g, "BufReadPost", "*", function()
+autocmd(g, "BufReadPost", "*", function(_)
   fn.matchadd("Error", [[\m^\([<>|]\)\{7} \@=\|^=\{7}$]])
 end)

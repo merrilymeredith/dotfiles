@@ -17,7 +17,7 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("LspAttach", {
   once = true,
   group = "lsp_attach",
-  callback = function()
+  callback = function(_)
     vim.opt.number = true
     vim.opt.updatetime = 250
   end,
@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.api.nvim_create_autocmd("CursorHold", {
       group = vim.api.nvim_create_augroup("lsp_buf_diags", { clear = true }),
       buffer = args.buf,
-      callback = vim.diagnostic.open_float,
+      callback = function(_) vim.diagnostic.open_float() end,
     })
   end,
 })
