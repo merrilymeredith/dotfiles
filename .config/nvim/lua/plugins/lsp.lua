@@ -36,7 +36,7 @@ return {
   { "j-hui/fidget.nvim", event = "LspAttach", config = true },
 
   -- Support pull diagnostics until 0.10
-  { "catlee/pull_diags.nvim", event = "LspAttach", config = true },
+  { "catlee/pull_diags.nvim", event = "LspAttach", config = true, cond = (vim.fn.has("nvim-0.10") == 0) },
 
   {
     "aznhe21/actions-preview.nvim",
