@@ -63,19 +63,11 @@ return {
             end
           end, { "i", "s" }),
           ["<C-g>"] = cmp.mapping.abort(),
-          ["<Right>"] = cmp.mapping.confirm({ select = true }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<Space>"] = function(fallback)
-            local e = cmp.get_active_entry()
-            if cmp.visible() and e then
-              cmp.confirm({ select = false }, function()
-                if e:get_kind() ~= cmp.lsp.CompletionItemKind.Snippet then
-                  vim.api.nvim_feedkeys(" ", "n", false)
-                end
-              end)
-            end
+          ["<Space>"] = cmp.mapping(function(fallback)
+            cmp.confirm({ select = false })
             fallback()
-          end,
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
