@@ -9,6 +9,7 @@ g.perl_compiler_force_warnings = 0
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    commit = "8012b55eee65eba1d1ee4df0a186d30e72dcbe65",
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
     },
