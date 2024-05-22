@@ -6,9 +6,8 @@
 -- one version in the same nvim session.
 
 local function find_elixir_lsp_dap_cmd(bufnr)
-  -- deprecated 0.10.0: s/get_active_clients/get_clients/; s/idname/name/
-  local elixir_lsp = vim.lsp.get_active_clients({
-    idname = "ElixirLS",
+  local elixir_lsp = vim.lsp.get_clients({
+    name = "ElixirLS",
     bufnr = bufnr or vim.api.nvim_get_current_buf(),
   })[1]
 
