@@ -13,7 +13,6 @@ return {
     },
     config = function()
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
 
       local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -27,7 +26,7 @@ return {
         },
         snippet = {
           expand = function(args)
-            luasnip.lsp_expand(args.body)
+            vim.snippet.expand(args.body)
           end,
         },
         formatting = {
@@ -45,8 +44,8 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
+            elseif vim.snippet.active({direction = 1}) then
+              vim.snippet.jump(1)
             elseif has_words_before() then
               cmp.complete()
             else
@@ -56,8 +55,8 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
+            elseif vim.snippet.active({direction = -1}) then
+              vim.snippet.jump(-1)
             else
               fallback()
             end
@@ -79,14 +78,5 @@ return {
         }),
       })
     end,
-  },
-  {
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    build = (jit.os ~= "Windows") and "make install_jsregexp",
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
   },
 }
