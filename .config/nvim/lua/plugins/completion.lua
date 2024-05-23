@@ -42,10 +42,10 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif vim.snippet.active({direction = 1}) then
+            if vim.snippet.active({direction = 1}) then
               vim.snippet.jump(1)
+            elseif cmp.visible() then
+              cmp.select_next_item()
             elseif has_words_before() then
               cmp.complete()
             else
@@ -53,10 +53,10 @@ return {
             end
           end, { "i", "s" }),
           ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif vim.snippet.active({direction = -1}) then
+            if vim.snippet.active({direction = -1}) then
               vim.snippet.jump(-1)
+            elseif cmp.visible() then
+              cmp.select_prev_item()
             else
               fallback()
             end
