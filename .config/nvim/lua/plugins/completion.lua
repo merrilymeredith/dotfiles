@@ -7,7 +7,6 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-calc",
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-tags",
     },
@@ -29,6 +28,7 @@ return {
             vim.snippet.expand(args.body)
           end,
         },
+        ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = function(entry, vim_item)
             if vim_item.kind == "Text" then
@@ -69,10 +69,13 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          { name = "lazydev" },
+        }, {
           { name = "nvim_lsp" },
-          { name = "nvim_lua" },
+        }, {
           { name = "buffer", option = { keyword_pattern = [[\k\+]] } },
           { name = "path" },
+        }, {
           { name = "tags" },
           { name = "calc" },
         }),

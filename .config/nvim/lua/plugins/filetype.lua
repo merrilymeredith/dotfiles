@@ -39,6 +39,15 @@ return {
     end,
   },
 
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    dependencies = {
+      "Bilal2453/luvit-meta",
+    },
+    opts = { library = { "luvit-meta/library" } },
+  },
+
   { "Shougo/vinarise.vim", cmd = "Vinarise" },
   "asciidoc/vim-asciidoc",
   { "vim-perl/vim-perl", branch = "dev" },
