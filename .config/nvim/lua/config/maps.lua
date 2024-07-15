@@ -1,13 +1,14 @@
-local function map(mode, lhs, rhs, opts)
+local function map(mode, lhs, rhs, desc, opts)
   opts = opts or {}
   opts.silent = opts.silent ~= false
+  opts.desc = desc
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 map("n", "<F2>", ":Neotree reveal<CR>")
 map("n", "<F3>", "n")
 map("n", "<S-F3>", "N")
-map("", "<F4>", ":let v:hlsearch = !v:hlsearch<CR>")
+map("", "<F4>", ":let v:hlsearch = !v:hlsearch<CR>", "Toggle Search Highlight")
 map("n", "<F5>", ":UndotreeToggle<CR>")
 map("n", "<F8>", ":TagbarToggle<CR>")
 
@@ -18,7 +19,7 @@ map("i", "<F4>", "<C-O><F4>")
 map("c", "<F3>", "<CR>")
 
 -- change to file's directory
-map("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>")
+map("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", "Chdir to buffer dir")
 
 -- window switching
 map("n", "<C-h>", "<C-w>h")
@@ -34,37 +35,37 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<cr>")
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>")
 
 -- buffer switching
-map("n", "gb", "<C-^>")
-map("n", "gB", ":ls<CR>:b ", { silent = false })
+map("n", "gb", "<C-^>", "Jump to # buffer")
+map("n", "gB", ":ls<CR>:b ", "List and switch buffers", { silent = false })
 
 -- Select last paste, in the same mode it was pasted in
-map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
+map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", "", { expr = true })
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", "", { expr = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", "", { expr = true })
 
 -- Use ltag over tselect
-map("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>")
+map("n", "g<C-]>", ":exe 'ltag ' . expand('<cword>') | lopen<CR>", "List and next Tag")
 
 -- clear all interestingwords with \\k since \K is ri.vim
 map("n", "<leader><leader>k", ":call UncolorAllWords()<CR>")
 
 -- use Grep for a recursive *
-map("n", "g*", ":Grep<CR>")
+map("n", "g*", ":Grep<CR>", "Recursive keyword search")
 
 -- K: doc, gKK: doc current filename
-map("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>")
+map("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>", "ViewDoc current buffer")
 
 -- Tabular shortcuts
-map("n", "<leader>ta", ":Tabularize first_arrow<CR>")
-map("n", "<leader>te", ":Tabularize first_eq<CR>")
-map("n", "<leader>tc", ":Tabularize first_colon<CR>")
-map("n", "<leader>tm", ":Tabularize methods<CR>")
+map("n", "<leader>ta", ":Tabularize first_arrow<CR>", "Align =>")
+map("n", "<leader>te", ":Tabularize first_eq<CR>", "Align =")
+map("n", "<leader>tc", ":Tabularize first_colon<CR>", "Align :")
+map("n", "<leader>tm", ":Tabularize methods<CR>", "Align -> or .")
 
 map("n", "<leader>a", function()
   local fo = vim.bo.formatoptions
@@ -75,44 +76,48 @@ map("n", "<leader>a", function()
     vim.bo.formatoptions = fo .. "a"
     vim.print("+a")
   end
-end)
+end, "Toggle autowrap")
 
 -- LSP features
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
   callback = function(args)
-    local bufopts = { buffer = args.buf }
+    local function bmap(mode, lhs, rhs, desc, opts)
+      opts = opts or {}
+      opts.buffer = args.buf
+      map(mode, lhs, rhs, desc, opts)
+    end
 
-    map("n", "<leader>d", vim.diagnostic.open_float, bufopts)
-    map("n", "<leader>ld", vim.diagnostic.setqflist, bufopts)
-    map("n", "[d", function()
+    bmap("n", "<leader>d", vim.diagnostic.open_float, "Toggle Diag Float")
+    bmap("n", "<leader>ld", vim.diagnostic.setqflist, "List Diagnostics")
+    bmap("n", "[d", function()
       vim.diagnostic.goto_prev({ float = false })
-    end, bufopts)
-    map("n", "]d", function()
+    end, "Next Diagnostic")
+    bmap("n", "]d", function()
       vim.diagnostic.goto_next({ float = false })
-    end, bufopts)
+    end, "Previous Diagnostic")
 
-    map("n", "gD", vim.lsp.buf.declaration, bufopts)
-    map("n", "gd", vim.lsp.buf.definition, bufopts)
-    map("n", "K", vim.lsp.buf.hover, bufopts)
-    map("n", "gi", vim.lsp.buf.implementation, bufopts)
-    map("i", "<C-S>", vim.lsp.buf.signature_help, bufopts)
-    map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-    map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-    map("n", "<leader>wl", function()
+    bmap("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
+    bmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
+    bmap("n", "K", vim.lsp.buf.hover, "LSP Hover")
+    bmap("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
+    bmap("i", "<C-S>", vim.lsp.buf.signature_help, "Toggle Signature Help")
+    bmap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add Workspace Folder")
+    bmap("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove Workspace Folder")
+    bmap("n", "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    map("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
-    map("n", "crn", vim.lsp.buf.rename, bufopts)
-    map("n", "gr", vim.lsp.buf.references, bufopts)
-    map({ "n", "x" }, "<leader>f", function()
+    end, "List Workspace Folders")
+    bmap("n", "<leader>D", vim.lsp.buf.type_definition, "Go to Type Definition")
+    bmap("n", "crn", vim.lsp.buf.rename, "LSP Rename")
+    bmap("n", "<leader>lr", vim.lsp.buf.references, "List References")
+    bmap({ "n", "x" }, "<leader>f", function()
       vim.lsp.buf.format({ async = true })
-    end, bufopts)
+    end, "LSP Format")
 
     local code_actions = require("actions-preview").code_actions
-    map("n", "crr", code_actions, bufopts)
-    map("x", "<C-R><C-R>", code_actions, bufopts)
-    map("x", "<C-R>", code_actions, bufopts)
+    bmap("n", "crr", code_actions, "Code Actions")
+    bmap("x", "<C-R><C-R>", code_actions, "Code Actions")
+    bmap("x", "<C-R>", code_actions, "Code Actions")
   end,
 })

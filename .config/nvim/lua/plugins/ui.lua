@@ -39,7 +39,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     keys = {
-      { "<leader>ig", "<cmd>IBLToggle<cr>" },
+      { "<leader>ig", "<cmd>IBLToggle<cr>", desc = "Toggle Indent Guides" },
     },
     opts = {
       enabled = false,
@@ -71,6 +71,7 @@ return {
       require("mini.indentscope").setup(opts)
     end,
   },
+
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -103,6 +104,16 @@ return {
           default = "•",
         },
       },
+    },
+  },
+
+  {
+    "folke/which-key.nvim",
+    opts = {
+      preset = "helix",
+      delay = 500,
+      filter = function(m) return m.desc ~= "" end,
+      icons = { rules = false },
     },
   },
 }
