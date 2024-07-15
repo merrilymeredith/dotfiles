@@ -114,6 +114,7 @@ return {
       delay = 500,
       filter = function(m) return m.desc ~= "" end,
       icons = { rules = false },
+      replace = { key = {} },
     },
   },
 }
