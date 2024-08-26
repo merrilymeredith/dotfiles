@@ -19,7 +19,21 @@ return {
         gopls = function()
           require("lspconfig").gopls.setup({
             capabilities = capabilities,
-            settings = { gopls = { gofumpt = true } },
+            settings = {
+              gopls = {
+                analyses = {
+                  unusedvariable = true,
+                  useany = true,
+                },
+                hints = {
+                  constantValues = true,
+                  rangeVariableTypes = true,
+                },
+                vulncheck = "Imports",
+                gofumpt = true,
+                staticcheck = true,
+              },
+            },
           })
         end,
         solargraph = function()

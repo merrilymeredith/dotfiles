@@ -115,6 +115,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.format({ async = true })
     end, "LSP Format")
 
+    bmap("n", "<leader>ih", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, "Toggle Inlay Hints")
+
     local code_actions = require("actions-preview").code_actions
     bmap("n", "crr", code_actions, "Code Actions")
     bmap("x", "<C-R><C-R>", code_actions, "Code Actions")
