@@ -20,12 +20,14 @@ return {
           require("lspconfig").gopls.setup({
             capabilities = capabilities,
             settings = {
+              -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
               gopls = {
                 analyses = {
                   unusedvariable = true,
                   useany = true,
                 },
                 hints = {
+                  assignVariableTypes = true,
                   constantValues = true,
                   rangeVariableTypes = true,
                 },
