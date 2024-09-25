@@ -10,15 +10,20 @@ return {
       { "williamboman/mason-lspconfig.nvim", config = true },
     },
     config = function(_, _)
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local lspconfig = require("lspconfig")
+
+      lspconfig.util.default_config.capabilities = vim.tbl_deep_extend("force",
+        lspconfig.util.default_config.capabilities,
+        require("cmp_nvim_lsp").default_capabilities()
+      )
+
+      -- allow view / -R to also stop autostart. no other global flag for this.
+      lspconfig.util.default_config.autostart = not vim.list_contains(vim.v.argv, "-R")
 
       require("mason-lspconfig").setup_handlers({
-        function(server)
-          require("lspconfig")[server].setup({ capabilities = capabilities })
-        end,
+        function(server) lspconfig[server].setup({}) end,
         gopls = function()
-          require("lspconfig").gopls.setup({
-            capabilities = capabilities,
+          lspconfig.gopls.setup({
             settings = {
               -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
               gopls = {
@@ -39,8 +44,7 @@ return {
           })
         end,
         solargraph = function()
-          require("lspconfig").solargraph.setup({
-            capabilities = capabilities,
+          lspconfig.solargraph.setup({
             init_options = { formatting = false },
           })
         end,
