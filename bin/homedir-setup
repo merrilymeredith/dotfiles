@@ -21,7 +21,7 @@ source .asdf/asdf.sh
 
 asdf plugin update --all
 
-if [[ "$MACHTYPE" ==  "i686" ]]; then
+if [[ "$MACHTYPE" !=  "i686" ]]; then
   curl -sS 'https://mise.run/' | sh
 fi
 
