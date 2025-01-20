@@ -21,6 +21,10 @@ source .asdf/asdf.sh
 
 asdf plugin update --all
 
+if ! [[ "$(uname -m)" =~ "i.86" ]]; then
+  curl -sS 'https://mise.run/' | sh
+fi
+
 bin/setup-man || :
 
 # Get rid of older stuff

@@ -15,6 +15,10 @@ if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if [ -x ~/.local/bin/mise ]; then
+  eval "$(mise activate ${ZSH_NAME:-bash})"
+fi
+
 if [ -d ~/.asdf ]; then
   source ~/.asdf/asdf.sh
 fi
