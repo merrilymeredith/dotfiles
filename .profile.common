@@ -19,10 +19,6 @@ if [ -x ~/.local/bin/mise ]; then
   eval "$(mise activate ${ZSH_NAME:-bash})"
 fi
 
-if [ -d ~/.asdf ]; then
-  source ~/.asdf/asdf.sh
-fi
-
 if [ -x "$(command -v nvim)" ]; then
   export EDITOR=nvim
   alias vim=nvim
@@ -36,9 +32,6 @@ export LESS='Ri'
 export GPG_TTY="$(tty)"
 
 export PERL_CPANM_OPT='-nq --prompt'
-
-export ASDF_CONCURRENCY='2'
-export RUBY_EXTRA_CONFIGURE_OPTIONS="--enable-shared --enable-install-doc"
 
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
