@@ -9,28 +9,26 @@ source .lib/sh/util.sh
 git --version >/dev/null ||
   die "Please install git!"
 
+
 clone_or_pull 'https://github.com/tarjoilija/zgen.git' .zgen
 
 zsh -i -c 'zgen update' || :
+zsh -i -c 'true'
 
-clone_or_pull 'https://github.com/asdf-vm/asdf' .asdf
-source .asdf/asdf.sh
 
-[ -d .asdf/plugins/perl ] ||
-    asdf plugin add perl
-
-asdf plugin update --all
-
-if [[ "$MACHTYPE" !=  "i686" ]]; then
+if [ -x .local/bin/mise ]; then
+  mise self-update -y
+else
   curl -sS 'https://mise.run/' | sh
 fi
 
+
 bin/setup-man || :
 
-# Get rid of older stuff
-for OLD in .plenv .rbenv .ndenv; do
-  if [ -e $OLD ]; then
-    warn "Pruning $OLD"
-    rm -rf $OLD
-  fi
-done
+
+if [ -d .asdf ]; then
+  source .asdf/asdf.sh
+  warn "Pruning asdf installs"
+  asdf list
+  rm -rf .asdf
+fi
