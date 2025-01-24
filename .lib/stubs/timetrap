@@ -6,7 +6,6 @@ install_it() {
     opt="--user-install"
 
   gem install -q ${opt:-} timetrap
-  asdf reshim ruby || :
 }
 
 . ~/.lib/sh/stubexec.sh

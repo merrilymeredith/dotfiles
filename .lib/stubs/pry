@@ -7,7 +7,6 @@ install_it() {
 
   gem install -q ${opt:-} \
     "pry:~>0.13.1" pry-byebug pry-inline
-  asdf reshim ruby || :
 }
 
 . ~/.lib/sh/stubexec.sh

@@ -3,7 +3,6 @@ set -eu
 
 install_it() {
   cpanm -n 'https://github.com/darold/pgFormatter.git'
-  asdf reshim perl || :
 }
 
 . ~/.lib/sh/stubexec.sh

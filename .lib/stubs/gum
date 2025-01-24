@@ -5,8 +5,6 @@ age_limit=7
 
 install_it() {
   bina_install "charmbracelet/gum"
-  # go install github.com/charmbracelet/gum@latest
-  # asdf reshim || :
 }
 
 . ~/.lib/sh/stubexec.sh

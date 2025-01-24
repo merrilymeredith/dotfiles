@@ -6,7 +6,6 @@ install_it() {
     opt="--user-install"
 
   gem install -q ${opt:-} "debug:>=1.0.0"
-  asdf reshim ruby || :
 }
 
 . ~/.lib/sh/stubexec.sh

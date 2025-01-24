@@ -3,7 +3,6 @@ set -eu
 
 install_it() {
   go install github.com/jstemmer/gotags@latest
-  asdf reshim || :
 }
 
 . ~/.lib/sh/stubexec.sh

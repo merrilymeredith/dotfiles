@@ -2,5 +2,3 @@
 set -euo pipefail
 
 cpm install -g $(cat $(dirname $0)/../.default-perl-modules)
-
-asdf reshim perl || :

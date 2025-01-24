@@ -9,7 +9,6 @@ install_it() {
   git clone --depth=1 "https://git.sr.ht/~sircmpwn/scdoc" "$scratch"
   make -C "$scratch" install PREFIX="$HOME/.local"
   rm -rf -- "$scratch"
-  asdf reshim || :
 }
 
 . ~/.lib/sh/stubexec.sh

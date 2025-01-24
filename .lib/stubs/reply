@@ -14,8 +14,6 @@ install_it() {
     Path::Tiny \
     Pry \
     Term::ReadLine::Gnu
-
-  asdf reshim perl || :
 }
 
 . ~/.lib/sh/stubexec.sh

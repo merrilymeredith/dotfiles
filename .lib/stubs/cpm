@@ -4,8 +4,6 @@ set -eu
 install_it() {
   curl -fsSL --compressed https://git.io/cpm |
     perl - install -g App::cpm
-
-  asdf reshim perl || :
 }
 
 . ~/.lib/sh/stubexec.sh

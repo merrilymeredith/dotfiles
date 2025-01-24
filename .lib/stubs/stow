@@ -3,7 +3,6 @@ set -eu
 
 install_it() {
   cpanm -n Stow
-  asdf reshim perl || :
 }
 
 . ~/.lib/sh/stubexec.sh
