@@ -65,5 +65,26 @@ return {
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     },
+    config = function()
+      local dap = require("dap")
+
+      -- configs also made by nvim-dap-go, nvim-dap-ruby deps
+
+      dap.adapters.codelldb = {
+        type = "executable",
+        command = "codelldb",
+      }
+
+      dap.configurations.zig = {
+        {
+          name = "Launch",
+          type = "codelldb",
+          request = "launch",
+          program = "${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}",
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+    end
   },
 }

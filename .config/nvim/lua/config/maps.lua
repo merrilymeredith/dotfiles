@@ -89,7 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       map(mode, lhs, rhs, desc, opts)
     end
 
-    bmap("n", "<leader>d", vim.diagnostic.open_float, "Toggle Diag Float")
     bmap("n", "<leader>ld", vim.diagnostic.setqflist, "List Diagnostics")
     bmap("n", "[d", function()
       vim.diagnostic.goto_prev({ float = false })
