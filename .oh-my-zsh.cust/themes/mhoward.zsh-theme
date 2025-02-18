@@ -16,6 +16,14 @@
 #   * Shows if logged in as root or not.
 # ------------------------------------------------------------------------------
 
+## from omz lib/spectrum.zsh
+# typeset -AH FX FG
+# FX[reset]="%{[00m%}"
+# FX[bold]="%{[01m%}"
+# FX[no-bold]="%{[22m%}"
+# FG[071]="%{[38;5;071m%}"
+# FG[124]="%{[38;5;124m%}"
+# FG[242]="%{[38;5;242m%}"
 
 # Customizable parameters.
 PROMPT_PATH_MAX_LENGTH=30
