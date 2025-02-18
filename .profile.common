@@ -48,6 +48,17 @@ vg() {
   $EDITOR +copen -q <(ag --vimgrep "${@:?No pattern provided.}")
 }
 
+man() {
+  command env \
+    LESS_TERMCAP_md=$'\e[36m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[44;37m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[32m' \
+    man "$@"
+}
+
 alias tmux-env='eval "$(tmux show-environment -s)"'
 alias :e=$EDITOR
 alias :q=exit

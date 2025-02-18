@@ -1,21 +1,9 @@
-typeset -U omz_plugins zsh_plugins envthings
-
 DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 VI_MODE_SET_CURSOR="true"
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE="true"
-
-omz_plugins=(
-  plugins/colored-man-pages
-  plugins/vi-mode
-)
-
-zsh_plugins=(
-  zsh-users/zsh-syntax-highlighting
-  ~/.oh-my-zsh.cust/themes/mhoward
-)
 
 if [ -f ~/.zshrc.local-pre ]; then
   source ~/.zshrc.local-pre
@@ -26,9 +14,9 @@ if [ -f ~/.zgen/zgen.zsh ]; then
 
   if ! zgen saved; then
     zgen oh-my-zsh
-    for plugin in $omz_plugins; do zgen oh-my-zsh $plugin; done
-
-    for plugin in $zsh_plugins; do zgen load $plugin; done
+    zgen oh-my-zsh plugins/vi-mode
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load ~/.oh-my-zsh.cust/themes/mhoward
     zgen save
   fi
 fi
