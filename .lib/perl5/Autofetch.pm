@@ -2,6 +2,7 @@ package Autofetch;
 
 use strict;
 use warnings;
+use Config ();
 use File::Spec::Functions qw(catfile rel2abs);
 
 sub fetch {
@@ -23,7 +24,15 @@ sub import {
   my $path    = cachepath($0);
   my $incpath = catfile($path, 'lib', 'perl5');
 
-  push @INC, $incpath, sub {
+  my ($version, $arch) = @Config::Config{'version', 'archname'};
+
+  push @INC,
+    $incpath,
+    catfile($incpath, $version, $arch),
+    catfile($incpath, $version),
+    catfile($incpath, $arch);
+
+  push @INC, sub {
     my (undef, $file) = @_;
 
     fetch($path, modulefy($file));
