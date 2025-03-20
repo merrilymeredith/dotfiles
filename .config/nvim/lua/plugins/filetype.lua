@@ -26,6 +26,7 @@ return {
         ensure_installed = {
           "c",
           "comment",
+          "diff",
           "eex",
           "elixir",
           "go",
