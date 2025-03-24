@@ -2,23 +2,14 @@ package Autofetch;
 
 use strict;
 use warnings;
+
 use Config ();
+use Digest::MD5 qw(md5_base64);
 use File::Spec::Functions qw(catfile rel2abs);
 
-sub fetch {
-  my ($path, $module) = @_;
-  return if
-    system('cpm', 'install', -L => $path, $module) == 0;
-  system 'cpanm', -nq, -l => $path, $module;
-}
-
-sub cachepath {
-  catfile(glob('~'), '.cache', 'lib', rel2abs($_[0]) =~ y|/ |-_|r);
-}
-
-sub modulefy { $_[0] =~ s/\.pm$//r =~ s|/|::|gr }
-
 sub import {
+  my ($class, @deps) = @_;
+
   return if our $INSTALLED++;
 
   my $path    = cachepath($0);
@@ -32,13 +23,36 @@ sub import {
     catfile($incpath, $version),
     catfile($incpath, $arch);
 
+  clear_cache($path) if -d $path && -M _ > 90;
+
   push @INC, sub {
     my (undef, $file) = @_;
 
-    fetch($path, modulefy($file));
+    fetch($path, modulefy($file), @deps);
 
     return IO::File->new(catfile($incpath, $file));
   };
+}
+
+sub fetch {
+  my ($path, @module) = @_;
+
+  system('cpm', 'install', '-L', $path, @module) == 0
+    or die "cpm: $!";
+}
+
+sub clear_cache {
+  my ($path) = @_;
+  require File::Find;
+
+  File::Find::finddepth(sub { -d $_ ? rmdir : unlink }, $path);
+  rmdir $path;
+}
+
+sub modulefy { $_[0] =~ s/\.pm$//r =~ s|/|::|gr }
+
+sub cachepath {
+  catfile(glob('~'), '.cache', 'perl-autofetch', md5_base64(rel2abs($_[0])));
 }
 
 1;
