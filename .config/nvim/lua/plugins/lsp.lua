@@ -1,13 +1,13 @@
 return {
   -- mason is nonlazy so my executable tests work
-  { "williamboman/mason.nvim", config = true },
+  { "mason-org/mason.nvim", config = true },
 
   {
     "neovim/nvim-lspconfig",
     branch = "master",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "williamboman/mason-lspconfig.nvim", config = true },
+      { "mason-org/mason-lspconfig.nvim", config = true },
     },
     config = function(_, _)
       local lspconfig = require("lspconfig")
