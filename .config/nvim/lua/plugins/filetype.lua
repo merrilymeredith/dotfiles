@@ -70,7 +70,7 @@ return {
             dialyzerEnabled = false,
             enableTestLenses = false,
           }),
-          on_attach = function(client, bufnr)
+          on_attach = function(_, _)
             vim.keymap.set("n", "<leader>fp", ":ElixirFromPipe<cr>", { buffer = true })
             vim.keymap.set("n", "<leader>tp", ":ElixirToPipe<cr>", { buffer = true })
             vim.keymap.set("v", "<leader>em", ":ElixirExpandMacro<cr>", { buffer = true })

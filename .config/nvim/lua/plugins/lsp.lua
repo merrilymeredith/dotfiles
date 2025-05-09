@@ -19,36 +19,6 @@ return {
 
       -- allow view / -R to also stop autostart. no other global flag for this.
       lspconfig.util.default_config.autostart = not vim.list_contains(vim.v.argv, "-R")
-
-      require("mason-lspconfig").setup_handlers({
-        function(server) lspconfig[server].setup({}) end,
-        gopls = function()
-          lspconfig.gopls.setup({
-            settings = {
-              -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-              gopls = {
-                analyses = {
-                  unusedvariable = true,
-                  useany = true,
-                },
-                hints = {
-                  assignVariableTypes = true,
-                  constantValues = true,
-                  rangeVariableTypes = true,
-                },
-                vulncheck = "Imports",
-                gofumpt = true,
-                staticcheck = true,
-              },
-            },
-          })
-        end,
-        solargraph = function()
-          lspconfig.solargraph.setup({
-            init_options = { formatting = false },
-          })
-        end,
-      })
     end,
   },
 
