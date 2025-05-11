@@ -37,7 +37,7 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     branch = "master",
-    event = "VeryLazy",
+    event = "LspAttach",
     opts = {
       toggle_key = "<C-S>",
       select_signature_key = "<M-n>",
@@ -48,4 +48,33 @@ return {
       hint_enable = false,
     },
   },
+
+  -- mise use -g 'npm:@devcontainers/cli@latest'
+  {
+    'jedrzejboczar/devcontainers.nvim',
+    cond = (vim.fn.executable("devcontainer") == 1),
+    event = { "BufReadPre", "BufNewFile" },
+    cmd = { 'DevcontainersUp', 'DevcontainersExec' },
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      -- "miversen33/netman.nvim", -- optional. this busts netrw right now
+    },
+    config = function(_, _)
+      local devc = require("devcontainers")
+      local lutil = require("lspconfig.util")
+
+      local function chain(orig, new)
+        return function(...)
+          if orig then
+            orig(...)
+          end
+          return new(...)
+        end
+      end
+
+      lutil.on_setup = chain(lutil.on_setup, function(config, user_config)
+        config.on_new_config = chain(config.on_new_config, devc.on_new_config)
+      end)
+    end,
+  }
 }
