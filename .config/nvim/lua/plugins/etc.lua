@@ -20,5 +20,12 @@ g.vimwiki_list = {
 }
 
 return {
-  { "vimwiki/vimwiki", event = "VeryLazy" },
+  {
+    "vimwiki/vimwiki",
+    keys = {
+      { "<leader>ww",         "<Plug>VimwikiIndex" },
+      { "<leader>w<leader>w", "<Plug>VimwikiMakeDiaryNote" },
+    },
+    ft = { "vimwiki", "vimwiki_markdown_custom" },
+  },
 }
