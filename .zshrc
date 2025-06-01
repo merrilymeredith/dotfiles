@@ -23,12 +23,15 @@ fi
 
 KEYTIMEOUT=25
 REPORTTIME=5
+HISTORY_IGNORE="ls|cd|cd {-,..}|pwd|exit|date|privim*|cht.sh*"
 
 setopt list_packed
 setopt correct
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt interactive_comments
+
+fpath=(~/.lib/zsh/ $fpath)
 
 # Make zsh know about hosts already accessed by SSH
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'

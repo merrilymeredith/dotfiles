@@ -3,8 +3,6 @@
 
 umask 027
 
-HISTIGNORE="ls:cd:cd -:pwd:exit:date:privim"
-
 export MANPATH=$HOME/.man:$HOME/.local/share/man:
 
 if [ -d ~/perl5/lib ]; then
