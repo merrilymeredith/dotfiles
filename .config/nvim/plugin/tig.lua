@@ -1,5 +1,4 @@
-local api = vim.api
-local fn = vim.fn
+local api, fn = vim.api, vim.fn
 
 local function tig(ctx)
   local cmd = ctx.fargs
@@ -12,11 +11,12 @@ local function tig(ctx)
   vim.wo.number = false
 
   table.insert(cmd, 1, "tig")
-  fn.termopen(cmd, {
+  fn.jobstart(cmd, {
     on_exit = function()
       vim.wo.number = orig_number
       vim.cmd.buffer("#")
     end,
+    term = true,
   })
 end
 
