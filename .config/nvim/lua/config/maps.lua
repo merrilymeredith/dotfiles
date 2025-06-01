@@ -62,10 +62,10 @@ map("n", "g*", ":Grep<CR>", "Recursive keyword search")
 map("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>", "ViewDoc current buffer")
 
 -- Tabular shortcuts
-map("n", "<leader>ta", ":Tabularize first_arrow<CR>", "Align =>")
-map("n", "<leader>te", ":Tabularize first_eq<CR>", "Align =")
-map("n", "<leader>tc", ":Tabularize first_colon<CR>", "Align :")
-map("n", "<leader>tm", ":Tabularize methods<CR>", "Align -> or .")
+map({"n", "v"}, "<leader>ta", ":Tabularize first_arrow<CR>", "Align =>")
+map({"n", "v"}, "<leader>te", ":Tabularize first_eq<CR>", "Align =")
+map({"n", "v"}, "<leader>tc", ":Tabularize first_colon<CR>", "Align :")
+map({"n", "v"}, "<leader>tm", ":Tabularize methods<CR>", "Align -> or .")
 
 map("n", "<leader>a", function()
   local fo = vim.bo.formatoptions
