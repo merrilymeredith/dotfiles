@@ -90,17 +90,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     bmap("n", "<leader>ld", vim.diagnostic.setqflist, "List Diagnostics")
-    bmap("n", "[d", function()
-      vim.diagnostic.goto_prev({ float = false })
-    end, "Next Diagnostic")
-    bmap("n", "]d", function()
-      vim.diagnostic.goto_next({ float = false })
-    end, "Previous Diagnostic")
+    bmap("n", "[d", function() vim.diagnostic.jump({count = -1}) end, "Previous Diagnostic")
+    bmap("n", "]d", function() vim.diagnostic.jump({count = 1}) end, "Next Diagnostic")
 
     bmap("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
     bmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
-    bmap("n", "K", vim.lsp.buf.hover, "LSP Hover")
     bmap("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
+    bmap("n", "K", vim.lsp.buf.hover, "LSP Hover")
     bmap("i", "<C-S>", vim.lsp.buf.signature_help, "Toggle Signature Help")
     bmap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add Workspace Folder")
     bmap("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove Workspace Folder")
