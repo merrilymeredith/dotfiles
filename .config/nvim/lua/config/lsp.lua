@@ -3,13 +3,12 @@ vim.diagnostic.config({
     close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
     focusable = false,
     header = "",
-    max_width = 72,
+    max_width = 55,
     source = "if_many",
-    style = "minimal",
+    severity = { max = vim.diagnostic.severity.WARN },
   },
   severity_sort = true,
-  underline = true,
-  virtual_text = false,
+  virtual_lines = { severity = vim.diagnostic.severity.ERROR },
 })
 
 -- Some options are more chill in text mode, this unchills them if a LSP is in
