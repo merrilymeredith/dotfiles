@@ -8,7 +8,10 @@ vim.diagnostic.config({
     severity = { max = vim.diagnostic.severity.WARN },
   },
   severity_sort = true,
-  virtual_lines = { severity = vim.diagnostic.severity.ERROR },
+  virtual_lines = {
+    current_line = true,
+    severity = vim.diagnostic.severity.ERROR
+  },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
