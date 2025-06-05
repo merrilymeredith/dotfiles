@@ -28,8 +28,12 @@ return {
     "aznhe21/actions-preview.nvim",
     event = "LspAttach",
     opts = {
+      backend = { "nui" },
       nui = {
         keymap = { close = { "<ESC>", "<C-c>", "q" } },
+        layout = { size = { width = "80%", height = "80%" } },
+        preview = { size = "75%" },
+        select = { size = { width = "100%", height = "25%" } },
       },
     },
   },
