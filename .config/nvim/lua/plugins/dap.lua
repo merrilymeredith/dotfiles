@@ -41,8 +41,13 @@ return {
         end,
       },
       { "theHamsta/nvim-dap-virtual-text", config = true },
+
       { "leoluz/nvim-dap-go", config = true },
       { "suketa/nvim-dap-ruby", config = true },
+      {
+        "mfussenegger/nvim-dap-python",
+        config = function() require("dap-python").setup("debugpy-adapter") end
+      },
     },
 
     -- stylua: ignore
@@ -68,7 +73,7 @@ return {
     config = function()
       local dap = require("dap")
 
-      -- configs also made by nvim-dap-go, nvim-dap-ruby deps
+      -- configs also made by nvim-dap-{go,python,ruby} deps above
 
       dap.adapters.codelldb = {
         type = "executable",
