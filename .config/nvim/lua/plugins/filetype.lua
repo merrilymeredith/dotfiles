@@ -18,10 +18,13 @@ return {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-treesitter.configs").setup({
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          disable = { "perl", "bash" },
+        },
         indent = { enable = true },
         endwise = { enable = true },
-        sync_install = true,
+        auto_install = true,
         ensure_installed = {
           "c",
           "comment",
@@ -31,6 +34,10 @@ return {
           "go",
           "heex",
           "lua",
+          "perl",
+          "python",
+          "regex",
+          "ruby",
           "surface",
           "vim",
           "vimdoc",
