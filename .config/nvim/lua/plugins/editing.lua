@@ -38,22 +38,7 @@ return {
   {
     "windwp/nvim-autopairs",
     event = { "InsertEnter" },
-    config = function (_, _)
-      local npairs = require("nvim-autopairs")
-      npairs.setup({})
-      local Rule = require("nvim-autopairs.rule")
-
-      -- Only run autopairs for opening a multiline block
-      npairs.clear_rules()
-      for _,bracket in pairs { { '(', ')' }, { '[', ']' }, { '{', '}' } } do
-        npairs.add_rules {
-          Rule(bracket[1], bracket[2])
-            :end_wise(function(opts)
-              return opts.next_char == ''
-            end)
-        }
-      end
-    end,
+    config = true
   },
 
   -- "tpope/vim-endwise",
