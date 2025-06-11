@@ -120,3 +120,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
     bmap("x", "<C-R>", code_actions, "Code Actions")
   end,
 })
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*.qmd",
+  group = vim.api.nvim_create_augroup("quarto", {clear = true}),
+  callback = function(args)
+    local function bmap(mode, lhs, rhs, desc, opts)
+      opts = opts or {}
+      opts.buffer = args.buf
+      map(mode, lhs, rhs, desc, opts)
+    end
+
+    local runner = require("quarto.runner")
+    bmap("n", "<localleader>rc", runner.run_cell,  "run cell")
+    bmap("n", "<localleader>ra", runner.run_above, "run cell and above")
+    bmap("n", "<localleader>rA", runner.run_all,   "run all cells")
+    bmap("n", "<localleader>rl", runner.run_line,  "run line")
+    bmap("v", "<localleader>r",  runner.run_range, "run visual range")
+    bmap("n", "<localleader>RA", function() runner.run_all(true) end, "run all cells of all languages")
+  end
+})

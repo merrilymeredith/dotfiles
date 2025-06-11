@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+
+. ~/.lib/sh/venv_wrapper.sh
+
+[ -d ~/.venvs/jupyter ] || mkvenv jupyter
+venv jupyter
+
+pip install -U pynvim jupyter_client ipykernel
+
+nvim --headless -c 'MasonInstall basedpyright' -c qall
+
+# image stuff:
+# pip install -U pnglatex  # render formulas
+# pip install -U pillow    # :MoltenImagePopup
+# pip install -U plotly kaleido
+
+# molten features:
+# pip install -U pyperclip   # molten_copy_output
+# pip install -U nbformat    # import/export output to .ipynb
