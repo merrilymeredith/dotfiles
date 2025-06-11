@@ -5,6 +5,14 @@ local function map(mode, lhs, rhs, desc, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local function mkbmap(buf)
+  return function(mode, lhs, rhs, desc, opts)
+    opts = opts or {}
+    opts.buffer = buf
+    map(mode, lhs, rhs, desc, opts)
+  end
+end
+
 map("n", "<F2>", ":Neotree reveal<CR>")
 map("n", "<F3>", "n")
 map("n", "<S-F3>", "N")
@@ -83,11 +91,7 @@ end, "Toggle autowrap")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
   callback = function(args)
-    local function bmap(mode, lhs, rhs, desc, opts)
-      opts = opts or {}
-      opts.buffer = args.buf
-      map(mode, lhs, rhs, desc, opts)
-    end
+    local bmap = mkbmap(args.buf)
 
     bmap("n", "<leader>ld", vim.diagnostic.setqflist, "List Diagnostics")
     bmap("n", "[d", function() vim.diagnostic.jump({count = -1}) end, "Previous Diagnostic")
@@ -125,11 +129,7 @@ vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
   pattern = "*.qmd",
   group = vim.api.nvim_create_augroup("quarto", {clear = true}),
   callback = function(args)
-    local function bmap(mode, lhs, rhs, desc, opts)
-      opts = opts or {}
-      opts.buffer = args.buf
-      map(mode, lhs, rhs, desc, opts)
-    end
+    local bmap = mkbmap(args.buf)
 
     local runner = require("quarto.runner")
     bmap("n", "<localleader>rc", runner.run_cell,  "run cell")
