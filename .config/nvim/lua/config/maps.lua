@@ -132,11 +132,11 @@ vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
     local bmap = mkbmap(args.buf)
 
     local runner = require("quarto.runner")
-    bmap("n", "<localleader>rc", runner.run_cell,  "run cell")
-    bmap("n", "<localleader>ra", runner.run_above, "run cell and above")
-    bmap("n", "<localleader>rA", runner.run_all,   "run all cells")
-    bmap("n", "<localleader>rl", runner.run_line,  "run line")
-    bmap("v", "<localleader>r",  runner.run_range, "run visual range")
-    bmap("n", "<localleader>RA", function() runner.run_all(true) end, "run all cells of all languages")
+    bmap("n", "<leader>rc", runner.run_cell,  "run cell")
+    bmap("n", "<leader>ra", runner.run_above, "run cell and above")
+    bmap("n", "<leader>rA", runner.run_all,   "run all cells")
+    bmap("n", "<leader>rl", runner.run_line,  "run line")
+    bmap("v", "<leader>r",  runner.run_range, "run visual range")
+    bmap("n", "<leader>RA", function() runner.run_all(true) end, "run all cells of all languages")
   end
 })
