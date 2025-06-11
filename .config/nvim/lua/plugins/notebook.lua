@@ -7,8 +7,6 @@ vim.g.molten_wrap_output = true
 -- activate "jupyter" venv before running vim,
 -- :MoltenInit explicitly
 
--- TODO silence pyright unused warnings, hopefully only for quarto?
-
 return {
   { "quarto-dev/quarto-nvim",
     ft = {"quarto"},
