@@ -18,3 +18,5 @@ nvim --headless -c 'MasonInstall basedpyright' -c qall
 # molten features:
 # pip install -U pyperclip   # molten_copy_output
 # pip install -U nbformat    # import/export output to .ipynb
+
+mkdir -p ~/.local/share/jupyter/runtime

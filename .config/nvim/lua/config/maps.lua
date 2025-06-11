@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
   pattern = "*.qmd",
   group = vim.api.nvim_create_augroup("quarto", {clear = true}),
   callback = function(args)
