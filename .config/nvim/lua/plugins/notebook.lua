@@ -8,8 +8,9 @@ vim.g.molten_wrap_output = true
 -- :MoltenInit explicitly
 
 return {
-  { "quarto-dev/quarto-nvim",
-    ft = {"quarto"},
+  {
+    "quarto-dev/quarto-nvim",
+    ft = { "quarto" },
     dependencies = {
       "jmbuhr/otter.nvim",
       { "benlubas/molten-nvim", build = ":UpdateRemotePlugins" },
