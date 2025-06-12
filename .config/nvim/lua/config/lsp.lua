@@ -1,15 +1,25 @@
 vim.diagnostic.config({
+  float = {
+    border = "solid",
+    close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    focusable = false,
+    header = "",
+    max_width = 55,
+    source = "if_many",
+  },
   severity_sort = true,
-  virtual_lines = { current_line = true },
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  once = true,
   group = "lsp_attach",
-  callback = function()
-    -- Some options are more chill in text mode, this unchills them if a LSP is
-    -- in play.  Note they're global and this is a once aucmd
+  callback = function(args)
     vim.opt.number = true
     vim.opt.updatetime = 250
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = vim.api.nvim_create_augroup("lsp_buf_diags", { clear = true }),
+      buffer = args.buf,
+      callback = function(_) vim.diagnostic.open_float() end,
+    })
   end,
 })
