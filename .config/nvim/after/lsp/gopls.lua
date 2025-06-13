@@ -15,6 +15,7 @@ return {
       vulncheck = "Imports",
       gofumpt = true,
       staticcheck = true,
+      experimentalPostfixCompletions = true,
     },
   }
 }
