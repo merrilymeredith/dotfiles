@@ -3,12 +3,15 @@ set -euo pipefail
 
 . ~/.lib/sh/venv_wrapper.sh
 
-[ -d ~/.venvs/jupyter ] || mkvenv jupyter
-venv jupyter
+[ -d ~/.venvs/neovim ] || mkvenv neovim
+venv neovim
 
 pip install -U pynvim jupyter_client ipykernel
 
 nvim --headless -c 'MasonInstall basedpyright' -c qall
+
+# Listing optional deps but I don't think I'll use them.  If I want real ipynb
+# files or graphics I'll use a real gui.
 
 # image stuff:
 # pip install -U pnglatex  # render formulas

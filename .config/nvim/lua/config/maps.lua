@@ -138,5 +138,9 @@ vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
     bmap("n", "<leader>rl", runner.run_line,  "run line")
     bmap("v", "<leader>r",  runner.run_range, "run visual range")
     bmap("n", "<leader>RA", function() runner.run_all(true) end, "run all cells of all languages")
+    bmap("n", "<leader>rr", ":MoltenReevaluateCell<CR>", "re-evaluate cell")
+    bmap("n", "<leader>ro", ":noautocmd MoltenEnterOutput<CR>", "open output window")
+    bmap("n", "<leader>rh", ":MoltenHideOutput<CR>", "close output window")
+    bmap("n", "<leader>rd", ":MoltenDelete<CR>", "forget cell")
   end
 })
