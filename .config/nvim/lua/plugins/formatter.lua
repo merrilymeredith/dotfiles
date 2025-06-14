@@ -8,7 +8,7 @@ return {
         mail = { "pandoc_markdown" },
         markdown = { "pandoc_markdown" },
         perl = { "perltidy" },
-        ruby = { { "standardrb", "rubocop" } },
+        ruby = { "standardrb", "rubocop", stop_after_first = true },
         sh = { "shfmt" },
         sql = { "pg_format" },
         -- LSP-handled:
@@ -41,7 +41,7 @@ return {
 
         return {
           timeout_ms = 500,
-          lsp_fallback = true,
+          lsp_format = "prefer",
         }
       end
     },
