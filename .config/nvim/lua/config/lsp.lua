@@ -11,7 +11,7 @@ vim.diagnostic.config({
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
+  group = vim.api.nvim_create_augroup("lsp_attach_opts", { clear = true }),
   callback = function(args)
     vim.opt.number = true
     vim.opt.updatetime = 250
