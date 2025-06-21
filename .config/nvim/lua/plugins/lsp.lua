@@ -8,6 +8,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "mason-org/mason-lspconfig.nvim", config = true },
+      "b0o/SchemaStore.nvim",
     },
     config = function(_, _)
       local lspconfig = require("lspconfig")
