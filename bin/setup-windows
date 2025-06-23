@@ -12,11 +12,19 @@ USERPROFILE="$(readlink ~/userprofile)"
 
 # Note to self, removed .lib, not really using it in windows
 
+oldrev=""
 if [ -f "$USERPROFILE/.hg_archival.txt" ]; then
   oldrev="$(perl -ne 'print $1 if /^node: (\w+)/' "$USERPROFILE/.hg_archival.txt")"
 fi
 
 cd "$(hg root)"
+newrev="$(hg tip -T '{node}')"
+
+if [[ $newrev = $oldrev ]]; then
+  echo "no changes"
+  exit 1
+fi
+
 hg archive -t tar -p . -I .hg_archival.txt \
   -I .config/nvim/ \
   -I .ctags \
@@ -32,6 +40,5 @@ hg archive -t tar -p . -I .hg_archival.txt \
   --xform='s/^.vim\//vimfiles\//' \
   --xform='s/^.vimrc$/_vimrc/'
 
-newrev="$(perl -ne 'print $1 if /^node: (\w+)/' "$USERPROFILE/.hg_archival.txt")"
 echo "~/userprofile updated to $newrev"
-hg log --stat --pager never -r "${oldrev:-$newrev}..$newrev"
+hg log --stat --pager never -P "$oldrev" -r "${oldrev}::$newrev"
