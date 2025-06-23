@@ -1,5 +1,5 @@
-#!/bin/sh
-set -eu
+#!/bin/bash
+set -euo pipefail
 
 if [ ! -L ~/userprofile ]; then
   echo "Please link ~/userprofile"
@@ -7,24 +7,31 @@ fi
 
 USERPROFILE="$(readlink ~/userprofile)"
 
-cd `hg root`
+# Only copy certain files, with some transforms, without anything extra in my
+# workdir.  Mtimes will be that of the latest revision, for all files.
 
-mkdir -p ${USERPROFILE}/vimfiles
+# Note to self, removed .lib, not really using it in windows
 
-cp -vu .vimrc ${USERPROFILE}/_vimrc
-cp -vu .gvimrc ${USERPROFILE}/_gvimrc
+if [ -f "$USERPROFILE/.hg_archival.txt" ]; then
+  oldrev="$(perl -ne 'print $1 if /^node: (\w+)/' "$USERPROFILE/.hg_archival.txt")"
+fi
 
-cp -vuRL -t ${USERPROFILE}/vimfiles .vim/*
+cd "$(hg root)"
+hg archive -t tar -p . -I .hg_archival.txt \
+  -I .config/nvim/ \
+  -I .ctags \
+  -I .gvimrc \
+  -I .perltidyrc \
+  -I .replyrc \
+  -I .replyrc.pl \
+  -I .vim/ \
+  -I .vimrc \
+  - | tar x -C "$USERPROFILE" --show-transformed-names \
+  --xform='s/^.config\/nvim\//AppData\/Local\/nvim\//' \
+  --xform='s/^.gvimrc$/_gvimrc/' \
+  --xform='s/^.vim\//vimfiles\//' \
+  --xform='s/^.vimrc$/_vimrc/'
 
-mkdir -p ${USERPROFILE}/AppData/Local/nvim
-cp -vuRL -t ${USERPROFILE}/AppData/Local/nvim .config/nvim/*
-
-mkdir -p ${USERPROFILE}/.goneovim
-cp -vu .config/goneovim/settings.toml ${USERPROFILE}/.goneovim/
-
-cp -vuRL -t ${USERPROFILE}/ \
-  .lib \
-  .ctags \
-  .perltidyrc \
-  .replyrc \
-  .replyrc.pl
+newrev="$(perl -ne 'print $1 if /^node: (\w+)/' "$USERPROFILE/.hg_archival.txt")"
+echo "~/userprofile updated to $newrev"
+hg log --stat --pager never -r "${oldrev:-$newrev}..$newrev"
