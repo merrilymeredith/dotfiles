@@ -14,7 +14,7 @@ let g:vimcache   = $HOME . '/.cache/vim'
 let s:filename   = expand('<sfile>')
 
 " Set up plug and plugins  {{{
-  call plug#begin(g:myvim . '/bundle')
+  call plug#begin(g:vimcache . '/bundle')
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
