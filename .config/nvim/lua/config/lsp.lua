@@ -1,3 +1,5 @@
+vim.lsp.set_log_level("OFF")
+
 vim.diagnostic.config({
   float = {
     border = "solid",
