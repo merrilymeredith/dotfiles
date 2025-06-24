@@ -41,4 +41,4 @@ hg archive -t tar -p . -I .hg_archival.txt \
   --xform='s/^.vimrc$/_vimrc/'
 
 echo "~/userprofile updated to $newrev"
-hg log --stat --pager never -P "$oldrev" -r "${oldrev}::$newrev"
+hg log --stat --pager never ${oldrev:+-P "${oldrev}"} -r "${oldrev:-$newrev}::$newrev"
