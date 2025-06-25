@@ -45,7 +45,7 @@ alias gcd='cd "$(git rev-parse --show-toplevel)"'
 source ~/.lib/sh/venv_wrapper.sh
 
 vg() {
-  $EDITOR +copen -q <(ag --vimgrep "${@:?No pattern provided.}")
+  $EDITOR -c "Grep ${@:?No pattern provided.}"
 }
 
 man() {

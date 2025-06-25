@@ -42,7 +42,13 @@ command("Grep", function(ctx)
     table.concat(vim.list_slice(ctx.fargs, 2, #ctx.fargs), " "),
   }, " ")
 
-  fn.setqflist({}, " ", { title = grepcmd, lines = fn.systemlist(grepcmd) })
+  local results = fn.systemlist(grepcmd)
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Grep: no results for: " .. pattern, vim.log.levels.ERROR)
+    return
+  end
+
+  fn.setqflist({}, " ", { title = grepcmd, lines = results })
   fn.setreg("/", [[\v]] .. pattern)
   cmd.copen()
   cmd.cfirst()
