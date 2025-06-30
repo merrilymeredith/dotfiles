@@ -1,7 +1,7 @@
+debug
 faraday
 httpx
 irb
-rdbg
 reline
 yard
 yard-solargraph
