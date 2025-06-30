@@ -1,4 +1,7 @@
-yard
-yard-solargraph
 faraday
 httpx
+irb
+rdbg
+reline
+yard
+yard-solargraph
