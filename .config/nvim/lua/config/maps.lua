@@ -70,10 +70,10 @@ map("n", "g*", ":Grep<CR>", "Recursive keyword search")
 map("n", "gKK", ":call ViewDoc('doc', expand('%:p'))<CR>", "ViewDoc current buffer")
 
 -- Tabular shortcuts
-map({"n", "v"}, "<leader>ta", ":Tabularize first_arrow<CR>", "Align =>")
-map({"n", "v"}, "<leader>te", ":Tabularize first_eq<CR>", "Align =")
-map({"n", "v"}, "<leader>tc", ":Tabularize first_colon<CR>", "Align :")
-map({"n", "v"}, "<leader>tm", ":Tabularize methods<CR>", "Align -> or .")
+map({ "n", "v" }, "<leader>ta", ":Tabularize first_arrow<CR>", "Align =>")
+map({ "n", "v" }, "<leader>te", ":Tabularize first_eq<CR>", "Align =")
+map({ "n", "v" }, "<leader>tc", ":Tabularize first_colon<CR>", "Align :")
+map({ "n", "v" }, "<leader>tm", ":Tabularize methods<CR>", "Align -> or .")
 
 map("n", "<leader>a", function()
   local fo = vim.bo.formatoptions
@@ -94,22 +94,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bmap = mkbmap(args.buf)
 
     bmap("n", "<leader>ld", vim.diagnostic.setqflist, "List Diagnostics")
-    bmap("n", "[d", function() vim.diagnostic.jump({count = -1}) end, "Previous Diagnostic")
-    bmap("n", "]d", function() vim.diagnostic.jump({count = 1}) end, "Next Diagnostic")
+    bmap("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, "Previous Diagnostic")
+    bmap("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, "Next Diagnostic")
 
-    bmap("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
-    bmap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
-    bmap("n", "gi", vim.lsp.buf.implementation, "Go to Implementation")
-    bmap("n", "K", vim.lsp.buf.hover, "LSP Hover")
+    -- defaults: grn gra grr gri gO K
+    bmap("n", "grD", vim.lsp.buf.declaration, "Go to Declaration")
+    bmap("n", "grd", vim.lsp.buf.definition, "Go to Definition")
+    bmap("n", "grt", vim.lsp.buf.type_definition, "Go to Type Definition")
+
     bmap("i", "<C-S>", vim.lsp.buf.signature_help, "Toggle Signature Help")
+
     bmap("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Add Workspace Folder")
     bmap("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove Workspace Folder")
-    bmap("n", "<leader>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, "List Workspace Folders")
-    bmap("n", "<leader>D", vim.lsp.buf.type_definition, "Go to Type Definition")
-    bmap("n", "crn", vim.lsp.buf.rename, "LSP Rename")
-    bmap("n", "<leader>lr", vim.lsp.buf.references, "List References")
+    bmap("n", "<leader>wl", function() vim.print(vim.lsp.buf.list_workspace_folders()) end, "List Workspace Folders")
+
     bmap({ "n", "x" }, "<leader>f", function()
       vim.lsp.buf.format({ async = true })
     end, "LSP Format")
@@ -119,24 +117,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, "Toggle Inlay Hints")
 
     local code_actions = require("actions-preview").code_actions
-    bmap("n", "crr", code_actions, "Code Actions")
-    bmap("x", "<C-R><C-R>", code_actions, "Code Actions")
-    bmap("x", "<C-R>", code_actions, "Code Actions")
+    bmap({ "n", "x" }, "gra", code_actions, "Code Actions")
   end,
 })
 
-vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   pattern = "*.qmd",
-  group = vim.api.nvim_create_augroup("quarto", {clear = true}),
+  group = vim.api.nvim_create_augroup("quarto", { clear = true }),
   callback = function(args)
     local bmap = mkbmap(args.buf)
 
     local runner = require("quarto.runner")
-    bmap("n", "<leader>rc", runner.run_cell,  "run cell")
+    bmap("n", "<leader>rc", runner.run_cell, "run cell")
     bmap("n", "<leader>ra", runner.run_above, "run cell and above")
-    bmap("n", "<leader>rA", runner.run_all,   "run all cells")
-    bmap("n", "<leader>rl", runner.run_line,  "run line")
-    bmap("v", "<leader>r",  runner.run_range, "run visual range")
+    bmap("n", "<leader>rA", runner.run_all, "run all cells")
+    bmap("n", "<leader>rl", runner.run_line, "run line")
+    bmap("v", "<leader>r", runner.run_range, "run visual range")
     bmap("n", "<leader>RA", function() runner.run_all(true) end, "run all cells of all languages")
     bmap("n", "<leader>rr", ":MoltenReevaluateCell<CR>", "re-evaluate cell")
     bmap("n", "<leader>ro", ":noautocmd MoltenEnterOutput<CR>", "open output window")
