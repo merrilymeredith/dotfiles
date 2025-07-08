@@ -26,6 +26,19 @@ return {
   { "j-hui/fidget.nvim", event = "LspAttach", config = true },
 
   {
+    "soulis-1256/eagle.nvim",
+    event = "LspAttach",
+    config = function()
+      vim.go.mousemoveevent = true
+      require("eagle").setup({
+        border = "rounded",
+        max_width_factor = 3,
+        max_height_factor = 3,
+      })
+    end,
+  },
+
+  {
     "aznhe21/actions-preview.nvim",
     event = "LspAttach",
     opts = {
