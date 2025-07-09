@@ -46,7 +46,7 @@ for BIN in neomutt pgpewrap; do
 done
 ln -sf neomutt mutt
 
-:<<=cut
+:<<POD
 =head1 NAME
 
 setup-neomutt - Clone/update and build neomutt
@@ -72,3 +72,4 @@ gpg2 isn't available in cygwin, but there is a windows build.  using it with
 cygwin paths requires a wrapper though.
 
 =cut
+POD

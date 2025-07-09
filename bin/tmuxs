@@ -17,7 +17,7 @@ else
   exec tmux attach -t "$name"
 fi
 
-:<<=cut
+:<<POD
 =head1 NAME
 
 tmuxs - tmux session
@@ -36,3 +36,4 @@ tmuxs attaches or switches to a session of the given name, or the cwd's name,
 creating it if necessary.
 
 =cut
+POD

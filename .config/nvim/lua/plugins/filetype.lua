@@ -21,7 +21,7 @@ return {
       require("nvim-treesitter.configs").setup({
         highlight = {
           enable = true,
-          disable = { "perl", "bash" },
+          disable = { "perl" },
         },
         indent = { enable = true },
         endwise = { enable = true },
@@ -36,6 +36,7 @@ return {
           "heex",
           "lua",
           "perl",
+          "pod",
           "python",
           "regex",
           "ruby",
@@ -44,6 +45,8 @@ return {
           "vimdoc",
         },
       })
+      vim.api.nvim_set_hl(0, "@keyword.pod", { link = "MoreMsg" })
+      vim.api.nvim_set_hl(0, "@markup.raw.pod", { link = "PreProc" })
     end,
   },
 
