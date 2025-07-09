@@ -31,6 +31,7 @@ g.interestingWordsTermColors = {
   "136",
 }
 
+---@type LazySpec
 return {
   "tpope/vim-unimpaired",
   "tomtom/tcomment_vim",

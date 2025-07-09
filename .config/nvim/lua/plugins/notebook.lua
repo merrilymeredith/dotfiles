@@ -7,6 +7,7 @@ vim.g.molten_wrap_output = true
 --   creates ~/.venvs/neovim, used automatically for nvim remote plugins
 -- :MoltenInit explicitly
 
+---@type LazySpec
 return {
   {
     "quarto-dev/quarto-nvim",

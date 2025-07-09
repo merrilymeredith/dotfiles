@@ -6,6 +6,7 @@ g.perl_sub_signatures = 1
 g.perl_sync_dist = 300
 g.perl_compiler_force_warnings = 0
 
+---@type LazySpec
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -49,10 +50,12 @@ return {
   {
     "folke/lazydev.nvim",
     ft = "lua",
-    dependencies = {
-      "Bilal2453/luvit-meta",
+    opts = {
+      library = {
+        "lazy.nvim",
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
     },
-    opts = { library = { "luvit-meta/library" } },
   },
 
   { "Shougo/vinarise.vim", cmd = "Vinarise" },

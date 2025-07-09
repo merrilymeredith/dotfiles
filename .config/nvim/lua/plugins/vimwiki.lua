@@ -19,6 +19,7 @@ g.vimwiki_list = {
   },
 }
 
+---@type LazySpec
 return {
   {
     "vimwiki/vimwiki",

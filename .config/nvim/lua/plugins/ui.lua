@@ -7,6 +7,7 @@ g.viewdoc_winwidth_max = 100
 
 g.neo_tree_remove_legacy_commands = 1
 
+---@type LazySpec
 return {
   { "powerman/vim-plugin-viewdoc", event = "VeryLazy" },
 
