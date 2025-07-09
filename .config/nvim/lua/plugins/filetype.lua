@@ -41,6 +41,7 @@ return {
           "regex",
           "ruby",
           "surface",
+          "sql",
           "vim",
           "vimdoc",
         },
