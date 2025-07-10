@@ -27,6 +27,7 @@ fi
 
 hg archive -t tar -p . -I .hg_archival.txt \
   -I .config/nvim/ \
+  -I .config/wezterm/ \
   -I .ctags \
   -I .gvimrc \
   -I .perltidyrc \
