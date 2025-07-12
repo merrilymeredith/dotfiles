@@ -21,6 +21,8 @@ o.number = false
 o.pumheight = 10
 o.showbreak = "» "
 o.termguicolors = true
+o.title = true
+o.titlestring = '%t%( %M%)%( (%<%{expand("%:~:h")})%)%a - Nvim'
 o.signcolumn = "number"
 o.winminwidth = 5
 
