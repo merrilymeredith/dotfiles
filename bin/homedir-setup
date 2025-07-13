@@ -22,6 +22,9 @@ else
   curl -sS 'https://mise.run/' | sh
 fi
 
+[ -f .config/mise/config.toml ] ||
+  touch .config/mise/config.toml
+
 
 bin/setup-man || :
 
